@@ -1,12 +1,3 @@
-# echo "";
-# echo $USER on $HOSTNAME;
-# # echo "";
-# PS1="\n$(tput setaf 166)\t$(tput sgr0)"
-# PS1+=" • "
-# PS1+="$(tput setaf 2)\w$(tput sgr0)\n$ ";
-# export PS1;
-#
-# alias dt="cd ~/Desktop"
 for file in ~/.{bash_profile}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
