@@ -14,3 +14,4 @@ alias restart="sudo apache2ctl restart"
 
 alias git-root='cd $(git rev-parse --show-toplevel)'
 alias @=git-root
+alias newsite="SITES;~/.photon/newsite.sh"
