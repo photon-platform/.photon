@@ -1,3 +1,4 @@
+
 for file in ~/.{bash_profile}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
