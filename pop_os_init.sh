@@ -54,13 +54,13 @@ sudo systemctl status apache2
 sudo apt update
 sudo apt install php
 # this currently installs:
-# libapache2-mod-php7.2 
-# php-common 
-# php7.2 
-# php7.2-cli 
-# php7.2-common 
-# php7.2-json 
-# php7.2-opcache 
+# libapache2-mod-php7.2
+# php-common
+# php7.2
+# php7.2-cli
+# php7.2-common
+# php7.2-json
+# php7.2-opcache
 # php7.2-readline
 
 sudo apt install \
@@ -83,8 +83,8 @@ sudo apt install \
   php-pdo \
   php-sqlite3 \
   php-mysql
- 
-sudo a2enmod proxy proxy_fcgi rewrite 
+
+sudo a2enmod proxy proxy_fcgi rewrite
 sudo a2enconf php7.2-fpm
 a2enmod proxy_fcgi setenvif
 
@@ -138,7 +138,7 @@ sudo chmod 700 ~/.ssh
 # https://www.inmotionhosting.com/support/website/ssh/shared-reseller-ssh
 sudo chmod 600 ~/.ssh/inmotion_ssh
 sudo ssh-add ~/.ssh/inmotion_ssh
-# 'config' file should have alias for illumiphi.com 
+# 'config' file should have alias for illumiphi.com
 # connect to inmotion
 ssh illumiphi.com
 
@@ -183,7 +183,7 @@ xclip -sel clip < ~/.ssh/id_rsa_phi_illumiphi.pub
 
 
 # install node
-sudo apt install nodejs npm   
+sudo apt install nodejs npm
 
 sudo npm install -g node-sass
 
@@ -196,3 +196,6 @@ npm rebuild node-sass --force
 
 # install xpath
 sudo apt install libxml-xpath-perl
+
+
+# librecad
