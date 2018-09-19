@@ -75,7 +75,8 @@ sudo apt install \
  php-fpm\
  php-dev\
  php-mysql\
- php-apcu
+ php-apcu\
+ php-tidy
 
 # for TNT search
 sudo apt install sqlite

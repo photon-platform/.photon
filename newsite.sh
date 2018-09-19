@@ -1,7 +1,9 @@
 #!/bin/bash
 source ~/.photon/.hosts
+sudo pwd
 
 clear
+
 
 echo
 echo "photon ✴ new site generator"

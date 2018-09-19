@@ -43,5 +43,3 @@ addhost() {
     fi
     tail $ETC_HOSTS
 }
-
-$@
