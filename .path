@@ -1,0 +1,1 @@
+export PATH=$PATH:~/.composer/vendor/asm89/twig-lint/bin
