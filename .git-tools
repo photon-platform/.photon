@@ -1,0 +1,11 @@
+alias g-df="git diff --cached --submodule"
+alias g-df-s="git config --global diff.submodule log"
+
+# git submodule update --remote DbConnector
+
+alias g-ch-m="git checkout master"
+alias g-surr="git submodule update --remote --rebase" #or --merge
+alias g-each="git submodule foreach 'git status'"
+
+alias g-root='cd $(git rev-parse --show-toplevel)'
+alias @=git-root

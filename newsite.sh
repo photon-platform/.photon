@@ -21,11 +21,16 @@ cd ${PROJECT}
 echo
 echo "✴ fetch upstream photon"
 git remote add upstream git@github.com:photon-platform/photon.git
-git fetch  upstream
+git fetch upstream
 
 echo
 echo "✴ pull upstream photon"
 git pull upstream master
+
+echo
+echo "✴ update submodules"
+git submodule update --init --recursive
+
 
 echo
 echo "✴ set permission for apache"

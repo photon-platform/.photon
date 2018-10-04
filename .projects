@@ -1,10 +1,12 @@
 # sites
-alias photon="cd ~/SITES/photon"
-alias ppn="cd ~/SITES/photon-platform.net"
+
+alias     sites="cd ~/SITES"
+alias    photon="cd ~/SITES/photon"
+alias       ppn="cd ~/SITES/photon-platform.net"
 alias illumiphi="cd ~/SITES/illumiphi.com"
-alias port="cd ~/SITES/port"
-alias gbp="cd ~/SITES/gerdemann"
-alias jill="cd ~/SITES/jill-moser"
+alias      port="cd ~/SITES/port-3"
+alias       gbp="cd ~/SITES/gerdemann"
+alias      jill="cd ~/SITES/jill-moser"
 
 alias inmotion="ssh illumiphi.com"
 
@@ -12,6 +14,5 @@ alias sites-conf="cd /etc/apache2/sites-available"
 alias hosts="sudo vim /etc/hosts"
 alias restart="sudo apache2ctl restart"
 
-alias git-root='cd $(git rev-parse --show-toplevel)'
-alias @=git-root
+
 alias newsite="cd ~/SITES;~/.photon/newsite.sh"
