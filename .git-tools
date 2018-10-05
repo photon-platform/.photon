@@ -8,4 +8,4 @@ alias g-surr="git submodule update --remote --rebase" #or --merge
 alias g-each="git submodule foreach 'git status'"
 
 alias g-root='cd $(git rev-parse --show-toplevel)'
-alias @=git-root
+alias @=g-root
