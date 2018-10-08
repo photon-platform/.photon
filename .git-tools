@@ -9,3 +9,9 @@ alias g-each="git submodule foreach 'git status'"
 
 alias g-root='cd $(git rev-parse --show-toplevel)'
 alias @=g-root
+
+alias gss="git status"
+alias ga="git add ."
+alias gc="git commit"
+alias gac="git add .;git commit"
+alias gacm="git add .;git commit -m"
