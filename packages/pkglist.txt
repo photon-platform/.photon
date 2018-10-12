@@ -611,6 +611,7 @@ libboost-date-time1.65.1:amd64			install
 libboost-filesystem1.65.1:amd64			install
 libboost-iostreams1.65.1:amd64			install
 libboost-locale1.65.1:amd64			install
+libboost-regex1.65.1:amd64			install
 libboost-system1.65.1:amd64			install
 libboost-thread1.65.1:amd64			install
 libbrlapi0.6:amd64				install
@@ -1424,6 +1425,8 @@ libsombok3:amd64				install
 libsonic0:amd64					install
 libsoup-gnome2.4-1:amd64			install
 libsoup2.4-1:amd64				install
+libsource-highlight-common			install
+libsource-highlight4v5				install
 libsoxr0:amd64					install
 libspectre1:amd64				install
 libspeechd2:amd64				install
@@ -2158,6 +2161,7 @@ sloccount					install
 software-properties-common			install
 sound-icons					install
 sound-theme-freedesktop				install
+source-highlight				install
 speech-dispatcher				install
 speech-dispatcher-audio-plugins:amd64		install
 speech-dispatcher-espeak-ng			install
