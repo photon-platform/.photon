@@ -1,0 +1,20 @@
+
+# jump to plugin directories
+function pl() {
+  if [ $1 ]
+  then
+    case $1 in
+      *)
+        cd "$PLUGINS_DIR/photon-$1"
+        head -n 2 blueprints.yaml
+        echo
+        git status -sb .
+
+        ;;
+    esac
+  else
+    cd $PLUGINS_DIR
+    echo
+    git status -sb .
+  fi
+}

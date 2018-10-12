@@ -1,0 +1,56 @@
+# sites
+
+# alias     sites="cd ~/SITES"
+alias       ppn="sites photon-platform.net"
+alias illumiphi="sites illumiphi.com"
+alias      port="sites port-3"
+alias      jill="sites jill"
+
+alias    photon="sites photon"
+alias       gbp="sites gerdemann"
+
+alias inmotion="ssh illumiphi.com"
+
+alias sites-conf="cd /etc/apache2/sites-available"
+alias hosts="sudo vim /etc/hosts"
+alias restart="sudo apache2ctl restart"
+
+
+alias newsite="cd ~/SITES;~/.photon/newsite.sh"
+
+# photon function
+#
+function sites() {
+  # echo "✴ $1"
+  # echo "$# args"
+  # for arg in $@
+  # do
+    # echo "- $arg"
+  # done
+
+  if [ $1 ]
+  then
+    case $1 in
+      new)
+        cd ~/SITES
+        ~/.photon/newsite.sh $2
+        # if [ $2 ]
+        # then
+        #   echo "new $2"
+        # else
+        #   echo "new nada"
+        # fi
+        ;;
+      *)
+        cd ~/SITES/$1
+        head -n 1 user/config/site.yaml
+        source .photon
+        git status -sb
+        ;;
+
+    esac
+  else
+    cd ~/SITES
+    find . --type d 
+  fi
+}

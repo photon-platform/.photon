@@ -5,12 +5,12 @@ alias g-df-s="git config --global diff.submodule log"
 
 alias g-ch-m="git checkout master"
 alias g-surr="git submodule update --remote --rebase" #or --merge
-alias g-each="git submodule foreach 'git status'"
+alias g-each="git submodule foreach 'git status -sb; echo'"
 
 alias g-root='cd $(git rev-parse --show-toplevel)'
 alias @=g-root
 
-alias gss="git status"
+alias gss="git status -sb"
 alias ga="git add ."
 alias gc="git commit"
 alias gac="git add .;git commit"

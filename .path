@@ -1,1 +1,4 @@
 export PATH=$PATH:~/.composer/vendor/asm89/twig-lint/bin
+
+# for less highlighting
+export PATH=$PATH:/usr/share/source-highlight
