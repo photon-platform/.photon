@@ -4,7 +4,7 @@
 alias       ppn="sites photon-platform.net"
 alias illumiphi="sites illumiphi.com"
 alias      port="sites port-3"
-alias      jill="sites jill"
+alias      jill="sites jill-moser"
 
 alias    photon="sites photon"
 alias       gbp="sites gerdemann"
@@ -15,6 +15,7 @@ alias sites-conf="cd /etc/apache2/sites-available"
 alias hosts="sudo vim /etc/hosts"
 alias restart="sudo apache2ctl restart"
 
+alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.5.3 "
 
 alias newsite="cd ~/SITES;~/.photon/newsite.sh"
 
@@ -51,6 +52,7 @@ function sites() {
     esac
   else
     cd ~/SITES
-    find . --type d 
+    find . -maxdepth 1 -mindepth 1 -type d -exec sh -c '(echo {} && cd {} && git status -s && echo)' \;
+
   fi
 }
