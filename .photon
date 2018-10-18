@@ -1,5 +1,23 @@
+#!/usr/bin/env bash
 
-# jump to plugin directories
+alias serve="php -S localhost:${PORT} system/router.php"
+alias local="open ${LOCAL}"
+alias admin="open ${LOCAL}/admin"
+alias server="open ${SERVER}"
+
+alias pr="cd ${PROJECT_DIR}"
+alias th="cd $THEMES_DIR/photon;gss"
+alias ch="cd $THEMES_DIR/photon-child;gss"
+alias pg="cd ${PROJECT_DIR}/user/pages;gss"
+alias us="cd ${PROJECT_DIR}/user;gss"
+# alias pl="cd $PLUGINS_DIR;gss ."
+
+
+# TODO: move these scripts
+alias sub_plug="$PROJECT_DIR/sh/sub_plug.sh"
+alias sub_theme="$PROJECT_DIR/sh/sub_theme.sh"
+
+
 function pl() {
   if [ $1 ]
   then
@@ -8,13 +26,12 @@ function pl() {
         cd "$PLUGINS_DIR/photon-$1"
         head -n 2 blueprints.yaml
         echo
-        git status -sb .
+        git status -sb
 
         ;;
     esac
   else
     cd $PLUGINS_DIR
-    echo
-    git status -sb .
+    git status -sb
   fi
 }

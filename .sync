@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+
+convertsecstohours() {
+ ((h=${1}/3600))
+ ((m=(${1}%3600)/60))
+ ((s=${1}%60))
+ printf "%02d:%02d:%02d\n" $h $m $s
+}
+
+convertsecstomin() {
+ ((m=${1}/60))
+ ((s=${1}%60))
+ printf "%02d:%02d\n" $m $s
+}
+
+function sync() {
+  if [ $1 ]
+  then
+
+
+    case $1 in
+      full)
+
+        SOURCE_DIR="$PROJECT_DIR/"
+        DEST_DIR=illumiphi.com:${SERVER_DIR}/
+
+        echo
+        echo full sync to server
+        echo "source: $SOURCE_DIR"
+        echo "dest: $DEST_DIR"
+        echo
+        echo "press enter to continue - Ctrl-c to stop"
+        read
+
+        START_TIME="$(date -u +%s)"
+        rsync \
+          --archive \
+          --update \
+          --compress \
+          --stats \
+          --progress \
+          --copy-links \
+          --exclude "$PROJECT_DIR/backup/*" \
+          --exclude "$PROJECT_DIR/cache/*" \
+          --exclude "$PROJECT_DIR/images/*" \
+          --exclude "$PROJECT_DIR/logs/*" \
+          --exclude "$PROJECT_DIR/user/.git/" \
+          --exclude "$PROJECT_DIR/user/data/tntsearch/*" \
+          --delete \
+          $SOURCE_DIR \
+          $DEST_DIR
+
+        END_TIME="$(date -u +%s)"
+        ELAPSED="$(($END_TIME-$START_TIME))"
+        TIME=$(convertsecstomin $ELAPSED)
+        echo
+        echo "✴ elapsed: $TIME m:s"
+
+        ;;
+      user)
+
+        SOURCE_DIR="$PROJECT_DIR/user/"
+        DEST_DIR=illumiphi.com:${SERVER_DIR}/user/
+
+
+        echo
+        echo user sync to server
+        echo "source: $SOURCE_DIR"
+        echo "dest: $DEST_DIR"
+        echo
+        echo "press enter to continue - Ctrl-c to stop"
+        read
+
+        START_TIME="$(date -u +%s)"
+        rsync \
+          --archive \
+          --update \
+          --compress \
+          --stats \
+          --progress \
+          --copy-links \
+          --exclude "$PROJECT_DIR/user/data/tntsearch/*" \
+          --delete \
+          $SOURCE_DIR \
+          $DEST_DIR
+
+        END_TIME="$(date -u +%s)"
+        ELAPSED="$(($END_TIME-$START_TIME))"
+        TIME=$(convertsecstomin $ELAPSED)
+        echo
+        echo "✴ elapsed: $TIME m:s"
+        ;;
+
+      *)
+        echo "Enter options: sync full or sync user or sync full dry"
+        ls
+        ;;
+    esac
+  else
+    cd $PLUGINS_DIR
+    git status -sb
+  fi
+
+}
+
+# alias dry-sync="rsync -auzvhPL --stats --delete --dry-run user/ illumiphi.com:${SERVER_DIR}/user/"
+#
+# alias sync="rsync -auzvhPL \
+#   --stats \
+#   --delete \
+#   --exclude $PROJECT_DIR/user/.git \
+#   --exclude $PROJECT_DIR/user/data/tntsearch/* \
+#   $PROJECT_DIR/user/ \
+#   illumiphi.com:${SERVER_DIR}/user/"
+#
+# alias dry-full-sync="rsync -auzvhPL \
+#   --stats \
+#   --dry-run \
+#   --exclude $PROJECT_DIR/backup/* \
+#   --exclude $PROJECT_DIR/cache/* \
+#   --exclude $PROJECT_DIR/images/* \
+#   --exclude $PROJECT_DIR/logs/* \
+#   --exclude $PROJECT_DIR/user/.git \
+#   --exclude $PROJECT_DIR/user/data/tntsearch/* \
+#   --delete \
+#   $PROJECT_DIR \
+#   illumiphi.com:${SERVER_DIR}/"
+#
+# alias full-sync="rsync -auzvhPL \
+#   --stats \
+#   --exclude $PROJECT_DIR/user/.git \
+#   --exclude $PROJECT_DIR/backup/* \
+#   --exclude $PROJECT_DIR/cache/* \
+#   --exclude $PROJECT_DIR/images/* \
+#   --exclude $PROJECT_DIR/logs/* \
+#   --exclude $PROJECT_DIR/user/data/tntsearch/* \
+#   --delete \
+#   $PROJECT_DIR/ \
+#   illumiphi.com:${SERVER_DIR}/"

@@ -1,5 +1,7 @@
 #!/bin/bash
 source ~/.photon/.hosts
+source ~/.photon/.sites
+
 sudo pwd
 
 clear
@@ -55,8 +57,7 @@ mkdir ~/SITES/LOGS/${PROJECT}
 # TODO: make a proper template
 echo
 echo "✴ create apache site config file"
-sudo cp /etc/apache2/sites-available/port.conf /etc/apache2/sites-available/${PROJECT}.conf
-sudo sed -i -e "s/port/${PROJECT}/g" /etc/apache2/sites-available/${PROJECT}.conf
+sudo sed -i -e "s/port/${PROJECT}/g" /etc/apache2/sites-available/port.conf > /etc/apache2/sites-available/${PROJECT}.conf
 
 echo
 echo "✴ enable site"

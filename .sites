@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # sites
 
 # alias     sites="cd ~/SITES"
@@ -17,42 +19,29 @@ alias restart="sudo apache2ctl restart"
 
 alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.5.3 "
 
-alias newsite="cd ~/SITES;~/.photon/newsite.sh"
-
 # photon function
 #
 function sites() {
-  # echo "✴ $1"
-  # echo "$# args"
-  # for arg in $@
-  # do
-    # echo "- $arg"
-  # done
 
   if [ $1 ]
   then
     case $1 in
       new)
-        cd ~/SITES
-        ~/.photon/newsite.sh $2
-        # if [ $2 ]
-        # then
-        #   echo "new $2"
-        # else
-        #   echo "new nada"
-        # fi
+        ~/.photon/sites/new.sh "$2" "$3"
+        ;;
+      status)
+        find . -maxdepth 1 -mindepth 1 -type d -exec sh -c '(echo {} && cd {}/user && git status -sb && echo)' \;
+
         ;;
       *)
-        cd ~/SITES/$1
-        head -n 1 user/config/site.yaml
+        cd ~/SITES/$1/user
+        ag "title" config/site.yaml
         source .photon
         git status -sb
         ;;
-
     esac
   else
     cd ~/SITES
-    find . -maxdepth 1 -mindepth 1 -type d -exec sh -c '(echo {} && cd {} && git status -s && echo)' \;
-
+    ls
   fi
 }
