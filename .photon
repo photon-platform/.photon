@@ -4,6 +4,7 @@ alias serve="php -S localhost:${PORT} system/router.php"
 alias local="open ${LOCAL}"
 alias admin="open ${LOCAL}/admin"
 alias server="open ${SERVER}"
+alias edit="atom ${PROJECT_DIR}/user"
 
 alias pr="cd ${PROJECT_DIR}"
 alias th="cd $THEMES_DIR/photon;gss"

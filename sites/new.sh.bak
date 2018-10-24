@@ -50,15 +50,15 @@ then
   bin/grav sandbox -s ../$PROJECT
 
   echo "✴ symlink plugins"
-  cp -rf ~/SITES/starter/user/plugins/* ~/SITES/$PROJECT/user/plugins/
-  cp -rf ~/SITES/starter/user/blueprints/config/* ~/SITES/$PROJECT/user/blueprints/config/
-  cp -rf ~/SITES/starter/user/{accounts,blueprints,config} ~/SITES/$PROJECT/user/
-  cp -rf ~/SITES/starter/user/config/{fonts,media}.yaml ~/SITES/$PROJECT/user/config/
+  ln -sf ~/SITES/starter/user/plugins/* ~/SITES/$PROJECT/user/plugins/
+  ln -sf ~/SITES/starter/user/blueprints/config/* ~/SITES/$PROJECT/user/blueprints/config/
+  cp -r ~/SITES/starter/user/{accounts,blueprints,config} ~/SITES/$PROJECT/user/
+  ln -sf ~/SITES/starter/user/config/{fonts,media}.yaml ~/SITES/$PROJECT/user/config/
 
-  cp -rr ~/SITES/starter/user/themes/photon-child ~/SITES/$PROJECT/user/themes/
+  cp -r ~/SITES/starter/user/themes/photon-child ~/SITES/$PROJECT/user/themes/
 
-  cp -rf ~/SITES/starter/user/{.photon,README.md,CHANGELOG.md} ~/SITES/$PROJECT/user/
-  cp -rf ~/SITES/starter/user/{.gitignore,.sass-lint.yml} ~/SITES/$PROJECT/user/
+  cp -r ~/SITES/starter/user/{.photon,README.md,CHANGELOG.md} ~/SITES/$PROJECT/user/
+  ln -sf ~/SITES/starter/user/{.gitignore,.sass-lint.yml} ~/SITES/$PROJECT/user/
 
   echo
   echo "✴ set config files"
@@ -109,25 +109,18 @@ then
 
   END_TIME="$(date -u +%s)"
   ELAPSED="$(($END_TIME-$START_TIME))"
-  TIME=$(convertsecstomin $ELAPSED)
   echo
-  echo "✴ elapsed: $TIME m:s"
+  echo "✴ elapsed: $ELAPSED seconds"
 
   sites $PROJECT
 
   echo
+  echo "✴ opening: http://$PROJECT.local"
+  open "http://$PROJECT.local"
 
-  echo serve="php -S localhost:${PORT} system/router.php"
-  echo local="open ${LOCAL}"
-  echo admin="open ${LOCAL}/admin"
-  echo server="open ${SERVER}"
-  echo edit="atom ${PROJECT_DIR}/user"
-
-  echo pr="cd ${PROJECT_DIR}"
-  echo th="cd $THEMES_DIR/photon;gss"
-  echo ch="cd $THEMES_DIR/photon-child;gss"
-  echo pg="cd ${PROJECT_DIR}/user/pages;gss"
-  echo us="cd ${PROJECT_DIR}/user;gss"
+  echo
+  echo "✴ opening: atom"
+  atom .
 
 else
   echo "no project name"

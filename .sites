@@ -8,9 +8,9 @@ alias    photon="sites photon-platform"
 alias illumiphi="sites illumiphi"
 alias      port="sites port-of-alsea"
 alias      jill="sites jill-moser"
+alias       gbp="sites gerdemann"
 
 alias   starter="sites starter"
-alias       gbp="sites gerdemann"
 
 alias inmotion="ssh illumiphi.com"
 
