@@ -20,6 +20,8 @@ function sync() {
 
     case $1 in
       full)
+        cd "$PROJECT_DIR/"
+        bin/grav clear-cache
 
         SOURCE_DIR="$PROJECT_DIR/"
         DEST_DIR=illumiphi.com:${SERVER_DIR}/
@@ -29,10 +31,11 @@ function sync() {
         echo "source: $SOURCE_DIR"
         echo "dest: $DEST_DIR"
         echo
-        echo "press enter to continue - Ctrl-c to stop"
-        read
+        echo "login to continue - Ctrl-c to stop"
+        echo
 
         START_TIME="$(date -u +%s)"
+        # excludes are relative to source dir
         rsync \
           --archive \
           --update \
@@ -40,12 +43,12 @@ function sync() {
           --stats \
           --progress \
           --copy-links \
-          --exclude "$PROJECT_DIR/backup/*" \
-          --exclude "$PROJECT_DIR/cache/*" \
-          --exclude "$PROJECT_DIR/images/*" \
-          --exclude "$PROJECT_DIR/logs/*" \
-          --exclude "$PROJECT_DIR/user/.git/" \
-          --exclude "$PROJECT_DIR/user/data/tntsearch/*" \
+          --exclude "/backup/*" \
+          --exclude "/images/*" \
+          --exclude "/logs/*" \
+          --exclude "/user/data/tntsearch/*" \
+          --exclude "/user/.git/" \
+          --exclude "/user/.sass-cache/" \
           --delete \
           $SOURCE_DIR \
           $DEST_DIR
@@ -69,7 +72,7 @@ function sync() {
         echo "dest: $DEST_DIR"
         echo
         echo "press enter to continue - Ctrl-c to stop"
-        read
+        echo
 
         START_TIME="$(date -u +%s)"
         rsync \
@@ -79,7 +82,9 @@ function sync() {
           --stats \
           --progress \
           --copy-links \
-          --exclude "$PROJECT_DIR/user/data/tntsearch/*" \
+          --exclude "data/tntsearch/*" \
+          --exclude ".git/" \
+          --exclude ".sass-cache/" \
           --delete \
           $SOURCE_DIR \
           $DEST_DIR

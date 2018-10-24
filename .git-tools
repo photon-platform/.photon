@@ -1,11 +1,11 @@
+#!/usr/bin/env bash
+
 alias g-df="git diff --cached --submodule"
 alias g-df-s="git config --global diff.submodule log"
 
 # git submodule update --remote DbConnector
 
 alias g-ch-m="git checkout master"
-alias g-surr="git submodule update --remote --rebase" #or --merge
-alias g-each="git submodule foreach 'git status -sb; echo'"
 
 alias g-root='cd $(git rev-parse --show-toplevel)'
 alias @=g-root
@@ -15,3 +15,65 @@ alias ga="git add ."
 alias gc="git commit"
 alias gac="git add .;git commit"
 alias gacm="git add .;git commit -m"
+
+alias g-surr="git submodule update --remote --rebase" #or --merge
+alias g-each="git submodule foreach 'git status -sb; echo'"
+
+# tools for git submodules
+gsub() {
+
+  if [ $1 ]
+  then
+    case $1 in
+
+      # add, commit with message, push
+      acmp)
+        if [[ $2 ]]; then
+          git submodule foreach "pwd; git add .; git commit -m \"$2\"; git push origin master; echo"
+        else
+          echo 'add commit message: gsub acmp "message"'
+        fi
+        ;;
+
+      #fetch all submodules from remote
+      fetch)
+        git submodule foreach 'pwd; \
+          git fetch; \
+          git status -sb; \
+          echo'
+        ;;
+
+      # set all to master branch
+      master)
+        git submodule foreach "pwd; \
+          git checkout master; \
+          git status -sb; \
+          echo"
+        ;;
+
+      # update from remote origin
+      update)
+        # check for outstanding changes before update
+        # git submodule update --remote
+        git submodule foreach "pwd; \
+          git pull; \
+          git checkout master; \
+          git status -sb; \
+          echo"
+        ;;
+
+      user)
+
+        ;;
+
+      *)
+        echo "Enter options: gsub [acmp|fetch|update]"
+        ls
+        ;;
+    esac
+  else
+    # default status each
+    git submodule foreach 'pwd; git status -sb; echo'
+  fi
+
+}

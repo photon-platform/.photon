@@ -16,8 +16,7 @@ echo "✴ photon SITE Generator"
 if [ -z $PROJECT ]
 then
   echo
-  echo "specify PROJECT repo name: "
-  read PROJECT
+  read -p "specify PROJECT repo name: " PROJECT
 fi
 
 REPO="git@github.com:i-am-phi/$PROJECT.git"
@@ -36,8 +35,7 @@ fi
 if [ -z "$TITLE" ]
 then
   echo
-  echo "specify site TITLE: "
-  read TITLE
+  read -p "specify site TITLE: " TITLE
 fi
 
 if [ -n $PROJECT ]
@@ -53,9 +51,14 @@ then
 
   echo "✴ symlink plugins"
   ln -sf ~/SITES/starter/user/plugins/* ~/SITES/$PROJECT/user/plugins/
+  ln -sf ~/SITES/starter/user/blueprints/config/* ~/SITES/$PROJECT/user/blueprints/config/
   cp -r ~/SITES/starter/user/{accounts,blueprints,config} ~/SITES/$PROJECT/user/
+  ln -sf ~/SITES/starter/user/config/{fonts,media}.yaml ~/SITES/$PROJECT/user/config/
+
   cp -r ~/SITES/starter/user/themes/photon-child ~/SITES/$PROJECT/user/themes/
-  cp -r ~/SITES/starter/user/{.photon,README.md,.gitignore} ~/SITES/$PROJECT/user/
+
+  cp -r ~/SITES/starter/user/{.photon,README.md,CHANGELOG.md} ~/SITES/$PROJECT/user/
+  ln -sf ~/SITES/starter/user/{.gitignore,.sass-lint.yml} ~/SITES/$PROJECT/user/
 
   echo
   echo "✴ set config files"
@@ -74,7 +77,9 @@ then
   ag --nonumbers "title:" config/plugins/admin.yaml
 
   # update project key
-  sed -i.bak "s/^\(\s*export PROJECT=\).*/\1$PROJECT/" .photon
+  sed -i.bak -e "s/^\(\s*export PROJECT=\).*/\1$PROJECT/" \
+             -e "s/ph.*net/illumiphi.com/g" \
+             .photon
   ag --nonumbers "title:" .photon
 
   echo

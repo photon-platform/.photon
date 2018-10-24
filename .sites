@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
 # sites
+source ~/.photon/.git-tools
 
 # alias     sites="cd ~/SITES"
-alias       ppn="sites photon-platform.net"
-alias illumiphi="sites illumiphi.com"
-alias      port="sites port-3"
+alias    photon="sites photon-platform"
+alias illumiphi="sites illumiphi"
+alias      port="sites port-of-alsea"
 alias      jill="sites jill-moser"
 
-alias    photon="sites photon"
+alias   starter="sites starter"
 alias       gbp="sites gerdemann"
 
 alias inmotion="ssh illumiphi.com"
@@ -30,18 +31,38 @@ function sites() {
         ~/.photon/sites/new.sh "$2" "$3"
         ;;
       status)
-        find . -maxdepth 1 -mindepth 1 -type d -exec sh -c '(echo {} && cd {}/user && git status -sb && echo)' \;
-
+        cd ~/SITES
+        find . -maxdepth 1 -mindepth 1 \
+          ! -name "LOGS" \
+          ! -name ".archive" \
+          -type d \
+          -exec sh -c '(echo {} && \
+            cd {}/user && \
+            git status -sb && \
+            echo)' \;
         ;;
       *)
         cd ~/SITES/$1/user
-        ag "title" config/site.yaml
+        pwd
+        echo
+        sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml
+        echo
         source .photon
         git status -sb
+        echo
         ;;
     esac
   else
     cd ~/SITES
-    ls
+    find . -maxdepth 1 -mindepth 1 \
+      ! -name "LOGS" \
+      ! -name ".archive" \
+      -type d \
+      -exec sh -c '(echo {} && \
+        cd {}/user && \
+        sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml && \
+        git status -sb && \
+        echo)' \;
+
   fi
 }
