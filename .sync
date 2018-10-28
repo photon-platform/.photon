@@ -17,7 +17,6 @@ function sync() {
   if [ $1 ]
   then
 
-
     case $1 in
       full)
         cd "$PROJECT_DIR/"
@@ -47,8 +46,45 @@ function sync() {
           --exclude "/images/*" \
           --exclude "/logs/*" \
           --exclude "/user/data/tntsearch/*" \
-          --exclude "/user/.git/" \
           --exclude "/user/.sass-cache/" \
+          --exclude "/user/.git/" \
+          --delete \
+          $SOURCE_DIR \
+          $DEST_DIR
+
+        END_TIME="$(date -u +%s)"
+        ELAPSED="$(($END_TIME-$START_TIME))"
+        TIME=$(convertsecstomin $ELAPSED)
+        echo
+        echo "✴ elapsed: $TIME m:s"
+
+        ;;
+      pull)
+
+        # pull copy from server
+
+        cd "$PROJECT_DIR/"
+        bin/grav clear-cache
+
+        SOURCE_DIR=illumiphi.com:${SERVER_DIR}/
+        DEST_DIR="/home/phi/SITES/.backup/$PROJECT/"
+
+        echo
+        echo pull sync from server backup
+        echo "source: $SOURCE_DIR"
+        echo "dest: $DEST_DIR"
+        echo
+        echo "login to continue - Ctrl-c to stop"
+        echo
+
+        START_TIME="$(date -u +%s)"
+        # excludes are relative to source dir
+        rsync \
+          --archive \
+          --update \
+          --compress \
+          --stats \
+          --progress \
           --delete \
           $SOURCE_DIR \
           $DEST_DIR
