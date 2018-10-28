@@ -21,8 +21,6 @@ alias restart="sudo apache2ctl restart"
 alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.5.3 "
 alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav-admin/1.5.3 "
 
-# photon function
-#
 function sites() {
 
   if [ $1 ]
@@ -30,6 +28,7 @@ function sites() {
     case $1 in
       new)
         ~/.photon/sites/new.sh "$2" "$3"
+        sites "$2"
         ;;
       status)
         cd ~/SITES

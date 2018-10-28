@@ -112,10 +112,11 @@ then
   mkdir ~/SITES/LOGS/$PROJECT
   ~/.photon/sites/new-apache.sh $PROJECT
 
-  git add .
-  git commit -m "init"
   git remote set-url origin "$REPO"
-  git push -fu origin master
+
+  # git add .
+  # git commit -m "init"
+  # git push -fu origin master
 
   END_TIME="$(date -u +%s)"
   ELAPSED="$(($END_TIME-$START_TIME))"
@@ -123,16 +124,16 @@ then
   echo
   echo "✴ elapsed: $TIME m:s"
 
-  sites $PROJECT
 
   echo
-
+  echo "Photon Project Commands"
+  echo
   echo serve="php -S localhost:${PORT} system/router.php"
   echo local="open ${LOCAL}"
   echo admin="open ${LOCAL}/admin"
   echo server="open ${SERVER}"
   echo edit="atom ${PROJECT_DIR}/user"
-
+  echo
   echo pr="cd ${PROJECT_DIR}"
   echo th="cd $THEMES_DIR/photon;gss"
   echo ch="cd $THEMES_DIR/photon-child;gss"
