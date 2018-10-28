@@ -20,7 +20,7 @@ then
   read -p "specify PROJECT repo name: " PROJECT
 fi
 
-REPO="git@github.com:i-am-phi/$PROJECT.git"
+REPO="https://github.com/i-am-phi/$PROJECT.git"
 echo
 echo "✴ check remote repo"
 echo $REPO
@@ -64,11 +64,13 @@ then
     git status -sb; \
     echo"
 
+  echo
+  echo "✴ init tntsearch"
+  bin/plugin tntsearch index
 
   echo
   echo "✴ set config files"
   cd ~/SITES/$PROJECT/user
-
   echo "✴ create server config folder"
   mv starter.photon-platform.net $PROJECT.illumiphi.com
 
@@ -107,13 +109,12 @@ then
   #   git submodule add https://github.com/photon-platform/grav-plugin-$PLUGIN.git plugins/$PLUGIN
   # done;
 
-
   mkdir ~/SITES/LOGS/$PROJECT
   ~/.photon/sites/new-apache.sh $PROJECT
 
   git add .
   git commit -m "init"
-  git remote set-url origin git@github.com:i-am-phi/$PROJECT.git
+  git remote set-url origin "$REPO"
   git push -fu origin master
 
   END_TIME="$(date -u +%s)"

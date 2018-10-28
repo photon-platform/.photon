@@ -36,11 +36,25 @@ function sites() {
         find . -maxdepth 1 -mindepth 1 \
           ! -name "LOGS" \
           ! -name ".archive" \
+          ! -name ".backup" \
+          ! -name "grav" \
           -type d \
           -exec sh -c '(echo {} && \
             cd {}/user && \
+            sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml && \
             git status -sb && \
             echo)' \;
+        ;;
+      archive)
+        cd ~/SITES
+        if [[ $2 ]]; then
+          D=$(date +"%Y%m%d-%T")
+          cp -a "$2" .archive/$2.$D
+          ls .archive | grep $2
+        else
+          echo "specify valid site: sites archive sitename"
+          ls
+        fi
         ;;
       *)
         cd ~/SITES/$1/user
@@ -55,15 +69,6 @@ function sites() {
     esac
   else
     cd ~/SITES
-    find . -maxdepth 1 -mindepth 1 \
-      ! -name "LOGS" \
-      ! -name ".archive" \
-      -type d \
-      -exec sh -c '(echo {} && \
-        cd {}/user && \
-        sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml && \
-        git status -sb && \
-        echo)' \;
-
+    ls
   fi
 }
