@@ -48,6 +48,8 @@ function sync() {
           --exclude "/user/data/tntsearch/*" \
           --exclude "/user/.sass-cache/" \
           --exclude "/user/.git/" \
+          --exclude "/user/*.com/" \
+          --exclude "/user/*.net/" \
           --delete \
           $SOURCE_DIR \
           $DEST_DIR
@@ -121,6 +123,8 @@ function sync() {
           --exclude "data/tntsearch/*" \
           --exclude ".git/" \
           --exclude ".sass-cache/" \
+          --exclude "/user/*.com/" \
+          --exclude "/user/*.net/" \
           --delete \
           $SOURCE_DIR \
           $DEST_DIR

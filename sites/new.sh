@@ -74,10 +74,14 @@ then
   echo "✴ create server config folder"
   mv starter.photon-platform.net $PROJECT.illumiphi.com
 
+
+  echo
+  echo "✴ set accounts"
+  cd ~/SITES/$PROJECT/user
+  cp ~/SITES/$CLONE/user/accounts/*.yaml accounts/
+
   echo
   echo "✴ set config files"
-  cd ~/SITES/$PROJECT/user
-
   # update theme
   sed -i "s/^\(\s*theme:\s*\).*/\1photon/" config/system.yaml
   ag --nonumbers "theme:" config/system.yaml
