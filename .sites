@@ -9,7 +9,9 @@ alias illumiphi="sites illumiphi"
 alias      port="sites port-of-alsea"
 alias      jill="sites jill-moser"
 alias       gbp="sites gerdemann"
-alias       yachats="sites yachats"
+alias   yachats="sites yachats"
+alias   presence="sites presence"
+alias   geometor="sites geometor"
 
 alias   starter="sites starter"
 
