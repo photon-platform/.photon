@@ -10,7 +10,7 @@ alias archive="cp -r ${PROJECT_DIR} ~/SITES/.archive/$PROJECT.$(date +"%Y%m%d")"
 alias pr="cd ${PROJECT_DIR}"
 alias th="cd $THEMES_DIR/photon;gss"
 alias ch="cd $THEMES_DIR/photon-child;gss"
-alias pg="cd ${PROJECT_DIR}/user/pages;gss"
+# alias pg="cd ${PROJECT_DIR}/user/pages;gss"
 alias us="cd ${PROJECT_DIR}/user;gss"
 
 alias cc="cd ${PROJECT_DIR};bin/grav clear-cache"
@@ -35,5 +35,52 @@ function pl() {
   else
     cd $PLUGINS_DIR
     git status -sb
+  fi
+}
+
+function pg() {
+  if [ $1 ]
+  then
+    case $1 in
+      new)
+        TEMPLATE="article"
+        echo "photon ✴ NEW $TEMPLATE"
+
+        read -p "   TITLE: " TITLE
+
+        FOLDER=$(echo "$TITLE" | tr "[:upper:]" "[:lower:]" | tr "[:space:]" "-" | sed -e 's/-$//g' | sed -e 's/[,\/\?\.]//g')
+
+        read -p "  FOLDER: " -i "$FOLDER" -e FOLDER
+
+        NUM="00"
+        read -p "     NUM: " -i "$NUM" -e NUM
+        if [ $NUM ]
+        then
+          FOLDER="${NUM}.${FOLDER}"
+        fi
+
+        read -p "SUBTITLE: " SUBTITLE
+
+        read -p " SUMMARY: " SUMMARY
+
+        mkdir $FOLDER
+        cd $FOLDER
+
+        sed -e "s/:TITLE:/$TITLE/g" \
+            -e "s/:SUBTITLE:/$SUBTITLE/g" \
+            -e "s/:SUMMARY:/$SUMMARY/g" \
+            ~/.photon/templates/$TEMPLATE.md > $TEMPLATE.md
+
+        atom $TEMPLATE.md
+        ;;
+      *)
+        echo "pg [new]"
+
+        ;;
+    esac
+  else
+    cd ${PROJECT_DIR}/user/pages
+    ls
+    git status -sb .
   fi
 }

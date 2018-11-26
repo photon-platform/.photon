@@ -10,7 +10,7 @@ alias g-df-s="git config --global diff.submodule log"
 alias g-root='cd $(git rev-parse --show-toplevel)'
 alias @=g-root
 
-alias gss="git status -sb"
+alias gss="git status -sb ."
 alias ga="git add ."
 alias gc="git commit"
 alias gac="git add .;git commit"
