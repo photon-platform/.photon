@@ -1,0 +1,42 @@
+[
+  {
+    title: ".Photon"
+    group: "config"
+    paths: [
+      "/home/phi/.photon"
+    ]
+    color: "magenta"
+  }
+  {
+    title: "starter"
+    group: "photon"
+    paths: [
+      "/home/phi/SITES/starter/user"
+    ]
+    color: "gold"
+  }
+  {
+    title: "port-of-alsea"
+    group: "photon"
+    paths: [
+      "/home/phi/SITES/port-of-alsea/user"
+    ]
+    color: "gold"
+  }
+  {
+    title: "gerdemann"
+    group: "photon"
+    paths: [
+      "/home/phi/SITES/gerdemann/user"
+    ]
+    color: "gold"
+  }
+  {
+    title: "jill-moser"
+    group: "photon"
+    paths: [
+      "/home/phi/SITES/jill-moser/user"
+    ]
+    color: "gold"
+  }
+]

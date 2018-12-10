@@ -1,0 +1,89 @@
+"*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "a8819854-2713-4a33-b04d-b79b29504768"
+  core:
+    disabledPackages: [
+      "language-gfm"
+      "minimap-pigments"
+      "markdown-preview"
+      "typewriter"
+      "linter-spell"
+      "javascript-snippets"
+      "markdown-mindmap"
+      "minimap"
+      "minimap-highlight-selected"
+      "linter-eslint"
+      "markdown-folding"
+      "script"
+      "language-c"
+      "language-csharp"
+      "language-objective-c"
+      "language-go"
+      "language-java"
+      "language-mustache"
+      "language-toml"
+      "language-ruby"
+      "language-ruby-on-rails"
+      "language-python"
+      "language-perl"
+      "atom-runner"
+      "atom-html-preview"
+      "language-clojure"
+      "language-less"
+      "atom-beautify"
+      "intentions"
+      "pigments"
+      "project-manager"
+      "scss-snippets"
+      "todo-show"
+      "tool-bar"
+      "tabs-to-spaces"
+      "tool-bar-markdown-writer"
+      "zotero-citations"
+      "languagetool"
+      "markdown-writer"
+      "emmet"
+      "emmet-snippets-compatibility"
+      "open-in-browsers"
+      "autocomplete-plus"
+    ]
+    telemetryConsent: "limited"
+  editor:
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+  "exception-reporting":
+    userId: "9dcc5dbc-427c-46ef-9811-269079746901"
+  "linter-ui-default":
+    panelHeight: 300
+  "markdown-preview-enhanced":
+    enableTypographer: true
+    openPreviewPaneAutomatically: false
+    previewTheme: "github-dark.css"
+    revealjsTheme: "night.css"
+  minimap:
+    plugins:
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+      pigments: true
+  "open-in-browsers":
+    BrowserPlus: false
+    IE: false
+    Opera: false
+    Safari: false
+    defBrowser: "Firefox"
+  "platformio-ide-terminal":
+    core:
+      autoRunCommand: "source .photon"
+    style:
+      theme: "solarized-dark"
+  "sync-settings":
+    _lastBackupHash: "9b729896ab25eb431ebdef4fd8be633f4b28ddef"
+    gistId: "8df0f252ff7de191b5a1336ed8fc44ab"
+    personalAccessToken: "6c8d75cbd40230836098fe5dfcd0d268de930ded"
+  "tree-view":
+    hideVcsIgnoredFiles: true
+    sortFoldersBeforeFiles: false
+  welcome:
+    showOnStartup: false
