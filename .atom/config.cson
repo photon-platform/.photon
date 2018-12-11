@@ -46,7 +46,6 @@
       "emmet"
       "emmet-snippets-compatibility"
       "open-in-browsers"
-      "autocomplete-plus"
     ]
     telemetryConsent: "limited"
   editor:
