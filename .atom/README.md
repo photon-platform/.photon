@@ -10,7 +10,7 @@
 <font color="#5F8700"><b>~/.atom</b></font><font color="#EEEEEC"><b> on </b></font><font color="#5F5FAF"><b>master</b></font><font color="#0087FF"><b> [!?]</b></font>
 <font color="#EEEEEC"><b>$ </b></font>
 </pre>
-at
+
 ## atom config
 
 ## file sync routines
