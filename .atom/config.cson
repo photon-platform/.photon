@@ -72,6 +72,9 @@
     Opera: false
     Safari: false
     defBrowser: "Firefox"
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
   "platformio-ide-terminal":
     core:
       autoRunCommand: "source .photon"
