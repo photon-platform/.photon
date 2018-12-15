@@ -85,7 +85,6 @@
     gistId: "8df0f252ff7de191b5a1336ed8fc44ab"
     personalAccessToken: "6c8d75cbd40230836098fe5dfcd0d268de930ded"
   "tree-view":
-    hideVcsIgnoredFiles: true
     sortFoldersBeforeFiles: false
   welcome:
     showOnStartup: false
