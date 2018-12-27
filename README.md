@@ -4,7 +4,7 @@
 
 # `photon ✴ CONFIG`
 
-.dotfiles for the `photon ✴ PLATFORM`
+Configuration files for the photon PLATFORM - bash scripts and dotfiles, atom editor configuration, file sync, git helpers
 
 You can view a demo of the starter site at https://starter.photon-platform.net
 
@@ -43,3 +43,5 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 ## atom config
 
 ## file sync routines
+
+## git helpers
