@@ -32,7 +32,6 @@
       "atom-html-preview"
       "language-clojure"
       "language-less"
-      "atom-beautify"
       "intentions"
       "pigments"
       "project-manager"
@@ -50,7 +49,7 @@
     ]
     telemetryConsent: "limited"
   editor:
-    fontSize: 16
+    fontSize: 13
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
