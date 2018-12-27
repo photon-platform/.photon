@@ -21,6 +21,7 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 * [prompt](#prompt)
 * [atom config](#atom-config)
 * [file sync routines](#file-sync-routines)
+* [git helpers](#git-helpers)
 
 <!-- /code_chunk_output -->
 
