@@ -3,6 +3,7 @@
     general:
       _analyticsUserId: "a8819854-2713-4a33-b04d-b79b29504768"
   core:
+    autoHideMenuBar: true
     disabledPackages: [
       "language-gfm"
       "minimap-pigments"
@@ -49,6 +50,7 @@
     ]
     telemetryConsent: "limited"
   editor:
+    fontSize: 16
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
@@ -66,6 +68,8 @@
       "highlight-selected": true
       "highlight-selectedDecorationsZIndex": 0
       pigments: true
+  "one-dark-ui":
+    fontSize: 14
   "open-in-browsers":
     BrowserPlus: false
     IE: false

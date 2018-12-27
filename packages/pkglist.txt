@@ -54,6 +54,7 @@ bluez						install
 bluez-cups					install
 bluez-obexd					install
 bolt						install
+breeze-cursor-theme				install
 brltty						deinstall
 bsdmainutils					install
 bsdutils					install
@@ -131,6 +132,7 @@ dmsetup						install
 dns-root-data					install
 dnsmasq-base					install
 dnsutils					install
+docbook-xml					install
 dosfstools					install
 dpkg						install
 dpkg-dev					install
@@ -177,14 +179,19 @@ fonts-dejavu-core				install
 fonts-dejavu-extra				install
 fonts-droid-fallback				install
 fonts-freefont-ttf				install
+fonts-hack					install
+fonts-hack-ttf					install
 fonts-kacst					install
 fonts-lato					install
 fonts-liberation				install
 fonts-liberation2				install
+fonts-noto					install
 fonts-noto-cjk					install
 fonts-noto-cjk-extra				install
 fonts-noto-color-emoji				install
+fonts-noto-hinted				install
 fonts-noto-mono					install
+fonts-noto-unhinted				install
 fonts-opensymbol				install
 fonts-ubuntu					install
 fonts-wine					install
@@ -436,6 +443,7 @@ initramfs-tools					install
 initramfs-tools-bin				install
 initramfs-tools-core				install
 inkscape					install
+inkscape-open-symbols				install
 inputattach					install
 install-info					install
 intel-microcode					install
@@ -621,6 +629,7 @@ libc6:i386					install
 libc6-dev:amd64					install
 libcaca0:amd64					install
 libcairo-gobject2:amd64				install
+libcairo-perl					install
 libcairo2:amd64					install
 libcairo2:i386					install
 libcairomm-1.0-1v5:amd64			install
@@ -751,6 +760,7 @@ libenchant1c2a:amd64				install
 libencode-locale-perl				install
 libeot0:amd64					install
 libepoxy0:amd64					install
+libept1.5.0:amd64				install
 libepubgen-0.1-1:amd64				install
 liberror-perl					install
 libespeak-ng1:amd64				install
@@ -851,6 +861,7 @@ libgl1-mesa-glx:i386				install
 libglapi-mesa:amd64				install
 libglapi-mesa:i386				install
 libgles2:amd64					install
+libglib-perl					install
 libglib2.0-0:amd64				install
 libglib2.0-0:i386				install
 libglib2.0-bin					install
@@ -922,6 +933,7 @@ libgstreamer1.0-0:i386				install
 libgtk-3-0:amd64				install
 libgtk-3-bin					install
 libgtk-3-common					install
+libgtk2-perl					install
 libgtk2.0-0:amd64				install
 libgtk2.0-bin					install
 libgtk2.0-common				install
@@ -1183,6 +1195,7 @@ libpam-runtime					install
 libpam-systemd:amd64				install
 libpam0g:amd64					install
 libpango-1.0-0:amd64				install
+libpango-perl					install
 libpangocairo-1.0-0:amd64			install
 libpangoft2-1.0-0:amd64				install
 libpangomm-1.4-1v5:amd64			install
@@ -1283,6 +1296,7 @@ libquadmath0:amd64				install
 libquvi-0.9-0.9.3:amd64				install
 libquvi-scripts-0.9				install
 libraptor2-0:amd64				install
+librarian0					install
 librasqal3:amd64				install
 libraw1394-11:amd64				install
 libraw16:amd64					install
@@ -1516,6 +1530,8 @@ libwmf-bin					install
 libwmf0.2-7:amd64				install
 libwnck-3-0:amd64				install
 libwnck-3-common				install
+libwnck-common					install
+libwnck22:amd64					install
 libwoff1:amd64					install
 libwpd-0.10-10:amd64				install
 libwpg-0.3-3:amd64				install
@@ -1575,6 +1591,12 @@ libxdmcp6:amd64					install
 libxdmcp6:i386					install
 libxext6:amd64					install
 libxext6:i386					install
+libxfce4ui-1-0:amd64				install
+libxfce4ui-common				install
+libxfce4util-bin				install
+libxfce4util-common				install
+libxfce4util7:amd64				install
+libxfconf-0-2					install
 libxfixes3:amd64				install
 libxfixes3:i386					install
 libxfont2:amd64					install
@@ -1691,6 +1713,7 @@ lua-json					install
 lua-lpeg:amd64					install
 lua-socket:amd64				install
 lvm2						install
+lxqt-common					install
 lynx						install
 lynx-common					install
 m4						install
@@ -1759,6 +1782,7 @@ openssl						install
 orca						install
 os-prober					install
 osinfo-db					install
+oxygen-icon-theme				install
 p11-kit						install
 p11-kit-modules:amd64				install
 packagekit					install
@@ -2011,6 +2035,7 @@ qtcore4-l10n					install
 qttranslations5-l10n				install
 rake						install
 rapid-photo-downloader				install
+rarian-compat					install
 readline-common					install
 repoman						install
 resolvconf					install
@@ -2041,8 +2066,12 @@ secureboot-db					install
 sed						install
 sensible-utils					install
 sessioninstaller				install
+sgml-base					install
+sgml-data					install
 shared-mime-info				install
 sharutils					install
+shotwell					install
+shotwell-common					install
 shtool						install
 silversearcher-ag				install
 simple-scan					install
@@ -2061,6 +2090,7 @@ ssl-cert					install
 stk						install
 strace						install
 sudo						install
+synaptic					install
 system-config-printer-common			install
 system-config-printer-udev			install
 system76-power					install
@@ -2159,13 +2189,17 @@ xbrlapi						install
 xdg-user-dirs					install
 xdg-user-dirs-gtk				install
 xdg-utils					install
+xfconf						install
 xfonts-base					install
 xfonts-encodings				install
 xfonts-scalable					install
 xfonts-utils					install
+xfwm4						install
+xfwm4-theme-breeze				install
 xinit						install
 xinput						install
 xkb-data					install
+xml-core					install
 xmlstarlet					install
 xorg						install
 xorg-docs-core					install
