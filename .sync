@@ -100,8 +100,6 @@ function sync_push_all() {
     --exclude "/user/data/tntsearch/*" \
     --exclude "/user/.sass-cache/" \
     --exclude "/user/.git/" \
-    --exclude "/user/*.com/" \
-    --exclude "/user/*.net/" \
     --delete \
     $SOURCE_DIR \
     $DEST_DIR
@@ -116,9 +114,9 @@ function sync_push_all() {
 }
 
 function sync_push_user() {
+
   SOURCE_DIR="$PROJECT_DIR/user/"
   DEST_DIR=illumiphi.com:${SERVER_DIR}/user/
-
 
   echo
   echo user sync to server

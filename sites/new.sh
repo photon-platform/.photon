@@ -83,7 +83,7 @@ then
   echo
   echo "✴ set config files"
   # update theme
-  sed -i "s/^\(\s*theme:\s*\).*/\1photon/" config/system.yaml
+  # sed -i "s/^\(\s*theme:\s*\).*/\1photon/" config/system.yaml
   ag --nonumbers "theme:" config/system.yaml
 
   # update site title
@@ -100,27 +100,14 @@ then
          .photon
   ag --nonumbers "title:" .photon
 
-  # echo "✴ add submodules"
-  #
-  # # photon theme
-  # git submodule add https://github.com/photon-platform/grav-theme-photon.git themes/photon
-  #
-  # # plugins
-  # for PLUGIN in {photon,photon-{breadcrumbs,creation,event,form,organization,person,portfolio,project,search,subscribe}}; do
-  #   rm -rf plugins/$PLUGIN
-  #   echo
-  #   echo "✴ $PLUGIN"
-  #   git submodule add https://github.com/photon-platform/grav-plugin-$PLUGIN.git plugins/$PLUGIN
-  # done;
 
   mkdir ~/SITES/LOGS/$PROJECT
   ~/.photon/sites/new-apache.sh $PROJECT
 
   git remote set-url origin "$REPO"
 
-  # git add .
-  # git commit -m "init"
-  # git push -fu origin master
+  git add .
+  git commit -m "init"
 
   END_TIME="$(date -u +%s)"
   ELAPSED="$(($END_TIME-$START_TIME))"
@@ -143,6 +130,15 @@ then
   echo ch="cd $THEMES_DIR/photon-child;gss"
   echo pg="cd ${PROJECT_DIR}/user/pages;gss"
   echo us="cd ${PROJECT_DIR}/user;gss"
+
+  echo
+  echo "✴ push to GitHub"
+
+  read -p "push now? (Y|n): " PUSH
+  if [ $PUSH = 'Y' ]
+  then
+    git push -fu origin master
+  fi
 
 else
   echo "no project name"
