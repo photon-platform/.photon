@@ -101,7 +101,6 @@ then
   ag --nonumbers "title:" .photon
 
 
-  mkdir ~/SITES/LOGS/$PROJECT
   ~/.photon/sites/new-apache.sh $PROJECT
 
   git remote set-url origin "$REPO"

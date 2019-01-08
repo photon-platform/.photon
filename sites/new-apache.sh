@@ -17,7 +17,9 @@ then
   sudo sed -e "s/starter/$1/g" /etc/apache2/sites-available/starter.conf | \
       sudo tee /etc/apache2/sites-available/$1.conf
 
-  # cat /etc/apache2/sites-available/$1.conf
+  cat /etc/apache2/sites-available/$1.conf
+
+  mkdir ~/SITES/LOGS/$PROJECT
 
   echo
   echo "✴ enable site"

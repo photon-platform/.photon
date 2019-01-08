@@ -29,7 +29,6 @@
       "language-python"
       "language-perl"
       "atom-runner"
-      "atom-html-preview"
       "language-clojure"
       "language-less"
       "intentions"
@@ -43,13 +42,10 @@
       "zotero-citations"
       "languagetool"
       "markdown-writer"
-      "emmet"
       "emmet-snippets-compatibility"
-      "open-in-browsers"
     ]
     telemetryConsent: "limited"
   editor:
-    fontSize: 13
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
