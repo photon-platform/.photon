@@ -5,3 +5,4 @@
 .atom/.apm
 .atom/.node-gyp
 .atom/recovery
+.atom/nohup.out
