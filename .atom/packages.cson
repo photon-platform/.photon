@@ -21,7 +21,6 @@ packages: [
   "linter-spell"
   "linter-twig"
   "linter-ui-default"
-  "markdown-folding"
   "markdown-preview-enhanced"
   "markdown-writer"
   "open-in-browsers"
