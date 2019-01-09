@@ -1,7 +1,7 @@
 #!/bin/sh
 
 init/remove-default-apps.sh
-sudo apt update && sudo apt upgrade
+sudo apt update -y && sudo apt upgrade -y
 
 init/atom.sh
 
