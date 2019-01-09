@@ -14,7 +14,7 @@ then
 
   echo
   echo "✴ create conf file:"
-  sudo sed -e "s/starter/$1/g" /etc/apache2/sites-available/starter.conf | \
+  sudo sed -e "s/grav/$1/g" /etc/apache2/sites-available/grav.conf | \
       sudo tee /etc/apache2/sites-available/$1.conf
 
   cat /etc/apache2/sites-available/$1.conf

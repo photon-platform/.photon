@@ -14,8 +14,7 @@ sudo unzip grav-admin-1.5.6.zip grav/
 
 # add new available site .conf
 
-cp /etc/apache2/sites-available/000-default.conf grav.conf
-sudo gedit /etc/apache2/sites-available/grav.conf
+cp ~/.photon/templates/grav.conf /etc/apache2/sites-available/grav.conf
 
 #<VirtualHost grav:80>
 #	#ServerName www.example.com
