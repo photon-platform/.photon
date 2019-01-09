@@ -4,8 +4,6 @@ sudo apt update && sudo apt upgrade
 
 init/vbox-init.sh
 
-
-
 sudo apt install vim
 # **ctags** Combining vim with ctags yields a powerful combination for working with large or unfamiliar codebases.
 

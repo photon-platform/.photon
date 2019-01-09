@@ -6,14 +6,9 @@
     autoHideMenuBar: true
     disabledPackages: [
       "language-gfm"
-      "minimap-pigments"
       "markdown-preview"
-      "typewriter"
       "linter-spell"
       "javascript-snippets"
-      "markdown-mindmap"
-      "minimap"
-      "minimap-highlight-selected"
       "linter-eslint"
       "markdown-folding"
       "script"
@@ -31,18 +26,13 @@
       "atom-runner"
       "language-clojure"
       "language-less"
-      "intentions"
-      "pigments"
       "project-manager"
       "scss-snippets"
-      "todo-show"
       "tool-bar"
       "tabs-to-spaces"
       "tool-bar-markdown-writer"
-      "zotero-citations"
       "languagetool"
       "markdown-writer"
-      "emmet-snippets-compatibility"
     ]
     telemetryConsent: "limited"
   editor:
