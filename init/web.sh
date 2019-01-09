@@ -3,8 +3,9 @@
 mkdir ~/SITES
 cd ~/SITES
 
-sudo wget https://getgrav.org/download/core/grav-admin/1.5.6 -O /var/www/grav-admin-1.5.6.zip
-sudo unzip grav-admin-1.5.6.zip grav/
+wget https://getgrav.org/download/core/grav-admin/1.5.6 -O grav-admin-1.5.6.zip
+unzip grav-admin-1.5.6.unzip
+mv grav-admin grav
 
 # set better permissions
 # sudo chmod -R 777 /var/www/grav
