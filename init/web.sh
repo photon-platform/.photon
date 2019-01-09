@@ -1,15 +1,14 @@
 #!/bin/sh
 
-cd /var/www
-sudo wget https://getgrav.org/download/core/grav-admin/1.5.1 -O /var/www/grav-admin-1.5.1.zip
-sudo unzip grav-admin-1.5.1.zip grav/
+mkdir ~/SITES
+cd ~/SITES
+
+sudo wget https://getgrav.org/download/core/grav-admin/1.5.6 -O /var/www/grav-admin-1.5.6.zip
+sudo unzip grav-admin-1.5.6.zip grav/
 
 # set better permissions
-sudo chmod -R 777 /var/www/grav
-sudo chown -R www-data:www-data /var/www/grav
-
-# configure git
-
+# sudo chmod -R 777 /var/www/grav
+# sudo chown -R www-data:www-data /var/www/grav
 
 # TODO:  set or clone new web folder
 
@@ -34,6 +33,4 @@ sudo gedit /etc/apache2/sites-available/grav.conf
 sudo a2ensite grav.conf
 sudo systemctl restart apache2
 
-php -S localhost:8000 system/router.php
-
-
+open grav.local
