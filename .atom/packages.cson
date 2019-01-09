@@ -8,6 +8,7 @@ packages: [
   "filesize"
   "highlight-line"
   "highlight-selected"
+  "intentions"
   "javascript-snippets"
   "language-apache"
   "language-awk"
@@ -38,6 +39,4 @@ packages: [
   "tool-bar"
   "tool-bar-markdown-writer"
   "trailing-spaces"
-  "typewriter"
-  "zotero-citations"
 ]
