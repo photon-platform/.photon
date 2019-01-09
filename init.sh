@@ -9,63 +9,13 @@ init/vbox-init.sh
 sudo apt install vim
 # **ctags** Combining vim with ctags yields a powerful combination for working with large or unfamiliar codebases.
 
+init/atom.sh
 
-# install atom dependencies
-sudo apt install gconf-service gconf-service-backend gconf2 gconf2-common libgconf-2-4
+init/apache.sh
 
-# install atom
-wget https://atom.io/download/deb -O atom.deb
-sudo dpkg -if atom.deb
-rm atom.deb
+init/php.sh
 
 
-
-# apache www folders
-sudo usermod -a -G www-data phi
-
-# install apache
-sudo apt update
-sudo apt install apache2
-sudo systemctl status apache2
-
-# install php
-sudo apt update
-sudo apt install php
-# this currently installs:
-# libapache2-mod-php7.2
-# php-common
-# php7.2
-# php7.2-cli
-# php7.2-common
-# php7.2-json
-# php7.2-opcache
-# php7.2-readline
-
-sudo apt install \
- php-mbstring\
- php-xmlrpc\
- php-soap\
- php-gd\
- php-xml\
- php-curl\
- php-zip\
- php-pear\
- php-fpm\
- php-dev\
- php-mysql\
- php-apcu\
- php-tidy
-
-# for TNT search
-sudo apt install sqlite
-sudo apt install \
-  php-pdo \
-  php-sqlite3 \
-  php-mysql
-
-sudo a2enmod proxy proxy_fcgi rewrite
-sudo a2enconf php7.2-fpm
-a2enmod proxy_fcgi setenvif
 
 cd /var/www
 sudo wget https://getgrav.org/download/core/grav-admin/1.5.1 -O /var/www/grav-admin-1.5.1.zip
