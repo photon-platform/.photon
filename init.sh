@@ -13,7 +13,7 @@ init/apache.sh
 
 init/php.sh
 
-
+init/git.sh
 
 cd /var/www
 sudo wget https://getgrav.org/download/core/grav-admin/1.5.1 -O /var/www/grav-admin-1.5.1.zip
