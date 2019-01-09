@@ -1,27 +1,10 @@
-# set shares
-# install guest additions
-# restart
-
-# For a Linux host, first install the DKMS (Dynamic Kernel Module Support) package on the guest machine (source):
-# keeps time synced
-
-sudo apt install dkms
-
-# Then install Guest Additions into guest system:
-
-sudo apt install virtualbox-guest-dkms
-sudo apt install virtualbox-guest-dkms-hwe
-# sudo apt install virtualbox-guest-x11
-# sudo apt install virtualbox-guest-x11-hwe
-
-
-
-# add phi account to vboxsf group for vbox shares
-sudo usermod -a -G vboxsf phi
-# apache www folders
-sudo usermod -a -G www-data phi
-
+#!/bin/sh
+init/remove-default-apps.sh
 sudo apt update && sudo apt upgrade
+
+init/vbox-init.sh
+
+
 
 # copy config files (from git?)
 
@@ -37,13 +20,10 @@ wget https://atom.io/download/deb -O atom.deb
 sudo dpkg -if atom.deb
 rm atom.deb
 
-apm install sync-settings
-GITHUB_TOKEN=6c8d75cbd40230836098fe5dfcd0d268de930ded \
- GIST_ID=8df0f252ff7de191b5a1336ed8fc44ab atom
 
-#	personal token: 6c8d75cbd40230836098fe5dfcd0d268de930ded
-#	gist id: 8df0f252ff7de191b5a1336ed8fc44ab
 
+# apache www folders
+sudo usermod -a -G www-data phi
 
 # install apache
 sudo apt update
