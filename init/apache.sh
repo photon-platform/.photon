@@ -1,6 +1,6 @@
 # install apache
-sudo apt update
-sudo apt install apache2
+sudo apt -y update
+sudo apt install -y apache2
 sudo systemctl status apache2
 
 # apache www folders
