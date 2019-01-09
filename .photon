@@ -7,6 +7,8 @@ alias server="open ${SERVER}"
 alias edit="atom ${PROJECT_DIR}/user"
 alias archive="cp -r ${PROJECT_DIR} ~/SITES/.archive/$PROJECT.$(date +"%Y%m%d")"
 
+alias dot=cd ~/.photon
+
 alias pr="cd ${PROJECT_DIR}"
 alias th="cd $THEMES_DIR/photon;gss"
 alias ch="cd $THEMES_DIR/photon-child;gss"
