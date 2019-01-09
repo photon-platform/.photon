@@ -13,8 +13,5 @@ init/git.sh
 
 init/vbox-init.sh
 
-sudo apt install vim
+sudo apt install -y vim
 # **ctags** Combining vim with ctags yields a powerful combination for working with large or unfamiliar codebases.
-
-
-

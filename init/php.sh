@@ -41,7 +41,7 @@ a2enmod proxy_fcgi setenvif
 
 # composer
 
-sudo apt install composer
+sudo apt install -y composer
 sudo chown -R $USER $HOME/.composer
 composer global require "asm89/twig-lint" "@dev"
 #make sure this is in the path fconfig

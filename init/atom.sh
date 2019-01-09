@@ -8,3 +8,7 @@ sudo apt install -y gconf-service gconf-service-backend gconf2 gconf2-common lib
 
 # install atom
 sudo apt install -y atom
+
+apm install package-sync
+
+atom
