@@ -24,6 +24,7 @@ init/graphics.sh
 
 init/grav.sh
 
+init/starter.sh
 
 echo
 echo *****************************************
