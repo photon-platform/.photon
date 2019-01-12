@@ -18,11 +18,11 @@ sudo apt install -y vim
 
 init/gsettings.sh
 
-init/grav.sh
-
 init/thunderbird.sh
 
+init/graphics.sh
 
+init/grav.sh
 
 
 echo
