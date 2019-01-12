@@ -18,6 +18,13 @@ sudo apt install -y vim
 
 init/gsettings.sh
 
+init/grav.sh
+
+init/thunderbird.sh
+
+
+
+
 echo
 echo *****************************************
 echo
