@@ -29,7 +29,7 @@ addhost grav
 
 cd grav
 
-sudo chown -R phi:phi .
+sudo chown phi:phi -R .
 find . -type f | sudo xargs chmod 664
 find ./bin -type f | sudo xargs chmod 775
 find . -type d | sudo xargs chmod 775
