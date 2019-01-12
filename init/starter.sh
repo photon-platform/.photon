@@ -27,5 +27,6 @@ git submodule foreach "pwd; \
   git status -sb; \
   echo"
 
+mkdir ~/SITES/LOGS/$PROJECT
 
 ~/.photon/sites/new-apache.sh $PROJECT
