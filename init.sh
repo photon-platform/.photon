@@ -33,14 +33,12 @@ fi;
 title() {
   clear
   echo "${orange}*************************************************"
-  echo "$1"
-  echo "*************************************************"
+  echo "${white}$1"
+  echo "${orange}*************************************************"
   echo "${reset}"
 }
 
 title "gnome settings"
-
-read test
 
 init/gsettings.sh
 
