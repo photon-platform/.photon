@@ -1,5 +1,7 @@
 #!/bin/sh
 
+./home.sh
+
 init/remove-default-apps.sh
 sudo apt update -y && sudo apt upgrade -y
 
