@@ -2,9 +2,7 @@
 
 source ~/.photon/.hosts
 
-mkdir ~/SITES
-mkdir ~/SITES/LOGS
-mkdir ~/SITES/LOGS/grav
+mkdir -p ~/SITES/LOGS/grav
 cd ~/SITES
 
 # read -p "continue?" tmp

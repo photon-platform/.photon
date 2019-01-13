@@ -14,18 +14,18 @@ sudo apt install -y php
 # php7.2-readline
 
 sudo apt install -y \
- php-mbstring\
- php-xmlrpc\
- php-soap\
- php-gd\
- php-xml\
- php-curl\
- php-zip\
- php-pear\
- php-fpm\
- php-dev\
- php-mysql\
- php-apcu\
+ php-mbstring \
+ php-xmlrpc \
+ php-soap \
+ php-gd \
+ php-xml \
+ php-curl \
+ php-zip \
+ php-pear \
+ php-fpm \
+ php-dev \
+ php-mysql \
+ php-apcu \
  php-tidy
 
 # for TNT search
