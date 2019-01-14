@@ -18,4 +18,4 @@ sudo apt install -y virtualbox-guest-dkms-hwe
 
 
 # add phi account to vboxsf group for vbox shares
-sudo usermod -a -G vboxsf phi
+sudo usermod -a -G vboxsf ${USERNAME}
