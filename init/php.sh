@@ -37,13 +37,18 @@ sudo apt install -y \
 
 sudo a2enmod proxy proxy_fcgi rewrite
 sudo a2enconf php7.2-fpm
-a2enmod proxy_fcgi setenvif
+sudo a2enmod proxy_fcgi setenvif
+
+sudo chmod  o+w /var/www/html
+
+sudo echo "<?php phpInfo();" > /var/www/html/info.php
+firefox "http://localhost/info.php"
 
 # composer
 
 sudo apt install -y composer
 sudo chown -R $USER $HOME/.composer
-composer global require "asm89/twig-lint" "@dev"
+sudo composer global require "asm89/twig-lint" "@dev"
 #make sure this is in the path fconfig
 export PATH=$PATH:~/.composer/vendor/asm89/twig-lint/bin
 # twig-lint at command prompt to test

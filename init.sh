@@ -31,7 +31,7 @@ else
 fi;
 
 title() {
-  clear
+  clear -x
   echo "${orange}*************************************************"
   echo "${white}$1"
   echo "${orange}*************************************************"
@@ -70,6 +70,19 @@ init/grav.sh
 
 title "photon starter"
 init/starter.sh
+
+title "Part 1 - complete"
+atom -v
+apm list
+apache2 -v
+php -v
+composer -v
+git -v
+git config --list
+
+echo
+echo "${orange}Continue?"
+read continue
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
