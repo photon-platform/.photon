@@ -38,8 +38,8 @@ title() {
   echo "${reset}"
 }
 
-title "gnome settings"
 
+title "gnome settings"
 init/gsettings.sh
 
 
@@ -48,16 +48,16 @@ title "home bash settings"
 source ~/.photon/.bash_profile
 
 
-title atom
+title "atom"
 init/atom.sh
 
-title apache
+title "apache"
 init/apache.sh
 
-title php
+title "php"
 init/php.sh
 
-title git
+title "git config"
 init/git.sh
 
 title "grav base"
@@ -86,13 +86,13 @@ init/remove-default-apps.sh
 title "virtualbox config"
 init/vbox-init.sh
 
-title thunderbird
+title "thunderbird"
 init/thunderbird.sh
 
-title chrome
+title "chrome"
 init/chrome.sh
 
-title graphics
+title "graphics"
 init/graphics.sh
 
 title "vim"
