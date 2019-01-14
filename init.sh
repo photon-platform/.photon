@@ -47,11 +47,6 @@ title "home bash settings"
 ./home.sh
 source ~/.photon/.bash_profile
 
-title "remove default apps"
-init/remove-default-apps.sh
-
-title "update & upgrade"
-sudo apt update -y && sudo apt upgrade -y
 
 title atom
 init/atom.sh
@@ -81,19 +76,15 @@ git -v
 git config --list
 
 echo
-echo "${orange}Continue?"
+echo "${orange}Continue?${reset}"
 read continue
 
-title "update & upgrade"
-sudo apt update -y && sudo apt upgrade -y
 
+title "remove default apps"
+init/remove-default-apps.sh
 
 title "virtualbox config"
 init/vbox-init.sh
-
-title "vim"
-sudo apt install -y vim
-# **ctags** Combining vim with ctags yields a powerful combination for working with large or unfamiliar codebases.
 
 title thunderbird
 init/thunderbird.sh
@@ -103,6 +94,11 @@ init/chrome.sh
 
 title graphics
 init/graphics.sh
+
+title "vim"
+sudo apt install -y vim
+# **ctags** Combining vim with ctags yields a powerful combination for working with large or unfamiliar codebases.
+
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y

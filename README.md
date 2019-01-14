@@ -25,6 +25,26 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 
 <!-- /code_chunk_output -->
 
+## install
+clone this repository to the users home directory
+```
+git clone "https://github.com/photon-platform/.photon"
+```
+this will create a new folder called `.photon`
+
+## provisioning
+
+run the `init.sh` script to install and configure all the components for the photon environment
+
+```
+cd ~/.photon
+./init.sh
+```
+
+the script runs a number of subscripts for setup
+
+
+
 
 ## bash config
 
