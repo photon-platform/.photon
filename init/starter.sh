@@ -31,4 +31,4 @@ mkdir ~/SITES/LOGS/$PROJECT
 
 ~/.photon/sites/new-apache.sh $PROJECT
 
-open http://$PROJECT.local
+firefox "http://$PROJECT.local" &

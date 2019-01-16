@@ -27,4 +27,4 @@ find . -type d | sudo xargs chmod +s
 
 sudo apache2ctl restart
 
-open http://grav.local
+firefox "http://grav.local" &

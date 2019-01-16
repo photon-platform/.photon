@@ -22,4 +22,5 @@ packages: [
   "linter-ui-default"
   "markdown-folding"
   "package-sync"
+  "platformio-ide-terminal"
 ]

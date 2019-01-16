@@ -12,4 +12,4 @@ sudo sed -i "s/^\(\s*export APACHE_RUN_GROUP=\s*\).*/\1$USERNAME/" /etc/apache2/
 
 sudo systemctl status apache2
 
-firefox "http://localhost"
+firefox "http://localhost" &

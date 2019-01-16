@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ~/.photon/.colors
+# source ~/.photon/.colors
 
 reset=$(tput sgr0);
 orange=$(tput setaf 166);
@@ -14,7 +14,10 @@ title() {
   echo "${reset}"
 }
 
-title test
+title "preopen firefox"
+firefox &
+
+title "ready to install - press enter to continue"
 read continue
 
 title "gnome settings"

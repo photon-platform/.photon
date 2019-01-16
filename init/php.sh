@@ -48,7 +48,7 @@ firefox "http://localhost/info.php"
 
 sudo apt install -y composer
 sudo chown -R $USER $HOME/.composer
-sudo composer global require "asm89/twig-lint" "@dev"
+composer global require "asm89/twig-lint" "@dev"
 #make sure this is in the path fconfig
 export PATH=$PATH:~/.composer/vendor/asm89/twig-lint/bin
 # twig-lint at command prompt to test
