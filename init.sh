@@ -24,6 +24,8 @@ subtitle() {
 title "ready to install - press enter to continue"
 read continue
 
+START_TIME="$(date -u +%s)"
+
 sudo apt update -y
 
 
@@ -129,3 +131,8 @@ subtitle "darktable"
 darktable -v
 
 # chrome -v
+
+END_TIME="$(date -u +%s)"
+ELAPSED="$(($END_TIME-$START_TIME))"
+
+subtitle  "✴ elapsed: $ELAPSED seconds"
