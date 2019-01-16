@@ -21,11 +21,17 @@ subtitle() {
   echo "${reset}"
 }
 
+title "ready to install - press enter to continue"
+read continue
+
+START_TIME="$(date -u +%s)"
+
+sudo apt update -y
+
+
 title "preopen firefox"
 firefox &
 
-title "ready to install - press enter to continue"
-read continue
 
 title "gnome settings"
 init/gsettings.sh
@@ -125,3 +131,8 @@ subtitle "darktable"
 darktable --version
 
 # chrome -v
+
+END_TIME="$(date -u +%s)"
+ELAPSED="$(($END_TIME-$START_TIME))"
+
+subtitle  "✴ elapsed: $ELAPSED seconds"

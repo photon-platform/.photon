@@ -28,6 +28,12 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 
 <!-- /code_chunk_output -->
 
+## operating system
+
+photon is standardized on the Pop!_OS linux distribution
+
+
+
 ## install
 clone this repository to the users home directory
 ```
