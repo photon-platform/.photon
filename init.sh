@@ -47,18 +47,18 @@ init/grav.sh
 title "photon starter"
 init/starter.sh
 
-title "Part 1 - complete"
-atom -v
-apm list
-apache2 -v
-php -v
-composer -v
-git -v
-git config --list
-
-echo
-echo "${orange}Continue?${reset}"
-read continue
+# title "Part 1 - complete"
+# atom -v
+# apm list
+# apache2 -v
+# php -v
+# composer -v
+# git -v
+# git config --list
+#
+# echo
+# echo "${orange}Continue?${reset}"
+# read continue
 
 
 title "remove default apps"
