@@ -13,6 +13,13 @@ title() {
   echo "${orange}*************************************************"
   echo "${reset}"
 }
+subtitle() {
+  echo ""
+  echo ""
+  echo "${white}$1"
+  echo "${orange}*************************************************"
+  echo "${reset}"
+}
 
 title "preopen firefox"
 firefox &
@@ -86,15 +93,35 @@ sudo apt update -y && sudo apt upgrade -y
 
 title installed apps
 
+subtitle "atom"
 atom -v
+
+subtitle "apm list"
 apm list
+
+subtitle "apache2"
 apache2 -v
+
+subtitle "php"
 php -v
+
+subtitle "composer"
 composer -v
+
+subtitle "git"
 git -v
 git config --list
-vim -v
-inkscape -v
+
+subtitle "vim"
+vim --version
+
+subtitle "inkscape"
+inkscape -V
+
+subtitle "gimp"
 gimp -v
+
+subtitle "darktable"
 darktable -v
+
 chrome -v
