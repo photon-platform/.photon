@@ -106,10 +106,10 @@ subtitle "php"
 php -v
 
 subtitle "composer"
-composer -v
+composer -V
 
 subtitle "git"
-git -v
+git --version
 git config --list
 
 subtitle "vim"
@@ -122,6 +122,6 @@ subtitle "gimp"
 gimp -v
 
 subtitle "darktable"
-darktable -v
+darktable --version
 
-chrome -v
+# chrome -v
