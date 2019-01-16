@@ -26,20 +26,17 @@ read continue
 
 START_TIME="$(date -u +%s)"
 
+subtitle "update system packages"
 sudo apt update -y
 
-
-title "preopen firefox"
+subtitle "preopen firefox"
 firefox &
 
-
-title "gnome settings"
+sub title "gnome settings"
 init/gsettings.sh
 
-
-title "home bash settings"
+sub title "home bash settings"
 ./home.sh
-source ~/.photon/.bash_profile
 
 
 title "atom"
