@@ -12,4 +12,4 @@ sudo apt install -y atom
 head -n -1 ~/.photon/.atom/packages.cson | sed -n "1d;p" | xargs apm install
 
 
-atom
+atom ~/.photon
