@@ -21,11 +21,15 @@ subtitle() {
   echo "${reset}"
 }
 
+title "ready to install - press enter to continue"
+read continue
+
+sudo apt update -y
+
+
 title "preopen firefox"
 firefox &
 
-title "ready to install - press enter to continue"
-read continue
 
 title "gnome settings"
 init/gsettings.sh
@@ -124,4 +128,4 @@ gimp -v
 subtitle "darktable"
 darktable -v
 
-chrome -v
+# chrome -v
