@@ -25,6 +25,7 @@ title "ready to install - press enter to continue"
 read continue
 
 START_TIME="$(date -u +%s)"
+echo started: $(date +"%T")
 
 subtitle "update system packages"
 sudo apt update -y
