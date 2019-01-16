@@ -17,6 +17,7 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 <!-- code_chunk_output -->
 
+* [operating system](#operating-system)
 * [install](#install)
 * [provisioning](#provisioning)
 * [bash config](#bash-config)

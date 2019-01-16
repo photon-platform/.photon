@@ -135,4 +135,12 @@ darktable --version
 END_TIME="$(date -u +%s)"
 ELAPSED="$(($END_TIME-$START_TIME))"
 
-subtitle  "✴ elapsed: $ELAPSED seconds"
+convertsecstomin() {
+ ((m=${1}/60))
+ ((s=${1}%60))
+ printf "%02d:%02d\n" $m $s
+}
+
+TIME=$(convertsecstomin $ELAPSED)
+
+subtitle "✴ elapsed: $TIME m:s"
