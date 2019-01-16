@@ -8,4 +8,7 @@ sudo apt install -y atom
 
 apm install package-sync
 
+head -n -1 ~/.photon/.atom/packages.cson | sed -n "1d;p" | xargs apm install
+
+
 atom
