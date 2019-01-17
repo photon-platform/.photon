@@ -17,8 +17,10 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 <!-- code_chunk_output -->
 
-* [operating system](#operating-system)
-* [install](#install)
+* [setting up the **photon PLATFORM** in a virtual machine](#setting-up-the-photon-platform-in-a-virtual-machine)
+	* [install virtual box](#install-virtual-box)
+	* [download the operating system](#download-the-operating-system)
+* [run installation script](#run-installation-script)
 * [provisioning](#provisioning)
 * [bash config](#bash-config)
 	* [home script](#home-script)
@@ -29,15 +31,42 @@ for more about the **photon ✴ PLATFORM**, visit us at https://photon-platform.
 
 <!-- /code_chunk_output -->
 
-## operating system
+## setting up the **photon PLATFORM** in a virtual machine
 
-photon is standardized on the Pop!_OS linux distribution
+A key aspect of **photon** is to set up a fully functioning development environment with all the tools necessary to develop, publish and manage digital content - and do it quickly and as automatically as poosible.
+
+watch the video playlist on youtube to
+
+### install virtual box
+
+https://www.virtualbox.org/
+
+### download the operating system
+
+**photon** is standardized on the Pop!_OS linux distribution by System76
+
+https://system76.com/pop
+
+click the download button to retrieve the latest iso file
 
 
+step by step install instructions here:
+https://pop.system76.com/docs/install-pop-os/
 
-## install
+but overall the installation is very intuitive.
+
+custom keyboard shortcuts
+https://pop.system76.com/docs/keyboard-shortcuts/
+
+https://pop.system76.com/docs/
+
+
+##  run installation script
+this .photon project contains all the
+
 clone this repository to the users home directory
 ```
+cd ~
 git clone "https://github.com/photon-platform/.photon"
 ```
 this will create a new folder called `.photon`
