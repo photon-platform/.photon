@@ -33,10 +33,10 @@ sudo apt update -y
 subtitle "preopen firefox"
 firefox &
 
-sub title "gnome settings"
+subtitle "gnome settings"
 init/gsettings.sh
 
-sub title "home bash settings"
+subtitle "home bash settings"
 ./home.sh
 
 
