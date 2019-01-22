@@ -49,8 +49,10 @@ init/apache.sh
 title "php"
 init/php.sh
 
-title "git config"
-init/git.sh
+# TODO: prompt user for info at start
+# this script is hardcoded for phi
+# title "git config"
+# init/git.sh
 
 title "grav base"
 init/grav.sh
@@ -58,6 +60,7 @@ init/grav.sh
 title "photon starter"
 init/starter.sh
 
+####################################
 # title "Part 1 - complete"
 # atom -v
 # apm list
@@ -89,11 +92,11 @@ init/graphics.sh
 
 title "vim"
 sudo apt install -y vim
-# **ctags** Combining vim with ctags yields a powerful combination for working with large or unfamiliar codebases.
-
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
+
+#####################################
 
 title installed apps
 
