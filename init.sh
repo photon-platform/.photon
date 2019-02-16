@@ -40,6 +40,9 @@ subtitle "home bash settings"
 ./home.sh
 
 
+title "general"
+init/general.sh
+
 title "atom"
 init/atom.sh
 

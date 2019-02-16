@@ -19,6 +19,11 @@ alias gacm="git add .;git commit -m"
 alias g-surr="git submodule update --remote --rebase" #or --merge
 alias g-each="git submodule foreach 'git status -sb; echo'"
 
+# create submodule from existing folder
+alias sub_plug="~/.photon/sh/sub_plug.sh"
+alias sub_theme="~/.photon/sh/sub_theme.sh"
+
+
 # tools for git submodules
 gsub() {
 
