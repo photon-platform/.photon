@@ -2,4 +2,4 @@
 
 sudo apt install -y rename
 
-sudo snap install nextcloud
+sudo apt install -y nextcloud-client
