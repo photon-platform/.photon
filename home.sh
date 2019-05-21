@@ -1,7 +1,9 @@
+D=$(date +"%Y%m%d-%T")
+
 cd ~
 
-mv .bashrc .bashrc.bak
+mv .bashrc .bashrc.$D.bak
 ln -sf ~/.photon/home/.bashrc
 
-mv .bash_profile .bash_profile.bak
+mv .bash_profile .bash_profile.$D.bak
 ln -sf ~/.photon/home/.bash_profile
