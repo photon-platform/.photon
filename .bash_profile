@@ -5,6 +5,8 @@ for file in ~/.photon/.{path,bash_prompt,exports,aliases,functions,extra,sites,h
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
+source ~/.photon/photon/_main.sh
+
 unset file;
 
 # Case-insensitive globbing (used in pathname expansion)
