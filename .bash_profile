@@ -1,9 +1,11 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
-for file in ~/.photon/.{path,bash_prompt,exports,aliases,functions,extra,sites,hosts,git-tools}; do
+for file in ~/.photon/.{path,bash_prompt,exports,aliases,functions,extra,sites,hosts,git-tools,server}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
+
+source ~/.photon/photon/_main.sh
 
 unset file;
 

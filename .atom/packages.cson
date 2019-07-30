@@ -21,6 +21,7 @@ packages: [
   "linter-twig"
   "linter-ui-default"
   "markdown-folding"
+  "open-in-browsers"
   "package-sync"
   "platformio-ide-terminal"
 ]

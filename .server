@@ -1,0 +1,3 @@
+#!/bin/sh
+
+alias site="cd ~/www/user;source .photon"

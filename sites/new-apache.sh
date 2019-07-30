@@ -19,7 +19,7 @@ then
 
   cat /etc/apache2/sites-available/$1.conf
 
-  mkdir ~/SITES/LOGS/$PROJECT
+  mkdir ~/SITES/LOGS/$1
 
   echo
   echo "✴ enable site"
