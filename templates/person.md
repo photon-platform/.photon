@@ -9,7 +9,7 @@ data:
         '@type': Person
         givenName:
         familyName:
-        email:
+        email: 
         telephone:
         url:
         address:

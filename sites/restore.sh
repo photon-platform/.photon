@@ -114,30 +114,32 @@ then
   echo
   echo "✴ elapsed: $TIME m:s"
 
+  gsub update
 
-  echo
-  echo "Photon Project Commands"
-  echo
-  echo serve="php -S localhost:${PORT} system/router.php"
-  echo local="open ${LOCAL}"
-  echo admin="open ${LOCAL}/admin"
-  echo server="open ${SERVER}"
-  echo edit="atom ${PROJECT_DIR}/user"
-  echo
-  echo pr="cd ${PROJECT_DIR}"
-  echo th="cd $THEMES_DIR/photon;gss"
-  echo ch="cd $THEMES_DIR/photon-child;gss"
-  echo pg="cd ${PROJECT_DIR}/user/pages;gss"
-  echo us="cd ${PROJECT_DIR}/user;gss"
+  
+  # echo
+  # echo "Photon Project Commands"
+  # echo
+  # echo serve="php -S localhost:${PORT} system/router.php"
+  # echo local="open ${LOCAL}"
+  # echo admin="open ${LOCAL}/admin"
+  # echo server="open ${SERVER}"
+  # echo edit="atom ${PROJECT_DIR}/user"
+  # echo
+  # echo pr="cd ${PROJECT_DIR}"
+  # echo th="cd $THEMES_DIR/photon;gss"
+  # echo ch="cd $THEMES_DIR/photon-child;gss"
+  # echo pg="cd ${PROJECT_DIR}/user/pages;gss"
+  # echo us="cd ${PROJECT_DIR}/user;gss"
 
-  echo
-  echo "✴ push to GitHub"
-
-  read -p "push now? (Y|n): " PUSH
-  if [ $PUSH = 'Y' ]
-  then
-    git push -fu origin master
-  fi
+  # echo
+  # echo "✴ push to GitHub"
+  #
+  # read -p "push now? (Y|n): " PUSH
+  # if [ $PUSH = 'Y' ]
+  # then
+  #   git push -fu origin master
+  # fi
 
 else
   echo "no project name"

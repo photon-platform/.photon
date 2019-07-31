@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function pl_sub() {
+function plugin_create_submodule() {
   echo
   echo "*** checking github repo"
   git ls-remote -h https://github.com/photon-platform/grav-plugin-photon-$1.git HEAD

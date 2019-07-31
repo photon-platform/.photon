@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 source ~/.photon/photon/plugins/create_submodule.sh
+source ~/.photon/photon/plugins/remove_submodule.sh
+source ~/.photon/photon/plugins/restore_submodule.sh
 
 function pl() {
   if [ $1 ]
@@ -11,15 +13,39 @@ function pl() {
         pr
         bin/plugin photon newplugin
         ;;
-      sub)
+      create)
         # initialize a submodule
         if [ $2 ]
         then
           echo ""
           pl $2
-          pl_sub $2
+          plugin_create_submodule $2
         else
-          echo "format: pl sub pluginname"
+          echo "format: pl create ${yellow}pluginname"
+        fi
+        ;;
+
+      restore)
+        # initialize a submodule
+        if [ $2 ]
+        then
+          echo ""
+          cd "$PLUGINS_DIR"
+          plugin_restore_submodule $2
+        else
+          echo "format: pl restore ${yellow}pluginname"
+        fi
+        ;;
+
+      remove)
+        # initialize a submodule
+        if [ $2 ]
+        then
+          echo ""
+          cd "$PLUGINS_DIR"
+          plugin_remove_submodule $2
+        else
+          echo "format: pl remove ${yellow}pluginname"
         fi
         ;;
 
