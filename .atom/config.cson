@@ -33,7 +33,12 @@
       "markdown-writer"
     ]
     telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "atom-dark-syntax"
+    ]
   editor:
+    fontSize: 15
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
@@ -65,8 +70,7 @@
   "platformio-ide-terminal":
     core:
       autoRunCommand: "source .photon"
-    style:
-      theme: "solarized-dark"
+    style: {}
   "sync-settings":
     _lastBackupHash: "9b729896ab25eb431ebdef4fd8be633f4b28ddef"
     gistId: "8df0f252ff7de191b5a1336ed8fc44ab"

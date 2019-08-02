@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo apt install -y npm
+
 sudo apt install -y rename
 
 sudo apt install -y nextcloud-client
@@ -16,5 +18,7 @@ wget -O ~/Downloads/rapid-photo-downloader.py https://launchpad.net/rapid/pyqt/0
 
 python3 ~/Downloads/rapid-photo-downloader.py
 
-sudo apt install -y ruby-sass
-sudo gem install sass-listen
+# sudo apt install -y ruby-sass
+# sudo gem install sass-listen
+
+# dat-sass has been added to the repo 1.22.9
