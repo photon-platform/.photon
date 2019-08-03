@@ -39,4 +39,11 @@
     ]
     color: "gold"
   }
+  {
+    title: "Geometor Explorer"
+    paths: [
+      "/home/phi/Projects/geometor-explorer"
+    ]
+    color: "gold"
+  }
 ]

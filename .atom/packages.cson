@@ -24,4 +24,5 @@ packages: [
   "open-in-browsers"
   "package-sync"
   "platformio-ide-terminal"
+  "project-manager"
 ]
