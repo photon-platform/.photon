@@ -1,4 +1,5 @@
 packages: [
+  "atom-beautify"
   "atom-html-preview"
   "atom-runner"
   "busy-signal"
@@ -25,4 +26,6 @@ packages: [
   "package-sync"
   "platformio-ide-terminal"
   "project-manager"
+  "svg-preview"
+  "svgo"
 ]

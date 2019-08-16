@@ -46,4 +46,12 @@
     ]
     color: "gold"
   }
+  {
+    title: "Root3 F"
+    group: "slides"
+    paths: [
+      "/home/phi/slides/root3f"
+    ]
+    color: "green"
+  }
 ]
