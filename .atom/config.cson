@@ -30,6 +30,7 @@
       "tool-bar-markdown-writer"
       "languagetool"
       "markdown-writer"
+      "linter-twig"
     ]
     telemetryConsent: "limited"
     themes: [

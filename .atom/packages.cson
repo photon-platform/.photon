@@ -24,6 +24,7 @@ packages: [
   "markdown-folding"
   "open-in-browsers"
   "package-sync"
+  "php-twig"
   "platformio-ide-terminal"
   "project-manager"
   "svg-preview"
