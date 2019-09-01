@@ -54,4 +54,11 @@
     ]
     color: "green"
   }
+  {
+    title: "Three Golden Sections"
+    paths: [
+      "/home/phi/Projects/three-golden-sections"
+    ]
+    color: "green"
+  }
 ]
