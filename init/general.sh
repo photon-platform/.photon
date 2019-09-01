@@ -5,6 +5,8 @@ sudo apt-get install -y nodejs
 
 sudo apt install -y npm
 
+sudo apt install -y tree
+
 sudo apt install -y rename
 
 sudo apt install -y nextcloud-client
@@ -26,4 +28,4 @@ python3 ~/Downloads/rapid-photo-downloader.py
 # sudo apt install -y ruby-sass
 # sudo gem install sass-listen
 
-# dat-sass has been added to the repo 1.22.9
+# dart-sass has been added to the repo 1.22.9
