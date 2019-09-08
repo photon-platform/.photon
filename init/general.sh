@@ -5,6 +5,8 @@ sudo apt-get install -y nodejs
 
 sudo apt install -y npm
 
+sudo ap/ install -y entr
+
 sudo apt install -y tree
 
 sudo apt install -y rename
@@ -18,6 +20,9 @@ sudo apt install -y ranger
 sudo apt install -y nnn
 
 sudo apt install -y ffmpeg
+
+sudo apt install -y libxml2-utils
+
 
 sudo apt -y install python3-pip python3-setuptools python3-wheel
 
