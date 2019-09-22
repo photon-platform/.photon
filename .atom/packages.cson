@@ -22,6 +22,8 @@ packages: [
   "linter-twig"
   "linter-ui-default"
   "markdown-folding"
+  "markdown-preview-plus"
+  "markdown-writer"
   "open-in-browsers"
   "package-sync"
   "php-twig"

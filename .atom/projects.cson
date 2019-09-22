@@ -1,11 +1,26 @@
 [
   {
+    title: "constructions"
+    paths: [
+      "/home/phi/Projects/constructions"
+    ]
+    color: "magenta"
+  }
+  {
     title: ".Photon"
     group: "config"
     paths: [
       "/home/phi/.photon"
     ]
     color: "magenta"
+  }
+  {
+    title: "geometor"
+    group: "photon"
+    paths: [
+      "/home/phi/SITES/geometor/user"
+    ]
+    color: "gold"
   }
   {
     title: "starter"
@@ -15,50 +30,5 @@
     ]
     color: "gold"
   }
-  {
-    title: "port-of-alsea"
-    group: "photon"
-    paths: [
-      "/home/phi/SITES/port-of-alsea/user"
-    ]
-    color: "gold"
-  }
-  {
-    title: "gerdemann"
-    group: "photon"
-    paths: [
-      "/home/phi/SITES/gerdemann/user"
-    ]
-    color: "gold"
-  }
-  {
-    title: "jill-moser"
-    group: "photon"
-    paths: [
-      "/home/phi/SITES/jill-moser/user"
-    ]
-    color: "gold"
-  }
-  {
-    title: "Geometor Explorer"
-    paths: [
-      "/home/phi/Projects/geometor-explorer"
-    ]
-    color: "gold"
-  }
-  {
-    title: "Root3 F"
-    group: "slides"
-    paths: [
-      "/home/phi/slides/root3f"
-    ]
-    color: "green"
-  }
-  {
-    title: "Three Golden Sections"
-    paths: [
-      "/home/phi/Projects/three-golden-sections"
-    ]
-    color: "green"
-  }
+
 ]

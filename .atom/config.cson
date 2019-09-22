@@ -5,8 +5,6 @@
   core:
     autoHideMenuBar: true
     disabledPackages: [
-      "language-gfm"
-      "markdown-preview"
       "linter-spell"
       "javascript-snippets"
       "linter-eslint"
@@ -29,8 +27,9 @@
       "tabs-to-spaces"
       "tool-bar-markdown-writer"
       "languagetool"
-      "markdown-writer"
       "linter-twig"
+      "markdown-preview"
+      "language-gfm"
     ]
     telemetryConsent: "limited"
     themes: [
@@ -38,6 +37,7 @@
       "atom-dark-syntax"
     ]
   editor:
+    fontSize: 12
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
@@ -45,11 +45,14 @@
     userId: "9dcc5dbc-427c-46ef-9811-269079746901"
   "linter-ui-default":
     panelHeight: 300
+    showPanel: true
   "markdown-preview-enhanced":
     enableTypographer: true
     openPreviewPaneAutomatically: false
     previewTheme: "github-dark.css"
     revealjsTheme: "night.css"
+  "markdown-writer":
+    fileExtension: ".md"
   minimap:
     plugins:
       "highlight-selected": true
