@@ -13,7 +13,7 @@ alias ch="cd $THEMES_DIR/photon-child;gss"
 # alias pg="cd ${PROJECT_DIR}/user/pages;gss"
 alias us="cd ${PROJECT_DIR}/user;gss"
 
-alias cc="cd ${PROJECT_DIR};bin/grav clear-cache"
+alias cc="${PROJECT_DIR}/bin/grav clearcache"
 
 source ~/.photon/photon/plugins.sh
 source ~/.photon/photon/pages.sh
