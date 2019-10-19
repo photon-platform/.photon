@@ -77,6 +77,8 @@ init/starter.sh
 # echo "${orange}Continue?${reset}"
 # read continue
 
+title "chrome"
+init/chrome.sh
 
 title "remove default apps"
 init/remove-default-apps.sh
@@ -84,14 +86,12 @@ init/remove-default-apps.sh
 title "virtualbox config"
 init/vbox-init.sh
 
-title "thunderbird"
-init/thunderbird.sh
+# title "thunderbird"
+# init/thunderbird.sh
 
-title "chrome"
-init/chrome.sh
 
-title "graphics"
-init/graphics.sh
+# title "graphics"
+# init/graphics.sh
 
 title "vim"
 sudo apt install -y vim
