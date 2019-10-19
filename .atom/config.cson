@@ -32,12 +32,7 @@
       "language-gfm"
     ]
     telemetryConsent: "limited"
-    themes: [
-      "one-dark-ui"
-      "atom-dark-syntax"
-    ]
   editor:
-    fontSize: 12
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
