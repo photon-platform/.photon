@@ -7,8 +7,8 @@ cd ~/SITES
 
 # read -p "continue?" tmp
 
-wget https://getgrav.org/download/core/grav-admin/1.5.6 -O grav-admin-1.5.6.zip
-unzip -q grav-admin-1.5.6.zip
+wget https://getgrav.org/download/core/grav-admin/1.6.16 -O grav-admin-1.6.16.zip
+unzip -q grav-admin-1.6.16.zip
 mv grav-admin/ grav/
 
 sudo cp ~/.photon/templates/grav.conf /etc/apache2/sites-available/grav.conf
