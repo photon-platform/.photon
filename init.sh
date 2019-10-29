@@ -83,8 +83,8 @@ init/chrome.sh
 title "remove default apps"
 init/remove-default-apps.sh
 
-title "virtualbox config"
-init/vbox-init.sh
+# title "virtualbox config"
+# init/vbox-init.sh
 
 # title "thunderbird"
 # init/thunderbird.sh
