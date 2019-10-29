@@ -16,6 +16,7 @@
 # sudo apt install virtualbox-guest-x11
 # sudo apt install virtualbox-guest-x11-hwe
 
+sudo apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 
 sudo apt-get install virtualbox-guest-additions-iso
 
