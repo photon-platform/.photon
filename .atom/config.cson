@@ -47,6 +47,7 @@
       "intentions"
       "linter"
       "linter-ui-default"
+      "package-sync"
     ]
     telemetryConsent: "limited"
   editor:

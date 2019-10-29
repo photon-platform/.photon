@@ -7,15 +7,17 @@
 # For a Linux host, first install the DKMS (Dynamic Kernel Module Support) package on the guest machine (source):
 # keeps time synced
 
-sudo apt install -y dkms
+# sudo apt install -y dkms
 
 # Then install Guest Additions into guest system:
 
-sudo apt install -y virtualbox-guest-dkms
-sudo apt install -y virtualbox-guest-dkms-hwe
+# sudo apt install -y virtualbox-guest-dkms
+# sudo apt install -y virtualbox-guest-dkms-hwe
 # sudo apt install virtualbox-guest-x11
 # sudo apt install virtualbox-guest-x11-hwe
 
+
+sudo apt-get install virtualbox-guest-additions-iso
 
 # add phi account to vboxsf group for vbox shares
 sudo usermod -a -G vboxsf ${USERNAME}

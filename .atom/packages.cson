@@ -10,7 +10,6 @@ packages: [
   "highlight-selected"
   "intentions"
   "javascript-snippets"
-  "language-apache"
   "language-awk"
   "language-markdown"
   "language-svg"
@@ -27,8 +26,4 @@ packages: [
   "open-in-browsers"
   "package-sync"
   "php-twig"
-  "platformio-ide-terminal"
-  "project-manager"
-  "svg-preview"
-  "svgo"
 ]
