@@ -1,7 +1,6 @@
 packages: [
   "atom-beautify"
   "atom-html-preview"
-  "atom-runner"
   "busy-signal"
   "emmet"
   "file-icons"
@@ -26,4 +25,7 @@ packages: [
   "open-in-browsers"
   "package-sync"
   "php-twig"
+  "platformio-ide-terminal"
+  "todo-show"
+  "tool-bar"
 ]
