@@ -6,12 +6,14 @@ source ~/.photon/.git-tools
 # alias     sites="cd ~/SITES"
 alias    photon="sites photon-platform"
 alias illumiphi="sites illumiphi"
+alias   geometor="sites geometor"
+alias   presence="sites presence"
+alias   audio="cd ~/SITES/audio"
+alias   constructions="cd ~/SITES/constructions"
+
 alias      port="sites port-of-alsea"
 alias      jill="sites jill-moser"
 alias       gbp="sites gerdemann"
-alias   yachats="sites yachats"
-alias   presence="sites presence"
-alias   geometor="sites geometor"
 alias        ona="sites ona"
 
 alias   starter="sites starter"
@@ -33,6 +35,10 @@ function sites() {
       new)
         ~/.photon/sites/new.sh "$2" "$3"
         sites "$2"
+        ;;
+      newhost)
+        ~/.photon/sites/newhost.sh "$2" "$3"
+        cd ~/SITES/$2
         ;;
       restore)
         ~/.photon/sites/restore.sh "$2" "$3"
