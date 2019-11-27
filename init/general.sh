@@ -19,6 +19,5 @@ sudo apt install -y ranger
 
 sudo apt install -y nnn
 
-sudo apt install -y ffmpeg
 
 sudo apt install -y libxml2-utils
