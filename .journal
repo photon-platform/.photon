@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+JOURNAL_HOME="/home/phi/journal"
+
+mkdir -p $JOURNAL_HOME
+
+alias jn='cd /home/phi/journal && cat >> `date +%F`&& date +%c | tac >> `date +%F`'

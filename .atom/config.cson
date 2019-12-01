@@ -47,6 +47,7 @@
     ]
     telemetryConsent: "limited"
   editor:
+    fontSize: 20
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
