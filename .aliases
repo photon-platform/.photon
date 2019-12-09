@@ -14,7 +14,7 @@ alias dl="cd ~/Downloads"
 alias g="git"
 
 alias dot="cd ~/.photon"
-alias pr="cd ~/Projects"
+alias proj="cd ~/Projects/"
 
 
 # Detect which `ls` flavor is in use

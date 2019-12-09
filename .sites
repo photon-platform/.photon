@@ -9,7 +9,7 @@ alias illumiphi="sites illumiphi"
 alias   geometor="sites geometor"
 alias   presence="sites presence"
 alias   audio="cd ~/SITES/audio"
-alias   constructions="cd ~/SITES/constructions"
+alias   constructions="cd ~/SITES/constructions;source .photon"
 
 alias      port="sites port-of-alsea"
 alias      jill="sites jill-moser"
