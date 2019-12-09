@@ -1,0 +1,18 @@
+{
+  "newmsg": "<p>Hi %cursor% -</p>\n\n\n",
+  "rspheader": "",
+  "rspmsg": "",
+  "fwdheader": "",
+  "fwdmsg": "",
+  "new": true,
+  "newhtml": true,
+  "newnbr": false,
+  "rsp": false,
+  "rsphead": false,
+  "rsphtml": false,
+  "rspnbr": false,
+  "fwd": false,
+  "fwdhead": false,
+  "fwdhtml": false,
+  "fwdnbr": false
+}
