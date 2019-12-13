@@ -8,3 +8,7 @@ gsettings set org.gnome.desktop.background color-shading-type 'solid'
 gsettings set org.gnome.desktop.background picture-uri "file:///home/${USERNAME}/.photon/graphics/photon-wallpaper.png"
 
 gsettings set org.gnome.desktop.screensaver picture-uri ''
+
+
+sudo apt install -y gnome-tweak-tool
+
