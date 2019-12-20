@@ -9,4 +9,7 @@ mv .bash_profile .bash_profile.$D.bak
 ln -sf ~/.photon/home/.bash_profile
 
 mv .vimrc .vimrc.$D.bak
-ln -sf ~/.photon/home/.vimrc
+ln -sf ~/.photon/.vimrc
+
+mv .vim .vim.$D.bak
+ln -sf ~/.photon/.vim

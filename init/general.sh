@@ -19,5 +19,6 @@ sudo apt install -y ranger
 
 sudo apt install -y nnn
 
+sudo apt install -y tmux
 
 sudo apt install -y libxml2-utils

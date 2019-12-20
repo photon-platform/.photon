@@ -14,6 +14,7 @@ alias gss="git status -sb ."
 alias ga="git add ."
 alias gc="git commit"
 alias gac="git add .;git commit"
+alias gacp="git add .;git commit;git push"
 alias gacm="git add .;git commit -m"
 
 alias g-surr="git submodule update --remote --rebase" #or --merge
