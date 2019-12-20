@@ -1,3 +1,6 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
 set hls
 set shiftwidth=2 softtabstop=2 expandtab
 set autoindent
@@ -6,8 +9,11 @@ set number relativenumber
 au Filetype markdown source ~/.vim/ftplugin/markdown.vim
 color dim
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+
+let mapleader = "-"
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -18,12 +24,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'sirver/ultisnips'
+
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
+" Plugin 'cakebaker/scss-syntax.vim'
+" Plugin 'hail2u/vim-css3-syntax'
+" Plugin 'tpope/vim-haml'
 Plugin 'beyondwords/vim-twig'
 " Plugin 'honza/vim-snippets'
-Plugin 'sirver/ultisnips'
+
+Plugin 'vim-airline/vim-airline'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
