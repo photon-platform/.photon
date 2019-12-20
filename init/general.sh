@@ -17,7 +17,7 @@ sudo apt install -y sendmail-bin
 
 sudo apt install -y ranger
 
-sudo apt install -y nnn
+sudo apt install -y nemo
 
 sudo apt install -y tmux
 
