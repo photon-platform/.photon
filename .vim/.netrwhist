@@ -1,9 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/phi/Downloads'
-let g:netrw_dirhist_2='/home/phi/.photon'
-let g:netrw_dirhist_3='/usr/share/vim/vim81/colors'
-let g:netrw_dirhist_4='/home/phi/SITES/geometor/user/themes/photon/scss'
-let g:netrw_dirhist_5='/home/phi/.photon/home'
-let g:netrw_dirhist_6='/home/phi/Projects'
-let g:netrw_dirhist_7='/home/phi/Projects/Broadcasts'
+let g:netrw_dirhist_cnt =0
