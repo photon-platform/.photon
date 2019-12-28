@@ -28,3 +28,4 @@ sudo apt install -y python-appindicator
 sudo snap install  jq
 sudo snap install  yq
 
+sudo apt install -y xmlstarlet
