@@ -35,7 +35,7 @@ hi SignColumn guifg=#BF81FA guibg=#1F1F1F guisp=#1F1F1F gui=NONE ctermfg=177 cte
 hi SpecialComment guifg=#FFB539 guibg=#1F1F1F guisp=#1F1F1F gui=NONE ctermfg=221 ctermbg=234 cterm=NONE
 hi Typedef guifg=#FFEE68 guibg=#1F1F1F guisp=#1F1F1F gui=NONE ctermfg=227 ctermbg=234 cterm=NONE
 hi Title guifg=#6DF584 guibg=#1F1F1F guisp=#1F1F1F gui=bold ctermfg=84 ctermbg=234 cterm=bold
-hi Folded guifg=#003DAD guibg=#001336 guisp=#001336 gui=NONE ctermfg=25 ctermbg=17 cterm=NONE
+hi Folded guifg=#003DAD guibg=#001336 guisp=#001336 gui=NONE ctermfg=238 ctermbg=233 cterm=NONE
 hi PreCondit guifg=#BF81FA guibg=#1F1F1F guisp=#1F1F1F gui=NONE ctermfg=177 ctermbg=234 cterm=NONE
 hi Include guifg=#BF81FA guibg=#1F1F1F guisp=#1F1F1F gui=NONE ctermfg=177 ctermbg=234 cterm=NONE
 hi TabLineSel guifg=#D0D0D0 guibg=#1F1F1F guisp=#1F1F1F gui=bold ctermfg=252 ctermbg=234 cterm=bold

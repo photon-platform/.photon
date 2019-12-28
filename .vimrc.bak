@@ -7,26 +7,11 @@ filetype plugin indent on    " required
 
 set number relativenumber
 
-set foldenable
-set foldmethod=indent
-
-" set showtabline=2
-let g:airline#extensions#tabline#enabled = 1
-
-
 au Filetype markdown source ~/.vim/ftplugin/markdown.vim
 color herald
 
-hi CursorLine   cterm=NONE ctermbg=232
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
 
-hi Visual term=reverse cterm=reverse guibg=Grey
-
-let mapleader = "\<Space>"
+let mapleader = "-"
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 

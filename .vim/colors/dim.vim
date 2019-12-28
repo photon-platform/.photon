@@ -1,4 +1,4 @@
-" https://github.com/jeffkreeftmeijer/vim-dim/blob/master/colors/dim.vim
+z https://github.com/jeffkreeftmeijer/vim-dim/blob/master/colors/dim.vim
 highlight clear
 
 if exists("syntax_on")
