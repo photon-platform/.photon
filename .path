@@ -1,6 +1,4 @@
-export PATH=$PATH:~/.composer/vendor/asm89/twig-lint/bin
-
-# for less highlighting
-export PATH=$PATH:/usr/share/source-highlight
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 export PATH=$PATH:~/.photon/dart-sass
