@@ -7,3 +7,5 @@
 .atom/recovery
 .atom/nohup.out
 .atom/.atom-socket*
+*.sw?
+.*.sw?

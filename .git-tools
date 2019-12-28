@@ -17,6 +17,15 @@ alias gac="git add .;git commit"
 alias gacp="git add .;git commit;git push"
 alias gacm="git add .;git commit -m"
 
+
+# Use Git’s colored diff when available
+hash git &>/dev/null;
+if [ $? -eq 0 ]; then
+	function diff() {
+		git diff --no-index --color-words "$@";
+	}
+fi;
+
 alias g-surr="git submodule update --remote --rebase" #or --merge
 alias g-each="git submodule foreach 'git status -sb; echo'"
 

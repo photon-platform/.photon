@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
 
-JOURNAL_HOME="/home/phi/journal"
+JOURNAL_HOME="/home/phi/journal/"
 
-mkdir -p $JOURNAL_HOME
 
-alias jn='cd /home/phi/journal && cat >> `date +%F`&& date +%c | tac >> `date +%F`'
+# alias jn='cd /home/phi/journal && cat >> `date +%f`&& date +%c | tac >> `date +%F`'
+
+function jn() {
+  read -p "title: " title
+  read -p "status: " status
+  cd $JOURNAL_HOME
+  file="jn-$(date +%Y-%m-%d_%H:%M:%S).md"
+  # touch $file
+  cat > "$file"  <<EOF
+---
+title: $title 
+status: $status
+---
+
+EOF
+  vim $file -c "$"
+}
+
+# ls -t --time-style=+"%Y-%m-%d %H:%M:%S"
+

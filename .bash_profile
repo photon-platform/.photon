@@ -1,7 +1,7 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
-for file in ~/.photon/.{path,bash_prompt,exports,aliases,functions,extra,sites,hosts,git-tools,server,journal}; do
+for file in ~/.photon/.{path,bash_prompt,exports,aliases,functions,extra,sites,hosts,git-tools,server,journal,colors}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
@@ -9,6 +9,14 @@ unset file;
 
 source ~/.photon/photon/_main.sh
 
+set -o vi
+
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
