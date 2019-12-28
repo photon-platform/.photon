@@ -21,4 +21,10 @@ sudo apt install -y nemo
 
 sudo apt install -y tmux
 
-sudo apt install -y libxml2-utils
+sudo apt install -y screenkey
+sudo apt install -y python-appindicator
+
+
+sudo snap install  jq
+sudo snap install  yq
+
