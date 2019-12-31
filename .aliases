@@ -16,12 +16,17 @@ alias gpr="cd ~/Projects/;ls -hst"
 alias gyt="cd ~/youtube/;ls -hst"
 alias dl="youtube-dl"
 
+alias open=xdg-open
+
 alias v="vim"
 alias vrc="vim ~/.vimrc"
+alias vbp="vim ~/.photon/.bash_profile"
 alias val="vim ~/.photon/.aliases"
+alias vfc="vim ~/.photon/.functions"
 
 alias src="source ~/.bash_profile"
 
+alias palette=~/.photon/color/palette.sh
 alias r="ranger"
 
 # Detect which `ls` flavor is in use
@@ -71,22 +76,8 @@ alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
 
-# macOS has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
-
-# macOS has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
-
-# Trim new lines and copy to clipboard
-alias c="tr -d '\n' | pbcopy"
-
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-
-# One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "${method}"="lwp-request -m '${method}'"
-done
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
@@ -94,5 +85,3 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
-# add syntax highlighting to less
-alias lessh='LESSOPEN="| src-hilite-lesspipe.sh %s" less -R '

@@ -8,9 +8,9 @@
 PROJECT="$1"
 TITLE="$2"
 
-source ~/.photon/.hosts
-source ~/.photon/.sites
-source ~/.photon/.functions
+# source ~/.photon/.hosts
+# source ~/.photon/.sites
+# source ~/.photon/.functions
 
 echo
 echo "✴ photon SITE Restorer"

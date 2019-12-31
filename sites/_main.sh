@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 
-# sites
-source ~/.photon/.git-tools
-
-# alias     sites="cd ~/SITES"
-alias    photon="sites photon-platform"
+alias starter="sites starter"
+alias photon="sites photon-platform"
 alias illumiphi="sites illumiphi"
-alias   geometor="sites geometor"
-alias   presence="sites presence"
-alias   audio="cd ~/SITES/audio"
-alias   constructions="cd ~/SITES/constructions;source .photon"
+alias geometor="sites geometor"
+alias presence="sites presence"
+alias port="sites port-of-alsea"
+alias jill="sites jill-moser"
+alias gbp="sites gerdemann"
+alias ona="sites ona"
 
-alias      port="sites port-of-alsea"
-alias      jill="sites jill-moser"
-alias       gbp="sites gerdemann"
-alias        ona="sites ona"
-
-alias   starter="sites starter"
+alias audio="cd ~/SITES/audio"
+alias constructions="cd ~/SITES/constructions;source .photon"
 
 alias inmotion="ssh illumiphi.com"
 
@@ -26,7 +21,6 @@ alias restart="sudo apache2ctl restart"
 
 alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.6.9 "
 alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
-
 alias grav-update="cd ~/SITES/grav;bin/gpm self-upgrade;"
 
 function sites() {

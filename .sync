@@ -66,7 +66,6 @@ function sync() {
     cd $PLUGINS_DIR
     git status -sb
   fi
-
 }
 
 function sync_push_all() {
@@ -109,12 +108,9 @@ function sync_push_all() {
   TIME=$(convertsecstomin $ELAPSED)
   echo
   echo "✴ elapsed: $TIME m:s"
-
-
 }
 
 function sync_push_user() {
-
   SOURCE_DIR="$PROJECT_DIR/user/"
   DEST_DIR=illumiphi.com:${SERVER_DIR}/user/
 
@@ -151,8 +147,6 @@ function sync_push_user() {
 }
 
 function sync_pull_backup(){
-  # pull copy from server SITES .backup folder
-
   cd "$PROJECT_DIR/"
   bin/grav clear-cache
 
@@ -184,13 +178,9 @@ function sync_pull_backup(){
   TIME=$(convertsecstomin $ELAPSED)
   echo
   echo "✴ elapsed: $TIME m:s"
-
-
 }
 
 function sync_pull_pages(){
-  # pull copy of pages to local
-
   cd "$PROJECT_DIR/"
   bin/grav clear-cache
 
@@ -222,11 +212,7 @@ function sync_pull_pages(){
   TIME=$(convertsecstomin $ELAPSED)
   echo
   echo "✴ elapsed: $TIME m:s"
-
-
 }
-
-
 
 # alias dry-sync="rsync -auzvhPL --stats --delete --dry-run user/ illumiphi.com:${SERVER_DIR}/user/"
 #

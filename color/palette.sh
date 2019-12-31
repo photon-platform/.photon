@@ -4,7 +4,7 @@
 # Print out 256 colours, with each number printed in its corresponding colour
 # See http://askubuntu.com/questions/821157/print-a-256-color-test-pattern-in-the-terminal/821163#821163
 
-set -eu # Fail on errors or undeclared variables
+# set -eu # Fail on errors or undeclared variables
 
 printable_colours=256
 
@@ -90,7 +90,9 @@ function print_blocks {
     done
 }
 
-print_run 0 16 # The first 16 colours are spread over the whole spectrum
-printf "\n"
-print_blocks 16 231 6 6 3 # 6x6x6 colour cube between 16 and 231 inclusive
-print_blocks 232 255 12 2 1 # Not 50, but 24 Shades of Grey
+function show_palette(){
+  print_run 0 16 # The first 16 colours are spread over the whole spectrum
+  printf "\n"
+  print_blocks 16 231 6 6 3 # 6x6x6 colour cube between 16 and 231 inclusive
+  print_blocks 232 255 12 2 1 # Not 50, but 24 Shades of Grey
+}

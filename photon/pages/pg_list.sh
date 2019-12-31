@@ -1,31 +1,71 @@
 #!/usr/bin/env bash
 
+sty_banner="${bgYellow}${fgBlack}"
+fmt_banner="${sty_banner} %-*s${txReset}\n"
+
+sty_title="${txBold}"
+fmt_title="${sty_title} %s${txReset}\n"
+
+sty_subtitle=""
+fmt_subtitle="${sty_subtitle} %s${txReset}\n"
+
+sty_child="${fgYellow}"
+fmt_child="${sty_child}%3d)${txReset} %s${fgCyan}%s${txReset}\n"
 
 function pg_list() {
+  width=$(tput cols)
+  clear
+  d=$(pwd)
+
+  printf "$fmt_banner" $((width - 1)) "$PROJECT * PG ${d#*/pages}"
   echo
-  echo "******** photon PAGES ***************************************************"
 
-
-  if test -f *.md;
+  mds=(*.md)
+  md=${mds[0]}
+  if test -f $md;
   then
-    frontmatter=$(cat *.md | sed -n '/---/,/---/p' )
-    # title=$(sed -n "s/^\(title:\s*\)\(.*\)/\2/p" *.md)
-    # title="${title%\"}"
-    # title="${title%\'}"
-    # title="${title#\"}"
-    # title="${title#\'}"
-    # echo $title
-    # echo $frontmatter
-    # echo $frontmatter | yq r - title
-    # echo $frontmatter | yq r - subtitle
-    title=$(cat *.md | sed -n '/---/,/---/p' | yq r - title )
-    echo $title
-    subtitle=$(cat *.md | sed -n '/---/,/---/p' | yq r - subtitle )
-    echo $subtitle
-    d=$(pwd)
-    echo ${d#*/pages}
-    echo
+    # yaml=$(cat $md | sed -n '/---/,/---/p')
+    yaml=$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')
+
+    title=$(echo "$yaml" | yq r - title )
+    printf "$fmt_title" "$title"
+
+    subtitle=$(echo "$yaml" | yq r - subtitle )
+    if [[ -n $subtitle ]]
+    then
+      # echo $subtitle
+      printf "$fmt_subtitle" "$subtitle"
+    fi
+
+    summary=$(tail -n +2 $md | sed -n -e '/^---$/,/^===$/{ /^---$/d; /^===$/d; p; }' | sed 's/^/ /')
+    if [[ -n $summary ]]
+    then
+      echo "$summary" | fold -w $((width-1)) -s
+    fi
+  else
+    printf "$fmt_title" "pages root"
   fi
+
+  echo
+
+
+  siblings=($(find $(dirname "$(pwd)") \
+    -maxdepth 1 -mindepth 1 -type d | sort))
+
+
+  i=0
+  index=0
+  for sib in ${siblings[@]}
+  do
+    if [[ $sib == $(pwd) ]]
+    then
+      index=$i
+      # echo $sib
+    fi
+    ((i++))
+  done
+
+  echo "" $((index + 1)) of ${#siblings[@]}
 
   children=$(find . \
     -maxdepth 2 \
@@ -37,7 +77,8 @@ function pg_list() {
   i=1
   dirs=()
 
-
+  printf "$fmt_banner" $((width - 1)) "children:"
+  echo
   for f in $children
   do
     filename=$(basename -- "$f")
@@ -46,43 +87,59 @@ function pg_list() {
     dirname=$(dirname "$f")
     dirs+=( $dirname )
 
-    # sed -n "s/^\(title:\s*\)\(.*\)/\2/p" $f
     gscount=$(git status -sb $dirname | wc -l)
     ((gscount--))
-    title=$(cat $f | sed -n '/---/,/---/p' | yq r - title )
+
+    yaml=$(cat $f | sed -n '/---/,/---/p')
+    title=$(echo "$yaml" | yq r - title )
+
     if (( gscount > 0 ));
     then
-      gscount="- $gscount"
+      gscount=" [$gscount]"
     else
       gscount=""
     fi
-    echo -e "$i\t$title $gscount"
-    # echo -e "\t[$filename]\t$dirname"
-    # echo
-    i=$((i+1))
+    # echo -e "$i\t$title $gscount"
+    printf "$fmt_child" $i "$title" "$gscount"
+    ((i++))
   done
   echo
-  echo "[e] edit current"
-  echo "[#] number jump to child folder"
-  read -p "?: " action
+
+  printf "$fmt_banner" $((width - 1)) "[e] edit | [hjk] move | [#] child | [y] yaml"
+  read -n1  action
   case $action in
-    q) ;;
-    e) 
-      vim *.md 
-      pq_list
+    q)
+      clear
       ;;
-    y) 
-      cat *.md | sed -n '/---/,/---/p' 
+    e)
+      vim *.md
       pg_list
+      ;;
+    f)
+      clear
+      echo
+      la
+      printf "$fmt_banner" $((width - 1)) "[e] edit | [hjk] move | [#] child | [y] yaml"
+      ;;
+    y)
+      echo
+      echo "$yaml"
       ;;
     h)
       cd ..
       pg_list
       ;;
-    *)
-      # echo "${dirs[(($action-1))]}"
+    j)
+      cd ${siblings[$((index + 1))]}
+      pg_list
+      ;;
+    k)
+      cd ${siblings[$((index - 1))]}
+      pg_list
+      ;;
+    [1-9]*)
       cd "${dirs[(($action-1))]}"
       pg_list
-    ;;
+      ;;
   esac
 }

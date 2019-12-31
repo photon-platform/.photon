@@ -14,7 +14,6 @@ set foldmethod=indent
 let g:airline#extensions#tabline#enabled = 1
 
 
-au Filetype markdown source ~/.vim/ftplugin/markdown.vim
 color herald
 
 hi CursorLine   cterm=NONE ctermbg=232
@@ -59,13 +58,16 @@ call vundle#begin()
 
 call vundle#end()            " required
 
+
 " Put your non-Plugin stuff after this line
 let g:airline_theme='sol'
 
 " When working with Markdown files, grok the YAML frontmatter...
 let g:vim_markdown_frontmatter = 1
 " ...and don't fold
-" let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_disabled = 1
+
+au Filetype markdown source ~/.vim/ftplugin/markdown.vim
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
