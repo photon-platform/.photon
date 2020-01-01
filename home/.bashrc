@@ -1,4 +1,4 @@
-echo BASHRC
+# echo BASHRC
 source ~/.photon/.bash_profile
 
 BASE16_SHELL=$HOME/.config/base16-shell/

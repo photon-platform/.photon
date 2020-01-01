@@ -20,14 +20,13 @@ yellow=$(tput setaf 136);
 
 # background color using ANSI escape
 
-export bgBlack=$(tput setab 232)
-export bgBlack=$(tput setab 232)
+export bgBlack=$(tput setab 0)
 export bgRed=$(tput setab 1) # red
 export bgGreen=$(tput setab 2) # green
 export bgYellow=$(tput setab 3) # yellow
 export bgBlue=$(tput setab 4) # blue
-export bgMagenta=$(tput setab 5) # magenta
-export bgCyan=$(tput setab 6) # cyan
+export bgPurple=$(tput setab 5) # magenta
+export bgAqua=$(tput setab 6) # cyan
 export bgWhite=$(tput setab 7) # white
 
 # foreground color using ANSI escape
@@ -37,8 +36,8 @@ export fgRed=$(tput setaf 1) # red
 export fgGreen=$(tput setaf 2) # green
 export fgYellow=$(tput setaf 3) # yellow
 export fgBlue=$(tput setaf 4) # blue
-export fgMagenta=$(tput setaf 5) # magenta
-export fgCyan=$(tput setaf 6) # cyan
+export fgPurple=$(tput setaf 5) # magenta
+export fgAqua=$(tput setaf 6) # cyan
 export fgWhite=$(tput setaf 7) # white
 
 # text editing options

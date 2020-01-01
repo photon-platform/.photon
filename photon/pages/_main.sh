@@ -11,6 +11,7 @@ function pg() {
         pg_new $2
         ;;
       ls)
+        clear
         pg_list
         ;;
       *)
@@ -20,7 +21,7 @@ function pg() {
     esac
   else
     cd ${PROJECT_DIR}/user/pages
-    git status -sb .
+    clear
     pg_list
   fi
 }

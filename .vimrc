@@ -14,13 +14,11 @@ set foldmethod=indent
 let g:airline#extensions#tabline#enabled = 1
 
 
-color herald
-
 hi CursorLine   cterm=NONE ctermbg=232
 augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
+   au!
+   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+   au WinLeave * setlocal nocursorline
 augroup END
 
 hi Visual term=reverse cterm=reverse guibg=Grey
@@ -55,12 +53,18 @@ call vundle#begin()
   Plugin 'prettier/vim-prettier'
 
   Plugin 'tpope/vim-fugitive'
+  Plugin 'morhetz/gruvbox'
+  " Plugin 'junegunn/goyo'
+  " Plugin 'junegunn/limelight'
 
 call vundle#end()            " required
 
+set background=dark    " Setting dark mode
+let g:gruvbox_contrast_dark = "hard"
+color gruvbox
 
 " Put your non-Plugin stuff after this line
-let g:airline_theme='sol'
+let g:airline_theme='gruvbox'
 
 " When working with Markdown files, grok the YAML frontmatter...
 let g:vim_markdown_frontmatter = 1

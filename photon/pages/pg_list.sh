@@ -10,11 +10,10 @@ sty_subtitle=""
 fmt_subtitle="${sty_subtitle} %s${txReset}\n"
 
 sty_child="${fgYellow}"
-fmt_child="${sty_child}%3d)${txReset} %s${fgCyan}%s${txReset}\n"
+fmt_child="${sty_child}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
 
 function pg_list() {
   width=$(tput cols)
-  clear
   d=$(pwd)
 
   printf "$fmt_banner" $((width - 1)) "$PROJECT * PG ${d#*/pages}"
@@ -113,32 +112,59 @@ function pg_list() {
       ;;
     e)
       vim *.md
+      clear
+      pg_list
+      ;;
+    v)
+      eog *
+      clear
       pg_list
       ;;
     f)
       clear
       echo
-      la
+      ls -hA
+      echo
       printf "$fmt_banner" $((width - 1)) "[e] edit | [hjk] move | [#] child | [y] yaml"
+      pg_list
       ;;
     y)
+      clear
       echo
       echo "$yaml"
+      echo
+      pg_list
       ;;
     h)
       cd ..
+      clear
       pg_list
       ;;
     j)
-      cd ${siblings[$((index + 1))]}
+      next=${siblings[$((index + 1))]}
+      if [[ -d "$next" ]]
+      then
+        cd ${next}
+      fi
+      clear
       pg_list
       ;;
     k)
-      cd ${siblings[$((index - 1))]}
+      prev=${siblings[$((index - 1))]}
+      if [[ -d "$prev" ]]
+      then
+        cd ${prev}
+      fi
+      clear
       pg_list
       ;;
     [1-9]*)
       cd "${dirs[(($action-1))]}"
+      clear
+      pg_list
+      ;;
+    *)
+      clear
       pg_list
       ;;
   esac
