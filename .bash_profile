@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-SOURCES=(.path)
+
+SOURCES=()
+SOURCES+=(.path)
 SOURCES+=(.exports)
 SOURCES+=(.aliases)
 SOURCES+=(color/color.sh)
@@ -13,7 +15,6 @@ SOURCES+=(.journal)
 SOURCES+=(.sync)
 SOURCES+=(photon/_main.sh)
 
-
 for file in  ${SOURCES[@]}
 do
   file="$HOME/.photon/$file"
@@ -26,18 +27,10 @@ unset file
 # enable vi mode for command line
 set -o vi
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-  [ -n "$PS1" ] && \
-  [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-  eval "$("$BASE16_SHELL/profile_helper.sh")"
-
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
-
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
-
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
