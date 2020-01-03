@@ -80,6 +80,7 @@ function pg_list() {
 
   printf "$fmt_banner" $((width - 1)) "children:"
   echo
+
   for f in $children
   do
     filename=$(basename -- "$f")
@@ -112,7 +113,7 @@ function pg_list() {
     q)
       clear
       ;;
-    e)
+    e) 
       vim *.md
       clear
       pg_list
