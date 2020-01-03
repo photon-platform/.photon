@@ -1,8 +1,8 @@
 ---
-title: ":TITLE:"
-subtitle: ":SUBTITLE:"
+title: :TITLE:
+subtitle: :SUBTITLE:
 content:
-    items: '@self.children'
+  items: '@self.children'
 child_type: article
 ---
 

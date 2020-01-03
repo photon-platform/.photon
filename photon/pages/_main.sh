@@ -4,6 +4,10 @@ source ~/.photon/photon/pages/pg_list.sh
 source ~/.photon/photon/pages/pg_new.sh
 
 function pg() {
+  espeak pages &
+  mpv /usr/share/lmms/samples/misc/dong02.ogg
+
+  clear
   if [ $1 ]
   then
     case $1 in

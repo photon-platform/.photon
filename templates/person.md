@@ -1,24 +1,24 @@
 ---
-title: ":TITLE:"
-subtitle: ":SUBTITLE:"
+title: :TITLE:
+subtitle: :SUBTITLE:
 content:
-    items: '@self.children'
+  items: '@self.children'
 child_type: person
 data:
-    person:
-        '@type': Person
-        givenName:
-        familyName:
-        email: 
-        telephone:
-        url:
-        address:
-            streetAddress:
-            postOfficeBoxNumber:
-            addressLocality:
-            addressRegion:
-            postalCode:
-            addressCountry:
+  person:
+    '@type': Person
+    givenName:
+    familyName:
+    email: 
+    telephone:
+    url:
+    address:
+      streetAddress:
+      postOfficeBoxNumber:
+      addressLocality:
+      addressRegion:
+      postalCode:
+      addressCountry:
 figure:
     image:
     alt:

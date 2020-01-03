@@ -26,6 +26,7 @@ hi Visual term=reverse cterm=reverse guibg=Grey
 let mapleader = "\<Space>"
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>h :noh<cr>
 
 
 " set the runtime path to include Vundle and initialize
@@ -53,6 +54,10 @@ call vundle#begin()
   Plugin 'prettier/vim-prettier'
 
   Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-surround'
+
+  " Plugin 'ddevault/vimspeak'
+
   Plugin 'morhetz/gruvbox'
   " Plugin 'junegunn/goyo'
   " Plugin 'junegunn/limelight'

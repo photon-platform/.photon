@@ -11,6 +11,7 @@ fmt_subtitle="${sty_subtitle} %s${txReset}\n"
 
 sty_child="${fgYellow}"
 fmt_child="${sty_child}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
+fmt_child2="     %s$\n"
 
 function pg_list() {
   width=$(tput cols)
@@ -28,6 +29,7 @@ function pg_list() {
 
     title=$(echo "$yaml" | yq r - title )
     printf "$fmt_title" "$title"
+    espeak "$title"
 
     subtitle=$(echo "$yaml" | yq r - subtitle )
     if [[ -n $subtitle ]]
@@ -116,11 +118,46 @@ function pg_list() {
       pg_list
       ;;
     v)
-      eog *
+      eog *.jpg
       clear
       pg_list
       ;;
     f)
+      clear
+      read -p "search files for: " search
+      results=$(grep -rilE --include=*.md -- "$search")
+      i=1
+      dirs=()
+
+      for r in $results
+      do
+        filename=$(basename -- "$r")
+        extension="${filename##*.}"
+        filename="${filename%.*}"
+        dirname=$(dirname "$r")
+        dirs+=( $dirname )
+        echo
+        printf "$fmt_child" $i "$r"
+        printf "$fmt_child2" "$(grep -i "$search" "$r")"
+        ((i++))
+      done
+
+      printf "$fmt_banner" $((width - 1)) "[r] return | [#] jump"
+      read -n1  search_action
+      case $search_action in
+
+        [1-9]*)
+          cd "${dirs[(($search_action-1))]}"
+          clear
+          pg_list
+          ;;
+        *)
+          clear
+          pg_list
+          ;;
+      esac
+      ;;
+    d)
       clear
       echo
       ls -hA
@@ -160,6 +197,12 @@ function pg_list() {
       ;;
     [1-9]*)
       cd "${dirs[(($action-1))]}"
+      clear
+      pg_list
+      ;;
+    n)
+      clear
+      pg_new
       clear
       pg_list
       ;;
