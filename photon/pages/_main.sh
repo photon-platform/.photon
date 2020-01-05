@@ -4,8 +4,8 @@ source ~/.photon/photon/pages/pg_list.sh
 source ~/.photon/photon/pages/pg_new.sh
 
 function pg() {
-  espeak pages &
-  mpv /usr/share/lmms/samples/misc/dong02.ogg
+  # espeak pages &
+  # mpv /usr/share/lmms/samples/misc/dong02.ogg
 
   clear
   if [ $1 ]
@@ -19,7 +19,7 @@ function pg() {
         pg_list
         ;;
       *)
-        echo "pg [new]"
+        echo "pg [new|ls]"
 
         ;;
     esac
