@@ -14,6 +14,8 @@ alias us="cd ${PROJECT_DIR}/user;gss"
 
 alias cc="cd ${PROJECT_DIR};bin/grav clear-cache"
 
-
+source ~/.photon/photon/ui/_main.sh
 source ~/.photon/photon/plugins/_main.sh
 source ~/.photon/photon/pages/_main.sh
+
+source ~/.photon/photon/shell/_main.sh

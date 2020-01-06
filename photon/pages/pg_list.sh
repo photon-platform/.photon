@@ -3,6 +3,12 @@
 sty_banner="${bgYellow}${fgBlack}"
 fmt_banner="${sty_banner} %-*s${txReset}\n"
 
+function print_banner() {
+  width=$(tput cols)
+  printf "$fmt_banner" $((width - 1)) "$1"
+  echo
+}
+
 sty_title="${txBold}"
 fmt_title="${sty_title} %s${txReset}\n"
 
@@ -33,12 +39,6 @@ function display_page_details() {
   then
     echo "$summary" | fold -w $((width-1)) -s
   fi
-}
-
-function print_banner() {
-  width=$(tput cols)
-  printf "$fmt_banner" $((width - 1)) "$1"
-  echo
 }
 
 function display_sibling_position() {

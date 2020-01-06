@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 function pg_new() {
-  # if no second paramter for template - defualt to article
-  TEMPLATE=${2-"article"}
+
+  # if no second paramter for template - default to article
+  TEMPLATE=${1-"article"}
 
   echo "photon ✴ NEW $TEMPLATE"
 
