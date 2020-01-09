@@ -1,0 +1,9 @@
+title: 
+subtitle: 
+author:
+content:
+  items: '@self.children'
+  order:
+    by: 'header.data.event.startDate|date("Y-m-d")'
+    dir: desc
+child_type: event
