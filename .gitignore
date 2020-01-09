@@ -7,5 +7,6 @@
 .atom/recovery
 .atom/nohup.out
 .atom/.atom-socket*
+.vim/bundle
 *.sw?
 .*.sw?

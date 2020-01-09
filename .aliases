@@ -14,6 +14,8 @@ alias gdl="cd ~/Downloads;ls -1Ahst | head"
 alias dot="cd ~/.photon;ls -a"
 alias gpr="cd ~/Projects/;ls -hst"
 alias gyt="cd ~/youtube/;ls -hst"
+alias gsnip="cd ~/.vim/Ultisnips/;ls"
+
 alias dl="youtube-dl"
 
 alias open=xdg-open

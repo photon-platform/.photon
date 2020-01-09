@@ -37,3 +37,5 @@ sudo snap install  jq
 sudo snap install  yq
 
 sudo apt install -y xmlstarlet
+
+sudo apt install -y newsboat

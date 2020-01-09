@@ -9,6 +9,7 @@ set number relativenumber
 
 set foldenable
 set foldmethod=indent
+set foldlevel=99
 
 " set showtabline=2
 let g:airline#extensions#tabline#enabled = 1
@@ -27,6 +28,8 @@ let mapleader = "\<Space>"
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>h :noh<cr>
+nnoremap <leader>n :bn<cr>
+nnoremap <leader>p :bp<cr>
 
 
 " set the runtime path to include Vundle and initialize
@@ -41,7 +44,7 @@ call vundle#begin()
 
   Plugin 'godlygeek/tabular'
   Plugin 'plasticboy/vim-markdown'
-
+  Plugin 'preservim/nerdcommenter'
   " Plugin 'cakebaker/scss-syntax.vim'
   " Plugin 'hail2u/vim-css3-syntax'
   Plugin 'beyondwords/vim-twig'
@@ -86,3 +89,5 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:NERDSpaceDelims = 1

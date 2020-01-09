@@ -18,12 +18,66 @@ alias inmotion="ssh illumiphi.com"
 alias sites-conf="cd /etc/apache2/sites-available"
 alias hosts="sudo vim /etc/hosts"
 alias restart="sudo apache2ctl restart"
+# TODO how to get the latest version of a github release
+# curl -s https://api.github.com/repos/jgm/pandoc/releases/latest \
+# | grep "browser_download_url.*deb" \
+# | cut -d : -f 2,3 \
+# | tr -d \" \
+# | wget -qi -
 
 alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.6.9 "
 alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
 alias grav-update="cd ~/SITES/grav;bin/gpm self-upgrade;"
 
+function display_sites_list() {
+  sites=$(find . \
+    -maxdepth 1 \
+    -mindepth 1 \
+    -not -path "./LOGS" \
+    -not -path "./grav" \
+    -type d \
+    | sort)
+
+  i=1
+  dirs=()
+
+  ui_banner "sites:"
+
+  for site in $sites
+  do
+    filename=$(basename -- "$site")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    dir=$(dirname "$site")
+    dirs+=( $dir )
+
+    # gscount=$(git status -sb $dir | wc -l)
+    ((gscount--))
+
+    if (( gscount > 0 ));
+    then
+      gscount=" [$gscount]"
+    else
+      gscount=""
+    fi
+
+    # echo -e "$i\t$title $gscount"
+    ui_list_item_number $i "$site"
+    ((i++))
+  done
+  echo
+}
+
 function sites() {
+  clear
+  ui_banner SITES
+  echo
+  cd ~/SITES/grav
+  bin/gpm version
+  echo
+
+  cd ~/SITES
+  display_sites_list
 
   if [ $1 ]
   then
@@ -66,7 +120,9 @@ function sites() {
         fi
         ;;
       *)
+        clear
         cd ~/SITES/$1/user
+        ui_banner "photon SITE"
         pwd
         echo
         sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml
