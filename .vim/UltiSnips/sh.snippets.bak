@@ -1,0 +1,12 @@
+# sh snippets
+
+snippet shebang "Shebang" b
+#!/usr/bin/bash
+$0
+endsnippet
+
+snippet func "function"
+function ${1}() {
+  $0
+}
+endsnippet
