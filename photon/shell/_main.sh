@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 function new_shell() {
   if [[ -n $1 ]]
@@ -12,9 +12,8 @@ function new_shell() {
 }
 
 function new_readme() {
-
   clear
-  
+
   # if no second paramter for template - default to readme
   TEMPLATE=${1-"readme"}
   echo "photon ✴ NEW $TEMPLATE"
@@ -30,4 +29,15 @@ function new_readme() {
       ~/.photon/templates/$TEMPLATE.md > $TEMPLATE.md
 
   vim $TEMPLATE.md
+}
+
+function todo() {
+  grep TODO -r --include="*.sh" .
+  # grep TODO -rn --include="*.sh" --exclude-from=".gitignore"  ./init.sh
+
+}
+
+function askme() {
+  read -p "what?" tmp
+  echo $tmp
 }

@@ -4,7 +4,52 @@ source ~/.photon/photon/plugins/create_submodule.sh
 source ~/.photon/photon/plugins/remove_submodule.sh
 source ~/.photon/photon/plugins/restore_submodule.sh
 
+function display_plugins_list() {
+  plugins=$(find . \
+    -maxdepth 1 \
+    -mindepth 1 \
+    -not -path "./LOGS" \
+    -not -path "./grav" \
+    -type d \
+    | sort)
+
+  i=1
+  dirs=()
+
+  ui_banner "plugins:"
+
+  for plugin in $plugins
+  do
+    filename=$(basename -- "$plugin")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    dir=$(dirname "$plugin")
+    dirs+=( $dir )
+
+    # gscount=$(git status -sb $dir | wc -l)
+    ((gscount--))
+
+    if (( gscount > 0 ));
+    then
+      gscount=" [$gscount]"
+    else
+      gscount=""
+      fi
+
+    # echo -e "$i\t$title $gscount"
+    ui_list_item_number $i "$plugin"
+    ((i++))
+  done
+  echo
+}
 function pl() {
+  cd $PLUGINS_DIR
+  clear
+  ui_banner PLUGINS
+  echo
+
+  display_plugins_list
+
   if [ $1 ]
   then
     case $1 in

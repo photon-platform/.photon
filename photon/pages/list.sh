@@ -1,33 +1,33 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
-sty_banner="${bgYellow}${fgBlack}"
-fmt_banner="${sty_banner} %-*s${txReset}\n"
+fmt_title="${txBold} %s${txReset}\n"
 
-function print_banner() {
-  width=$(tput cols)
-  printf "$fmt_banner" $((width - 1)) "$1"
-  echo
-}
+fmt_subtitle=" %s${txReset}\n"
 
-sty_title="${txBold}"
-fmt_title="${sty_title} %s${txReset}\n"
-
-sty_subtitle=""
-fmt_subtitle="${sty_subtitle} %s${txReset}\n"
-
-sty_child="${fgYellow}"
-fmt_child="${sty_child}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
+fmt_child="${fgYellow}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
 fmt_child2="     %s\n"
 
 function display_page_details() {
   md=$1
+  filename=$(basename -- "$md")
+  extension="${filename##*.}"
+  name="${filename%.*}"
+  dir=$(dirname "$md")
+
   yaml=$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')
 
   title=$(echo "$yaml" | yq r - title )
   printf "$fmt_title" "$title"
   # espeak "$title"
 
-  subtitle=$(echo "$yaml" | yq r - subtitle )
+  case $name in
+    event)
+      subtitle=$(echo "$yaml" | yq r - data.event.startDate )
+      ;;
+    *)
+      subtitle=$(echo "$yaml" | yq r - subtitle )
+      ;;
+  esac
   if [[ -n $subtitle ]]
   then
     # echo $subtitle
@@ -39,6 +39,9 @@ function display_page_details() {
   then
     echo "$summary" | fold -w $((width-1)) -s
   fi
+  echo
+
+  grep -e "^#\{1,6\}" "$md"
 }
 
 function display_sibling_position() {
@@ -61,6 +64,8 @@ function display_sibling_position() {
 }
 
 function display_children_list() {
+  ui_banner "children:"
+
   children=$(find . \
     -maxdepth 2 \
     -mindepth 2 \
@@ -71,13 +76,11 @@ function display_children_list() {
   i=1
   dirs=()
 
-  print_banner "children:"
-
   for f in $children
   do
     filename=$(basename -- "$f")
     extension="${filename##*.}"
-    filename="${filename%.*}"
+    name="${filename%.*}"
     dir=$(dirname "$f")
     dirs+=( $dir )
 
@@ -95,14 +98,14 @@ function display_children_list() {
     fi
 
     # echo -e "$i\t$title $gscount"
-    printf "$fmt_child" $i "$title" "$gscount"
+    ui_list_item_number $i "$title" "$gscount"
     ((i++))
   done
   echo
 }
 
 function move_in_siblings() {
-  print_banner "move within siblings"
+  ui_banner "move within siblings"
   siblings=($(find $(dirname "$(pwd)") \
     -maxdepth 1 -mindepth 1 -type d | sort))
 
@@ -135,7 +138,7 @@ function move_in_siblings() {
   echo
   echo "" $((index + 1)) of ${#siblings[@]}
 
-  print_banner "[j] move down | [k] move up | [q] quit"
+  ui_banner "[j] move down | [k] move up | [q] quit"
   read -n1  action
   case $action in
     j)
@@ -213,7 +216,7 @@ function find_from_dir() {
     ((i++))
   done
 
-  print_banner "[r] return | [#] jump"
+  ui_banner "[r] return | [#] jump"
   read -n1  search_action
   case $search_action in
     [1-9]*)
@@ -230,7 +233,7 @@ function find_from_dir() {
 
 function pg_list() {
   d=$(pwd)
-  print_banner "$PROJECT * PG ${d#*/pages}"
+  ui_banner "$PROJECT * PG ${d#*/pages}"
 
   # TODO: check of current directory is home directory
   # set flag to restrict navigation
@@ -248,7 +251,7 @@ function pg_list() {
 
   display_children_list
 
-  print_banner "[e] edit | [hjk] move | [#] child | [y] yaml"
+  ui_banner "[e] edit | [hjk] move | [#] child | [y] yaml"
 
   read -n1  action
   case $action in

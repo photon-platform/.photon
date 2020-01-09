@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-source ~/.photon/photon/pages/pg_list.sh
-source ~/.photon/photon/pages/pg_new.sh
+source ~/.photon/photon/pages/list.sh
+source ~/.photon/photon/pages/new.sh
 
 function pg() {
   # espeak pages &
@@ -28,4 +28,14 @@ function pg() {
     clear
     pg_list
   fi
+}
+
+function fix_delimiter() {
+  files=$(grep -lr --include="*.md" "___" | sort)
+  
+  for f in ${files}
+  do
+    echo $f
+    sed -i 's/^___$/===/' $f
+  done
 }
