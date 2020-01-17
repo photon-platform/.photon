@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-
 function pg_new() {
 
   echo "Select templates: "
@@ -24,9 +23,8 @@ function pg_new() {
 
   read -p "select template number: " -n1 choice
 
-
   # if no second paramter for template - default to article
-  TEMPLATE=${templates[$(choice + 1 )]}
+  TEMPLATE=${templates[$((choice - 1))]}
 
   # breakdown filepath
   filename=$(basename -- "$TEMPLATE")
@@ -35,22 +33,72 @@ function pg_new() {
   clear
   ui_banner "photon ✴ NEW $name"
 
-  yaml=$(cat $TEMPLATE)
+  yaml="$(cat $TEMPLATE)"
 
   # set page title
   title=$(echo "$yaml" | yq r - title )
   read -p "   title: " -i "$title" title
-  yaml=$(echo "$yaml" | yq w - title "$title")
+  yaml="$(echo "$yaml" | yq w - title "$title")"
   # echo "$yaml"
 
   # get page folder name from title
-  FOLDER=$(echo "$title" | \
-    tr "[:upper:]" "[:lower:]" | \
-    tr "[:space:]" "-" | \
-    sed -e 's/-$//g' | \
-    sed -e 's/[,\/\?\.]//g')
+  folder=$(slugify "$title")
 
-  read -p "  FOLDER: " -i "$FOLDER" -e FOLDER
+  case $name in
+    event)
+      allDay=$(ask_truefalse "All Day Event?")
+      startDate=$(ask_date "Start Date: ")
+      startTime=""
+      if [[ $allDay != "true" ]]; then
+        read -p "Start Time: " -i "14:00" -e startTime
+        startDate+=" $startTime"
+      fi
+      yaml="$(echo "$yaml" | yq w - date  "$startDate")"
+      yaml="$(echo "$yaml" | yq w - data.event.startDate  "$startDate")"
+      yaml="$(echo "$yaml" | yq w - data.event.allDay  "$allDay")"
+      folder="$(date +%Y-%m-%d --date "$startDate")-$folder"
+      ;;
+    organization)
+      subtitle=$(echo "$yaml" | yq r - subtitle )
+      read -p "   subtitle: " -i "$subtitle" subtitle
+      yaml=$(echo "$yaml" | yq w - subtitle "$subtitle")
+
+      yaml="$(echo "$yaml" | yq w - data.organization.name  "$title")"
+
+      telephone="$(ask_value "telephone: ")"
+      yaml="$(echo "$yaml" | yq w - data.organization.telephone  "$telephone")"
+
+      email="$(ask_value "email: ")"
+      yaml="$(echo "$yaml" | yq w - data.organization.email  "$email")"
+
+      url="$(ask_value "url: ")"
+      yaml="$(echo "$yaml" | yq w - data.organization.url  "$url")"
+
+      streetAddress="$(ask_value "streetAddress: ")"
+      yaml="$(echo "$yaml" | yq w - data.organization.location.address.streetAddress  "$streetAddress")"
+
+      ;;
+    post)
+      postDate=$(ask_date "post date: ")
+      folder="$(date +%Y-%m-%d --date "$postDate")-$folder"
+      yaml="$(echo "$yaml" | yq w - date "$postDate")"
+
+      subtitle=$(echo "$yaml" | yq r - subtitle )
+      read -p "   subtitle: " -i "$subtitle" subtitle
+      yaml=$(echo "$yaml" | yq w - subtitle "$subtitle")
+      ;;
+    *)
+      subtitle=$(echo "$yaml" | yq r - subtitle )
+      read -p "   subtitle: " -i "$subtitle" subtitle
+      yaml=$(echo "$yaml" | yq w - subtitle "$subtitle")
+      ;;
+  esac
+
+  # echo "$yaml"
+
+  read -p " SUMMARY: " SUMMARY
+
+  read -p "  folder: " -i "$folder" -e folder
 
   # determine folder number
   # TODO get next folder number
@@ -58,18 +106,11 @@ function pg_new() {
   read -p "     NUM: " -i "$NUM" -e NUM
   if [ $NUM ]
   then
-    FOLDER="${NUM}.${FOLDER}"
+    folder="${NUM}.${folder}"
   fi
 
-  subtitle=$(echo "$yaml" | yq r - subtitle )
-  read -p "   subtitle: " -i "$subtitle" subtitle
-  yaml=$(echo "$yaml" | yq w - subtitle "$subtitle")
-  echo "$yaml"
-
-  read -p " SUMMARY: " SUMMARY
-
-  mkdir $FOLDER
-  cd $FOLDER
+  mkdir $folder
+  cd $folder
 
   echo "---" > "$name.md"
   echo "$yaml" >> "$name.md"
@@ -77,34 +118,33 @@ function pg_new() {
   echo -e "\n$SUMMARY\n" >> "$name.md"
   echo "===" >> "$name.md"
 
-  # TODO change to yaml
-  # sed -e "s/:TITLE:/$TITLE/g" \
-    # -e "s/:SUBTITLE:/$SUBTITLE/g" \
-    # -e "s/:SUMMARY:/$SUMMARY/g" \
-    # ~/.photon/templates/$TEMPLATE.md > $TEMPLATE.md
-
-  # case $name in
-    # event)
-      # subtitle=$(echo "$yaml" | yq r - data.event.startDate )
-      # ;;
-    # *)
-      # subtitle=$(echo "$yaml" | yq r - subtitle )
-      # ;;
-  # esac
-
-  # if [[ -n $subtitle ]]
-  # then
-    # # echo $subtitle
-    # # printf "$fmt_subtitle" "$subtitle"
-  # fi
-
-  # summary=$(tail -n +2 $md | sed -n -e '/^---$/,/^===$/{ /^---$/d; /^===$/d; p; }' | sed 's/^/ /')
-  # if [[ -n $summary ]]
-  # then
-    # echo "$summary" | fold -w $((width-1)) -s
-  # fi
-  # echo
-
   # vim $name.md
 }
 
+function ask_value() {
+  read -p "$1" -e value
+  echo "$value"
+}
+
+function ask_date() {
+  read -p "$1" -i $(date +%m/%d/%Y) -e startDate
+  echo "$startDate"
+}
+
+function ask_truefalse() {
+  read -n1 -p "${1} [y/n]" -e tf
+  case $tf in
+    y)
+      echo "true"
+      ;;
+    *)
+      echo "false"
+      ;;
+  esac
+}
+
+function update_markdown_yaml() {
+  clear
+  # cat event.md | sed "/---/,/---/c ---\n$yaml\n---\n"
+
+}

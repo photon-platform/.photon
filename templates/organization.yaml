@@ -1,0 +1,31 @@
+title:
+subtitle:
+content:
+  items: '@self.children'
+child_type: person
+figure:
+  image:
+  alt:
+  title:
+  caption:
+taxonomy:
+  tag:
+  category:
+data:
+  organization:
+     '@type': Organization
+     name: 
+     telephone: 
+     url: 
+     email:
+     location:
+       address:
+         streetAddress:
+         addressLocality: Waldport
+         addressRegion: OR
+         postalCode: '97394'
+         addressCountry: US
+       geo:
+         latitude:
+         longitude:
+

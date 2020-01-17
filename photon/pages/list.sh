@@ -14,7 +14,7 @@ function display_page_details() {
   name="${filename%.*}"
   dir=$(dirname "$md")
 
-  yaml=$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')
+  yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
 
   title=$(echo "$yaml" | yq r - title )
   printf "$fmt_title" "$title"
@@ -99,6 +99,7 @@ function display_children_list() {
 
     # echo -e "$i\t$title $gscount"
     ui_list_item_number $i "$title" "$gscount"
+    ui_list_item "$(basename -- $dir)"
     ((i++))
   done
   echo
@@ -285,6 +286,7 @@ function pg_list() {
     y)
       clear
       echo
+      yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
       echo "$yaml"
       echo
       pg_list

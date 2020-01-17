@@ -10,9 +10,7 @@ figure:
   caption:
 taxonomy:
   tag:
-    -
   category:
-    -
 data:
   person:
     '@type': Person

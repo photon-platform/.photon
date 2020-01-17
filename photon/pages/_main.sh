@@ -2,6 +2,7 @@
 
 source ~/.photon/photon/pages/list.sh
 source ~/.photon/photon/pages/new.sh
+source ~/.photon/photon/pages/sort.sh
 
 function pg() {
   # espeak pages &
@@ -32,7 +33,7 @@ function pg() {
 
 function fix_delimiter() {
   files=$(grep -lr --include="*.md" "___" | sort)
-  
+
   for f in ${files}
   do
     echo $f
