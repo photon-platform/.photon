@@ -6,7 +6,7 @@ fmt_banner="${sty_banner} %-*s${txReset}\n"
 
 sty_child="${fgYellow}"
 fmt_child="${sty_child}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
-fmt_child2="     %s\n"
+fmt_child2="${fgAqua}     %s\n${txReset}"
 
 function ui_banner() {
   width=$(tput cols)

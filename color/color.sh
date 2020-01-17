@@ -6,7 +6,7 @@ tput sgr0; # reset colors
 bold=$(tput bold);
 reset=$(tput sgr0);
 
-black=$(tput setaf 0);
+black=$(tput setaf 232);
 blue=$(tput setaf 33);
 cyan=$(tput setaf 37);
 green=$(tput setaf 64);
@@ -21,6 +21,7 @@ yellow=$(tput setaf 136);
 # background color using ANSI escape
 
 export bgBlack=$(tput setab 0)
+export bgBlackBlack=$(tput setab 232)
 export bgRed=$(tput setab 1) # red
 export bgGreen=$(tput setab 2) # green
 export bgYellow=$(tput setab 3) # yellow

@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 
 sudo apt install -y inkscape
 sudo apt install -y darktable
 sudo apt install -y gimp
+sudo apt install -y exif
+sudo apt install -y exiftool
 
 # sudo apt install snapd
 # sudo snap install gravit-designer

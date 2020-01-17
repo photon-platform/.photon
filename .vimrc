@@ -40,11 +40,14 @@ call vundle#begin()
 
   Plugin 'VundleVim/Vundle.vim'
 
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'airblade/vim-gitgutter'
+
   Plugin 'sirver/ultisnips'
 
   Plugin 'godlygeek/tabular'
   Plugin 'plasticboy/vim-markdown'
-  Plugin 'preservim/nerdcommenter'
+
   " Plugin 'cakebaker/scss-syntax.vim'
   " Plugin 'hail2u/vim-css3-syntax'
   Plugin 'beyondwords/vim-twig'
@@ -56,8 +59,8 @@ call vundle#begin()
   Plugin 'vim-syntastic/syntastic'
   Plugin 'prettier/vim-prettier'
 
-  Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-surround'
+  Plugin 'preservim/nerdcommenter'
 
   " Plugin 'ddevault/vimspeak'
 

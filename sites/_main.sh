@@ -25,8 +25,8 @@ alias restart="sudo apache2ctl restart"
 # | tr -d \" \
 # | wget -qi -
 
-alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.6.9 "
-alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
+# alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.6.9 "
+# alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
 alias grav-update="cd ~/SITES/grav;bin/gpm self-upgrade;"
 
 function display_sites_list() {

@@ -1,2 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/phi/.photon/templates'
+let g:netrw_dirhist_2='/home/phi/.photon/photon/pages'
+let g:netrw_dirhist_3='/home/phi/.photon/photon'
+let g:netrw_dirhist_4='/home/phi/.photon'
+let g:netrw_dirhist_5='/home/phi/.photon/templates'
