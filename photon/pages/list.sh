@@ -39,9 +39,10 @@ function display_page_details() {
   then
     echo "$summary" | fold -w $((width-1)) -s
   fi
-  echo
 
-  grep -e "^#\{1,6\}" "$md"
+  grep -e "^#\{1,6\}" "$md"| sed -e "s/#/  /g"
+
+  echo
 }
 
 function display_sibling_position() {
@@ -198,9 +199,10 @@ function move_in_siblings() {
 }
 
 function find_from_dir() {
-  clear
+  echo
   read -p "search files for: " search
-  results=$(grep -rilE --include=*.md -- "$search")
+  # results=$(grep -rilE --include=*.md -- "$search")
+  results=$(ag -Sl "$search")
   i=1
   dirs=()
 
@@ -213,7 +215,8 @@ function find_from_dir() {
     dirs+=( $dir )
     echo
     printf "$fmt_child" $i "$r"
-    printf "$fmt_child2" "$(grep -i "$search" "$r")"
+    # printf "$fmt_child2" "$(grep -i "$search" "$r")"
+    ag -S "$search" "$r"
     ((i++))
   done
 
@@ -265,7 +268,7 @@ function pg_list() {
       pg_list
       ;;
     v)
-      eog *.jpg
+      sxiv *.jpg
       clear
       pg_list
       ;;
@@ -316,6 +319,26 @@ function pg_list() {
       ;;
     [1-9]*)
       cd "${dirs[(($action-1))]}"
+      clear
+      pg_list
+      ;;
+    g)
+      echo
+      read -p "Enter child number: " -e num
+      cd "${dirs[(($num-1))]}"
+      clear
+      pg_list
+      ;;
+    G)
+      clear
+      echo
+      gss
+      read -p "Add and commit this branch [y]:  " -e commit
+      if [[ $commit == "y" ]]; then
+        gacp
+        echo
+        read -p "press any key to continue"
+      fi
       clear
       pg_list
       ;;

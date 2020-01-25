@@ -1,11 +1,15 @@
 filetype off                  " required
 
-set hls
 set shiftwidth=2 softtabstop=2 expandtab
 set autoindent
 filetype plugin indent on    " required
 
 set number relativenumber
+
+set ignorecase
+set smartcase
+set incsearch
+set hls
 
 set foldenable
 set foldmethod=indent
@@ -22,6 +26,7 @@ augroup CursorLine
    au WinLeave * setlocal nocursorline
 augroup END
 
+
 hi Visual term=reverse cterm=reverse guibg=Grey
 
 let mapleader = "\<Space>"
@@ -30,6 +35,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>h :noh<cr>
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>t :BTags<cr>
 
 
 " set the runtime path to include Vundle and initialize
@@ -42,6 +50,8 @@ call vundle#begin()
 
   Plugin 'tpope/vim-fugitive'
   Plugin 'airblade/vim-gitgutter'
+
+  Plugin 'ludovicchabant/vim-gutentags'
 
   Plugin 'sirver/ultisnips'
 
@@ -67,6 +77,9 @@ call vundle#begin()
   Plugin 'morhetz/gruvbox'
   " Plugin 'junegunn/goyo'
   " Plugin 'junegunn/limelight'
+  Plugin 'junegunn/fzf'
+  Plugin 'junegunn/fzf.vim'
+
 
 call vundle#end()            " required
 
@@ -94,3 +107,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:NERDSpaceDelims = 1
+
+set spell
+hi clear SpellBad
+hi SpellBad ctermfg=red cterm=underline
+" Set style for gVim
+" hi SpellBad gui=undercurl

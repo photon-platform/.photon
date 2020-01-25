@@ -18,6 +18,13 @@ function mkd() {
   mkdir -p "$@" && cd "$_"
 }
 
+# Find and open in Vim
+function vf() {
+  local file=$(fzf)
+  if [[ -f $file ]]; then
+    vim $file
+  fi
+}
 # Determine size of a file or total size of a directory
 function fs() {
   if du -b /dev/null > /dev/null 2>&1; then

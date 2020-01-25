@@ -11,6 +11,12 @@ sudo apt install -y tree
 
 sudo apt install -y rename
 
+sudo apt install -y fzf
+
+sudo apt install -y silversearcher-ag
+
+sudo apt install -y fd-find
+
 # sudo apt install -y nextcloud-client
 
 sudo apt install -y sendmail-bin

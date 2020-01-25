@@ -10,3 +10,4 @@
 .vim/bundle
 *.sw?
 .*.sw?
+tags
