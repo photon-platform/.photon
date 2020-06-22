@@ -1,38 +1,41 @@
 #!/usr/bin/bash
 
-fmt_title="${txBold} %s${txReset}\n"
-
-fmt_subtitle=" %s${txReset}\n"
+## photon - pages - list
 
 fmt_child="${fgYellow}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
 fmt_child2="     %s\n"
 
+function h1() {
+  fmt="${txBold} %s${txReset}\n"
+  printf "$fmt" "$1"
+}
+
+function h2() {
+  fmt=" %s${txReset}\n"
+  printf "$fmt" "$1"
+}
+
+# TODO check $yaml should be established before  calling
+function yq_r() {
+  key="$1"
+  echo "$yaml" | yq r - "$key"
+}
+
 function display_page_details() {
   md=$1
-  filename=$(basename -- "$md")
-  extension="${filename##*.}"
-  name="${filename%.*}"
-  dir=$(dirname "$md")
 
   yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
 
-  title=$(echo "$yaml" | yq r - title )
-  printf "$fmt_title" "$title"
-  # espeak "$title"
+  h1 "$(yq_r "title")"
 
   case $name in
     event)
-      subtitle=$(echo "$yaml" | yq r - data.event.startDate )
+      h2 "$(yq_r "data.event.startDate")"
       ;;
     *)
-      subtitle=$(echo "$yaml" | yq r - subtitle )
+      h2 "$(yq_r "subtitle")"
       ;;
   esac
-  if [[ -n $subtitle ]]
-  then
-    # echo $subtitle
-    printf "$fmt_subtitle" "$subtitle"
-  fi
 
   summary=$(tail -n +2 $md | sed -n -e '/^---$/,/^===$/{ /^---$/d; /^===$/d; p; }' | sed 's/^/ /')
   if [[ -n $summary ]]
@@ -40,7 +43,12 @@ function display_page_details() {
     echo "$summary" | fold -w $((width-1)) -s
   fi
 
+  # show headings from document indented
   grep -e "^#\{1,6\}" "$md"| sed -e "s/#/  /g"
+
+  echo
+
+  h1 "$(yq_r "taxonomy.category")"
 
   echo
 }
@@ -79,27 +87,14 @@ function display_children_list() {
 
   for f in $children
   do
-    filename=$(basename -- "$f")
-    extension="${filename##*.}"
-    name="${filename%.*}"
     dir=$(dirname "$f")
     dirs+=( $dir )
 
     yaml=$(cat $f | sed -n '/---/,/---/p')
-    title=$(echo "$yaml" | yq r - title )
+    title="$(yq_r title )"
 
-    # gscount=$(git status -sb $dir | wc -l)
-    ((gscount--))
-
-    if (( gscount > 0 ));
-    then
-      gscount=" [$gscount]"
-    else
-      gscount=""
-    fi
-
-    # echo -e "$i\t$title $gscount"
-    ui_list_item_number $i "$title" "$gscount"
+    ui_list_item_number $i "$title"
+    ui_list_item "$(yq_r "subtitle")"
     ui_list_item "$(basename -- $dir)"
     ((i++))
   done
@@ -146,46 +141,46 @@ function move_in_siblings() {
     j)
       clear
       echo "move down"
-      echo "move"
+      echo "swap: "
 
-      echo ${siblings[index]}
       fromDir=$(basename -- ${siblings[index]})
       echo $fromDir
       num1="${fromDir%.*}"
       name1="${fromDir#*.}"
-      echo $num1 $name1
-      echo "to"
-      echo ${siblings[$((index + 1))]}
+
       toDir=$(basename -- ${siblings[$((index + 1))]})
       echo $toDir
       num2="${toDir%.*}"
       name2="${toDir#*.}"
-      echo $num2 $name2
+
       mv "../$fromDir" "../$num2.$name1"
       mv "../$toDir" "../$num1.$name2"
+      cd "../$num2.$name1"
+      pwd
       # clear
-      pg_list
+      move_in_siblings
       ;;
     k)
       clear
       echo "move up"
-      echo ${siblings[index]}
+      echo "swap: "
+
       fromDir=$(basename -- ${siblings[index]})
       echo $fromDir
       num1="${fromDir%.*}"
       name1="${fromDir#*.}"
-      echo $num1 $name1
-      echo "to"
-      echo ${siblings[$((index - 1))]}
+
       toDir=$(basename -- ${siblings[$((index - 1))]})
       echo $toDir
       num2="${toDir%.*}"
       name2="${toDir#*.}"
-      echo $num2 $name2
+
       mv "../$fromDir" "../$num2.$name1"
       mv "../$toDir" "../$num1.$name2"
+      cd "../$num2.$name1"
+      pwd
       # clear
-      pg_list
+      move_in_siblings
       ;;
     [1-9]*)
       clear
@@ -214,13 +209,14 @@ function find_from_dir() {
     dir=$(dirname "$r")
     dirs+=( $dir )
     echo
-    printf "$fmt_child" $i "$r"
-    # printf "$fmt_child2" "$(grep -i "$search" "$r")"
-    ag -S "$search" "$r"
+    ui_list_item_number $i "$r"
+    ui_list_item "$(ag --color -S "$search" "$r")"
+    # echo -e "$(ag --color -S "$search" "$r")"
     ((i++))
   done
 
-  ui_banner "[r] return | [#] jump"
+  echo
+  ui_banner "[q] return | [#] jump"
   read -n1  search_action
   case $search_action in
     [1-9]*)
@@ -246,15 +242,23 @@ function pg_list() {
   md=${mds[0]}
   if test -f $md;
   then
-    display_page_details $md
     display_sibling_position
+    echo
+    display_page_details $md
   else
-    printf "$fmt_title" "pages root"
+    h1 "pages root"
+    echo
+    gss
   fi
   echo
 
   display_children_list
 
+  echo
+  gsss
+  echo
+
+  # TODO: show all menu options on '?'
   ui_banner "[e] edit | [hjk] move | [#] child | [y] yaml"
 
   read -n1  action
@@ -295,7 +299,9 @@ function pg_list() {
       pg_list
       ;;
     h)
-      cd ..
+      if [[ $(pwd) != "$PROJECT_DIR/user/pages" ]]; then
+        cd ..
+      fi
       clear
       pg_list
       ;;
@@ -324,8 +330,9 @@ function pg_list() {
       ;;
     g)
       echo
-      read -p "Enter child number: " -e num
-      cd "${dirs[(($num-1))]}"
+      # read -p "Enter child number: " -e num
+      # cd "${dirs[(($num-1))]}"
+      zd
       clear
       pg_list
       ;;
@@ -339,6 +346,13 @@ function pg_list() {
         echo
         read -p "press any key to continue"
       fi
+      clear
+      pg_list
+      ;;
+    r)
+      clear
+      renumber_children_list
+      clear
       clear
       pg_list
       ;;
