@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+alias pa="sites phiarchitect.com"
 alias starter="sites starter"
 alias photon="sites photon-platform"
 alias illumiphi="sites illumiphi"
@@ -72,6 +73,7 @@ function sites() {
   clear
   ui_banner SITES
   echo
+
   cd ~/SITES/grav
   bin/gpm version
   echo
@@ -84,7 +86,7 @@ function sites() {
     case $1 in
       new)
         ~/.photon/sites/new.sh "$2" "$3"
-        sites "$2"
+        # sites "$2"
         ;;
       newhost)
         ~/.photon/sites/newhost.sh "$2" "$3"
@@ -134,6 +136,5 @@ function sites() {
     esac
   else
     cd ~/SITES
-    ls
   fi
 }

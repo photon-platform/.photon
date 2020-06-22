@@ -3,7 +3,6 @@
 # create an empty host directory
 # set up apache
 
-
 PROJECT="$1"
 
 source ~/.photon/.hosts
@@ -17,7 +16,6 @@ then
   echo
   read -p "specify site PROJECT name: " PROJECT
 fi
-
 
 if [ -n $PROJECT ]
 then
@@ -33,8 +31,6 @@ then
   TIME=$(convertsecstomin $ELAPSED)
   echo
   echo "✴ elapsed: $TIME m:s"
-
-
 
 else
   echo "no project name"

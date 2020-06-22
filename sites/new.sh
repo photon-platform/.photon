@@ -4,23 +4,29 @@
 # copy additional files
 # set up apache
 
+SITESROOT=~/SITES
+if [[ $HOSTNAME == *.com ]]
+then
+  SITESROOT=~
+fi
 
+GITHUBORG="illumiphi"
 PROJECT="$1"
 TITLE="$2"
 
-source ~/.photon/.hosts
-source ~/.photon/.sites
-source ~/.photon/.functions
-
 echo
 echo "✴ photon SITE Generator"
+
+echo
+read -e -i "$GITHUBORG" -p "specify GITHUB Org name: " GITHUBORG
+
 if [ -z $PROJECT ]
 then
   echo
   read -p "specify PROJECT repo name: " PROJECT
 fi
 
-REPO="https://github.com/i-am-phi/$PROJECT.git"
+REPO="https://github.com/$GITHUBORG/$PROJECT.git"
 echo
 echo "✴ check remote repo"
 echo $REPO
@@ -50,15 +56,15 @@ then
 
   echo
   echo "✴ cloning grav"
-  cd ~/SITES/grav
-  bin/grav sandbox -s ~/SITES/$PROJECT
-  ln -sf ~/SITES/grav/.htaccess ~/SITES/$PROJECT/
+  cd $SITESROOT/grav
+  bin/grav sandbox -s $SITESROOT/$PROJECT
+  ln -sf $SITESROOT/grav/.htaccess $SITESROOT/$PROJECT/
 
   echo
   echo "✴ clone starter user"
-  cd ~/SITES/$PROJECT
+  cd $SITESROOT/$PROJECT
   rm -rf user
-  git clone --recurse-submodules ~/SITES/$CLONE/user/.git ~/SITES/$PROJECT/user
+  git clone --recurse-submodules $SITESROOT/$CLONE/user/.git $SITESROOT/$PROJECT/user
   git submodule foreach "pwd; \
     git checkout master; \
     git status -sb; \
@@ -70,15 +76,15 @@ then
 
   echo
   echo "✴ set config files"
-  cd ~/SITES/$PROJECT/user
+  cd $SITESROOT/$PROJECT/user
   echo "✴ create server config folder"
-  mv starter.photon-platform.net $PROJECT.illumiphi.com
+  mv starter.photon-platform.net $PROJECT
 
 
   echo
   echo "✴ set accounts"
-  cd ~/SITES/$PROJECT/user
-  cp ~/SITES/$CLONE/user/accounts/*.yaml accounts/
+  cd $SITESROOT/$PROJECT/user
+  cp $SITESROOT/$CLONE/user/accounts/*.yaml accounts/
 
   echo
   echo "✴ set config files"
@@ -96,7 +102,7 @@ then
 
   # update project key
   sed -i -e "s/^\(\s*export PROJECT=\).*/\1$PROJECT/" \
-         -e "s/ph.*net/illumiphi.com/g" \
+         -e "s/ph.*net/$PROJECT/g" \
          .photon
   ag --nonumbers "title:" .photon
 
