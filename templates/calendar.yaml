@@ -1,9 +1,12 @@
 title: 
 subtitle: 
 author:
+collection:
+  name: Events
+  showCount: true
+  showMenu: true
 content:
   items: '@self.children'
   order:
     by: 'header.data.event.startDate|date("Y-m-d")'
     dir: desc
-child_type: event

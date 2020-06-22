@@ -1,13 +1,11 @@
 title:
 subtitle:
+collection:
+  name: Details
+  showCount: true
+  showMenu: true
 content:
   items: '@self.children'
-child_type: person
-figure:
-  image:
-  alt:
-  title:
-  caption:
 taxonomy:
   tag:
   category:

@@ -1,21 +1,19 @@
 title:
 subtitle:
 author:
+collection:
+  name: Event Items
+  showCount: true
+  showMenu: true
 content:
   items: '@self.children'
-child_type: article
-figure:
-  image:
-  alt:
-  title:
-  caption:
 taxonomy:
   tag:
   category:
 data:
   event:
-    startDate: '10/18/2018 02:00 pm'
+    startDate: 
     allDay: false
     address:
-      addressRegion: OR
-      addressCountry: US
+      addressRegion: 
+      addressCountry: 
