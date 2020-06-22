@@ -6,10 +6,11 @@ mkdir -p ~/SITES/LOGS/grav
 cd ~/SITES
 
 # read -p "continue?" tmp
-
-wget https://getgrav.org/download/core/grav-admin/1.6.16 -O grav-admin-1.6.16.zip
-unzip -q grav-admin-1.6.16.zip
-mv grav-admin/ grav/
+# https://getgrav.org/download/core/grav/1.6.20
+GRAV=1.6.20
+wget https://getgrav.org/download/core/grav/${GRAV} -O grav.zip
+unzip -q grav.zip
+# mv grav-admin/ grav/
 
 sudo cp ~/.photon/templates/grav.conf /etc/apache2/sites-available/grav.conf
 

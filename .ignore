@@ -1,3 +1,4 @@
+*.git*
 *.atom*
 *dart-sass*
 *thunderbird*

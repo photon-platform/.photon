@@ -20,11 +20,16 @@ function mkd() {
 
 # Find and open in Vim
 function vf() {
-  local file=$(fzf)
-  if [[ -f $file ]]; then
+  local file=$(fd -H -t f | fzf -m --preview="bat {}")
+  if [[ -n $file ]]; then
     vim $file
   fi
 }
+
+function zd() {
+  cd "$(fdfind -H -t d  | fzf)"
+}
+
 # Determine size of a file or total size of a directory
 function fs() {
   if du -b /dev/null > /dev/null 2>&1; then

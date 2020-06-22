@@ -12,6 +12,15 @@ alias gacp="git add .;git commit;git push"
 alias g-df="git diff --cached --submodule"
 alias g-df-s="git config --global diff.submodule log"
 
+function g-home() {
+  echo $(git rev-parse --show-toplevel)
+}
+
+# git summary summary
+function gsss() {
+  gss | awk '{ print substr($1, 1,3) }' | ag -v "##" | sort | uniq -c
+}
+
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
   complete -o default -o nospace -F _git g
@@ -40,44 +49,28 @@ gsub() {
   then
     case $1 in
 
-      # add, commit with message, push
-      acmp)
-        if [[ $2 ]]; then
-          git submodule foreach "pwd; git add .; git commit -m \"$2\"; git push origin master; echo"
-        else
-          echo 'add commit message: gsub acmp "message"'
-        fi
-        ;;
-
-      #fetch all submodules from remote
       fetch)
-        git submodule foreach 'pwd; \
+        git submodule foreach " \
           git fetch; \
           git status -sb; \
-          echo'
+          echo"
         ;;
 
-      # set all to master branch
       master)
-        git submodule foreach "pwd; \
+        git submodule foreach " \
           git checkout master; \
           git status -sb; \
           echo"
         ;;
 
-      # update from remote origin
       update)
         # check for outstanding changes before update
         # git submodule update --remote
-        git submodule foreach "pwd; \
+        git submodule foreach " \
           git pull; \
           git checkout master; \
           git status -sb; \
           echo"
-        ;;
-
-      user)
-
         ;;
 
       *)
@@ -87,18 +80,19 @@ gsub() {
     esac
   else
     # default status each
-    git submodule foreach 'pwd; git status -sb; echo'
+    git submodule foreach 'git status -sb; echo'
   fi
 
 }
 
-function reset-history {
+# https://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-initial-commit-in-a-git-repository/13102849#13102849
+function g-reset-history() {
   git checkout --orphan newBranch
   git add -A  # Add all files and commit them
   git commit
   git branch -D master  # Deletes the master branch
   git branch -m master  # Rename the current branch to master
-  git push -f origin master  # Force push master branch to github
+  git push -fu origin master  # Force push master branch to github
   git gc --aggressive --prune=all     # remove the old files
 
 }

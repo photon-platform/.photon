@@ -1,8 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/phi/SITES/port-of-alsea/user/plugins/photon-event'
-let g:netrw_dirhist_2='/home/phi/SITES/port-of-alsea/user/plugins/photon-event/templates'
-let g:netrw_dirhist_3='/home/phi/SITES/port-of-alsea/user/plugins/photon-event/templates/_json-ld'
-let g:netrw_dirhist_4='/home/phi/.photon/color'
-let g:netrw_dirhist_5='/home/phi/.photon'
-let g:netrw_dirhist_6='/home/phi/.photon/photon'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/phi/SITES/euclid/user/themes/photon-child'
+let g:netrw_dirhist_2='/home/phi/SITES/euclid/user/themes/photon-child/templates'
+let g:netrw_dirhist_3='/home/phi/SITES/euclid/user/themes/photon-child/templates/_site'

@@ -22,8 +22,8 @@ yellow=$(tput setaf 136);
 
 export bgBlack=$(tput setab 0)
 export bgBlackBlack=$(tput setab 232)
-export bgRed=$(tput setab 1) # red
-export bgGreen=$(tput setab 2) # green
+export bgRed=$(tput setab 1) 
+export bgGreen=$(tput setab 2) 
 export bgYellow=$(tput setab 3) # yellow
 export bgBlue=$(tput setab 4) # blue
 export bgPurple=$(tput setab 5) # magenta
@@ -33,6 +33,7 @@ export bgWhite=$(tput setab 7) # white
 # foreground color using ANSI escape
 
 export fgBlack=$(tput setaf 0) # black
+export fgBlackBlack=$(tput setaf 232) # black
 export fgRed=$(tput setaf 1) # red
 export fgGreen=$(tput setaf 2) # green
 export fgYellow=$(tput setaf 3) # yellow

@@ -38,6 +38,7 @@ nnoremap <leader>p :bp<cr>
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>t :BTags<cr>
+nnoremap <leader>w :%s/\s\+$//e<cr>
 
 
 " set the runtime path to include Vundle and initialize
@@ -108,8 +109,3 @@ let g:syntastic_check_on_wq = 0
 
 let g:NERDSpaceDelims = 1
 
-set spell
-hi clear SpellBad
-hi SpellBad ctermfg=red cterm=underline
-" Set style for gVim
-" hi SpellBad gui=undercurl
