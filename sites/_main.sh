@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+export SITESROOT=~/SITES
+export ISLOCAL=true
+if [[ "$HOSTNAME" =~ .*com$ ]]
+then
+  export SITESROOT=~
+  export ISLOCAL=false
+fi
+
+
 alias pa="sites phiarchitect.com"
 alias starter="sites starter"
 alias photon="sites photon-platform"
@@ -11,8 +20,8 @@ alias jill="sites jill-moser"
 alias gbp="sites gerdemann"
 alias ona="sites ona"
 
-alias audio="cd ~/SITES/audio"
-alias constructions="cd ~/SITES/constructions;source .photon"
+alias audio="cd $SITESROOT/audio"
+alias constructions="cd $SITESROOT/constructions;source .photon"
 
 alias inmotion="ssh illumiphi.com"
 
@@ -28,7 +37,7 @@ alias restart="sudo apache2ctl restart"
 
 # alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.6.9 "
 # alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
-alias grav-update="cd ~/SITES/grav;bin/gpm self-upgrade;"
+alias grav-update="cd $SITESROOT/grav;bin/gpm self-upgrade;"
 
 function display_sites_list() {
   sites=$(find . \
@@ -74,11 +83,11 @@ function sites() {
   ui_banner SITES
   echo
 
-  cd ~/SITES/grav
+  cd $SITESROOT/grav
   bin/gpm version
   echo
 
-  cd ~/SITES
+  cd $SITESROOT
   display_sites_list
 
   if [ $1 ]
@@ -86,18 +95,18 @@ function sites() {
     case $1 in
       new)
         ~/.photon/sites/new.sh "$2" "$3"
-        # sites "$2"
+        cd $SITESROOT/$2/user
         ;;
       newhost)
         ~/.photon/sites/newhost.sh "$2" "$3"
-        cd ~/SITES/$2
+        cd $SITESROOT/$2/user
         ;;
       restore)
         ~/.photon/sites/restore.sh "$2" "$3"
-        sites "$2"
+        cd $SITESROOT/$2/user
         ;;
       status)
-        cd ~/SITES
+        cd $SITESROOT
         find . -maxdepth 1 -mindepth 1 \
           ! -name "LOGS" \
           ! -name ".archive" \
@@ -111,7 +120,7 @@ function sites() {
             echo)' \;
         ;;
       archive)
-        cd ~/SITES
+        cd $SITESROOT
         if [[ $2 ]]; then
           D=$(date +"%Y%m%d-%T")
           cp -a "$2" .archive/$2.$D
@@ -123,7 +132,7 @@ function sites() {
         ;;
       *)
         clear
-        cd ~/SITES/$1/user
+        cd $SITESROOT/$1/user
         ui_banner "photon SITE"
         pwd
         echo
@@ -135,6 +144,6 @@ function sites() {
         ;;
     esac
   else
-    cd ~/SITES
+    cd $SITESROOT
   fi
 }

@@ -4,14 +4,6 @@
 # copy additional files
 
 
-SITESROOT=~/SITES
-ISLOCAL=true
-if [[ "$HOSTNAME" =~ .*com$ ]]
-then
-  SITESROOT=~
-  ISLOCAL=false
-fi
-
 GITHUBORG="illumiphi"
 PROJECT="$1"
 TITLE="$2"
