@@ -2,12 +2,11 @@
 
 # sandbox a new site with grav
 # copy additional files
-# set up apache
 
 
 SITESROOT=~/SITES
 ISLOCAL=true
-if [[ "$HOSTNAME" == .*com$ ]]
+if [[ "$HOSTNAME" =~ .*com$ ]]
 then
   SITESROOT=~
   ISLOCAL=false
