@@ -95,3 +95,15 @@ function slugify() {
     sed -E 's/-+$//g' |\
     tr A-Z a-z
 }
+
+function newsh() {
+  scriptname=$1
+  if [[ -z $scriptname ]]
+  then
+    read -p "script name: " scriptname
+  fi
+  echo '#!/usr/bin/env bash' > $scriptname.sh
+  chmod +x $scriptname.sh
+  vim $scriptname.sh
+}
+
