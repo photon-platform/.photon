@@ -5,7 +5,8 @@
 # set up apache
 
 SITESROOT=~/SITES
-if [[ $HOSTNAME == *.com ]]
+# check if running on server
+if [[ "$HOSTNAME" == .*com$ ]]
 then
   SITESROOT=~
 fi

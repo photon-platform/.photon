@@ -7,7 +7,7 @@
 
 SITESROOT=~/SITES
 ISLOCAL=true
-if [[ $HOSTNAME == *.com ]]
+if [[ "$HOSTNAME" == .*com$ ]]
 then
   SITESROOT=~
   ISLOCAL=false
