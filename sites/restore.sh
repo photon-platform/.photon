@@ -78,7 +78,7 @@ function sites_restore() {
 
     if [[ $ISLOCAL = true ]]
     then
-      ~/.photon/sites/new-apache.sh $PROJECT
+      apache_new $PROJECT
     fi
       
     # git remote set-url origin "$REPO"

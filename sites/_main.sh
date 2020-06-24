@@ -12,6 +12,7 @@ source ~/.photon/sites/_aliases.sh
 source ~/.photon/sites/list.sh
 source ~/.photon/sites/new.sh
 source ~/.photon/sites/restore.sh
+source ~/.photon/sites/apache.sh
 source ~/.photon/sites/site/_main.sh
 
 

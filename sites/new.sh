@@ -103,7 +103,7 @@ function sites_new() {
     ag --nonumbers "title:" .photon
 
 
-    ~/.photon/sites/new-apache.sh $PROJECT
+    apache_new $PROJECT
 
     git remote set-url origin "$REPO"
 
