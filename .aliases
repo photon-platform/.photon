@@ -8,6 +8,7 @@ alias -- -="cd -"
 
 alias fd="fdfind"
 
+alias inmotion="ssh illumiphi.com"
 
 alias g="git"
 
