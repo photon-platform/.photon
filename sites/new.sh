@@ -78,7 +78,7 @@ then
   echo
   echo "✴ set config files"
   cd $SITESROOT/$PROJECT/user
-  echo "✴ create server config folder"
+  echo "✴ rename server config folder"
   mv starter.photon-platform.net $PROJECT
 
 

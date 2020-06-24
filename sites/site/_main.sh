@@ -14,7 +14,7 @@ alias pju="cd ${PROJECT_DIR}/user;gss"
 alias grav-cc="cd ${PROJECT_DIR};bin/grav clearcache"
 alias grav-log="cd ${PROJECT_DIR};bin/grav logviewer"
 
-source ~/.photon/photon/plugins/_main.sh
-source ~/.photon/photon/pages/_main.sh
+source ~/.photon/sites/site/plugins/_main.sh
+source ~/.photon/sites/site/pages/_main.sh
+source ~/.photon/sites/site/sync.sh
 
-source ~/.photon/photon/shell/_main.sh

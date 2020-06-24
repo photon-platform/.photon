@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source ~/.photon/photon/plugins/create_submodule.sh
-source ~/.photon/photon/plugins/remove_submodule.sh
-source ~/.photon/photon/plugins/restore_submodule.sh
+source ~/.photon/sites/site/plugins/create_submodule.sh
+source ~/.photon/sites/site/plugins/remove_submodule.sh
+source ~/.photon/sites/site/plugins/restore_submodule.sh
 
 function display_plugins_list() {
   plugins=$(find . \

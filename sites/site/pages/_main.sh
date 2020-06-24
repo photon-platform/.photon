@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source ~/.photon/photon/pages/list.sh
-source ~/.photon/photon/pages/new.sh
-source ~/.photon/photon/pages/sort.sh
+source ~/.photon/sites/site/pages/list.sh
+source ~/.photon/sites/site/pages/new.sh
+source ~/.photon/sites/site/pages/sort.sh
 
 function pg() {
   # espeak pages &

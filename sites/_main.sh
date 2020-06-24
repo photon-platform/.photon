@@ -8,20 +8,9 @@ then
   export ISLOCAL=false
 fi
 
-
-alias pa="sites phiarchitect.com"
-alias starter="sites starter"
-alias photon="sites photon-platform"
-alias illumiphi="sites illumiphi"
-alias geometor="sites geometor"
-alias presence="sites presence"
-alias port="sites port-of-alsea"
-alias jill="sites jill-moser"
-alias gbp="sites gerdemann"
-alias ona="sites ona"
-
-alias audio="cd $SITESROOT/audio"
-alias constructions="cd $SITESROOT/constructions;source .photon"
+source ~/.photon/sites/_aliases.sh
+source ~/.photon/sites/list.sh
+source ~/.photon/sites/site/_main.sh
 
 alias inmotion="ssh illumiphi.com"
 
@@ -39,56 +28,17 @@ alias restart="sudo apache2ctl restart"
 # alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
 alias grav-update="cd $SITESROOT/grav;bin/gpm self-upgrade;"
 
-function display_sites_list() {
-  sites=$(find . \
-    -maxdepth 1 \
-    -mindepth 1 \
-    -not -path "./LOGS" \
-    -not -path "./grav" \
-    -type d \
-    | sort)
-
-  i=1
-  dirs=()
-
-  ui_banner "sites:"
-
-  for site in $sites
-  do
-    filename=$(basename -- "$site")
-    extension="${filename##*.}"
-    filename="${filename%.*}"
-    dir=$(dirname "$site")
-    dirs+=( $dir )
-
-    # gscount=$(git status -sb $dir | wc -l)
-    ((gscount--))
-
-    if (( gscount > 0 ));
-    then
-      gscount=" [$gscount]"
-    else
-      gscount=""
-    fi
-
-    # echo -e "$i\t$title $gscount"
-    ui_list_item_number $i "$site"
-    ((i++))
-  done
-  echo
-}
-
 function sites() {
   clear
   ui_banner SITES
   echo
 
-  cd $SITESROOT/grav
-  bin/gpm version
+  # cd $SITESROOT/grav
+  # bin/gpm version
   echo
 
   cd $SITESROOT
-  display_sites_list
+  sites_list
 
   if [ $1 ]
   then
