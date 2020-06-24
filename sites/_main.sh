@@ -10,9 +10,10 @@ fi
 
 source ~/.photon/sites/_aliases.sh
 source ~/.photon/sites/list.sh
+source ~/.photon/sites/new.sh
+source ~/.photon/sites/restore.sh
 source ~/.photon/sites/site/_main.sh
 
-alias inmotion="ssh illumiphi.com"
 
 alias sites-conf="cd /etc/apache2/sites-available"
 alias hosts="sudo vim /etc/hosts"
@@ -33,18 +34,13 @@ function sites() {
   ui_banner SITES
   echo
 
-  # cd $SITESROOT/grav
-  # bin/gpm version
-  echo
-
   cd $SITESROOT
-  sites_list
 
   if [ $1 ]
   then
     case $1 in
       new)
-        ~/.photon/sites/new.sh "$2" "$3"
+        sites_new "$2" "$3"
         cd $SITESROOT/$2/user
         ;;
       newhost)
@@ -52,7 +48,7 @@ function sites() {
         cd $SITESROOT/$2/user
         ;;
       restore)
-        ~/.photon/sites/restore.sh "$2" "$3"
+        sites_restore "$2" "$3"
         cd $SITESROOT/$2/user
         ;;
       status)
@@ -95,5 +91,6 @@ function sites() {
     esac
   else
     cd $SITESROOT
+    sites_list
   fi
 }
