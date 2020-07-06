@@ -3,37 +3,17 @@
 # sandbox a new site with grav
 # copy additional files
 
-
 function sites_restore() {
-    
-  GITHUBORG="illumiphi"
-  PROJECT="$1"
-  TITLE="$2"
+
+  clear
+  ui_banner "photon ✴ SITES restore"
+
+  githuborg_set
 
   echo
-  echo "photon ✴ SITES restore"
+  read -p "specify PROJECT repo name to restore: " PROJECT
 
-  echo
-  read -e -i "$GITHUBORG" -p "specify GITHUB Org name: " GITHUBORG
-
-  if [ -z $PROJECT ]
-  then
-    echo
-    read -p "specify PROJECT repo name to restore: " PROJECT
-  fi
-
-  REPO="https://github.com/$GITHUBORG/$PROJECT.git"
-  echo
-  echo "✴ check remote repo"
-  echo $REPO
-  echo
-  git ls-remote $REPO
-  if [ $? -ne 0 ]
-  then
-    echo ""
-    echo "check if REPO exists"
-    exit 1
-  fi
+  repo_check
 
   if [ -n $PROJECT ]
   then
@@ -55,25 +35,15 @@ function sites_restore() {
     cd $SITESROOT/$PROJECT
     rm -rf user
     git clone --recurse-submodules $REPO $SITESROOT/$PROJECT/user
+
+    cd $SITESROOT/$PROJECT/user
     git submodule foreach "pwd; \
       git checkout master; \
       git status -sb; \
       echo"
 
     # echo
-    # echo "✴ init tntsearch"
-    # bin/plugin tntsearch index
-
-    # echo
-    # echo "✴ set config files"
-    # cd $SITESROOT/$PROJECT/user
-    # echo "✴ create server config folder"
-    # mv starter.photon-platform.net $PROJECT.illumiphi.com
-    #
-    #
-    # echo
     # echo "✴ set accounts"
-    # cd $SITESROOT/$PROJECT/user
     # cp $SITESROOT/$CLONE/user/accounts/*.yaml accounts/
 
     if [[ $ISLOCAL = true ]]
@@ -81,10 +51,7 @@ function sites_restore() {
       apache_new $PROJECT
     fi
       
-    # git remote set-url origin "$REPO"
-
-    # git add .
-    # git commit -m "init"
+    gsub update
 
     END_TIME="$(date -u +%s)"
     ELAPSED="$((END_TIME-START_TIME))"
@@ -92,7 +59,6 @@ function sites_restore() {
     echo
     echo "✴ elapsed: $TIME m:s"
 
-    gsub update
 
     
   else

@@ -12,6 +12,9 @@ export HOSTS_FILE=/etc/hosts
 export IP="127.0.0.1"
 
 
+alias sites-conf="cd /etc/apache2/sites-available"
+alias hosts="sudo vim /etc/hosts"
+alias restart="sudo apache2ctl restart"
 
 removehost() {
   if [ $1 ]

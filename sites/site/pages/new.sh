@@ -2,7 +2,7 @@
 
 TEMPLATE_DIR=~/.photon/templates/
 
-function pg_new() {
+function pages_new() {
 
   echo "Select a template: "
   echo

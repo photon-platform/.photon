@@ -1,39 +1,37 @@
 #!/usr/bin/env bash
 
+function sites_dirs() {
+  find $SITESROOT -maxdepth 2 -type d -name user | sort
+}
+
 function sites_list() {
-  sites=$(find . \
-    -type f \
-    -wholename "*user/config/site.yaml" \
-    | sort)
+  # sites=$(sites_dirs)
+  sites=()
+  while IFS=  read -r -d $'\0'; do
+      sites+=("$REPLY")
+    done < <( find $SITESROOT -maxdepth 3 -type f -wholename "*/user/.photon" -print0 | sort)
+  IFS=$'\n' sites=($(sort <<<"${sites[*]}"))
+  unset IFS
+  sites_count=${#sites[@]}
 
   i=1
-  dirs=()
+  # dirs=()
 
   ui_banner "sites:"
 
-  for site in $sites
+  for site in ${sites[@]}
   do
-    filename=$(basename -- "$site")
-    extension="${filename##*.}"
-    filename="${filename%.*}"
+    # filename=$(basename -- "$site")
+    # extension="${filename##*.}"
+    # filename="${filename%.*}"
     dir=$(dirname "$site")
-    dirs+=( $dir )
+    # dirs+=( $site )
 
-    title=$(sed -n -e 's/title: \(.*\)/\1/p' $site)
-
-    # gscount=$(git status -sb $dir | wc -l)
-    ((gscount--))
-
-    if (( gscount > 0 ));
-    then
-      gscount=" [$gscount]"
-    else
-      gscount=""
-    fi
+    title=$(sed -n -e 's/title: \(.*\)/\1/p' "$dir/config/site.yaml")
 
     # echo -e "$i\t$title $gscount"
     ui_list_item_number $i "$title"
-    ui_list_item "${dir%/user/config}"
+    ui_list_item "${dir}"
     ((i++))
   done
   echo

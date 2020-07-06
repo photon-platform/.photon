@@ -100,9 +100,7 @@ function sort_in_siblings() {
   read -n1  action
   case $action in
     j)
-      clear
-      echo "move down"
-      echo "move"
+      # move down
 
       echo ${siblings[index]}
       fromDir=$(basename -- ${siblings[index]})
@@ -120,11 +118,10 @@ function sort_in_siblings() {
       mv "../$fromDir" "../$num2.$name1"
       mv "../$toDir" "../$num1.$name2"
       # clear
-      pg_list
+      pages
       ;;
     k)
-      clear
-      echo "move up"
+      # "move up"
       echo ${siblings[index]}
       fromDir=$(basename -- ${siblings[index]})
       echo $fromDir
@@ -141,15 +138,15 @@ function sort_in_siblings() {
       mv "../$fromDir" "../$num2.$name1"
       mv "../$toDir" "../$num1.$name2"
       # clear
-      pg_list
+      pages
       ;;
     [1-9]*)
       clear
-      pg_list
+      pages
       ;;
     *)
       clear
-      pg_list
+      pages
       ;;
   esac
 }

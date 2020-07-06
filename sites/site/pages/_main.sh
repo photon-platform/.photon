@@ -2,41 +2,26 @@
 
 source ~/.photon/sites/site/pages/list.sh
 source ~/.photon/sites/site/pages/new.sh
+source ~/.photon/sites/site/pages/actions.sh
 source ~/.photon/sites/site/pages/sort.sh
+source ~/.photon/sites/site/pages/page/_main.sh
 
-function pg() {
-  # espeak pages &
-  # mpv /usr/share/lmms/samples/misc/dong02.ogg
+function pages() {
+  
+  @
+  source .photon
+  cd $PROJECT_DIR/user/pages
 
-  clear
-  if [ $1 ]
-  then
-    case $1 in
-      new)
-        pg_new $2
-        ;;
-      ls)
-        clear
-        pg_list
-        ;;
-      *)
-        echo "pg [new|ls]"
+  ui_banner "$PROJECT * PAGES"
 
-        ;;
-    esac
-  else
-    cd ${PROJECT_DIR}/user/pages
-    clear
-    pg_list
-  fi
-}
+  h1 "pages root"
+  echo
+  
+  gsss
+  echo
 
-function fix_delimiter() {
-  files=$(grep -lr --include="*.md" "___" | sort)
+  page_children
+  
+  pages_actions
 
-  for f in ${files}
-  do
-    echo $f
-    sed -i 's/^___$/===/' $f
-  done
 }

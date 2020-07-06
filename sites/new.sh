@@ -6,40 +6,21 @@
 
 function sites_new() {
 
-  GITHUBORG="illumiphi"
-  PROJECT="$1"
-  TITLE="$2"
+  PROJECT=""
+  TITLE=""
+
+  clear
+  ui_banner "photon ✴ SITES new"
+
+  githuborg_set
 
   echo
-  echo "photon ✴ SITES new"
+  read -p "specify PROJECT repo name: " PROJECT
 
+  repo_check
+  
   echo
-  read -e -i "$GITHUBORG" -p "specify GITHUB Org name: " GITHUBORG
-
-  if [ -z $PROJECT ]
-  then
-    echo
-    read -p "specify PROJECT repo name: " PROJECT
-  fi
-
-  REPO="https://github.com/$GITHUBORG/$PROJECT.git"
-  echo
-  echo "✴ check remote repo"
-  echo $REPO
-  echo
-  git ls-remote $REPO
-  if [ $? -ne 0 ]
-  then
-    echo ""
-    echo "https://github.com/new"
-    exit 1
-  fi
-
-  if [ -z "$TITLE" ]
-  then
-    echo
-    read -p "specify site TITLE: " TITLE
-  fi
+  read -p "specify site TITLE: " TITLE
 
   if [ -n $PROJECT ]
   then
