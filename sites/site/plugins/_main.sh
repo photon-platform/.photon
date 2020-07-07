@@ -10,7 +10,7 @@ source ~/.photon/sites/site/plugins/submodule/restore_submodule.sh
 function plugins() {
   @
   source .photon
-  cd $PROJECT_DIR/user/plugins
+  cd plugins
 
   clear
   ui_banner "$PROJECT * PLUGINS"
