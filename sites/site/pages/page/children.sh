@@ -20,8 +20,8 @@ function page_children() {
   do
 
     yaml=$(cat $f | sed -n '/---/,/---/p')
-    title=$( echo "$yaml" | sed -n -e 's/title: \(.*\)/\1/p' )
-    subtitle=$( echo "$yaml" | sed -n -e 's/subtitle: \(.*\)/\1/p' )
+    title=$( echo "$yaml" | sed -n -e 's/^title: \(.*\)/\1/p' )
+    subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle: \(.*\)/\1/p' )
     # title="$(yq_r title )"
     # subtitle="$(yq_r subtitle )"
 
