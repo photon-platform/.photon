@@ -14,21 +14,17 @@ function find_from_dir() {
   echo
   read -p "search files for: " search
   # results=$(grep -rilE --include=*.md -- "$search")
-  results=$(ag -Sl "$search")
+  results=$(grep -ril "$search" . )
   i=1
   dirs=()
 
   for r in $results
   do
-    filename=$(basename -- "$r")
-    extension="${filename##*.}"
-    filename="${filename%.*}"
     dir=$(dirname "$r")
     dirs+=( $dir )
     echo
     ui_list_item_number $i "$r"
-    ui_list_item "$(ag --color -S "$search" "$r")"
-    # echo -e "$(ag --color -S "$search" "$r")"
+    ui_list_item "$(grep -i "$search" "$r")"
     ((i++))
   done
 
@@ -39,11 +35,11 @@ function find_from_dir() {
     [1-9]*)
       cd "${dirs[(($search_action-1))]}"
       clear
-      pages
+      page
       ;;
     *)
       clear
-      pages
+      page
       ;;
   esac
 }

@@ -18,7 +18,7 @@ function g-home() {
 
 # git summary summary
 function gsss() {
-  gss | awk '{ print substr($1, 1,3) }' | ag -v "##" | sort | uniq -c
+  gss | awk '{ print substr($1, 1,3) }' | grep -v "##" | sort | uniq -c
 }
 
 # Enable tab completion for `g` by marking it as an alias for `git`
