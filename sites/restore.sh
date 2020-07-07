@@ -53,12 +53,20 @@ function sites_restore() {
       
     gsub update
 
+    cd $SITESROOT/$PROJECT
+    bin/plugin login new-user \
+      -u phi \
+      -e phi@phiarchitect.com \
+      -P b \
+      -N "phi ARCHITECT" \
+      -t "admin"
+    cd $SITESROOT/$PROJECT/user
+    
     END_TIME="$(date -u +%s)"
     ELAPSED="$((END_TIME-START_TIME))"
     TIME=$(convertsecstomin $ELAPSED)
     echo
     echo "✴ elapsed: $TIME m:s"
-
 
     
   else
