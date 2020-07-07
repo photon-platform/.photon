@@ -16,14 +16,13 @@ function page_children() {
 
   i=1
 
-  for f in ${children[@]}
+  for md in ${children[@]}
   do
 
-    yaml=$(cat $f | sed -n '/---/,/---/p')
+    yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
+    # yaml=$(cat $md | sed -n '/---/,/---/p')
     title=$( echo "$yaml" | sed -n -e 's/^title: \(.*\)/\1/p' )
     subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle: \(.*\)/\1/p' )
-    # title="$(yq_r title )"
-    # subtitle="$(yq_r subtitle )"
 
     ui_list_item_number $i "$title"
     ui_list_item "$subtitle"

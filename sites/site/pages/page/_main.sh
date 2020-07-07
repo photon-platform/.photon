@@ -17,6 +17,8 @@ function page() {
     echo "" $((siblings_index + 1)) of $siblings_count
     
     yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
+    title=$( echo "$yaml" | sed -n -e 's/^title: \(.*\)/\1/p' )
+    subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle: \(.*\)/\1/p' )
 
     if [[ $PAGESYAML == true ]]
     then
@@ -24,14 +26,16 @@ function page() {
       echo "$yaml"
       echo
     else
-      h1 "$(yq_r "title")"
+      h1 "$title"
+      h2 "$subtitle"
 
       case $name in
         event)
-          h2 "$(yq_r "data.event.startDate")"
+          startDate=$( echo "$yaml" | sed -n -e 's/.*startDate: \(.*\)/\1/p' )
+          h2 "$startDate"
           ;;
         *)
-          h2 "$(yq_r "subtitle")"
+          # h2 "$(yq_r "subtitle")"
           ;;
       esac
     fi
@@ -47,7 +51,7 @@ function page() {
 
     echo
 
-    h1 "$(yq_r "taxonomy.category")"
+    # h1 "$(yq_r "taxonomy.category")"
     echo
 
     page_children
@@ -62,8 +66,3 @@ function page() {
 
 }
 
-# TODO check $yaml should be established before  calling
-function yq_r() {
-  key="$1"
-  echo "$yaml" | yq r - "$key"
-}
