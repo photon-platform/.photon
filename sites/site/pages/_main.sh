@@ -10,7 +10,7 @@ function pages() {
   
   @
   source .photon
-  cd $PROJECT_DIR/user/pages
+  cd pages
 
   ui_banner "$PROJECT * PAGES"
 
