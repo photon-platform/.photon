@@ -6,12 +6,13 @@ function sites_dirs() {
 
 function sites_list() {
   # sites=$(sites_dirs)
-  sites=()
-  while IFS=  read -r -d $'\0'; do
-      sites+=("$REPLY")
-    done < <( find $SITESROOT -maxdepth 3 -type f -wholename "*/user/.photon" -print0 | sort)
-  IFS=$'\n' sites=($(sort <<<"${sites[*]}"))
-  unset IFS
+  # sites=()
+  # while IFS=  read -r -d $'\0'; do
+      # sites+=("$REPLY")
+    # done < <( find $SITESROOT -maxdepth 3 -type f -wholename "*/user/.photon" -print0 | sort)
+  # IFS=$'\n' sites=($(sort <<<"${sites[*]}"))
+  # unset IFS
+  sites=( $( find $SITESROOT -maxdepth 3 -type f -wholename "*/user/.photon" | sort))
   sites_count=${#sites[@]}
 
   i=1
