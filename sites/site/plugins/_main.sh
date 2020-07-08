@@ -14,9 +14,11 @@ function plugins() {
 
   clear
   ui_banner "$PROJECT * PLUGINS"
-
-  h1 "plugins root"
+  d=$(pwd)
+  h1 "$(prompt_git):${d}"
   echo
+
+  gsss
 
   plugins_list
 

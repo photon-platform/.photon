@@ -2,10 +2,18 @@
 
 function sites_actions() {
 
-  ui_banner "SITES actions: "
+  ui_banner "SITES actions [?] for help "
 
   read -n1  action
   case $action in
+    \?)
+      echo
+      h2 "q - quit"
+      h2 "f - find from current directory"
+      h2 "r - ranger"
+      echo
+      sites_actions
+      ;;
     q)
       clear
       echo "exiting SITES"
@@ -13,6 +21,10 @@ function sites_actions() {
       ;;
     f)
       find_from_dir
+      ;;
+    r)
+      ranger
+      sites_actions
       ;;
     d)
       clear
@@ -63,15 +75,16 @@ function sites_actions() {
       clear
       site
       ;;
-    r)
+    s)
       clear
       sites_restore
       # clear
       site
       ;;
     *)
-      clear
-      pages
+      echo
+      echo "not a command"
+      sites_actions
       ;;
   esac
 

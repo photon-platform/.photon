@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-children=()
-children_count=0
-
 function page_children_dirs() {
   find . -maxdepth 2 -mindepth 2 -name "*.md" -type f | sort 
 }
@@ -26,18 +23,18 @@ function page_children() {
 
     ui_list_item_number $i "$title"
     ui_list_item "$subtitle"
-    ui_list_item "$f"
+    ui_list_item "$md"
     ((i++))
   done
   echo
 }
 
 function test_list_nullsep() {
-children=()
-while IFS=  read -r -d $'\0'; do
-    children+=("$REPLY")
-done < <(find . -maxdepth 2 -mindepth 2 -name "*.md" -type f -print0 | sort )
-IFS=$'\n' children=($(sort <<<"${children[*]}"))
-unset IFS
-echo ${children[@]}
+  children=()
+  while IFS=  read -r -d $'\0'; do
+      children+=("$REPLY")
+  done < <(find . -maxdepth 2 -mindepth 2 -name "*.md" -type f -print0 | sort )
+  IFS=$'\n' children=($(sort <<<"${children[*]}"))
+  unset IFS
+  echo ${children[@]}
 }

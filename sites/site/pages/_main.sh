@@ -7,21 +7,21 @@ source ~/.photon/sites/site/pages/sort.sh
 source ~/.photon/sites/site/pages/page/_main.sh
 
 function pages() {
-  
+
   @
   source .photon
   cd pages
 
   ui_banner "$PROJECT * PAGES"
-
-  h1 "pages root"
+  d=$(pwd)
+  h1 "$(prompt_git):${d}"
   echo
-  
+
   gsss
   echo
 
   page_children
-  
+
   pages_actions
 
 }

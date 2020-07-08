@@ -1,20 +1,14 @@
 #!/usr/bin/env bash
 
-siblings=
-siblings_index=
-siblings_count=
+
+function page_siblings_dirs() {
+  parent_dir=$(dirname "$(pwd)") 
+  find $parent_dir -maxdepth 2 -mindepth 2 -name "*.md" -type f | sort 
+}
 
 function page_siblings() {
 
-  parent_dir=$(dirname "$(pwd)") 
-
-  siblings=()
-  while IFS=  read -r -d $'\0'; do
-      siblings+=("$REPLY")
-  done < <(find $parent_dir -maxdepth 2 -mindepth 2 -name "*.md" -type f -print0 | sort )
-  IFS=$'\n' siblings=($(sort <<<"${siblings[*]}"))
-  unset IFS
-
+  siblings=( $(page_siblings_dirs) )
   siblings_count=${#siblings[@]}
 
   i=0

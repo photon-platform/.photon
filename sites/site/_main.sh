@@ -16,11 +16,17 @@ function site() {
   @
   source .photon
   # clear
-  ui_banner "photon SITE"
-  sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml
-  pwd
+  ui_banner "$PROJECT * SITE "
+
+  d=$(pwd)
+  pg="$(prompt_git "${violet}" "${red}")"
+  h1 "${pg}${txReset}:${d}"
+  echo
+
+  h2 "$(sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml)"
+  h2 "$(pwd)"
   site_siblings
-  echo $((siblings_index + 1)) of $siblings_count
+  h2 "$((siblings_index + 1)) of $siblings_count"
   echo
   fmt="  [%c] ${fgYellow}%3d${txReset} ${txBold}%s${txReset}\n"
   printf "$fmt" "p" $(find ./pages -name "*.md" | wc -l ) "pages"

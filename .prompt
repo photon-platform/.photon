@@ -104,7 +104,7 @@ PS1+="\[${fgAqua}\]\t "; # time
 PS1+='[${timer_show}s] $?\n'
 # PS1+="[$(convertsecstomin $timer_show)s] $?\n"
 PS1+="\[${green}\]\w"; # working directory full path
-PS1+="\$(prompt_git \"\[${fgWhite}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+PS1+="\$(prompt_git \"\[${fgWhite}\] on \[${violet}\]\" \"\[${red}\]\")"; # Git repository details
 PS1+="\n"
 PS1+="\[${fgWhite}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1
