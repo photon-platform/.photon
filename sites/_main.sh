@@ -4,7 +4,7 @@ export SITESROOT=~/SITES
 export ISLOCAL=true
 if [[ "$HOSTNAME" =~ .*com$ ]]
 then
-  export SITESROOT=~
+  # export SITESROOT=~
   export ISLOCAL=false
 fi
 

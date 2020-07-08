@@ -47,9 +47,6 @@ function sites_new() {
       git status -sb; \
       echo"
 
-    echo
-    echo "✴ init tntsearch"
-    bin/plugin tntsearch index
 
     echo
     echo "✴ set config files"
@@ -58,10 +55,10 @@ function sites_new() {
     mv starter.photon-platform.net $PROJECT
 
 
-    echo
-    echo "✴ set accounts"
-    cd $SITESROOT/$PROJECT/user
-    cp $SITESROOT/$CLONE/user/accounts/*.yaml accounts/
+    # echo
+    # echo "✴ set accounts"
+    # cd $SITESROOT/$PROJECT/user
+    # cp $SITESROOT/$CLONE/user/accounts/*.yaml accounts/
 
     echo
     echo "✴ set config files"
@@ -91,27 +88,24 @@ function sites_new() {
     git add .
     git commit -m "init"
 
+    cd $SITESROOT/$PROJECT
+    bin/plugin login new-user \
+      -u phi \
+      -e phi@phiarchitect.com \
+      -P b \
+      -N "phi ARCHITECT" \
+      -t "admin"
+    echo
+    echo "✴ init tntsearch"
+    bin/plugin tntsearch index
+    cd $SITESROOT/$PROJECT/user
+
     END_TIME="$(date -u +%s)"
     ELAPSED="$(($END_TIME-$START_TIME))"
     TIME=$(convertsecstomin $ELAPSED)
     echo
     echo "✴ elapsed: $TIME m:s"
 
-
-    echo
-    echo "Photon Project Commands"
-    echo
-    echo serve="php -S localhost:${PORT} system/router.php"
-    echo local="open ${LOCAL}"
-    echo admin="open ${LOCAL}/admin"
-    echo server="open ${SERVER}"
-    echo edit="atom ${PROJECT_DIR}/user"
-    echo
-    echo pr="cd ${PROJECT_DIR}"
-    echo th="cd $THEMES_DIR/photon;gss"
-    echo ch="cd $THEMES_DIR/photon-child;gss"
-    echo pg="cd ${PROJECT_DIR}/user/pages;gss"
-    echo us="cd ${PROJECT_DIR}/user;gss"
 
     echo
     echo "✴ push to GitHub"
