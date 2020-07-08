@@ -45,3 +45,7 @@ sudo snap install  yq
 sudo apt install -y xmlstarlet
 
 sudo apt install -y newsboat
+
+sudo add-apt-repository ppa:nextcloud-devs/client
+sudo apt-get update
+sudo apt install nextcloud-client
