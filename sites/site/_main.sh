@@ -18,10 +18,11 @@ function site() {
   # clear
   ui_banner "$PROJECT * SITE "
 
-  d=$(pwd)
-  pg="$(prompt_git "${violet}" "${red}")"
-  h1 "${pg}${txReset}:${d}"
-  echo
+  show_dir
+  # d=$(pwd)
+  # pg="$(prompt_git "${violet}" "${red}")"
+  # h1 "${pg}${txReset}:${d}"
+  # echo
 
   h2 "$(sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml)"
   h2 "$(pwd)"

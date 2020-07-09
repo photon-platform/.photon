@@ -14,11 +14,18 @@ function plugins_actions() {
       ;;
     f)
       find_from_dir
+      clear
+      plugins
+      ;;
+    r)
+      ranger
+      clear
+      plugins
       ;;
     d)
       clear
       echo
-      ls -hA
+      la
       echo
       plugins_actions
       ;;
@@ -38,7 +45,8 @@ function plugins_actions() {
       pages
       ;;
     [1-9]*)
-      cd "${dirs[(($action-1))]}"
+      cd "$( dirname ${list[(($action-1))]} )"
+      # read
       clear
       plugin
       ;;
@@ -80,7 +88,7 @@ function plugins_actions() {
           echo "format: pl create ${yellow}pluginname"
         fi
       ;;
-    r)
+    b)
       # restore submodule
       # TODO this is a function for the plugin modul
         if [ $2 ]

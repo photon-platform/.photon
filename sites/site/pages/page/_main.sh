@@ -8,16 +8,16 @@ function page() {
 
   ui_banner "$PROJECT * PAGE "
 
-  d=$(pwd)
-  h1 "$(prompt_git):${d}"
-  echo
+  show_dir
 
   mds=(*.md)
   md=${mds[0]}
-  h2 $md
 
   if test -f $md;
   then
+
+    h2 $md
+    h2 "$( date -Is -r ${md} )"
 
     page_siblings
     h2 "$((siblings_index + 1)) of $siblings_count"

@@ -13,7 +13,7 @@ SOURCES+=(hosts/_main.sh)
 SOURCES+=(sites/_main.sh)
 SOURCES+=(color/color.sh)
 SOURCES+=(color/palette.sh)
-# SOURCES+=(photon/_main.sh)
+SOURCES+=(tools/_main.sh)
 
 for file in  ${SOURCES[@]}
 do

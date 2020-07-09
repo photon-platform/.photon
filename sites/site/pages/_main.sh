@@ -13,9 +13,7 @@ function pages() {
   cd pages
 
   ui_banner "$PROJECT * PAGES"
-  d=$(pwd)
-  h1 "$(prompt_git):${d}"
-  echo
+  show_dir
 
   gsss
   echo

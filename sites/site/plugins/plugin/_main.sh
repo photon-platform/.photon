@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-function plugin() {
-  head -n 2 blueprints.yaml
-  echo
-  git status -sb .
+source ~/.photon/sites/site/plugins/plugin/actions.sh
+source ~/.photon/sites/site/plugins/plugin/siblings.sh
 
+function plugin() {
+  ui_banner "$PROJECT * PLUGIN "
+
+  show_dir
+  plugin_siblings
+
+  gsss
+  plugin_actions
 }
