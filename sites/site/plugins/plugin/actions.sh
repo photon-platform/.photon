@@ -12,8 +12,10 @@ function plugin_actions() {
       echo "exiting plugin"
       echo "type "plugin" to reeneter"
       ;;
-    f)
-      find_from_dir
+    /)
+      search
+      clear
+      plugin
       ;;
     r)
       ranger

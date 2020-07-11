@@ -12,8 +12,8 @@ function plugins_actions() {
       echo "exiting PLUGINS"
       echo "type "plugins" to reeneter"
       ;;
-    f)
-      find_from_dir
+    /)
+      search
       clear
       plugins
       ;;

@@ -12,8 +12,15 @@ function pages_actions() {
       echo "exiting PAGES"
       echo "type "pages" to reeneter"
       ;;
-    f)
-      find_from_dir
+    t)
+      tre
+      clear
+      pages
+      ;;
+    /)
+      search
+      clear
+      pages
       ;;
     d)
       clear

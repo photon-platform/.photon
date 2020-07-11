@@ -9,6 +9,9 @@ function plugin() {
   show_dir
   plugin_siblings
 
+  cat blueprints.yaml | head -n 12
+  echo
+
   gsss
   plugin_actions
 }

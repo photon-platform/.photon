@@ -22,8 +22,15 @@ function page_actions() {
       clear
       page
       ;;
-    f)
-      find_from_dir
+    t)
+      tre
+      # clear
+      page_actions
+      ;;
+    /)
+      search
+      clear
+      page
       ;;
     d)
       clear

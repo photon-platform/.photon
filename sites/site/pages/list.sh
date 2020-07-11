@@ -1,30 +1,33 @@
 #!/usr/bin/bash
 
-## photon - pages - list
 
-# TODO check $yaml should be established before  calling
-function yq_r() {
-  key="$1"
-  echo "$yaml" | yq r - "$key"
-}
+function search() {
+  if [[ -z $1 ]]
+  then
+    echo
+    read -p "search files for: " search
+  else
+    search=$1
+  fi
 
-
-
-function find_from_dir() {
-  echo
-  read -p "search files for: " search
-  # results=$(grep -rilE --include=*.md -- "$search")
-  results=$(grep -ril "$search" . )
+  results=( $(grep \
+   -rilE \
+   --exclude-dir="vendor" \
+   --exclude-dir="node_modules" \
+   --exclude-dir=".git" \
+   --exclude="*.min.js" \
+   --exclude="*.pack.js" \
+   --exclude="grav.index" \
+   -- \
+   "$search" \
+   . ) )
   i=1
-  dirs=()
 
-  for r in $results
+  for r in ${results[@]}
   do
-    dir=$(dirname "$r")
-    dirs+=( $dir )
     echo
     ui_list_item_number $i "$r"
-    ui_list_item "$(grep -i "$search" "$r")"
+    grep -i "$search" "$r"
     ((i++))
   done
 
@@ -33,13 +36,15 @@ function find_from_dir() {
   read -n1  search_action
   case $search_action in
     [1-9]*)
-      cd "${dirs[(($search_action-1))]}"
-      clear
-      page
+      # cd "$(dirnane ${results[(($search_action-1))]} )"
+      vim -c "/$search/" "${results[(($search_action-1))]}"
       ;;
-    *)
-      clear
-      page
+    a)
+      vim -c "/$search/" "${results[@]}"
+      ;;
+    q)
+      # clear
+      # page
       ;;
   esac
 }

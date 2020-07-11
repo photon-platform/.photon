@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# TODO convert aliases to actions
+alias serve="php -S localhost:${PORT} system/router.php"
+alias archive="cp -r ${PROJECT_DIR} ~/SITES/.archive/$PROJECT.$(date +"%Y%m%d")"
+
+alias grav-cc="cd ${PROJECT_DIR};bin/grav clearcache"
+alias grav-log="cd ${PROJECT_DIR};bin/grav logviewer"
+
 function site_actions() {
 
   # TODO: show all menu options on '?'
@@ -88,8 +95,15 @@ function site_actions() {
       site
       ;;
 
-    f)
-      find_from_dir
+    t)
+      tre 
+      clear
+      site
+      ;;
+    /)
+      search
+      clear
+      site
       ;;
     d)
       echo

@@ -2,7 +2,7 @@
 
 function sites_actions() {
 
-  ui_banner "SITES actions [?] for help "
+  ui_banner "SITES actions: h j k [le] # g G r d q ? "
 
   read -n1  action
   case $action in
@@ -19,8 +19,10 @@ function sites_actions() {
       echo "exiting SITES"
       echo "type "sites" to reeneter"
       ;;
-    f)
-      find_from_dir
+    /)
+      search
+      clear
+      sites
       ;;
     r)
       ranger
@@ -56,16 +58,32 @@ function sites_actions() {
       ;;
     g)
       echo
-      dir=$(sites_dirs | sed -e "s|$SITESROOT/\(.*\)/user|\1|" | fzf )
+      dir=$(sites_dirs | sed -e "s|$SITESROOT/\(.*\)/user/.photon|\1|" | fzf )
       cd "$SITESROOT/$dir/user"
+      # read -p continue
       clear
       site
       ;;
     G)
       clear
+      ui_banner "git SITES"
       echo
-      gss
-      read -p "press any key to continue"
+      i=1
+      for site in ${sites[@]}
+      do
+        dir=$(dirname "$site")
+        cd $dir
+
+        title=$(sed -n -e 's/title: \(.*\)/\1/p' "$dir/config/site.yaml")
+
+        ui_banner  "$i $title"
+        echo "   ${dir}"
+        echo
+        gss
+        echo
+        ((i++))
+      done
+      read -n1 -p "press any key to continue"
       clear
       sites
       ;;
@@ -92,20 +110,6 @@ function sites_actions() {
       newhost)
         ~/.photon/sites/newhost.sh "$2" "$3"
         cd $SITESROOT/$2/user
-        ;;
-      status)
-        cd $SITESROOT
-        find . -maxdepth 1 -mindepth 1 \
-          ! -name "LOGS" \
-          ! -name ".archive" \
-          ! -name ".backup" \
-          ! -name "grav" \
-          -type d \
-          -exec sh -c '(echo {} && \
-            cd {}/user && \
-            sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml && \
-            git status -sb && \
-            echo)' \;
         ;;
       archive)
         cd $SITESROOT

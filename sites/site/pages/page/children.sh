@@ -15,15 +15,18 @@ function page_children() {
 
   for md in ${children[@]}
   do
-
     yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
     # yaml=$(cat $md | sed -n '/---/,/---/p')
     title=$( echo "$yaml" | sed -n -e 's/^title: \(.*\)/\1/p' )
     subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle: \(.*\)/\1/p' )
 
     ui_list_item_number $i "$title"
-    ui_list_item "$subtitle"
+    if [[ $subtitle ]]
+    then
+      ui_list_item "$subtitle"
+    fi
     ui_list_item "$md"
+
     ((i++))
   done
   echo
