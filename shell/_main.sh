@@ -16,7 +16,7 @@ function new_readme() {
 
   # if no second paramter for template - default to readme
   TEMPLATE=${1-"readme"}
-  echo "photon ✴ NEW $TEMPLATE"
+  ui_banner "photon ✴ NEW $TEMPLATE"
 
   # get details
   read -p "   TITLE: " TITLE
@@ -32,7 +32,13 @@ function new_readme() {
 }
 
 function todo() {
-  grep TODO -r --include="*.sh" .
+  grep TODO -rH \
+    --include="*.sh" \
+    --include="*.md" \
+    --exclude-from=".gitignore"  \
+    --exclude-dir=".atom" \
+    --exclude-dir="node_modules" \
+    .
   # grep TODO -rn --include="*.sh" --exclude-from=".gitignore"  ./init.sh
 
 }
