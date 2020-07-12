@@ -52,7 +52,7 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   Plugin 'airblade/vim-gitgutter'
 
-  Plugin 'ludovicchabant/vim-gutentags'
+  " Plugin 'ludovicchabant/vim-gutentags'
 
   Plugin 'sirver/ultisnips'
 

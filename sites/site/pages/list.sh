@@ -15,8 +15,12 @@ function search() {
    --exclude-dir="vendor" \
    --exclude-dir="node_modules" \
    --exclude-dir=".git" \
+   --exclude-dir=".git" \
+   --exclude="tags" \
    --exclude="*.min.js" \
+   --exclude="*.min.css" \
    --exclude="*.pack.js" \
+   --exclude="*.map" \
    --exclude="grav.index" \
    -- \
    "$search" \

@@ -3,6 +3,7 @@
 source ~/.photon/sites/site/actions.sh
 source ~/.photon/sites/site/pages/_main.sh
 source ~/.photon/sites/site/plugins/_main.sh
+source ~/.photon/sites/site/themes/_main.sh
 source ~/.photon/sites/site/siblings.sh
 source ~/.photon/sites/site/sync.sh
 

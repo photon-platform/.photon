@@ -3,7 +3,7 @@
 export PROJECT=".photon"
 export PROJECT_DIR="/home/phi/$"
 
-function search(){
+function search_old(){
   clear
   read -p "search files for: " search
   results=($(grep -rilE \

@@ -8,7 +8,7 @@
 .atom/nohup.out
 .atom/.atom-socket*
 .vim/bundle
-.netrwhist
+.vim/.netrwhist
 *.sw?
 .*.sw?
 tags

@@ -68,9 +68,7 @@ function site_actions() {
     t)
       cd themes
       clear
-      vf
-      clear
-      site
+      themes
       ;;
     c)
       cd config
