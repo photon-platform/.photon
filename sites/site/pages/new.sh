@@ -4,28 +4,66 @@ TEMPLATE_DIR=~/.photon/templates/
 
 function pages_new() {
 
-  echo "Select a template: "
+  clear
+  ui_banner "photon ✴ PAGE new"
+  h1 "Select a template: "
+
+  scaffold=$( scaffolds_select )
+
+  # clear
+  # ui_banner "photon ✴ PAGE new"
+  scaffold_name=`sed -n -e 's/% name: \(.*\)/\1/p' $scaffold`
+  h1 "$scaffold_name"
+  h2 "$scaffold"
   echo
 
-  template=$(fd -t f ".yaml$" $TEMPLATE_DIR | fzf)
+  scaffold_folder=`sed -n -e 's/% folder: \(.*\)/\1/p' $scaffold`
+  
+  scaffold_vars=( $( scaffold_vars $scaffold ) )
 
-  # breakdown filepath
-  filename=$(basename -- "$template")
-  extension="${filename##*.}"
-  name="${filename%.*}"
-  clear
-  ui_banner "photon ✴ NEW $name"
+  for v in ${scaffold_vars[@]}
+  do
+    eval "unset $v"
+  done
 
-  yaml="$(cat $template)"
+  # defs=( `sed -n -e 's/% def: \(.*\)/"\1"/p' $scaffold` )
+  mapfile -t defs < <(sed -n -e 's/% def: \(.*\)/\1/p' $scaffold)
+  # sed -n -e 's/% def: \(.*\)/"\1"/p' $scaffold | mapfile defs 
+  # for def in ${defs[@]}
+  for (( i = 0; i < ${#defs[@]}; i++))
+  do
+    # echo ${defs[i]}
+    eval export "${defs[i]}"
+  done
 
-  # set page title
-  title=$(echo "$yaml" | yq r - title )
-  title="$(ask_value "title" "$title" )"
-  # read -p "   title: " -i "$title" title
-  yaml="$(echo "$yaml" | yq w - title "$title")"
+  for v in ${scaffold_vars[@]}
+  do
+    value="$(ask_value "$v" "${!v}" )"
+    eval "export $v='$value'"
+  done
+
+  # envsubst < $scaffold
+  cat $scaffold | sed  -e '/^[%]/d' | envsubst 
 
   # get page folder name from title
   folder=$(slugify "$title")
+  if [[ $scaffold_folder=="date" ]]
+  then
+    folder="$(date +%Y-%m-%d --date "$post_date")-$folder"
+  fi
+
+  mkdir "$folder"
+
+  envsubst < $scaffold > $folder/test.md
+
+  for v in ${scaffold_vars[@]}
+  do
+      eval "unset $v"
+  done
+
+  return
+
+
 
   case $name in
     event)
@@ -63,7 +101,6 @@ function pages_new() {
       ;;
     post)
       postDate=$(ask_date "post date")
-      folder="$(date +%Y-%m-%d --date "$postDate")-$folder"
       yaml="$(echo "$yaml" | yq w - date "$postDate")"
 
       subtitle=$(echo "$yaml" | yq r - subtitle )
@@ -107,41 +144,4 @@ function pages_new() {
       echo "===" >> "$name.md"
 
   # vim $name.md
-}
-
-LABEL_WIDTH=15
-function get_label() {
-  printf "${fgYellow}%*s: ${txReset}" $LABEL_WIDTH "$1"
-}
-
-function ask_value() {
-  label=$(get_label "$1")
-  default="${2#null}"
-  read -p "$label" -e -i "$default"
-  echo "$REPLY"
-}
-
-function ask_date() {
-  label=$(get_label "$1")
-  read -p "$label" -i $(date +%m/%d/%Y) -e startDate
-  echo "$startDate"
-}
-
-function ask_truefalse() {
-  label=$(get_label "$1 [y/n]")
-  read -n1 -p "${label}"
-  case $REPLY in
-    y)
-      echo "true"
-      ;;
-    *)
-      echo "false"
-      ;;
-  esac
-}
-
-function update_markdown_yaml() {
-  clear
-  # cat event.md | sed "/---/,/---/c ---\n$yaml\n---\n"
-
 }
