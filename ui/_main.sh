@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
 
+source ~/.photon/ui/ask.sh
+
 fmt_child="${fgYellow}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
 fmt_child2="     %s\n"
 
