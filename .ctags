@@ -1,0 +1,8 @@
+--exclude=.git
+--exclude=.atom
+--exclude=**/vendor
+--exclude=**/node_modules
+--exclude=**/packages
+--exclude=**/grav
+--exclude=**min.js
+--exclude=**pack.js

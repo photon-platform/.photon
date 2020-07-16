@@ -3,7 +3,9 @@ set linebreak
 set foldmethod=manual
 nnoremap <leader>yc ggjV/---/<cr>kzf<cr>j:noh<cr>
 nnoremap <leader>yo ggjzo
-nnoremap <leader>t gg/title:/<cr>:noh<cr>2w
+nnoremap <leader>yt gg/title:/<cr>:noh<cr>2w
+nnoremap <leader>k k0/[:-]/<cr>:noh<cr>
+nnoremap <leader>j j0/[:-]/<cr>:noh<cr>
 
 set spell
 hi clear SpellBad

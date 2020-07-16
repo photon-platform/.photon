@@ -37,7 +37,7 @@ nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>t :BTags<cr>
+nnoremap <leader>bt :BTags<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
 
 
