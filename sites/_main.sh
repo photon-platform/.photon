@@ -11,7 +11,6 @@ fi
 # default org for github operations
 GITHUBORG="illumiphi"
 
-source ~/.photon/sites/_aliases.sh
 source ~/.photon/sites/list.sh
 source ~/.photon/sites/actions.sh
 source ~/.photon/sites/new.sh

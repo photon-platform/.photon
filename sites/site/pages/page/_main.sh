@@ -4,6 +4,8 @@ source ~/.photon/sites/site/pages/page/actions.sh
 source ~/.photon/sites/site/pages/page/siblings.sh
 source ~/.photon/sites/site/pages/page/children.sh
 
+function join_by { local IFS="$1"; shift; echo "$*"; }
+
 function page() {
 
   ui_banner "$PROJECT * PAGE "
@@ -16,6 +18,8 @@ function page() {
   if test -f $md;
   then
 
+    md_type=${md%.*}
+
     h2 $md
     h2 "$( date -Is -r ${md} )"
 
@@ -23,23 +27,20 @@ function page() {
     h2 "$((siblings_index + 1)) of $siblings_count"
     echo
 
-    yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
-    title=$( echo "$yaml" | sed -n -e 's/^title: \(.*\)/\1/p' )
-    subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle: \(.*\)/\1/p' )
+    markdown_yaml_get
+    eval "$(yaml_parse page)"
 
     if [[ $PAGESYAML == true ]]
     then
-      echo
       echo "$yaml"
-      echo
     else
-      h1 "$title"
-      h2 "$subtitle"
+      h1 "$page_title"
+      h2 "$page_subtitle"
 
-      case $name in
+      case $md_type in
         event)
-          startDate=$( echo "$yaml" | sed -n -e 's/.*startDate: \(.*\)/\1/p' )
-          h2 "$startDate"
+          # startDate=$( echo "$yaml" | sed -n -e 's/.*startDate: \(.*\)/\1/p' )
+          h2 "$page_data_event_startDate"
           ;;
         *)
           # h2 "$(yq_r "subtitle")"
@@ -58,8 +59,14 @@ function page() {
 
     echo
 
-    # h1 "$(yq_r "taxonomy.category")"
+    page_cats="$(join_by , "${page_taxonomy_category[@]}" )"
+    h2 "cat: ${page_cats}"
+
+    page_tags="$(join_by , "${page_taxonomy_tags[@]}" )"
+    h2 "tag: ${page_tags}"
     echo
+
+    unset -v  $( ( set -o posix ; set ) | grep page_ | sed -n 's/\(.*\)\=(.*/\1/p' )
 
     page_children
 

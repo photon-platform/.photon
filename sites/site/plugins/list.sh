@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 function plugins_list_dirs() {
-  find . -maxdepth 2 -mindepth 2 -name "blueprints.yaml" -type f | sort 
+  find . -maxdepth 2 -mindepth 2 -name "blueprints.yaml" -type f | sort
 }
 
 function plugins_list() {
