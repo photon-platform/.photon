@@ -6,16 +6,18 @@ source ~/.photon/sites/site/plugins/_main.sh
 source ~/.photon/sites/site/themes/_main.sh
 source ~/.photon/sites/site/siblings.sh
 source ~/.photon/sites/site/sync.sh
+source ~/.photon/sites/site/swatch.sh
 
 function site() {
   @
   source .photon
   # clear
   ui_banner "$PROJECT * SITE "
+  tab_title "$PROJECT * SITE "
 
   show_dir
 
-  h2 "$(sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml)"
+  h1 "$(sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml)"
   site_siblings
   h2 "$((siblings_index + 1)) of $siblings_count"
   echo
@@ -29,4 +31,6 @@ function site() {
   gsss
   echo
   site_actions
+
+  tab_title
 }

@@ -23,6 +23,7 @@ hi CursorLine   cterm=NONE ctermbg=232
 augroup CursorLine
    au!
    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+   au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
    au WinLeave * setlocal nocursorline
 augroup END
 
@@ -38,6 +39,7 @@ nnoremap <leader>p :bp<cr>
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>bt :BTags<cr>
+nnoremap <leader>tg :Tags<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
 
 
@@ -52,16 +54,17 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   Plugin 'airblade/vim-gitgutter'
 
-  " Plugin 'ludovicchabant/vim-gutentags'
+  Plugin 'ludovicchabant/vim-gutentags'
 
   Plugin 'sirver/ultisnips'
 
   Plugin 'godlygeek/tabular'
+  
   Plugin 'plasticboy/vim-markdown'
 
-  " Plugin 'cakebaker/scss-syntax.vim'
+  Plugin 'cakebaker/scss-syntax.vim'
   " Plugin 'hail2u/vim-css3-syntax'
-  Plugin 'beyondwords/vim-twig'
+  Plugin 'lumiliet/vim-twig'
 
   Plugin 'rstacruz/sparkup'
 
@@ -81,6 +84,8 @@ call vundle#begin()
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
 
+  " Plugin 'ycm-core/YouCompleteMe'
+
 
 call vundle#end()            " required
 
@@ -97,6 +102,8 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
 
 au Filetype markdown source ~/.vim/ftplugin/markdown.vim
+
+autocmd FileType scss set iskeyword+=-
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}

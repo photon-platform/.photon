@@ -113,3 +113,5 @@ export PS1
 PS2="\[${fgYellow}\]→ \[${reset}\]"
 export PS2
 
+title=${PWD} # current directory
+echo -n -e "\033]0;$title\007"

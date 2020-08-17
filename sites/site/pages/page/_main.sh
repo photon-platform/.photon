@@ -5,10 +5,16 @@ source ~/.photon/sites/site/pages/page/siblings.sh
 source ~/.photon/sites/site/pages/page/children.sh
 
 function join_by { local IFS="$1"; shift; echo "$*"; }
+function remove_quotes() {
+  temp="${1%\'}"
+  temp="${temp#\'}"
+  echo "$temp"
+}
 
 function page() {
 
   ui_banner "$PROJECT * PAGE "
+  tab_title "$PROJECT * PAGE "
 
   show_dir
 
@@ -20,32 +26,36 @@ function page() {
 
     md_type=${md%.*}
 
-    h2 $md
-    h2 "$( date -Is -r ${md} )"
+    h2 "$md - $( date '+%F %H:%M'  -r ${md} )"
 
     page_siblings
     h2 "$((siblings_index + 1)) of $siblings_count"
     echo
 
-    markdown_yaml_get
+    markdown_yaml_get $md
     eval "$(yaml_parse page)"
 
     if [[ $PAGESYAML == true ]]
     then
       echo "$yaml"
     else
-      h1 "$page_title"
+      h1 "$( remove_quotes "$page_title" )"
       h2 "$page_subtitle"
 
-      case $md_type in
-        event)
-          # startDate=$( echo "$yaml" | sed -n -e 's/.*startDate: \(.*\)/\1/p' )
-          h2 "$page_data_event_startDate"
-          ;;
-        *)
-          # h2 "$(yq_r "subtitle")"
-          ;;
-      esac
+      if [[ $page_data_event_startDate ]]
+      then
+        dt="$( remove_quotes "$page_data_event_startDate" )"
+        h2 "$(date '+%A, %B %d, %Y, %I:%M %p'   -d "$dt")"
+      fi
+
+      echo
+      page_cats="$(join_by , "${page_taxonomy_category[@]}" )"
+      h2 "cat: ${page_cats}"
+
+      page_tags="$(join_by , "${page_taxonomy_tag[@]}" )"
+      h2 "tag: ${page_tags}"
+      echo
+
     fi
 
     summary=$(tail -n +2 $md | sed -n -e '/^---$/,/^===$/{ /^---$/d; /^===$/d; p; }' | sed 's/^/ /')
@@ -59,13 +69,6 @@ function page() {
 
     echo
 
-    page_cats="$(join_by , "${page_taxonomy_category[@]}" )"
-    h2 "cat: ${page_cats}"
-
-    page_tags="$(join_by , "${page_taxonomy_tags[@]}" )"
-    h2 "tag: ${page_tags}"
-    echo
-
     unset -v  $( ( set -o posix ; set ) | grep page_ | sed -n 's/\(.*\)\=(.*/\1/p' )
 
     page_children
@@ -77,6 +80,7 @@ function page() {
     echo
     la
   fi
+  tab_title
 
 }
 

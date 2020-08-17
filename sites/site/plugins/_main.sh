@@ -14,6 +14,7 @@ function plugins() {
 
   clear
   ui_banner "$PROJECT * PLUGINS"
+  tab_title "$PROJECT * PLUGINS"
   show_dir
 
   gsss
@@ -21,6 +22,7 @@ function plugins() {
   plugins_list
 
   plugins_actions
+  tab_title
 
 }
 

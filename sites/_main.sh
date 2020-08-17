@@ -26,6 +26,8 @@ function sites() {
 
   cd $SITESROOT
 
+  tab_title SITES
+  
   clear
   ui_banner SITES
   echo
@@ -33,6 +35,9 @@ function sites() {
   sites_list
 
   sites_actions
+
+  tab_title
+
 }
 
 function githuborg_set() {

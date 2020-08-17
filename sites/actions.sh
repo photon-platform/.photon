@@ -14,38 +14,13 @@ function sites_actions() {
       echo
       sites_actions
       ;;
-    q)
-      clear
-      echo "exiting SITES"
-      echo "type "sites" to reeneter"
-      ;;
-    /)
-      search
-      clear
-      sites
-      ;;
-    r)
-      ranger
-      sites_actions
-      ;;
-    d)
-      clear
-      echo
-      ls -hA
-      echo
-      sites_actions
-      ;;
-    h)
-      cd ..
-      clear
-      la
-      ;;
-    j)
-      sites
-      ;;
-    k)
-      sites
-      ;;
+    q) clear; ;;
+    /) search; clear; sites ;;
+    r) ranger; sites_actions ;;
+    d) clear; echo; ls -hA; echo; sites_actions ;;
+    h) cd ..; clear; la; ;;
+    j) sites; ;;
+    k) sites; ;;
     [1-9]*)
       dir="$(dirname ${sites[((action-1))]})"
       echo

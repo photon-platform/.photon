@@ -7,34 +7,11 @@ function plugin_actions() {
 
   read -n1  action
   case $action in
-    q)
-      clear
-      echo "exiting plugin"
-      echo "type "plugin" to reeneter"
-      ;;
-    /)
-      search
-      clear
-      plugin
-      ;;
-    r)
-      ranger
-      clear
-      plugin
-      ;;
-    d)
-      clear
-      echo
-      ls -hA
-      echo
-      plugin
-      ;;
-    h)
-      # if parent equals plugins call plugins
-      cd ..
-      clear
-      plugins
-      ;;
+    q) clear; ;;
+    /) search; clear; plugin; ;;
+    r) ranger; clear; plugin; ;;
+    d) clear; echo; ls -hA; echo; plugin; ;;
+    h) cd ..; clear; plugins; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
       if [[ -d "$next" ]]
@@ -53,14 +30,8 @@ function plugin_actions() {
       clear
       plugin
       ;;
-    g)
-      echo
-      # read -p "Enter child number: " -e num
-      # cd "${dirs[(($num-1))]}"
-      zd
-      clear
-      plugin
-      ;;
+    f) vf; clear; plugin; ;;
+    g) zd; clear; plugin; ;;
     G)
       clear
       echo

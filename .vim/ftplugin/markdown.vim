@@ -1,11 +1,24 @@
 set wrap
 set linebreak
 set foldmethod=manual
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 nnoremap <leader>yc ggjV/---/<cr>kzf<cr>j:noh<cr>
 nnoremap <leader>yo ggjzo
 nnoremap <leader>yt gg/title:/<cr>:noh<cr>2w
 nnoremap <leader>k k0/[:-]/<cr>:noh<cr>
 nnoremap <leader>j j0/[:-]/<cr>:noh<cr>
+
+nnoremap <leader>0 0:s/[#]*\s*//<cr>:noh<cr>
+nnoremap <leader>1 0:s/[#]*\s*/# /<cr>:noh<cr>
+nnoremap <leader>2 0:s/[#]*\s*/## /<cr>:noh<cr>
+nnoremap <leader>3 0:s/[#]*\s*/### /<cr>:noh<cr>
+nnoremap <leader>4 0:s/[#]*\s*/#### /<cr>:noh<cr>
+nnoremap <leader>5 0:s/[#]*\s*/##### /<cr>:noh<cr>
+nnoremap <leader>6 0:s/[#]*\s*/###### /<cr>:noh<cr>
 
 set spell
 hi clear SpellBad

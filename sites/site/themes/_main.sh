@@ -14,6 +14,8 @@ function themes() {
 
   clear
   ui_banner "$PROJECT * THEMES"
+  tab_title "$PROJECT * THEMES"
+
   show_dir
 
   gsss
@@ -22,5 +24,5 @@ function themes() {
 
   themes_actions
 
+  tab_title
 }
-

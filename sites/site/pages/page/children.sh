@@ -41,3 +41,58 @@ function test_list_nullsep() {
   unset IFS
   echo ${children[@]}
 }
+
+
+function page_children_renumber() {
+  ui_banner "renumber children:"
+
+  i=1
+  dirs=()
+
+  children=( $(page_children_dirs) )
+  children_count=${#children[@]}
+
+  for f in ${children[@]}; do
+    dir=$(dirname "$f")
+    dirs+=( $dir )
+
+    dname=$(basename -- "$dir")
+    name="${dname#*.}"
+    num="${dname%%.*}"
+
+    if [[ "$num" =~ ^[0-9]+$ ]]; then
+      printf -v newnum "%02d" $i
+      ui_list_item_number $i "$newnum $name"
+      ui_list_item  "$dname"
+    else
+      echo "not a numbered folder"
+    fi
+    ((i++))
+  done
+  echo
+
+  ask=$(ask_truefalse "continue")
+  echo
+  if [[ $ask == "true" ]]; then
+    for (( i = $(( ${#children[@]}-1 )); i>= 0; i-- )); do
+      f=${children[$i]}
+      dir=$(dirname "$f")
+      dname=$(basename -- "$dir")
+      name="${dname#*.}"
+      num="${dname%%.*}"
+      if [[ "$num" =~ ^[0-9]+$ ]]; then
+        printf -v newnum "%02d" $(( i + 1 ))
+        newdname="$newnum.$name"
+        ui_list_item_number $i "$newdname"
+        ui_list_item  "$dname"
+        if [[ "$dname" != "$newdname" ]]; then
+          mv -n "$dname" "$newdname"
+        fi
+      else
+        echo "not a numbered folder"
+      fi
+    done
+    ask=$(ask_truefalse "any key continue")
+    echo
+  fi
+}

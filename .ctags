@@ -1,5 +1,6 @@
 --exclude=.git
 --exclude=.atom
+--exclude=.vim/bundle
 --exclude=**/vendor
 --exclude=**/node_modules
 --exclude=**/packages

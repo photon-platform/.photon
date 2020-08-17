@@ -2,8 +2,8 @@
 
 
 # set account
-git config --global user.name "i-am-phi"
-git config --global user.email "illumiphi@gmail.com"
+git config --global user.name "phi-architect"
+git config --global user.email "phi@phiarchitect.com"
 
 
 git config --global credential.helper cache

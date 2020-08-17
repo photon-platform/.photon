@@ -10,6 +10,7 @@ alias fd="fdfind"
 
 alias inmotion="ssh illumiphi.com"
 
+alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; clear; site;"
 alias g="git"
 
 alias gdl="cd ~/Downloads;ls -1Ahst | head"
@@ -33,6 +34,8 @@ alias val="vim ~/.photon/.aliases"
 alias vfc="vim ~/.photon/.functions"
 alias vrang="vim ~/.config/ranger/rc.conf"
 
+alias sk_on="screenkey --scr 1 -p fixed  -s small -g 777x57+2241+1460"
+alias sk_off="pkill -f screenkey"
 
 alias src="source ~/.bashrc"
 

@@ -5,6 +5,7 @@ source ~/.photon/sites/site/plugins/plugin/siblings.sh
 
 function plugin() {
   ui_banner "$PROJECT * PLUGIN "
+  tab_title "$PROJECT * PLUGIN "
 
   show_dir
   plugin_siblings
@@ -14,4 +15,5 @@ function plugin() {
 
   gsss
   plugin_actions
+  tab_title
 }

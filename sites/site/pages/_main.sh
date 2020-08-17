@@ -5,6 +5,7 @@ source ~/.photon/sites/site/pages/new.sh
 source ~/.photon/sites/site/pages/actions.sh
 source ~/.photon/sites/site/pages/sort.sh
 source ~/.photon/sites/site/pages/scaffolds.sh
+source ~/.photon/sites/site/pages/taxonomy.sh
 source ~/.photon/sites/site/pages/page/_main.sh
 
 function pages() {
@@ -14,6 +15,8 @@ function pages() {
   cd pages
 
   ui_banner "$PROJECT * PAGES"
+  tab_title "$PROJECT * PAGES"
+
   show_dir
 
   gsss
@@ -23,4 +26,5 @@ function pages() {
 
   pages_actions
 
+  tab_title
 }

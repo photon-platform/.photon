@@ -5,56 +5,23 @@ function pages_actions() {
   # TODO: show all menu options on '?'
   ui_banner "PAGES actions: "
 
-  read -n1  action
+  read -s -n1  action
   case $action in
-    q)
-      clear
-      echo "exiting PAGES"
-      echo "type "pages" to reeneter"
-      ;;
-    t)
-      tre
-      clear
-      pages
-      ;;
-    /)
-      search
-      clear
-      pages
-      ;;
-    d)
-      clear
-      echo
-      ls -hA
-      echo
-      pages_actions
-      ;;
-    h)
-      cd ..
-      clear
-      site
-      ;;
-    j)
-      clear
-      plugins
-      ;;
-    k)
-      clear
-      plugins
-      ;;
+    q) clear; ;;
+    t) tree; pages_actions; ;;
+    /) search; clear; pages; ;;
+    r) ranger; clear; pages; ;;
+    d) la; echo; pages_actions; ;;
+    h) cd ..; clear; site; ;;
+    j) clear; plugins; ;;
+    k) clear; plugins; ;;
     [1-9]*)
       cd $(dirname ${children[$((action - 1))]})
       clear
       page
       ;;
-    g)
-      echo
-      # read -p "Enter child number: " -e num
-      # cd "${dirs[(($num-1))]}"
-      zd
-      clear
-      page
-      ;;
+    f) vf; clear; pages; ;;
+    g) zd; clear; page; ;;
     G)
       clear
       echo
@@ -68,19 +35,13 @@ function pages_actions() {
       clear
       pages
       ;;
-    r)
+    b)
       clear
-      renumber_children_list
-      clear
+      page_children_renumber
       clear
       pages
       ;;
-    n)
-      clear
-      pages_new
-      clear
-      page
-      ;;
+    n) clear; pages_new; clear; page; ;;
     *)
       clear
       pages

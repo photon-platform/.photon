@@ -2,6 +2,6 @@
 
 function markdown_yaml_get() {
 
-  yaml=$(cat $md | sed -n '/---/,/---/p')
+  export yaml=$(cat $1 | sed -n '/---/,/---/p')
 
 }

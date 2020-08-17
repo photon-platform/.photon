@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 
+source ~/.photon/ui/color.sh
 source ~/.photon/ui/ask.sh
 
 fmt_child="${fgYellow}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
@@ -36,4 +37,14 @@ function ui_list_item_number() {
 
 function ui_display_numbered_list() {
   echo
+}
+
+function tab_title {
+  if [ -z "$1" ]
+  then
+    title=${PWD} # current directory
+  else
+    title=$1 # first param
+  fi
+  echo -n -e "\033]0;$title\007"
 }

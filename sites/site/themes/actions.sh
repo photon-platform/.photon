@@ -7,57 +7,21 @@ function themes_actions() {
 
   read -n1  action
   case $action in
-    q)
-      clear
-      echo "exiting themeS"
-      echo "type "themes" to reeneter"
-      ;;
-    /)
-      search
-      clear
-      themes
-      ;;
-    r)
-      ranger
-      clear
-      themes
-      ;;
-    d)
-      clear
-      echo
-      la
-      echo
-      themes_actions
-      ;;
-    h)
-      # nav up
-      clear
-      site
-      ;;
-    j)
-      cd ../pages
-      clear
-      pages
-      ;;
-    k)
-      cd ../pages
-      clear
-      pages
-      ;;
+    q) clear; ;; # quit
+    /) search; clear; themes; ;;
+    r) ranger; clear; themes; ;;
+    d) clear; echo; la; echo; themes_actions; ;;
+    h) clear; site; ;;
+    j) cd ../pages; clear; pages; ;;
+    k) cd ../pages; clear; pages; ;;
     [1-9]*)
       cd "$( dirname ${list[(($action-1))]} )"
       # read
       clear
       theme
       ;;
-    g)
-      echo
-      # read -p "Enter child number: " -e num
-      # cd "${dirs[(($num-1))]}"
-      zd
-      clear
-      theme
-      ;;
+    f) vf; clear; themes;;
+    g) zd; ranger ;;
     G)
       clear
       echo

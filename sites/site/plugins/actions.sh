@@ -7,57 +7,21 @@ function plugins_actions() {
 
   read -n1  action
   case $action in
-    q)
-      clear
-      echo "exiting PLUGINS"
-      echo "type "plugins" to reeneter"
-      ;;
-    /)
-      search
-      clear
-      plugins
-      ;;
-    r)
-      ranger
-      clear
-      plugins
-      ;;
-    d)
-      clear
-      echo
-      la
-      echo
-      plugins_actions
-      ;;
-    h)
-      # nav up
-      clear
-      site
-      ;;
-    j)
-      cd ../pages
-      clear
-      pages
-      ;;
-    k)
-      cd ../pages
-      clear
-      pages
-      ;;
+    q) clear; ;;
+    /) search; clear; plugins; ;;
+    r) ranger; clear; plugins; ;;
+    d) clear; echo; la; echo; plugins_actions; ;;
+    h) clear; site; ;;
+    j) cd ../pages; clear; pages; ;;
+    k) cd ../themes; clear; themes; ;;
     [1-9]*)
       cd "$( dirname ${list[(($action-1))]} )"
       # read
       clear
       plugin
       ;;
-    g)
-      echo
-      # read -p "Enter child number: " -e num
-      # cd "${dirs[(($num-1))]}"
-      zd
-      clear
-      plugin
-      ;;
+    f) vf; clear; plugins;;
+    g) zd; clear; ranger ;;
     G)
       clear
       echo
@@ -117,32 +81,4 @@ function plugins_actions() {
       ;;
   esac
 
-  if [ $1 ]
-  then
-    case $1 in
-
-      new)
-        ;;
-
-      create)
-        ;;
-
-      restore)
-        # initialize a submodule
-        ;;
-
-
-      *)
-        # jump to plugin
-        cd "$PLUGINS_DIR/photon-$1"
-        head -n 2 blueprints.yaml
-        echo
-        git status -sb .
-        ;;
-
-    esac
-  else
-    cd $PLUGINS_DIR
-    git status -sb .
-  fi
 }

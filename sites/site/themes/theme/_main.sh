@@ -5,6 +5,7 @@ source ~/.photon/sites/site/themes/theme/siblings.sh
 
 function theme() {
   ui_banner "$PROJECT * theme "
+  tab_title "$PROJECT * theme "
 
   show_dir
   theme_siblings
@@ -14,4 +15,5 @@ function theme() {
 
   gsss
   theme_actions
+  tab_title
 }

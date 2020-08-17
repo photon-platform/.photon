@@ -30,3 +30,11 @@ function scaffolds_keys ()
 function scaffold_vars() {
   sed -n -e 's/.*\${\(.*\)}.*/\1/p' $1
 }
+
+function scaffold_edit() {
+  v $( scaffolds_select )
+}
+
+function scaffold_edit_all() {
+  v $( scaffolds_list )
+}

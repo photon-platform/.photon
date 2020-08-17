@@ -14,11 +14,10 @@ function site_actions() {
 
   read -n1  action
   case $action in
-    q)
-      clear
-      echo "exiting SITE"
-      echo "type "site" to reeneter"
-      ;;
+    q) clear; ;;
+    r) ranger; clear; site; ;;
+    f) vf; clear; site;;
+    g) zd; ranger; ;;
     x)
       clear
       ui_banner "Site DELETE"
@@ -55,64 +54,18 @@ function site_actions() {
       done
       site
       ;;
-    p)
-      cd pages
-      clear
-      pages
-      ;;
-    u)
-      cd plugins
-      clear
-      plugins
-      ;;
-    t)
-      cd themes
-      clear
-      themes
-      ;;
-    c)
-      cd config
-      clear
-      vf
-      clear
-      site
-      ;;
-    e)
-      vim README.md
-      clear
-      site
-      ;;
-    l)
-      vim CHANGELOG.md
-      clear
-      site
-      ;;
-    .)
-      vim .photon
-      clear
-      site
-      ;;
+    p) cd pages; clear; pages; ;;
+    u) cd plugins; clear; plugins; ;;
+    t) cd themes; clear; themes; ;;
+    c) cd config; clear; vf; clear; site; ;;
+    e) vim README.md; clear; site; ;;
+    l) vim CHANGELOG.md; clear; site; ;;
+    .) vim .photon; clear; site; ;;
 
-    t)
-      tre 
-      clear
-      site
-      ;;
-    /)
-      search
-      clear
-      site
-      ;;
-    d)
-      echo
-      ls -hA
-      echo
-      site_actions
-      ;;
-    h)
-      clear
-      sites
-      ;;
+    t) tre ; clear; site; ;;
+    /) search; clear; site; ;;
+    d) echo; la; echo; site_actions; ;;
+    h) clear; sites; ;;
     j)
       next=$( dirname "${siblings[$((siblings_index + 1))]}" )
       echo $next
@@ -147,6 +100,7 @@ function site_actions() {
       clear
       site
       ;;
+    w) clear; swatch; ;;
     *)
       echo
       echo "not a command"

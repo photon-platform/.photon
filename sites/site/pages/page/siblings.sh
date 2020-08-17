@@ -2,8 +2,8 @@
 
 
 function page_siblings_dirs() {
-  parent_dir=$(dirname "$(pwd)") 
-  find $parent_dir -maxdepth 2 -mindepth 2 -name "*.md" -type f | sort 
+  parent_dir=$(dirname "$(pwd)")
+  find $parent_dir -maxdepth 2 -mindepth 2 -name "*.md" -type f | sort
 }
 
 function page_siblings() {
@@ -12,9 +12,9 @@ function page_siblings() {
   siblings_count=${#siblings[@]}
 
   i=0
-  for sib in ${siblings[@]}
+  for sib_md in ${siblings[@]}
   do
-    if [[ $(dirname "$sib") == $(pwd) ]]
+    if [[ $(dirname "$sib_md") == $(pwd) ]]
     then
       siblings_index=$i
     fi
@@ -24,30 +24,36 @@ function page_siblings() {
 }
 
 function page_siblings_move() {
-  ui_banner "move page within siblings"
+  ui_banner "Move page within siblings"
+
+  h1 "$(dirname $(pwd))"
+  echo
 
   i=0
   index=0
-  for sib in ${siblings[@]}
+
+  siblings=( $(page_siblings_dirs) )
+  siblings_count=${#siblings[@]}
+
+  for sib_md in ${siblings[@]}
   do
     current=""
 
-    if [[ $sib == $(pwd) ]]
+    if [[ $(dirname "$sib_md") == $(pwd) ]]
     then
       index=$i
-      # echo $sib
+      # echo $sib_md
       current=$fgRed
     fi
     ((i++))
 
-    mds=(${sib}/*.md)
-    md=${mds[0]}
-    if test -f $md;
+    if test -f $sib_md;
     then
-      yaml=$(cat $md | sed -n '/---/,/---/p')
+      yaml=$(cat $sib_md | sed -n '/---/,/---/p')
       title=$(echo "$yaml" | yq r - title )
       printf "$fmt_child" $i "$current$title"
-      printf "$fmt_child2" "$sib"
+      # printf "$fmt_child2" "$sib_md"
+      printf "$fmt_child2" "$(basename $(dirname ${sib_md}))"
     else
       printf "$fmt_child" $i "no page"
     fi
@@ -63,12 +69,12 @@ function page_siblings_move() {
       echo "move down"
       echo "swap: "
 
-      fromDir=$(basename -- ${siblings[index]})
+      fromDir=$(basename $(dirname ${siblings[index]}))
       echo $fromDir
       num1="${fromDir%.*}"
       name1="${fromDir#*.}"
 
-      toDir=$(basename -- ${siblings[$((index + 1))]})
+      toDir=$(basename $(dirname ${siblings[$((index + 1))]}))
       echo $toDir
       num2="${toDir%.*}"
       name2="${toDir#*.}"
@@ -85,12 +91,12 @@ function page_siblings_move() {
       echo "move up"
       echo "swap: "
 
-      fromDir=$(basename -- ${siblings[index]})
+      fromDir=$(basename $(dirname ${siblings[index]}))
       echo $fromDir
       num1="${fromDir%.*}"
       name1="${fromDir#*.}"
 
-      toDir=$(basename -- ${siblings[$((index - 1))]})
+      toDir=$(basename $(dirname ${siblings[$((index - 1))]}))
       echo $toDir
       num2="${toDir%.*}"
       name2="${toDir#*.}"

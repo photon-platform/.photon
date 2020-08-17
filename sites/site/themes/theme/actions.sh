@@ -7,34 +7,11 @@ function theme_actions() {
 
   read -n1  action
   case $action in
-    q)
-      clear
-      echo "exiting theme"
-      echo "type "theme" to reeneter"
-      ;;
-    /)
-      search
-      clear
-      theme
-      ;;
-    r)
-      ranger
-      clear
-      theme
-      ;;
-    d)
-      clear
-      echo
-      ls -hA
-      echo
-      theme
-      ;;
-    h)
-      # if parent equals themes call themes
-      cd ..
-      clear
-      themes
-      ;;
+    q) clear; ;;
+    /) search; clear; theme; ;;
+    r) ranger; clear; theme; ;;
+    d) clear; echo; ls -hA; echo; theme; ;;
+    h) cd ..; clear; themes; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
       if [[ -d "$next" ]]
@@ -53,14 +30,8 @@ function theme_actions() {
       clear
       theme
       ;;
-    g)
-      echo
-      # read -p "Enter child number: " -e num
-      # cd "${dirs[(($num-1))]}"
-      zd
-      clear
-      theme
-      ;;
+    f) vf; clear; theme; ;;
+    g) zd; clear; theme; ;;
     G)
       clear
       echo
