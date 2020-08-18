@@ -8,11 +8,11 @@ function tools_git_actions() {
   read -n1  action
   case $action in
     q) clear; ;; # quit
-    a) git add .; read -p "enter to continue"; tools_git  ;;
-    c) git commit; read -p "enter to continue"; tools_git  ;;
-    p) git push; read -p "enter to continue"; tools_git  ;;
-    f) gsub fetch; read -p "enter to continue"; tools_git  ;;
-    b) gsub update; read -p "enter to continue"; tools_git  ;;
+    a) git add .;  tools_git  ;;
+    c) git commit;  tools_git  ;;
+    p) git push;  tools_git  ;;
+    f) gsub fetch;  tools_git  ;;
+    b) gsub update;  tools_git  ;;
     *)
       clear
       tools_git

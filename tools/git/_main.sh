@@ -10,10 +10,15 @@ function tools_git() {
   ui_banner "tools * GRAV"
   tab_title "tools * GRAV"
 
+  pwd
+  echo
   gss
+
+  echo
 
   tools_git_actions
 
+  tab_title "$PWD"
 }
 
 alias g-root='cd $(git rev-parse --show-toplevel)'
