@@ -2,8 +2,8 @@
 
 source ~/.photon/tools/yaml.sh
 source ~/.photon/tools/markdown.sh
-source ~/.photon/tools/git.sh
 source ~/.photon/tools/palette.sh
+source ~/.photon/tools/git/_main.sh
 
 function show_dir() {
 
