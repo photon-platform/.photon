@@ -89,6 +89,9 @@ init/remove-default-apps.sh
 # title "thunderbird"
 # init/thunderbird.sh
 
+title "neomutt"
+init/neomutt.sh
+
 
 # title "graphics"
 # init/graphics.sh
