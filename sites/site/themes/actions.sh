@@ -23,15 +23,7 @@ function themes_actions() {
     f) vf; clear; themes;;
     g) zd; ranger ;;
     G)
-      clear
-      echo
-      gss
-      read -p "Add and commit this branch [y]:  " -e commit
-      if [[ $commit == "y" ]]; then
-        gacp
-        echo
-        read -p "press any key to continue"
-      fi
+      tools_git
       clear
       themes
       ;;

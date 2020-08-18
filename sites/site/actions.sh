@@ -86,17 +86,14 @@ function site_actions() {
       clear
       site
       ;;
-    G)
+    V)
       clear
-      echo
-      gss
-      echo
-      read -p "Add and commit this folder [y]:  " -e commit
-      if [[ $commit == "y" ]]; then
-        gacp
-        echo
-        read -n1 -p "press any key to continue"
-      fi
+      tools_grav
+      clear
+      site
+      ;;
+    G)
+      tools_git
       clear
       site
       ;;

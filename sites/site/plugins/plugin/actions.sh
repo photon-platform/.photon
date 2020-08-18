@@ -33,15 +33,7 @@ function plugin_actions() {
     f) vf; clear; plugin; ;;
     g) zd; clear; plugin; ;;
     G)
-      clear
-      echo
-      gss
-      read -p "Add and commit this branch [y]:  " -e commit
-      if [[ $commit == "y" ]]; then
-        gacp
-        echo
-        read -p "press any key to continue"
-      fi
+      tools_git
       clear
       plugin
       ;;

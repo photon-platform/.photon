@@ -33,15 +33,7 @@ function theme_actions() {
     f) vf; clear; theme; ;;
     g) zd; clear; theme; ;;
     G)
-      clear
-      echo
-      gss
-      read -p "Add and commit this branch [y]:  " -e commit
-      if [[ $commit == "y" ]]; then
-        gacp
-        echo
-        read -p "press any key to continue"
-      fi
+      tools_git
       clear
       theme
       ;;
