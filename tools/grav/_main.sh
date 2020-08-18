@@ -2,6 +2,8 @@
 
 source ~/.photon/tools/grav/actions.sh
 
+alias V=tools_grav
+
 function tools_grav() {
   @
   source .photon

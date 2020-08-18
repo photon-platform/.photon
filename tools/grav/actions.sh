@@ -3,7 +3,7 @@
 function tools_grav_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "grav actions: "
+  ui_banner "grav actions: q c-clearcache u-updateplugins l-clean"
 
   read -n1  action
   case $action in

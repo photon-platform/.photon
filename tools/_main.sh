@@ -4,6 +4,7 @@ source ~/.photon/tools/yaml.sh
 source ~/.photon/tools/markdown.sh
 source ~/.photon/tools/palette.sh
 source ~/.photon/tools/git/_main.sh
+source ~/.photon/tools/grav/_main.sh
 
 function show_dir() {
 
