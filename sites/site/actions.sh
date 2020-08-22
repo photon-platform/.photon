@@ -17,7 +17,7 @@ function site_actions() {
     q) clear; ;;
     r) ranger; clear; site; ;;
     f) vf; clear; site;;
-    g) zd; ranger; ;;
+    g) zd; clear; ;;
     x)
       clear
       ui_banner "Site DELETE"

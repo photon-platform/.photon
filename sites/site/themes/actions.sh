@@ -21,7 +21,7 @@ function themes_actions() {
       theme
       ;;
     f) vf; clear; themes;;
-    g) zd; ranger ;;
+    g) zd; clear ;;
     G)
       tools_git
       clear

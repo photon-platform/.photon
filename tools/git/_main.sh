@@ -7,8 +7,8 @@ alias G=tools_git
 function tools_git() {
 
   clear
-  ui_banner "tools * GRAV"
-  tab_title "tools * GRAV"
+  ui_banner "tools * GIT"
+  tab_title "tools * GIT"
 
   pwd
   echo

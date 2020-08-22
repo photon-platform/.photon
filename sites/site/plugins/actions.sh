@@ -21,7 +21,7 @@ function plugins_actions() {
       plugin
       ;;
     f) vf; clear; plugins;;
-    g) zd; clear; ranger ;;
+    g) zd; clear; plugin ;;
     G)
       tools_git
       clear

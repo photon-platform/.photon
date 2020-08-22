@@ -11,6 +11,7 @@ function tools_git_actions() {
     a) echo; git add .;  tools_git  ;;
     c) echo; git commit;  tools_git  ;;
     p) echo; git push; echo; read -p "enter to continue: ";  tools_git  ;;
+    u) echo; git pull --recurse-submodules; echo; read -p "enter to continue: ";  tools_git  ;;
     f) echo; gsub fetch; echo; read -p "enter to continue: " ;  tools_git  ;;
     b) echo; gsub update; echo; read -p "enter to continue: " ;  tools_git  ;;
     *)
