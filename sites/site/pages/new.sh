@@ -10,8 +10,10 @@ function pages_new() {
 
   scaffold=$( scaffolds_select )
 
-  # clear
-  # ui_banner "photon ✴ PAGE new"
+  clear
+  ui_banner "photon ✴ PAGE new"
+  ncal -3
+  echo
   scaffold_name=`sed -n -e 's/% name: \(.*\)/\1/p' $scaffold`
   h1 "$scaffold_name"
   h2 "$scaffold"

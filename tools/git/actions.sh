@@ -3,11 +3,12 @@
 function tools_git_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "git actions: q a c p u f b"
+  ui_banner "git actions: q d a c p u f b"
 
   read -n1  action
   case $action in
     q) clear; ;; # quit
+    d) echo; git diff . ; echo; read -p "enter to continue: ";  tools_git  ;;
     a) echo; git add .;  tools_git  ;;
     c) echo; git commit;  tools_git  ;;
     p) echo; git push; echo; read -p "enter to continue: ";  tools_git  ;;

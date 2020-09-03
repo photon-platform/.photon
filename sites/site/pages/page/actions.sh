@@ -64,6 +64,12 @@ function page_actions() {
       clear
       page
       ;;
+    0)
+      last=$(( ${#children[@]} - 1 ))
+      cd $(dirname ${children[ last ]})
+      clear
+      page
+      ;;
     G)
       tools_git
       clear

@@ -20,6 +20,12 @@ function pages_actions() {
       clear
       page
       ;;
+    0)
+      last=$(( ${#children[@]} - 1 ))
+      cd $(dirname ${children[ last ]})
+      clear
+      page
+      ;;
     f) vf; clear; pages; ;;
     g) zd; clear; page; ;;
     G)

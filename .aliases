@@ -11,7 +11,7 @@ alias fd="fdfind"
 alias inmotion="ssh illumiphi.com"
 
 alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; clear; site;"
-alias g="git"
+alias presence="cd ~/SITES/presence/user; clear; site;"
 
 alias gdl="cd ~/Downloads;ls -1Ahst | head"
 
