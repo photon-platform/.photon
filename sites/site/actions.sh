@@ -77,11 +77,13 @@ function site_actions() {
       site
       ;;
     k)
-      prev=$( dirname "${siblings[$((siblings_index - 1))]}" )
-      echo $prev
-      if [[ -d "$prev" ]]
-      then
-        cd ${prev}
+      if [[ $siblings_index > 0 ]]; then
+        prev=$( dirname "${siblings[$((siblings_index - 1))]}" )
+        echo $prev
+        if [[ -d "$prev" ]]
+        then
+          cd ${prev}
+        fi
       fi
       clear
       site

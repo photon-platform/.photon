@@ -20,8 +20,6 @@ function sites_restore() {
 
     START_TIME="$(date -u +%s)"
 
-    # CLONE=starter
-
     sudo pwd
 
     echo
@@ -41,10 +39,6 @@ function sites_restore() {
       git checkout master; \
       git status -sb; \
       echo"
-
-    # echo
-    # echo "✴ set accounts"
-    # cp $SITESROOT/$CLONE/user/accounts/*.yaml accounts/
 
     if [[ $ISLOCAL = true ]]
     then

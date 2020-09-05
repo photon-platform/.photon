@@ -23,11 +23,13 @@ function sites_actions() {
     k) sites; ;;
     [1-9]*)
       dir="$(dirname ${sites[((action-1))]})"
-      echo
-      echo $dir
       cd $dir
-      pwd
-      # read -n1 -p "any key to continue..."
+      clear
+      site
+      ;;
+    0)
+      last=$(( ${#sites[@]} - 1 ))
+      cd $(dirname ${sites[ last ]})
       clear
       site
       ;;
