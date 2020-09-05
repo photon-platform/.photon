@@ -27,7 +27,7 @@ function sites_new() {
 
     START_TIME="$(date -u +%s)"
 
-    CLONE=starter
+    CLONE=starter.photon-platform.net
 
     sudo pwd
 
