@@ -14,7 +14,7 @@ function tools_grav() {
   tab_title "$PROJECT * GRAV"
 
   echo
-  bin/gpm version
+  bin/grav -V
   echo
 
   tools_grav_actions

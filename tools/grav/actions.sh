@@ -3,17 +3,17 @@
 function tools_grav_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "grav actions: q c-clearcache u-updateplugins l-clean"
+  ui_banner "grav actions: q v-grav u-plugins c-cache l-clean t-tntsearch"
 
   read -n1  action
   case $action in
     q) clear; ;; # quit
-    c) bin/grav clearcache; read -p "enter to continue";  ;;
-    u) bin/gpm update; read -p "enter to continue";  ;;
-    l) bin/grav clean; read -p "enter to continue";  ;;
-    *)
-      clear
-      ;;
+    v) bin/gpm self-upgrade; echo; tools_grav_actions; ;;
+    u) bin/gpm update; bin/grav clean; echo; tools_grav_actions; ;;
+    c) bin/grav clearcache; echo; tools_grav_actions; ;;
+    l) bin/grav clean; echo; tools_grav_actions; ;;
+    t) bin/plugin tntsearch index; echo; tools_grav_actions; ;;
+    *) echo; echo "not a command"; tools_grav_actions; ;;
   esac
 
 }
