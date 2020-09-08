@@ -5,12 +5,13 @@ SOURCES+=(.path)
 SOURCES+=(.exports)
 SOURCES+=(.aliases)
 SOURCES+=(.functions)
-SOURCES+=(.prompt)
 SOURCES+=(ui/_main.sh)
+SOURCES+=(tools/_main.sh)
 SOURCES+=(shell/_main.sh)
 SOURCES+=(hosts/_main.sh)
 SOURCES+=(sites/_main.sh)
-SOURCES+=(tools/_main.sh)
+# prompt should be last
+SOURCES+=(.prompt)
 
 for file in  ${SOURCES[@]}
 do
@@ -37,7 +38,6 @@ shopt -s cdspell
 #determines search program for fzf
 if type ag &> /dev/null; then
     export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
-    # export FZF_DEFAULT_COMMAND='ag'
 fi
 
 # Enable some Bash 4 features when possible:
@@ -48,5 +48,5 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
+# [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
