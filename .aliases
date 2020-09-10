@@ -12,6 +12,7 @@ alias inmotion="ssh illumiphi.com"
 
 alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; clear; site;"
 alias presence="cd ~/SITES/presence/user; clear; site;"
+alias photon="cd ~/SITES/photon-platform.net/user; clear; site;"
 
 alias gdl="cd ~/Downloads;ls -1Ahst | head"
 
