@@ -2,7 +2,17 @@
 
 source ~/.photon/tools/git/actions.sh
 
-alias G=tools_git
+alias g-root='cd $(git rev-parse --show-toplevel)'
+alias @=g-root
+
+alias gss="git status -sb ."
+alias ga="git add ."
+alias gc="git commit"
+alias gac="git add .;git commit"
+alias gacp="git add .;git commit;git push"
+
+alias g-df="git diff --cached --submodule"
+alias g-df-s="git config --global diff.submodule log"
 
 function tools_git() {
 
@@ -21,17 +31,8 @@ function tools_git() {
   tab_title "$PWD"
 }
 
-alias g-root='cd $(git rev-parse --show-toplevel)'
-alias @=g-root
+alias G=tools_git
 
-alias gss="git status -sb ."
-alias ga="git add ."
-alias gc="git commit"
-alias gac="git add .;git commit"
-alias gacp="git add .;git commit;git push"
-
-alias g-df="git diff --cached --submodule"
-alias g-df-s="git config --global diff.submodule log"
 
 function g-home() {
   echo $(git rev-parse --show-toplevel)
