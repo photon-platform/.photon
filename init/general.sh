@@ -5,7 +5,7 @@ sudo apt-get install -y nodejs
 
 sudo apt install -y npm
 
-sudo ap/ install -y entr
+sudo apt install -y entr
 
 sudo apt install -y tree
 
