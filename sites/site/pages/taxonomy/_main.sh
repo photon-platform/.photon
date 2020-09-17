@@ -15,47 +15,31 @@ function taxonomy() {
   taxonomy_index
 
   fmt="  [%c] ${fgYellow}%3d${txReset} ${txBold}%s${txReset}\n"
+  
   printf "$fmt" "c" ${#tax_category[@]} "categories"
-  printf "$fmt" "t" ${#tax_tag[@]} "tags"
-  printf "$fmt" "p" ${#tax_photon[@]} "photon"
-  echo
-  h1 Categories
-
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_category[@]}" | sort -z )
-  for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
-    tax_key="${tax_keys[i]}"
-    h2 "$tax_key"
-    # for md in  ${tax_category[$tax_key]}
-    # do
-      # h2 " - $md"
-    # done
-  done
-
-  echo
-  h1 Tags
-
+  join_by , "${tax_keys[@]}" 
+  
+  printf "$fmt" "t" ${#tax_tag[@]} "tags"
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_tag[@]}" | sort -z )
-  for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
-    tax_key="${tax_keys[i]}"
-    h2 "$tax_key"
-    # for md in  ${tax_tag[$tax_key]}
-    # do
-      # h2 " - $md"
-    # done
-  done
-
-  echo
-  h1 Photon
-
+  join_by , "${tax_keys[@]}" 
+  
+  printf "$fmt" "p" ${#tax_photon[@]} "photon"
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_photon[@]}" | sort -z )
-  for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
-    tax_key="${tax_keys[i]}"
-    h2 "$tax_key"
-    # for md in  ${tax_photon[$tax_key]}
-    # do
-      # h2 " - $md"
-    # done
-  done
+  join_by , "${tax_keys[@]}" 
+  
+  # echo
+  # h1 Categories
+
+  # mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_category[@]}" | sort -z )
+  # for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
+    # tax_key="${tax_keys[i]}"
+    # h2 "$tax_key"
+    # # for md in  ${tax_category[$tax_key]}
+    # # do
+      # # h2 " - $md"
+    # # done
+  # done
 
   echo
   taxonomy_actions
@@ -93,9 +77,9 @@ function index_page_categories() {
 }
 
 function index_page_tags() {
-  for tax_key in  ${page_taxonomy_tag[@]}
+  for (( j = 0; j < ${#page_taxonomy_tag[@]}; j++ ))
   do
-    tax_tag[$tax_key]+="$md "
+    tax_tag[${page_taxonomy_tag[j]}]+="$md "
   done
 }
 
