@@ -5,7 +5,7 @@ source ~/.photon/sites/site/pages/new.sh
 source ~/.photon/sites/site/pages/actions.sh
 source ~/.photon/sites/site/pages/sort.sh
 source ~/.photon/sites/site/pages/scaffolds.sh
-source ~/.photon/sites/site/pages/taxonomy.sh
+source ~/.photon/sites/site/pages/taxonomy/_main.sh
 source ~/.photon/sites/site/pages/page/_main.sh
 
 function pages() {

@@ -54,6 +54,9 @@ function page() {
 
       page_tags="$(join_by , "${page_taxonomy_tag[@]}" )"
       h2 "tag: ${page_tags}"
+      
+      page_pho="$(join_by , "${page_taxonomy_photon[@]}" )"
+      h2 "pho: ${page_pho}"
       echo
 
     fi

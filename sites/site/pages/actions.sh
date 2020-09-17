@@ -14,7 +14,7 @@ function pages_actions() {
     d) la; echo; pages_actions; ;;
     h) cd ..; clear; site; ;;
     j) clear; plugins; ;;
-    k) clear; plugins; ;;
+    k) clear; themes; ;;
     [1-9]*)
       cd $(dirname ${children[$((action - 1))]})
       clear
@@ -28,6 +28,7 @@ function pages_actions() {
       ;;
     f) vf; clear; pages; ;;
     g) zd; clear; page; ;;
+    T) taxonomy; clear; page; ;;
     G)
       tools_git
       clear
