@@ -21,7 +21,9 @@ function taxonomy_list_categories() {
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_category[@]}" | sort -z )
   for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
     tax_key="${tax_keys[i]}"
-    ui_list_item_number $(( i + 1 ))  "$tax_key (${#tax_category[$tax_key]})"
+    tax_value=(${tax_category[$tax_key]})
+    tax_count=${#tax_value[@]}
+    ui_list_item_number $(( i + 1 ))  "$tax_key ($tax_count)"
   done
 
   echo
@@ -33,8 +35,6 @@ function taxonomy_list_categories() {
     [1-9]*)
       tax_key=${tax_keys[$((action - 1))]}
       vim -c "/$tax_key/" ${tax_category[$tax_key]}
-      clear
-      taxonomy
       ;;
   esac
 }
@@ -46,7 +46,9 @@ function taxonomy_list_tags() {
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_tag[@]}" | sort -z )
   for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
     tax_key="${tax_keys[i]}"
-    ui_list_item_number $(( i + 1 ))  "$tax_key (${#tax_tag[$tax_key]})"
+    tax_value=(${tax_tag[$tax_key]})
+    tax_count=${#tax_value[@]}
+    ui_list_item_number $(( i + 1 ))  "$tax_key ($tax_count)"
   done
 
   echo
@@ -71,7 +73,9 @@ function taxonomy_list_photon() {
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_photon[@]}" | sort -z )
   for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
     tax_key="${tax_keys[i]}"
-    ui_list_item_number $(( i + 1 ))  "$tax_key (${#tax_photon[$tax_key]})"
+    tax_value=(${tax_photon[$tax_key]})
+    tax_count=${#tax_value[@]}
+    ui_list_item_number $(( i + 1 ))  "$tax_key ($tax_count)"
   done
 
   echo
