@@ -84,6 +84,8 @@ call vundle#begin()
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
 
+  Plugin 'jasonshell/vim-svg-indent'
+
   " Plugin 'ycm-core/YouCompleteMe'
 
 
