@@ -13,41 +13,33 @@ function taxonomy() {
   declare -A tax_photon
 
   taxonomy_index
+  clear
+  ui_banner "$PROJECT * TAXONOMY "
+  echo
 
   fmt="  [%c] ${fgYellow}%3d${txReset} ${txBold}%s${txReset}\n"
   
   printf "$fmt" "c" ${#tax_category[@]} "categories"
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_category[@]}" | sort -z )
   join_by , "${tax_keys[@]}" 
+  echo
   
   printf "$fmt" "t" ${#tax_tag[@]} "tags"
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_tag[@]}" | sort -z )
   join_by , "${tax_keys[@]}" 
+  echo
   
   printf "$fmt" "p" ${#tax_photon[@]} "photon"
   mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_photon[@]}" | sort -z )
   join_by , "${tax_keys[@]}" 
+  echo
   
-  # echo
-  # h1 Categories
-
-  # mapfile -d '' tax_keys < <(printf '%s\0' "${!tax_category[@]}" | sort -z )
-  # for (( i = 0; i < ${#tax_keys[@]}; i++ )); do
-    # tax_key="${tax_keys[i]}"
-    # h2 "$tax_key"
-    # # for md in  ${tax_category[$tax_key]}
-    # # do
-      # # h2 " - $md"
-    # # done
-  # done
-
   echo
   taxonomy_actions
 }
 
 function taxonomy_index() {
   
-
   mapfile -t pages_below < <(find . -type f -name "*.md" | sort)
 
   h1 "indexing pages..."

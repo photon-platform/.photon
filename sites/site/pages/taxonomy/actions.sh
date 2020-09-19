@@ -32,6 +32,11 @@ function taxonomy_list_categories() {
   read -s -n1  action
   case $action in
 
+    '#')
+      read -p "enter number: " number
+      tax_key=${tax_keys[$((number - 1))]}
+      vim -c "/$tax_key/" ${tax_category[$tax_key]}
+      ;;
     [1-9]*)
       tax_key=${tax_keys[$((action - 1))]}
       vim -c "/$tax_key/" ${tax_category[$tax_key]}
@@ -57,6 +62,11 @@ function taxonomy_list_tags() {
   read -s -n1  action
   case $action in
 
+    '#')
+      read -p "enter number: " number
+      tax_key=${tax_keys[$((number - 1))]}
+      vim -c "/$tax_key/" ${tax_tag[$tax_key]}
+      ;;
     [1-9]*)
       tax_key=${tax_keys[$((action - 1))]}
       vim -c "/$tax_key/" ${tax_tag[$tax_key]}
@@ -84,6 +94,11 @@ function taxonomy_list_photon() {
   read -s -n1  action
   case $action in
 
+    '#')
+      read -p "enter number: " number
+      tax_key=${tax_keys[$((number - 1))]}
+      vim -c "/$tax_key/" ${tax_photon[$tax_key]}
+      ;;
     [1-9]*)
       tax_key=${tax_keys[$((action - 1))]}
       vim -c "/$tax_key/" ${tax_photon[$tax_key]}
