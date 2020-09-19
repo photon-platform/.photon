@@ -24,6 +24,7 @@ set spell
 hi clear SpellBad
 hi SpellBad ctermfg=red cterm=underline
 
+" function for cleaning content for the euclid project
 function Clean()
   %s/<a href="\/elem.\(.\{-}\)">.\{-}<\/a>/\1/cg<cr>
   %s/<.b n="\d*"\/>//g<cr>

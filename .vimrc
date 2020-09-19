@@ -60,13 +60,13 @@ call vundle#begin()
 
   Plugin 'godlygeek/tabular'
   
+  Plugin 'mattn/emmet-vim'
+
   Plugin 'plasticboy/vim-markdown'
 
   Plugin 'cakebaker/scss-syntax.vim'
-  " Plugin 'hail2u/vim-css3-syntax'
-  Plugin 'lumiliet/vim-twig'
 
-  Plugin 'rstacruz/sparkup'
+  Plugin 'lumiliet/vim-twig'
 
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
