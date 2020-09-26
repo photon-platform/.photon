@@ -21,6 +21,13 @@ function sites_actions() {
     h) cd ..; clear; la; ;;
     j) sites; ;;
     k) sites; ;;
+    '#')
+      read -p "enter number: " number
+      dir="$(dirname ${sites[((number-1))]})"
+      cd $dir
+      clear
+      site
+      ;;
     [1-9]*)
       dir="$(dirname ${sites[((action-1))]})"
       cd $dir

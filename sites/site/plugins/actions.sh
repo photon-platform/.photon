@@ -14,6 +14,13 @@ function plugins_actions() {
     h) clear; site; ;;
     j) cd ../pages; clear; pages; ;;
     k) cd ../themes; clear; themes; ;;
+    '#')
+      read -p "enter number: " number
+      dir="$(dirname ${list[((number-1))]})"
+      cd $dir
+      clear
+      plugin
+      ;;
     [1-9]*)
       cd "$( dirname ${list[(($action-1))]} )"
       # read

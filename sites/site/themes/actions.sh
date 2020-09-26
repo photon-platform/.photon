@@ -14,6 +14,13 @@ function themes_actions() {
     h) clear; site; ;;
     j) cd ../pages; clear; pages; ;;
     k) cd ../pages; clear; pages; ;;
+    '#')
+      read -p "enter number: " number
+      dir="$(dirname ${list[((number-1))]})"
+      cd $dir
+      clear
+      theme
+      ;;
     [1-9]*)
       cd "$( dirname ${list[(($action-1))]} )"
       # read

@@ -59,6 +59,13 @@ function page_actions() {
       clear
       page
       ;;
+    '#')
+      read -p "enter number: " number
+      dir="$(dirname ${children[((number-1))]})"
+      cd $dir
+      clear
+      page
+      ;;
     [1-9]*)
       cd $(dirname ${children[$((action - 1))]})
       clear
