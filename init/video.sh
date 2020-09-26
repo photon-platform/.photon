@@ -7,6 +7,7 @@ sudo apt install -y ffmpeg
 #install snapd first
 # https://shotcut.org/download/
 snap install shotcut --classic
+sudo apt install -y melt
 
 sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt update
