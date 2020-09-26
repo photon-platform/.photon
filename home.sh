@@ -13,3 +13,6 @@ ln -sf ~/.photon/.vimrc
 
 mv .vim .vim.$D.bak
 ln -sf ~/.photon/.vim
+
+mv .config/ranger .config/ranger.$D.bak
+ln -sf ~/.photon/config/ranger ~/.config/ranger
