@@ -8,6 +8,7 @@ function plugin_actions() {
   read -n1  action
   case $action in
     q) clear; ;;
+    @) clear; cd ..; site ;;
     /) search; clear; plugin; ;;
     r) ranger; clear; plugin; ;;
     d) clear; echo; ls -hA; echo; plugin; ;;

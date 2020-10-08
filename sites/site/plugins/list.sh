@@ -15,9 +15,12 @@ function plugins_list() {
   for plugin in ${list[@]}
   do
     # gsss
+    export yaml=$(cat $plugin)
+    eval "$(yaml_parse plugin)" 2> /dev/null
 
     # echo -e "$i\t$title $gscount"
-    ui_list_item_number $i "$plugin"
+    ui_list_item_number $i "$(remove_quotes "$plugin_name") - $plugin_version"
+    # ui_list_item "$(dirname "$plugin")"
     ((i++))
   done
   echo

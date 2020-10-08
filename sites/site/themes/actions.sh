@@ -8,6 +8,7 @@ function themes_actions() {
   read -n1  action
   case $action in
     q) clear; ;; # quit
+    @) clear; site ;;
     /) search; clear; themes; ;;
     r) ranger; clear; themes; ;;
     d) clear; echo; la; echo; themes_actions; ;;

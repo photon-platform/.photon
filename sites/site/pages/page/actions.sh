@@ -11,6 +11,7 @@ function page_actions() {
     e) vim *.md; clear; page; ;;
     v) sxiv *.jpg; clear; page; ;;
     t) tree; page_actions; ;;
+    @) clear; site ;;
     /) search; clear; page; ;;
     r) ranger; clear; page; ;;
     d) la; echo; page_actions; ;;

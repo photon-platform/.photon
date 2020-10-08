@@ -9,6 +9,7 @@ function pages_actions() {
   case $action in
     q) clear; ;;
     t) tree; pages_actions; ;;
+    @) clear; site ;;
     /) search; clear; pages; ;;
     r) ranger; clear; pages; ;;
     d) la; echo; pages_actions; ;;

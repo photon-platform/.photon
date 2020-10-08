@@ -15,6 +15,7 @@ function sites_actions() {
       sites_actions
       ;;
     q) clear; ;;
+    # @) clear; home ;;
     /) search; clear; sites ;;
     r) ranger; sites_actions ;;
     d) clear; echo; ls -hA; echo; sites_actions ;;
