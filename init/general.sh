@@ -19,13 +19,11 @@ sudo apt install -y fd-find
 
 sudo apt install -y cmake #for YouCompleteMe
 
-# sudo apt install -y nextcloud-client
 
 sudo apt install -y sendmail-bin
 
 sudo apt install -y ranger
 
-sudo apt install -y nemo
 
 sudo apt install -y tmux
 

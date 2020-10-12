@@ -84,7 +84,7 @@ fi
 
 function banner() {
   fc=$(tput setaf 94)
-  sty_banner="${fc}${bgBlackBlack}"
+  sty_banner="${fc}"
   fmt_banner="${sty_banner} %-*s${txReset}\n"
   width=$(tput cols)
 
@@ -96,7 +96,7 @@ function banner() {
 # Set the terminal title and prompt.
 PS1="$(banner)"
 PS1=""
-PS1+="\[${txBold}${bgBlackBlack}\]\n"; # newline
+PS1+="\[${txBold}\]\n"; # newline
 PS1+="\[${userStyle}\]\u"; # username
 PS1+="\[${fgWhite}\] ✴ "
 PS1+="\[${hostStyle}\]\h "; # host

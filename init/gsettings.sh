@@ -9,6 +9,7 @@ gsettings set org.gnome.desktop.background picture-uri "file:///home/${USERNAME}
 
 gsettings set org.gnome.desktop.screensaver picture-uri ''
 
+# https://askubuntu.com/questions/34214/how-do-i-disable-overlay-scrollbars
 
 sudo apt install -y gnome-tweak-tool
 
