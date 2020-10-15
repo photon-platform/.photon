@@ -67,8 +67,8 @@ gsub() {
         # check for outstanding changes before update
         # git submodule update --remote
         git submodule foreach " \
-          git pull; \
           git checkout master; \
+          git pull; \
           git status -sb; \
           echo"
         ;;
