@@ -41,7 +41,7 @@ function plugins_actions() {
       bin/plugin photon newplugin
       ;;
     c) plugin_create_submodule ;;
-    b) plugin_restore_submodule ;;
+    b) plugin_restore ;;
     remove) plugin_remove_submodule ;;
     *)
       clear
