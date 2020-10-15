@@ -40,41 +40,9 @@ function plugins_actions() {
       pr
       bin/plugin photon newplugin
       ;;
-    c)
-      # create submodule
-      # TODO this is a function for the plugin modul
-        if [ $2 ]
-        then
-          echo ""
-          pl $2
-          plugin_create_submodule $2
-        else
-          echo "format: pl create ${yellow}pluginname"
-        fi
-      ;;
-    b)
-      # restore submodule
-      # TODO this is a function for the plugin modul
-        if [ $2 ]
-        then
-          echo ""
-          cd "$PLUGINS_DIR"
-          plugin_restore_submodule $2
-        else
-          echo "format: pl restore ${yellow}pluginname"
-        fi
-      ;;
-    remove)
-      # initialize a submodule
-      if [ $2 ]
-      then
-        echo ""
-        cd "$PLUGINS_DIR"
-        plugin_remove_submodule $2
-      else
-        echo "format: pl remove ${yellow}pluginname"
-      fi
-      ;;
+    c) plugin_create_submodule ;;
+    b) plugin_restore_submodule ;;
+    remove) plugin_remove_submodule ;;
     *)
       clear
       plugins
