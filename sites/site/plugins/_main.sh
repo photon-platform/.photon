@@ -4,7 +4,7 @@ source ~/.photon/sites/site/plugins/list.sh
 source ~/.photon/sites/site/plugins/actions.sh
 source ~/.photon/sites/site/plugins/plugin/_main.sh
 # source ~/.photon/sites/site/plugins/submodule/create_submodule.sh
-# source ~/.photon/sites/site/plugins/submodule/remove_submodule.sh
+source ~/.photon/sites/site/plugins/submodule/remove_submodule.sh
 
 function plugins() {
   @
@@ -42,12 +42,12 @@ function plugin_restore() {
   echo "*** update submodules within submodule"
   git submodule update --init --recursive
 
-  echo
-  echo "*** push to repo"
+  # echo
+  # echo "*** push to repo"
 
-  git add .
-  git commit -m "add submodule plugin: photon-$name"
-  git push -fu origin master
+  # git add .
+  # git commit -m "add submodule plugin: photon-$name"
+  # git push -fu origin master
 
   # git gc --aggressive --prune=all
 }
