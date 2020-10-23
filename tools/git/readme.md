@@ -1,6 +1,6 @@
 ---
-title: tools Grav
-subtitle: utilities to manage the grav config
+title: tools Git
+subtitle: utilities to manage git and github operations for photon
 ---
 
 

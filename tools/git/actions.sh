@@ -3,18 +3,17 @@
 function tools_git_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "git actions: q d a c p u f b"
+  ui_banner "git actions: q d a c p u S"
 
   read -n1  action
   case $action in
     q) clear; ;; # quit
-    d) echo; git diff . ; echo; read -p "enter to continue: ";  tools_git  ;;
+    d) echo; git diff .; pause_enter;  tools_git  ;;
     a) echo; git add .;  tools_git  ;;
     c) echo; git commit;  tools_git  ;;
-    p) echo; git push; echo; read -p "enter to continue: ";  tools_git  ;;
-    u) echo; git pull --recurse-submodules; echo; read -p "enter to continue: ";  tools_git  ;;
-    f) echo; gsub fetch; echo; read -p "enter to continue: " ;  tools_git  ;;
-    b) echo; gsub update; echo; read -p "enter to continue: " ;  tools_git  ;;
+    p) echo; git push; pause_enter;  tools_git  ;;
+    u) echo; git pull --recurse-submodules; pause_enter;  tools_git  ;;
+    S) echo; tools_git_submodules;  tools_git  ;;
     *)
       clear
       tools_git

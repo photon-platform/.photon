@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 source ~/.photon/tools/git/actions.sh
+source ~/.photon/tools/git/submodules/_main.sh
 
-alias g-root='cd $(git rev-parse --show-toplevel)'
-alias @=g-root
 
 alias gss="git status -sb ."
 alias ga="git add ."
@@ -35,8 +34,10 @@ alias G=tools_git
 
 
 function g-home() {
-  echo $(git rev-parse --show-toplevel)
+  git rev-parse --show-toplevel
 }
+alias g-root='cd "$(g-home)"'
+alias @=g-root
 
 # git summary summary
 function gsss() {
@@ -60,52 +61,10 @@ alias g-surr="git submodule update --remote --rebase" #or --merge
 alias g-each="git submodule foreach 'git status -sb; echo'"
 
 # create submodule from existing folder
-alias sub_plug="~/.photon/sh/sub_plug.sh"
-alias sub_theme="~/.photon/sh/sub_theme.sh"
+# alias sub_plug="~/.photon/sh/sub_plug.sh"
+# alias sub_theme="~/.photon/sh/sub_theme.sh"
 
 
-# tools for git submodules
-gsub() {
-
-  if [ $1 ]
-  then
-    case $1 in
-
-      fetch)
-        git submodule foreach " \
-          git fetch; \
-          git status -sb; \
-          echo"
-        ;;
-
-      master)
-        git submodule foreach " \
-          git checkout master; \
-          git status -sb; \
-          echo"
-        ;;
-
-      update)
-        # check for outstanding changes before update
-        # git submodule update --remote
-        git submodule foreach " \
-          git pull; \
-          git checkout master; \
-          git status -sb; \
-          echo"
-        ;;
-
-      *)
-        echo "Enter options: gsub [acmp|fetch|update]"
-        ls
-        ;;
-    esac
-  else
-    # default status each
-    git submodule foreach 'git status -sb; echo'
-  fi
-
-}
 
 # https://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-initial-commit-in-a-git-repository/13102849#13102849
 function g-reset-history() {
