@@ -22,16 +22,31 @@ function tools_git() {
   pwd
   echo
   gss
-
+  echo "tag: " $(gtl)
   echo
 
   tools_git_actions
 
   tab_title "$PWD"
 }
-
 alias G=tools_git
 
+function tools_git_tag_delete() {
+  git tag -d $1
+  git push origin --delete $1
+}
+alias gtd=tools_git_tag_delete
+
+function tools_git_tag_add() {
+  git tag -a $1
+  git push origin --tags
+}
+alias gta=tools_git_tag_add
+
+function tools_git_tag_latest() {
+  git tag | sort | tail -n 1
+}
+alias gtl=tools_git_tag_latest
 
 function g-home() {
   git rev-parse --show-toplevel
@@ -45,9 +60,9 @@ function gsss() {
 }
 
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-  complete -o default -o nospace -F _git g
-fi;
+# if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  # complete -o default -o nospace -F _git g
+# fi;
 
 # Use Git’s colored diff when available
 hash git &>/dev/null;
@@ -59,12 +74,6 @@ fi;
 
 alias g-surr="git submodule update --remote --rebase" #or --merge
 alias g-each="git submodule foreach 'git status -sb; echo'"
-
-# create submodule from existing folder
-# alias sub_plug="~/.photon/sh/sub_plug.sh"
-# alias sub_theme="~/.photon/sh/sub_theme.sh"
-
-
 
 # https://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-initial-commit-in-a-git-repository/13102849#13102849
 function g-reset-history() {
