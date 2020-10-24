@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#s!/usr/bin/env bash
 
 LABEL_WIDTH=15
 function get_label() {
@@ -31,3 +31,9 @@ function ask_truefalse() {
   esac
 }
 
+function pause_enter() {
+  echo; read -s -p "${fgRed}enter to continue: ${txReset}"
+}
+function pause_any() {
+  echo; read -n1 -s -p "${fgGreen}any key to continue: ${txReset}"
+}
