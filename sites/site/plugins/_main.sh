@@ -3,8 +3,6 @@
 source ~/.photon/sites/site/plugins/list.sh
 source ~/.photon/sites/site/plugins/actions.sh
 source ~/.photon/sites/site/plugins/plugin/_main.sh
-# source ~/.photon/sites/site/plugins/submodule/create_submodule.sh
-source ~/.photon/sites/site/plugins/submodule/remove_submodule.sh
 
 function plugins() {
   @
