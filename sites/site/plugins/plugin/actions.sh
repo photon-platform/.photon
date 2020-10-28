@@ -12,6 +12,8 @@ function plugin_actions() {
     /) search; clear; plugin; ;;
     r) ranger; clear; plugin; ;;
     d) clear; echo; ls -hA; echo; plugin; ;;
+    e) v README.md ; clear; plugin; ;;
+    b) v blueprints.yaml ; clear; plugin; ;;
     h) cd ..; clear; plugins; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})

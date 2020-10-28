@@ -47,3 +47,7 @@ firefox "http://localhost/info.php"
 # composer
 sudo apt install -y composer
 sudo chown -R $USER $HOME/.composer
+
+# sudo pecl channel-update pecl.php.net
+
+# sudo pecl install yaml

@@ -6,6 +6,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
 
+alias report="php ~/.photon/report/plugin.php"
+
 alias fd="fdfind"
 
 alias inmotion="ssh illumiphi.com"
