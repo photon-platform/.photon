@@ -9,6 +9,14 @@ def isPHPScalarTypesEnabled():
 	return isEnabled or re.match('<\?php\s+declare\(strict_types=[01]\);', '\n'.join(vim.current.window.buffer))
 endglobal
 
+## photon Snippets
+
+snippet ptest "photon Option test"
+"${1|a,b,c|}"
+${0}
+endsnippet
+
+
 ## Snippets from SnipMate, taken from
 ## https://github.com/scrooloose/snipmate-snippets.git
 
