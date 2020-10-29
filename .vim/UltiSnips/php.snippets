@@ -12,7 +12,7 @@ endglobal
 ## photon Snippets
 
 snippet ptest "photon Option test"
-"${1|a,b,c|}"
+"${1:`! basename $(pwd)`}"
 ${0}
 endsnippet
 
