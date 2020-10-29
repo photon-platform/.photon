@@ -18,6 +18,13 @@ function mkd() {
   mkdir -p "$@" && cd "$_"
 }
 
+function cp_bak() {
+  if [[ -f $1 ]]; then
+    D=$(date +"%Y%m%d-%T")
+    cp $1 $1.$D.bak
+  fi
+}
+
 # Find and open in Vim
 function vf() {
   local file=$(list_text_files | sort | fzf -m --preview="bat {}")

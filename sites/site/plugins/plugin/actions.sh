@@ -11,6 +11,7 @@ function plugin_actions() {
     @) clear; cd ..; site ;;
     /) search; clear; plugin; ;;
     r) ranger; clear; plugin; ;;
+    R) cp_bak README.md; report > README.md; v README.md; clear; plugin ;;
     d) clear; echo; ls -hA; echo; plugin; ;;
     e) v README.md ; clear; plugin; ;;
     b) v blueprints.yaml ; clear; plugin; ;;

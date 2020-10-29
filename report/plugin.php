@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
+
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 include 'report/header.php';
@@ -38,15 +39,17 @@ Here is the default configuration and an explanation of available options:
 Note that if you use the admin plugin, a file with your configuration, and named <?= $current_dir ?>.yaml will be saved in the `user/config/plugins/` folder once the configuration is saved in the admin.
 
 <?php
-$finder = new Finder();
-// find all files in the current directory
-show_folder("blueprints");
-$finder->files()->depth('== 0')->in("blueprints")->name("*.yaml");
 
-// check if there are any search results
-if ($finder->hasResults()) {
-  // echo $finder->count()." files found\n";
-  foreach ($finder as $file) {
+$finder = new Finder();
+
+if (file_exists($folder)) {
+  show_folder("blueprints");
+  $finder->files()->depth('== 0')->in("blueprints")->name("*.yaml");
+
+  // check if there are any search results
+  if ($finder->hasResults()) {
+    // echo $finder->count()." files found\n";
+    foreach ($finder as $file) {
       // $absoluteFilePath = $file->getRealPath();
       $template = $file->getRelativePathname();
       $template_data = Yaml::parseFile($file);
@@ -56,8 +59,9 @@ if ($finder->hasResults()) {
       printf( "    extends: %s\n", $template_data["@extends"]["type"] );
       printf( "    fields:\n" );
       foreach(array_keys($template_data["form"]["fields"]["tabs"]["fields"]) as $key){
-        printf( "   - %s\n", $key );
+        printf( "     - %s\n", $key );
       }
+    }
   }
 }
 show_folder("templates");
@@ -85,17 +89,19 @@ function cmd_block($cmd){
 }
 
 function show_folder($folder){
-  h1($folder);
-  cmd_block("tree --dirsfirst --noreport $folder");
-  $filename = $folder.'/README.md';
+  if (file_exists($folder)) {
+    h1($folder);
+    cmd_block("tree --dirsfirst --noreport $folder");
+    $filename = $folder.'/README.md';
 
-  if (file_exists($filename)) {
-    include( $filename );
+    if (file_exists($filename)) {
+      include( $filename );
+    }
   }
 
 }
 
-include( "LICENSE.txt" );
+// include( "LICENSE.txt" );
 
 
 ?>
