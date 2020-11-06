@@ -40,8 +40,6 @@ alias val="vim ~/.photon/.aliases"
 alias vfc="vim ~/.photon/.functions"
 alias vrang="vim ~/.config/ranger/rc.conf"
 
-alias skon="screenkey --scr 1 -p fixed -f 'Fira Mono' -s small -g 768x108+960+1740"
-alias skoff="pkill -f screenkey"
 
 alias src="source ~/.bashrc"
 

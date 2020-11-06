@@ -119,3 +119,4 @@ let g:syntastic_check_on_wq = 0
 
 let g:NERDSpaceDelims = 1
 
+hi Normal guibg=NONE ctermbg=NONE
