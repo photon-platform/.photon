@@ -8,6 +8,7 @@ source ~/.photon/tools/speak.sh
 source ~/.photon/tools/list.sh
 source ~/.photon/tools/git/_main.sh
 source ~/.photon/tools/grav/_main.sh
+source ~/.photon/tools/ffmpeg/_main.sh
 
 function show_dir() {
 

@@ -6,7 +6,9 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
 
-alias report="php ~/.photon/report/plugin.php"
+alias report_plugin="php ~/.photon/report/plugin.php"
+alias report_theme="php ~/.photon/report/theme.php"
+alias readme_html="pandoc -f gfm --css=/home/phi/.photon/report/gfm.css -s -o readme.html --metadata pagetitle="test" README.md ; open readme.html"
 alias sandbox="cd ~/Projects/sandbox"
 
 alias fd="fdfind"
@@ -38,7 +40,7 @@ alias val="vim ~/.photon/.aliases"
 alias vfc="vim ~/.photon/.functions"
 alias vrang="vim ~/.config/ranger/rc.conf"
 
-alias skon="screenkey --scr 1 -p fixed -f 'Fira Mono' -s small -g 600x100+960+1748"
+alias skon="screenkey --scr 1 -p fixed -f 'Fira Mono' -s small -g 768x108+960+1740"
 alias skoff="pkill -f screenkey"
 
 alias src="source ~/.bashrc"

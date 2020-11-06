@@ -5,7 +5,7 @@ function themes_actions() {
   # TODO: show all menu options on '?'
   ui_banner "themeS actions: "
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     q) clear; ;; # quit
     @) clear; site ;;

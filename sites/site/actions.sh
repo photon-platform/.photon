@@ -10,9 +10,9 @@ alias grav-log="cd ${PROJECT_DIR};bin/grav logviewer"
 function site_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "SITE actions: "
+  ui_banner "SITE actions: q p u t c h j k g f o e . l / d G V"
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     q) clear; ;;
     r) ranger; clear; site; ;;
@@ -26,7 +26,7 @@ function site_actions() {
       echo 
       echo check git status above before continuing.
       echo
-      read -n1 -p "Proceed?:  " -e response
+      read -s -n1 -p "Proceed?:  " -e response
       if [[ $response == "y" ]]; then
         echo
       fi
@@ -62,6 +62,7 @@ function site_actions() {
     l) vim CHANGELOG.md; clear; site; ;;
     .) vim .photon; clear; site; ;;
 
+    #TODO: conflict on t action
     t) tre ; clear; site; ;;
     /) search; clear; site; ;;
     d) echo; la; echo; site_actions; ;;

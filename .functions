@@ -18,10 +18,13 @@ function mkd() {
   mkdir -p "$@" && cd "$_"
 }
 
+function timestamp() {
+  date +"%Y%m%d-%H%M%S"
+}
+
 function cp_bak() {
   if [[ -f $1 ]]; then
-    D=$(date +"%Y%m%d-%T")
-    cp $1 $1.$D.bak
+    cp $1 $1.$(timestamp).bak
   fi
 }
 

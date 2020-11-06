@@ -5,12 +5,19 @@ function theme_actions() {
   # TODO: show all menu options on '?'
   ui_banner "theme actions: "
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     q) clear; ;;
     @) clear; cd ..; site ;;
     /) search; clear; theme; ;;
     r) ranger; clear; theme; ;;
+    e) v README.md ; clear; theme; ;;
+    .) v blueprints.yaml ; clear; theme; ;;
+    l) vim CHANGELOG.md; clear; theme; ;;
+    R) report_theme > README.md; 
+      mkdir -p docs;
+      cp README.md docs/index.md;
+      v README.md; clear; theme ;;
     d) clear; echo; ls -hA; echo; theme; ;;
     h) cd ..; clear; themes; ;;
     j)

@@ -5,7 +5,7 @@ function plugins_actions() {
   # TODO: show all menu options on '?'
   ui_banner "PLUGINS actions: "
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     q) clear; ;;
     @) clear; site ;;

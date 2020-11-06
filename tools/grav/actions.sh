@@ -5,7 +5,7 @@ function tools_grav_actions() {
   # TODO: show all menu options on '?'
   ui_banner "grav actions: q v-grav u-plugins c-cache l-clean t-tntsearch"
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     q) clear; ;; # quit
     v) bin/gpm self-upgrade; echo; tools_grav_actions; ;;

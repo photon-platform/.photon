@@ -4,7 +4,7 @@ function sites_actions() {
 
   ui_banner "SITES actions: h j k [le] # g G r d q n s ? "
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     \?)
       echo

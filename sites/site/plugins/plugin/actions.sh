@@ -5,16 +5,21 @@ function plugin_actions() {
   # TODO: show all menu options on '?'
   ui_banner "plugin actions: "
 
-  read -n1  action
+  read -s -n1  action
   case $action in
     q) clear; ;;
     @) clear; cd ..; site ;;
     /) search; clear; plugin; ;;
     r) ranger; clear; plugin; ;;
-    R) cp_bak README.md; report > README.md; v README.md; clear; plugin ;;
+    R) report_plugin > README.md; 
+      mkdir -p docs;
+      cp README.md docs/index.md;
+      v README.md; 
+      clear; plugin ;;
     d) clear; echo; ls -hA; echo; plugin; ;;
     e) v README.md ; clear; plugin; ;;
-    b) v blueprints.yaml ; clear; plugin; ;;
+    .) v blueprints.yaml ; clear; plugin; ;;
+    l) vim CHANGELOG.md; clear; plugin; ;;
     h) cd ..; clear; plugins; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})

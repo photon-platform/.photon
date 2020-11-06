@@ -1,19 +1,15 @@
 <?php
-require_once __DIR__.'/vendor/autoload.php';
 
+require_once __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
-include 'report/header.php';
+include 'report/markdown.php';
 
-// TODO: assumes we are in a grav plugin or theme
-
+$project = Yaml::parseFile('blueprints.yaml');
 $current_dir=rtrim(shell_exec('basename $PWD'));
 
-$plugin = Yaml::parseFile('blueprints.yaml');
-h1( $plugin["name"] );
-h2( $plugin["version"] );
-printf( "> %s\n", $plugin["description"]);
+include 'report/header.php';
 
 printf( '- [%1$s](#%1$s)'."\n", "configuration" );
 printf( '- [%1$s](#%1$s)'."\n", "templates" );
@@ -26,9 +22,7 @@ h1( "configuration" );
 echo "blueprints.yaml\n";
 echo "\n";
 echo "fields:\n";
-foreach(array_keys($plugin["form"]["fields"]) as $key){
-    echo " - ".$key."\n";
-}
+blueprintListFields( $project["form"] );
 
 ?>
 
@@ -36,13 +30,17 @@ Before configuring this plugin, you should copy the `user/plugins/<?= $current_d
 
 Here is the default configuration and an explanation of available options:
 
+```yaml
+<?php include "${current_dir}.yaml" ?>
+```
+
 Note that if you use the admin plugin, a file with your configuration, and named <?= $current_dir ?>.yaml will be saved in the `user/config/plugins/` folder once the configuration is saved in the admin.
 
 <?php
 
 $finder = new Finder();
 
-if (file_exists($folder)) {
+if (file_exists("blueprints")) {
   show_folder("blueprints");
   $finder->files()->depth('== 0')->in("blueprints")->name("*.yaml");
 
@@ -54,13 +52,14 @@ if (file_exists($folder)) {
       $template = $file->getRelativePathname();
       $template_data = Yaml::parseFile($file);
       echo "\n";
-      printf( "- %s\n", $template_data["title"] );
-      printf( "    %s\n", $template );
-      printf( "    extends: %s\n", $template_data["@extends"]["type"] );
-      printf( "    fields:\n" );
-      foreach(array_keys($template_data["form"]["fields"]["tabs"]["fields"]) as $key){
-        printf( "     - %s\n", $key );
-      }
+      printf( "### %s\n", $template_data["title"] );
+      printf( "%s\n", $template );
+      printf( "extends: %s\n", $template_data["@extends"]["type"] );
+      printf( "fields:\n" );
+      blueprintListFields( $template_data["form"]["fields"]["tabs"] );
+      // foreach(array_keys($template_data["form"]["fields"]["tabs"]["fields"]) as $key){
+        // printf( "     - %s\n", $key );
+      // }
     }
   }
 }
@@ -71,35 +70,6 @@ show_folder("assets");
 show_folder("languages");
 
 	
-function h1($str) {
-  echo "\n";
-  echo "# ".$str."\n";
-}
-
-function h2($str) {
-  echo "\n";
-  echo "## ".$str."\n";
-}
-
-function cmd_block($cmd){
-  echo "\n";
-  echo "```sh\n";
-  echo shell_exec($cmd);
-  echo "```\n";
-}
-
-function show_folder($folder){
-  if (file_exists($folder)) {
-    h1($folder);
-    cmd_block("tree --dirsfirst --noreport $folder");
-    $filename = $folder.'/README.md';
-
-    if (file_exists($filename)) {
-      include( $filename );
-    }
-  }
-
-}
 
 // include( "LICENSE.txt" );
 
