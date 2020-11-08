@@ -4,16 +4,23 @@
 MIC="alsa_input.usb-046d_HD_Pro_Webcam_C920_B11A2C0F-02.analog-stereo"
 BLUE="alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo"
 AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
+CAMERA="/dev/video2"
+ZIGGI="/dev/video0"
+
+# /dev/video2 [HD Pro Webcam C920]
+# /dev/video0 [IPEVO Ziggi-HD: IPEVO Ziggi-HD]
+
 
 function tools_ffmpeg_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "ffmpeg actions: q c l s x"
+  ui_banner "ffmpeg actions: q c l t s x"
 
   read -s -n1  action
   case $action in
     q) clear; ;; # quit
-    l) dbf_cam; kb_cam; sk1; set_term; echo; tools_ffmpeg_actions;;
+    l) dbf_cam; kb_cam; sk1; echo; tools_ffmpeg_actions;;
+    t) set_term; ;; 
     x) dbfoff; kboff; skoff; tools_ffmpeg_actions;;
     s) screen_rec;  tools_ffmpeg_actions; ;;
     c) record_cam;  tools_ffmpeg_actions; ;;
@@ -69,11 +76,12 @@ function screen_rec() {
     "$output" 
   mpv "$output"
 }
+
 function record_cam() {
   output="$( make_filename ).mkv"
 
   ui_banner "recording: $output"
-  ffmpeg -y -hide_banner -i /dev/video0 \
+  ffmpeg -y -hide_banner -i $CAMERA \
     -f pulse -ac 2 -i $MIC "$output" 
 
   ui_banner "fix offset"
@@ -93,15 +101,15 @@ function rc2() {
   AUDIO_OFFSET="0.33"
   TRIM_END=3
 
-  output="$( make_filename ).mkv"
+  output="$( make_filename ).mp4"
 
   echo
   ui_banner "recording: $output"
   ffmpeg  -hide_banner \
     -framerate 30 \
-    -video_size 800x448 \
-    -f v4l2 -i /dev/video0 \
-    -f pulse -ac 2 -i $BLUE \
+    -video_size 1280x720 \
+    -f v4l2 -input_format mjpeg -i $CAMERA \
+    -f pulse  -ac 2  -i $BLUE \
     "$output" 
 
   echo
@@ -110,27 +118,27 @@ function rc2() {
     -i "$output" -itsoffset $AUDIO_OFFSET \
     -i "$output" \
     -map 0:v -map 1:a  \
-    -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
     -af "highpass=f=100, volume=volume=5dB, afftdn" \
     "tmp.mkv"
+  mv tmp.mkv "$output"
 
-  echo
-  ui_banner "trim $trim seconds off end"
-  dur=$(ffprobe -hide_banner -i "tmp.mkv"  -show_entries format=duration -v quiet -of csv="p=0")
-  trim=$( echo $dur - $TRIM_END | bc )
-  ffmpeg -y -hide_banner -t $trim \
-    -i tmp.mkv -c copy \
-    "$output"
-  rm tmp.mkv 
+  # echo
+  # ui_banner "trim $trim seconds off end"
+  # dur=$(ffprobe -hide_banner -i "tmp.mkv"  -show_entries format=duration -v quiet -of csv="p=0")
+  # trim=$( echo $dur - $TRIM_END | bc )
+  # ffmpeg -y -hide_banner -t $trim \
+    # -i tmp.mkv -c copy \
+    # "$output"
+  # rm tmp.mkv 
 
   
   mpv "$output"
-  # mpv tmp.mkv
 }
 
 function ra() {
 
-  output="$( make_filename ).mp3"
+  output="$( make_filename ).m4a"
 
   ui_banner "recording: $output"
   ffmpeg -y -hide_banner \
@@ -154,17 +162,19 @@ function rablue() {
 }
 
 function kb_cam() {
-  mpv --really-quiet --no-border \
-    --osc=no \
-    --video-zoom=1.3 \
-    --geometry=800x248+1040+660 \
-    --saturation=-100 \
-    /dev/video2 &
+  # mpv --really-quiet --no-border \
+    # --osc=no \
+    # --video-zoom=1.3 \
+    # --geometry=800x248+1040+660 \
+    # --saturation=-100 \
+    # $ZIGGI &
+  ffplay -noborder -hide_banner  \
+    -video_size 800x600 \
+    -loglevel quiet \
+    -i $ZIGGI \
+    -vf "rotate=PI, crop=800:200, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -left 1040  -top 1388 
   export PID_KB=$!
-  # ffplay -noborder -hide_banner  \
-    # -i /dev/video2 \
-    # -video_size 800x448 \
-    # -top 1348 -left 1040 &
 }
 
 function kboff() {
@@ -185,7 +195,7 @@ alias skoff="pkill -f screenkey"
 
 function desk_cam() {
   ffplay -noborder -hide_banner  \
-    -i /dev/video0 \
+    -i $CAMERA \
     -video_size 800x448 \
     -left 1040 -top 900 &
 }
@@ -193,10 +203,10 @@ function desk_cam() {
 function dbf_cam() {
   ffplay -noborder -hide_banner  \
     -loglevel quiet \
-    -i /dev/video0 \
+    -i $CAMERA \
     -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" \
     -video_size 800x448 \
-    -left 1040 -top 900 &
+    -left 1040 -top 900 
   export PID_DBF=$!
 }
 function dbfoff() {
@@ -208,7 +218,7 @@ function dbfoff() {
 }
 
 function other_cam() {
-  ffmpeg -top 900 -i /dev/video0 -c:v rawvideo -pix_fmt rgb24 -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" -window_size 80x25 -f caca - -top 900
+  ffmpeg -top 900 -i $CAMERA -c:v rawvideo -pix_fmt rgb24 -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" -window_size 80x25 -f caca - -top 900
 }
 
 function sky_cam() {
@@ -221,23 +231,24 @@ function sky_cam() {
 function timelapse() {
   output="$( make_filename ).mkv"
   ffmpeg -framerate 1 -f v4l2  \
-    -i /dev/video0 \
+    -i $CAMERA \
     -vf settb=\(1/30\),setpts=N/TB/30 \
     -r 30 -vcodec libx264 -crf 0 -preset ultrafast -threads 0 \
     $output
 }
 
 function ffconcat() {
-  output="$( make_filename ).mkv"
-  ffmpeg -f concat -safe 0 \
-    -i <(for f in *.mkv; do echo "file '$PWD/$f'"; done) \
+  output="$( make_filename ).mp4"
+  ffmpeg -hide_banner \
+    -f concat -safe 0 \
+    -i <(for f in *.mp4; do echo "file '$PWD/$f'"; done) \
     -c copy \
     $output
 }
 
 function ffsnap() {
   ffmpeg -y -video_size 1920x1080 \
-    -f video4linux2 -i /dev/video0  \
+    -f video4linux2 -i $CAMERA  \
     -vframes 1 test.jpg; ffplay test.jpg
   # ffmpeg -y -f video4linux2 -i /dev/video0  -vframes 1 test.jpg
 

@@ -12,3 +12,7 @@ sudo apt install -y melt
 sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt update
 sudo apt install -y obs-studio
+
+sudo add-apt-repository ppa:kdenlive/kdenlive-stable
+sudo apt-get update
+sudo apt install -y kdenlive

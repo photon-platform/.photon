@@ -43,8 +43,8 @@ subtitle "home bash settings"
 title "general"
 init/general.sh
 
-title "atom"
-init/atom.sh
+# title "atom"
+# init/atom.sh
 
 title "apache"
 init/apache.sh
@@ -89,8 +89,8 @@ init/remove-default-apps.sh
 # title "thunderbird"
 # init/thunderbird.sh
 
-title "neomutt"
-init/neomutt.sh
+# title "neomutt"
+# init/neomutt.sh
 
 
 # title "graphics"
@@ -128,14 +128,14 @@ git config --list
 subtitle "vim"
 vim --version
 
-subtitle "inkscape"
-inkscape -V
+# subtitle "inkscape"
+# inkscape -V
 
-subtitle "gimp"
-gimp -v
+# subtitle "gimp"
+# gimp -v
 
-subtitle "darktable"
-darktable --version
+# subtitle "darktable"
+# darktable --version
 
 # chrome -v
 
