@@ -37,12 +37,9 @@ sudo apt_upgrade
 
 init/gsettings.sh
 
-init/vim.sh
-
 init/general.sh
 
-# title "atom"
-# init/atom.sh
+init/vim.sh
 
 subtitle "preopen firefox"
 firefox &
@@ -53,29 +50,10 @@ init/php.sh
 
 init/grav.sh
 
-title "photon starter"
 init/starter.sh
-
-####################################
-# title "Part 1 - complete"
-# atom -v
-# apm list
-# apache2 -v
-# php -v
-# composer -v
-# git -v
-# git config --list
-#
-# echo
-# echo "${orange}Continue?${reset}"
-# read continue
 
 title "chrome"
 init/chrome.sh
-
-
-# title "virtualbox config"
-# init/vbox-init.sh
 
 # title "thunderbird"
 # init/thunderbird.sh
@@ -83,10 +61,7 @@ init/chrome.sh
 # title "neomutt"
 # init/neomutt.sh
 
-
-# title "graphics"
-# init/graphics.sh
-
+init/graphics.sh
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
@@ -95,11 +70,6 @@ sudo apt update -y && sudo apt upgrade -y
 
 title installed apps
 
-subtitle "atom"
-atom -v
-
-subtitle "apm list"
-apm list
 
 subtitle "apache2"
 apache2 -v
