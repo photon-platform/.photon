@@ -39,6 +39,8 @@ init/gsettings.sh
 subtitle "home bash settings"
 ./home.sh
 
+src
+
 
 title "general"
 init/general.sh
