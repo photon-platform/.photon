@@ -1,9 +1,18 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# install apache
+source ~/.photon/ui/_main.sh
+
+clear -x
+ui_banner "apache"
+
+echo
+h1 "apache2"
+echo
 sudo apt install -y apache2
 
-# apache www folders
+echo
+h1 "set user group"
+echo
 sudo usermod -a -G www-data $USERNAME
 
 #set apache environment variables

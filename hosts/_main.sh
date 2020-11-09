@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 
-
 # copy from https://gist.github.com/irazasyed/a7b0a079e7727a4315b9
-
-##### run with sudo
 
 # PATH TO YOUR HOSTS FILE
 export HOSTS_FILE=/etc/hosts
 
 # DEFAULT IP FOR HOSTNAME
 export IP="127.0.0.1"
-
 
 alias sites-conf="cd /etc/apache2/sites-available"
 alias hosts="sudo vim /etc/hosts"

@@ -1,11 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 source ~/.photon/ui/_main.sh
 source ~/.photon/.functions
-
-reset=$(tput sgr0);
-orange=$(tput setaf 166);
-white=$(tput setaf 15);
 
 title() {
   clear -x
@@ -18,31 +14,28 @@ subtitle() {
   echo
 }
 
-clear -x
 
 title "photon PLATFORM initialization"
-h1 "press enter to continue"
+subtitle "press enter to continue"
 read continue
 
 START_TIME="$(date -u +%s)"
 echo started: $(date +"%T")
 
-subtitle "home bash settings"
 ./home.sh
 src
 
-subtitle "remove default apps"
+# TODO: prompt user for info at start
+# this script is hardcoded for phi
+# title "git config"
+# init/git.sh
+
 init/remove-default-apps.sh
 
-subtitle "update system packages"
+title "update system packages"
 sudo apt_upgrade
 
-subtitle "preopen firefox"
-firefox &
-
-subtitle "gnome settings"
 init/gsettings.sh
-
 
 init/vim.sh
 
@@ -51,18 +44,13 @@ init/general.sh
 # title "atom"
 # init/atom.sh
 
-title "apache"
+subtitle "preopen firefox"
+firefox &
+
 init/apache.sh
 
-title "php"
 init/php.sh
 
-# TODO: prompt user for info at start
-# this script is hardcoded for phi
-# title "git config"
-# init/git.sh
-
-title "grav base"
 init/grav.sh
 
 title "photon starter"

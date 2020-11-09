@@ -1,17 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-source ~/.photon/.hosts
+GRAV=1.6.28
+
+source ~/.photon/hosts/_main.sh
+source ~/.photon/ui/_main.sh
+
+clear -x
+ui_banner "grav"
+
+echo
+h1 "download zip: $GRAV"
+echo
 
 mkdir -p ~/SITES/LOGS/grav
 cd ~/SITES
 
-# read -p "continue?" tmp
-# https://getgrav.org/download/core/grav/1.6.20
-GRAV=1.6.20
 wget https://getgrav.org/download/core/grav/${GRAV} -O grav.zip
 unzip -q grav.zip
-# mv grav-admin/ grav/
 
+echo
+h1 "set conf file"
+echo
 sudo cp ~/.photon/templates/grav.conf /etc/apache2/sites-available/grav.conf
 
 sudo a2ensite grav.conf

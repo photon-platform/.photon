@@ -1,7 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# install php
-sudo apt -y update
+source ~/.photon/ui/_main.sh
+
+clear -x
+ui_banner "php"
+
+echo
+h1 "php"
+echo
 sudo apt install -y php
 # this currently installs:
 # libapache2-mod-php7.2
@@ -13,6 +19,9 @@ sudo apt install -y php
 # php7.2-opcache
 # php7.2-readline
 
+echo
+h1 "php accessories"
+echo
 sudo apt install -y \
   php-mbstring \
   php-xmlrpc \
@@ -28,13 +37,17 @@ sudo apt install -y \
   php-apcu \
   php-tidy
 
-# for TNT search
+echo
+h1 "sqlite"
+echo
 sudo apt install -y \
   sqlite \
   php-pdo \
-  php-sqlite3 \
-  php-mysql
+  php-sqlite3 
 
+echo
+h1 "php configure"
+echo
 sudo a2enmod proxy proxy_fcgi rewrite
 sudo a2enconf php7.2-fpm
 sudo a2enmod proxy_fcgi setenvif
@@ -44,7 +57,9 @@ sudo chmod  o+w /var/www/html
 sudo echo "<?php phpInfo();" > /var/www/html/info.php
 firefox "http://localhost/info.php"
 
-# composer
+echo
+h1 "composer"
+echo
 sudo apt install -y composer
 sudo chown -R $USER $HOME/.composer
 

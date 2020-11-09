@@ -1,35 +1,32 @@
 #!/usr/bin/env bash
 
-# sandbox a new site with grav
-# copy additional files
-
 function sites_restore() {
 
-  clear
+  clear -x
   ui_banner "photon ✴ SITES restore"
 
+  PROJECT="$1"
+  if [[ -z $PROJECT ]]; then
+    echo
+    read -p "specify PROJECT repo name to restore: " PROJECT
+  fi
+
   githuborg_set
-
-  echo
-  read -p "specify PROJECT repo name to restore: " PROJECT
-
   repo_check
 
   if [ -n $PROJECT ]
   then
 
-    START_TIME="$(date -u +%s)"
-
-    sudo pwd
-
     echo
-    echo "✴ cloning grav"
+    h1 "sandbox grav"
+    echo
     cd $SITESROOT/grav
     bin/grav sandbox -s $SITESROOT/$PROJECT
     ln -sf $SITESROOT/grav/.htaccess $SITESROOT/$PROJECT/
 
     echo
-    echo "✴ clone github repo for site"
+    h1 "clone $REPO"
+    echo
     cd $SITESROOT/$PROJECT
     rm -rf user
     git clone --recurse-submodules $REPO $SITESROOT/$PROJECT/user
@@ -45,8 +42,7 @@ function sites_restore() {
       apache_new $PROJECT
     fi
       
-    gsub update
-
+    #TODO: prompt for username
     cd $SITESROOT/$PROJECT
     bin/plugin login new-user \
       -u phi \
@@ -55,13 +51,6 @@ function sites_restore() {
       -N "phi ARCHITECT" \
       -t "admin"
     cd $SITESROOT/$PROJECT/user
-    
-    END_TIME="$(date -u +%s)"
-    ELAPSED="$((END_TIME-START_TIME))"
-    TIME=$(convertsecstomin $ELAPSED)
-    echo
-    echo "✴ elapsed: $TIME m:s"
-
     
   else
     echo "no project name"

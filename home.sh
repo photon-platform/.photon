@@ -1,4 +1,10 @@
+#!/usr/bin/env bash
+
+source ~/.photon/ui/_main.sh
 D=$(date +"%Y%m%d-%T")
+
+clear -x
+ui_banner "link config files in home directory"
 
 cd ~
 
