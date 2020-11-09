@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+function apt_upgrade() {
+  sudo apt update -y
+  sudo apt list --upgradeable
+  read -n1 -p "run upgrade?" run_upgrade
+  if [[ $run_upgrade == "y" ]]; then
+    sudo apt upgrade -y
+    sudo apt autoremove -y
+  fi
+}
+
 convertsecstohours() {
   ((h=${1}/3600))
   ((m=(${1}%3600)/60))
@@ -71,8 +81,6 @@ function phpserver() {
   sleep 1 && open "http://${ip}:${port}/" &
   php -S "${ip}:${port}";
 }
-
-
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
 # the `.git` directory, listing directories first. The output gets piped into

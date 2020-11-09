@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# source ~/.photon/.colors
+source ~/.photon/ui/_main.sh
+source ~/.photon/.functions
 
 reset=$(tput sgr0);
 orange=$(tput setaf 166);
@@ -8,27 +9,33 @@ white=$(tput setaf 15);
 
 title() {
   clear -x
-  echo "${orange}*************************************************"
-  echo "${white}$1"
-  echo "${orange}*************************************************"
-  echo "${reset}"
+  ui_banner "$1"
+  echo 
 }
 subtitle() {
-  echo ""
-  echo ""
-  echo "${white}$1"
-  echo "${orange}*************************************************"
-  echo "${reset}"
+  echo
+  h1 "$1"
+  echo
 }
 
-title "ready to install - press enter to continue"
+clear -x
+
+title "photon PLATFORM initialization"
+h1 "press enter to continue"
 read continue
 
 START_TIME="$(date -u +%s)"
 echo started: $(date +"%T")
 
+subtitle "home bash settings"
+./home.sh
+src
+
+subtitle "remove default apps"
+init/remove-default-apps.sh
+
 subtitle "update system packages"
-sudo apt update -y
+sudo apt_upgrade
 
 subtitle "preopen firefox"
 firefox &
@@ -36,17 +43,9 @@ firefox &
 subtitle "gnome settings"
 init/gsettings.sh
 
-subtitle "home bash settings"
-./home.sh
 
-src
+init/vim.sh
 
-title "vim"
-sudo apt install -y exuberant-ctags
-sudo apt install -y vim
-vim +PluginInstall +qall
-
-title "general"
 init/general.sh
 
 # title "atom"
@@ -86,8 +85,6 @@ init/starter.sh
 title "chrome"
 init/chrome.sh
 
-title "remove default apps"
-init/remove-default-apps.sh
 
 # title "virtualbox config"
 # init/vbox-init.sh
