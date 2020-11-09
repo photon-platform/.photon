@@ -41,6 +41,10 @@ subtitle "home bash settings"
 
 src
 
+title "vim"
+sudo apt install -y exuberant-ctags
+sudo apt install -y vim
+vim +PluginInstall +qall
 
 title "general"
 init/general.sh
@@ -98,8 +102,6 @@ init/remove-default-apps.sh
 # title "graphics"
 # init/graphics.sh
 
-title "vim"
-sudo apt install -y vim
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
