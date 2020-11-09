@@ -16,11 +16,12 @@ subtitle() {
 
 
 title "photon PLATFORM initialization"
-subtitle "press enter to continue"
-read continue
+# subtitle "press enter to continue"
+# read continue
+sudo pwd
 
-START_TIME="$(date -u +%s)"
-echo started: $(date +"%T")
+# START_TIME="$(date -u +%s)"
+# echo started: $(date +"%T")
 
 ./home.sh
 src
@@ -99,15 +100,15 @@ vim --version
 
 # chrome -v
 
-END_TIME="$(date -u +%s)"
-ELAPSED="$(($END_TIME-$START_TIME))"
+# END_TIME="$(date -u +%s)"
+# ELAPSED="$(($END_TIME-$START_TIME))"
 
-convertsecstomin() {
- ((m=${1}/60))
- ((s=${1}%60))
- printf "%02d:%02d\n" $m $s
-}
+# convertsecstomin() {
+ # ((m=${1}/60))
+ # ((s=${1}%60))
+ # printf "%02d:%02d\n" $m $s
+# }
 
-TIME=$(convertsecstomin $ELAPSED)
+# TIME=$(convertsecstomin $ELAPSED)
 
-subtitle "✴ elapsed: $TIME m:s"
+# subtitle "✴ elapsed: $TIME m:s"
