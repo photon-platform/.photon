@@ -63,13 +63,14 @@ init/chrome.sh
 
 init/graphics.sh
 
+init/nextcloud.sh
+
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
 
 #####################################
 
 title installed apps
-
 
 subtitle "apache2"
 apache2 -v

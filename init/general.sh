@@ -5,6 +5,7 @@ source ~/.photon/ui/_main.sh
 clear -x
 ui_banner "general utilities"
 
+#TODO: ranger - set config files
 echo
 h1 "ranger"
 echo
@@ -26,7 +27,7 @@ echo
 sudo apt install -y tree
 
 echo
-h1 "ranger"
+h1 "rename"
 echo
 sudo apt install -y rename
 
@@ -39,21 +40,26 @@ echo
 h1 "screenkey"
 echo
 sudo apt install -y screenkey
+
+echo
+h1 "python-appindicator"
+echo
 sudo apt install -y python-appindicator
 
+echo
+h1 "xmlstarlet"
+echo
+sudo apt install -y xmlstarlet
+
+echo
+h1 "newsboat"
+echo
+sudo apt install -y newsboat
 
 # Gogh theme for Terminal - with Gruvbox
 # https://github.com/Mayccoll/Gogh
 sudo apt-get install dconf-cli uuid-runtime
 bash -c  "$(wget -qO- https://git.io/vQgMr)"
-
-sudo apt install -y xmlstarlet
-
-sudo apt install -y newsboat
-
-sudo add-apt-repository ppa:nextcloud-devs/client
-sudo apt-get update
-sudo apt install nextcloud-client
 
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
