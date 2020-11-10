@@ -8,7 +8,7 @@ ui_banner "nextcloud client"
 echo
 h1 "load ppa"
 echo
-sudo add-apt-repository ppa:nextcloud-devs/client
+sudo add-apt-repository -y ppa:nextcloud-devs/client
 sudo apt update -y
 
 echo
