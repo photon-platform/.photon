@@ -9,7 +9,7 @@ then
 fi
 
 # default org for github operations
-GITHUBORG="illumiphi"
+GITHUBORG="photon-platform"
 
 source ~/.photon/sites/list.sh
 source ~/.photon/sites/actions.sh
