@@ -49,6 +49,8 @@ init/apache.sh
 
 init/php.sh
 
+init/composer.sh
+
 init/grav.sh
 
 init/starter.sh
