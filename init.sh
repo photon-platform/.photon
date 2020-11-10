@@ -93,6 +93,6 @@ subtitle "darktable"
 darktable --version
 
 subtitle "chrome"
-chrome -v
+google-chrome -v
 
 
