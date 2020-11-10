@@ -57,12 +57,3 @@ sudo chmod  o+w /var/www/html
 sudo echo "<?php phpInfo();" > /var/www/html/info.php
 firefox "http://localhost/info.php"
 
-echo
-h1 "composer"
-echo
-sudo apt install -y composer
-sudo chown -R $USER $HOME/.composer
-
-# sudo pecl channel-update pecl.php.net
-
-# sudo pecl install yaml

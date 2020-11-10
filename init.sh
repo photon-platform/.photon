@@ -16,20 +16,10 @@ subtitle() {
 
 
 title "photon PLATFORM initialization"
-# subtitle "press enter to continue"
-# read continue
 sudo pwd
-
-# START_TIME="$(date -u +%s)"
-# echo started: $(date +"%T")
 
 ./home.sh
 src
-
-# TODO: prompt user for info at start
-# this script is hardcoded for phi
-# title "git config"
-# init/git.sh
 
 init/remove-default-apps.sh
 
@@ -86,31 +76,21 @@ composer -V
 
 subtitle "git"
 git --version
-git config --list
+# git config --list
 
 subtitle "vim"
 vim --version
 
-# subtitle "inkscape"
-# inkscape -V
+subtitle "inkscape"
+inkscape -V
 
-# subtitle "gimp"
-# gimp -v
+subtitle "gimp"
+gimp -v
 
-# subtitle "darktable"
-# darktable --version
+subtitle "darktable"
+darktable --version
 
-# chrome -v
+subtitle "chrome"
+chrome -v
 
-# END_TIME="$(date -u +%s)"
-# ELAPSED="$(($END_TIME-$START_TIME))"
 
-# convertsecstomin() {
- # ((m=${1}/60))
- # ((s=${1}%60))
- # printf "%02d:%02d\n" $m $s
-# }
-
-# TIME=$(convertsecstomin $ELAPSED)
-
-# subtitle "✴ elapsed: $TIME m:s"
