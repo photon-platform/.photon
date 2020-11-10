@@ -92,7 +92,10 @@ gimp -v
 subtitle "darktable"
 darktable --version
 
-subtitle "chrome"
-google-chrome -v
+subtitle "google-chrome"
+google-chrome --version
+
+subtitle "firefox"
+firefox --version
 
 
