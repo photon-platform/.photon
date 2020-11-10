@@ -42,8 +42,8 @@ init/general.sh
 
 init/vim.sh
 
-subtitle "preopen firefox"
-firefox &
+# subtitle "preopen firefox"
+# firefox &
 
 init/apache.sh
 
