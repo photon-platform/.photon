@@ -28,6 +28,8 @@ sudo apt_upgrade
 
 init/gsettings.sh
 
+init/git.sh
+
 init/general.sh
 
 init/vim.sh
