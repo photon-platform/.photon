@@ -4,23 +4,16 @@
 source ~/.photon/ui/_main.sh
 
 clear -x
-ui_banner "git config"
+ui_banner "git"
 
 echo
-read -p "git user name: " username
-read -p "git user email: " useremail
+h1 "load ppa"
 echo
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo apt update
 
-
-# set account
-git config --global user.name $username
-git config --global user.email $useremail
-
-
-# Set git to use the credential memory cache
-git config --global credential.helper cache
-# extend cache timeout
-git config --global credential.helper 'cache --timeout=10000000'
-
-git config --list
-
+echo
+h1 "install git"
+echo
+sudo apt install -y git
+git --version
