@@ -58,6 +58,12 @@ init/chrome.sh
 
 init/graphics.sh
 
+init/media.sh
+
+init/thunderbird.sh
+
+init/node.sh
+
 init/nextcloud.sh
 
 title "update & upgrade"
