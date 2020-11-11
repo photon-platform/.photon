@@ -25,14 +25,29 @@ source ~/.bashrc
 init/remove-default-apps.sh
 
 title "update system packages"
-# sudo apt_upgrade
-  sudo apt update -y
-  sudo apt list --upgradeable
-  read -n1 -p "run upgrade?" run_upgrade
-  if [[ $run_upgrade == "y" ]]; then
-    sudo apt upgrade -y
-    sudo apt autoremove -y
-  fi
+
+echo
+h1 "apt update"
+echo
+sudo apt update -y
+
+echo
+h1 "apt upgradeable"
+echo
+sudo apt list --upgradeable
+
+echo
+read -n1 -p "run upgrade?" run_upgrade
+if [[ $run_upgrade == "y" ]]; then
+  echo
+  h1 "apt upgrade"
+  echo
+  sudo apt upgrade -y
+  echo
+  h1 "apt autoremove"
+  echo
+  sudo apt autoremove -y
+fi
 
 init/gsettings.sh
 
