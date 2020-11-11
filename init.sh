@@ -14,12 +14,13 @@ subtitle() {
   echo
 }
 
+cd ~/.photon
 
 title "photon PLATFORM initialization"
 sudo pwd
 
 ./home.sh
-src
+source ~/.bashrc
 
 init/remove-default-apps.sh
 

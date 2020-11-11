@@ -28,6 +28,7 @@ alias gpr="cd ~/Projects/;ls -hst"
 alias gge="cd ~/Projects/geometor-explorer;ls -hst"
 alias gyt="cd ~/youtube/;ls -hst"
 alias gsnip="cd ~/.vim/Ultisnips/;ls"
+alias gm="cd /media/phi"
 
 alias dl="youtube-dl"
 
