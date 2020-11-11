@@ -37,6 +37,13 @@ echo
 sudo apt install -y sendmail-bin
 
 echo
+h1 "bat"
+echo
+sudo apt install -y bat
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
+
+echo
 h1 "screenkey"
 echo
 sudo apt install -y screenkey
