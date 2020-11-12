@@ -24,7 +24,7 @@ function page_siblings() {
 }
 
 function page_siblings_move() {
-  ui_banner "Move page within siblings"
+  ui_header "Move page within siblings"
 
   h1 "$(dirname $(pwd))"
   echo
@@ -61,7 +61,7 @@ function page_siblings_move() {
   echo
   echo "" $((index + 1)) of ${#siblings[@]}
 
-  ui_banner "[j] move down | [k] move up | [q] quit"
+  ui_footer "[j] move down | [k] move up | [q] quit"
   read -n1  action
   case $action in
     j)

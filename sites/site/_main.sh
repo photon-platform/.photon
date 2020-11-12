@@ -12,7 +12,7 @@ function site() {
   @
   source .photon
   # clear
-  ui_banner "$PROJECT * SITE "
+  ui_header "$PROJECT * SITE "
   tab_title "$PROJECT * SITE "
 
   show_dir

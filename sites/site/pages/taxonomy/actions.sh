@@ -3,7 +3,7 @@
 function taxonomy_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "TAXONOMY actions: "
+  ui_footer "TAXONOMY actions: "
 
   read -s -n1  action
   case $action in

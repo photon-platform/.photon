@@ -3,7 +3,7 @@
 function plugin_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "plugin actions: "
+  ui_footer "plugin actions: "
 
   read -s -n1  action
   case $action in

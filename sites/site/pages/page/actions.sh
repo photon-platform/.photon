@@ -3,7 +3,7 @@
 function page_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "PAGE actions: "
+  ui_footer "PAGE actions: "
 
   read -s -n1  action
   case $action in

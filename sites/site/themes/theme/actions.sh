@@ -3,7 +3,7 @@
 function theme_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "theme actions: "
+  ui_footer "theme actions: "
 
   read -s -n1  action
   case $action in

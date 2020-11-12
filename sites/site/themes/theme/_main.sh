@@ -4,7 +4,7 @@ source ~/.photon/sites/site/themes/theme/actions.sh
 source ~/.photon/sites/site/themes/theme/siblings.sh
 
 function theme() {
-  ui_banner "$PROJECT * theme "
+  ui_header "$PROJECT * theme "
   tab_title "$PROJECT * theme "
 
   show_dir

@@ -25,12 +25,10 @@ alias grav-update="cd $SITESROOT/grav;bin/gpm self-upgrade;"
 function sites() {
 
   cd $SITESROOT
-
-  tab_title SITES
   
   clear
-  ui_banner SITES
-  echo
+  ui_header "photon ✴ SITES"
+  tab_title "photon ✴ SITES"
 
   sites_list
 

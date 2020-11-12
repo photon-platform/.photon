@@ -10,7 +10,7 @@ function plugins() {
   cd plugins
 
   clear
-  ui_banner "$PROJECT * PLUGINS"
+  ui_header "$PROJECT * PLUGINS"
   tab_title "$PROJECT * PLUGINS"
   show_dir
 
@@ -24,7 +24,7 @@ function plugins() {
 }
 
 function plugin_restore() {
-  ui_banner "restore plugin submodule"
+  ui_header "restore plugin submodule"
 
   if [[ $1 ]]; then
     name=$1

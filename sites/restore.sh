@@ -3,7 +3,7 @@
 function sites_restore() {
 
   clear -x
-  ui_banner "photon ✴ SITES restore"
+  ui_header "photon ✴ SITES restore"
 
   PROJECT="$1"
   if [[ -z $PROJECT ]]; then

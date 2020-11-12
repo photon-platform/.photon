@@ -44,7 +44,7 @@ function test_list_nullsep() {
 
 
 function page_children_renumber() {
-  ui_banner "renumber children:"
+  ui_header "renumber children:"
 
   i=1
   dirs=()

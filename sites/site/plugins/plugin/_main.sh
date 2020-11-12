@@ -4,7 +4,7 @@ source ~/.photon/sites/site/plugins/plugin/actions.sh
 source ~/.photon/sites/site/plugins/plugin/siblings.sh
 
 function plugin() {
-  ui_banner "$PROJECT * PLUGIN "
+  ui_header "$PROJECT * PLUGIN "
   tab_title "$PROJECT * PLUGIN "
 
   show_dir

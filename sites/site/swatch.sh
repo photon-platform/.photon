@@ -3,7 +3,7 @@
 function swatch() {
 
   clear
-  ui_banner "$PROJECT * SWATCH "
+  ui_header "$PROJECT * SWATCH "
   tab_title "$PROJECT * SWATCH "
 
   show_dir

@@ -5,14 +5,14 @@ TEMPLATE_DIR=~/.photon/templates/
 function pages_new() {
 
   clear
-  ui_banner "photon ✴ PAGE new"
+  ui_header "photon ✴ PAGE new"
   h1 "Select a template: "
 
   scaffold=$( scaffolds_select )
   if [[ $scaffold ]]; then
     
     clear
-    ui_banner "photon ✴ PAGE new"
+    ui_header "photon ✴ PAGE new"
     ncal -3
     echo
     scaffold_name=`sed -n -e 's/% name: \(.*\)/\1/p' $scaffold`

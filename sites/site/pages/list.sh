@@ -35,7 +35,7 @@ function search() {
   done
 
   echo
-  ui_banner "[q] return | [#] jump"
+  ui_footer "[q] return | [#] jump"
   read -n1  search_action
   case $search_action in
     [1-9]*)

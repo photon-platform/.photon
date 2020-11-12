@@ -10,7 +10,7 @@ alias grav-log="cd ${PROJECT_DIR};bin/grav logviewer"
 function site_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "SITE actions: q p u t c h j k g f o e . l / d G V"
+  ui_footer "SITE actions: q p u t c h j k g f o e . l / d G V"
 
   read -s -n1  action
   case $action in

@@ -13,7 +13,7 @@ function remove_quotes() {
 
 function page() {
 
-  ui_banner "$PROJECT * PAGE "
+  ui_header "$PROJECT * PAGE "
   tab_title "$PROJECT * PAGE "
 
   show_dir

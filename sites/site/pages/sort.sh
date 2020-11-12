@@ -3,7 +3,7 @@
 
 
 function sort_in_siblings() {
-  ui_banner "move within siblings"
+  ui_header "move within siblings"
 
   siblings=($(find $(dirname "$(pwd)") \
     -maxdepth 1 -mindepth 1 -type d | sort))
@@ -34,7 +34,7 @@ function sort_in_siblings() {
   echo
   echo "" $((index + 1)) of ${#siblings[@]}
 
-  ui_banner "[j] move down | [k] move up | [q] quit"
+  ui_footer "[j] move down | [k] move up | [q] quit"
   read -n1  action
   case $action in
     j)

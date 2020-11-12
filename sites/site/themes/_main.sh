@@ -10,7 +10,7 @@ function themes() {
   cd themes
 
   clear
-  ui_banner "$PROJECT * THEMES"
+  ui_header "$PROJECT * THEMES"
   tab_title "$PROJECT * THEMES"
 
   show_dir

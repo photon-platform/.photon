@@ -3,10 +3,9 @@ source ~/.photon/sites/site/pages/taxonomy/actions.sh
 
 function taxonomy() {
 
-  ui_banner "$PROJECT * TAXONOMY "
+  ui_header "$PROJECT * TAXONOMY "
   tab_title "$PROJECT * TAXONOMY "
 
-  show_dir
 
   declare -A tax_category
   declare -A tax_tag
@@ -14,7 +13,8 @@ function taxonomy() {
 
   taxonomy_index
   clear
-  ui_banner "$PROJECT * TAXONOMY "
+  ui_header "$PROJECT * TAXONOMY "
+  show_dir
   echo
 
   fmt="  [%c] ${fgYellow}%3d${txReset} ${txBold}%s${txReset}\n"

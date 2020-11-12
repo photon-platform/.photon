@@ -10,7 +10,7 @@ function sites_new() {
   TITLE=""
 
   clear
-  ui_banner "photon ✴ SITES new"
+  ui_header "photon ✴ SITES new"
 
   githuborg_set
 
