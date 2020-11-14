@@ -11,9 +11,14 @@ echo
 sudo apt install -y jack
 
 echo
+echo
 h1 "ffmpeg"
 echo
 sudo apt install -y ffmpeg
+
+h1 "mpv"
+echo
+sudo apt install -y mpv
 
 echo
 h1 "audacity"

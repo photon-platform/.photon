@@ -68,6 +68,11 @@ h1 "newsboat"
 echo
 sudo apt install -y newsboat
 
+echo
+h1 "youtube-dl"
+echo
+sudo pip install --upgrade youtube_dl
+
 
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
