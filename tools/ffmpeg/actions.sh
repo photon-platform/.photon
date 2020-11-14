@@ -7,33 +7,29 @@ AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
 CAMERA="/dev/video2"
 ZIGGI="/dev/video0"
 
-# /dev/video2 [HD Pro Webcam C920]
-# /dev/video0 [IPEVO Ziggi-HD: IPEVO Ziggi-HD]
-
+# mapfile -t media < <(find . -type f -name "*.mkv" -or -name "*.opus" -or -name "*.mp3" | sort)
 
 function tools_ffmpeg_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "ffmpeg actions: q c l t s x"
+  ui_footer "ffmpeg actions: q c d k y t s x"
 
   read -s -n1  action
   case $action in
     q) clear; ;; # quit
-    l) dbf_cam; kb_cam; sk1; echo; tools_ffmpeg_actions;;
-    t) set_term; ;; 
+    c) rc2;  tools_ffmpeg_actions; ;;
+    d) dbf_cam ;  tools_ffmpeg_actions;;
+    k) kb_cam ;  tools_ffmpeg_actions;;
+    y) sk2; tools_ffmpeg_actions ;; 
+    t) set_term; tools_ffmpeg_actions ;; 
     x) dbfoff; kboff; skoff; tools_ffmpeg_actions;;
     s) screen_rec;  tools_ffmpeg_actions; ;;
-    c) record_cam;  tools_ffmpeg_actions; ;;
-    *)
-      clear
-      tools_ffmpeg
-      ;;
+    *) clear; tools_ffmpeg ;;
   esac
-
 }
 
 function set_term() {
-  gnome-terminal --geometry=86x44+0+800 --hide-menubar --zoom=1.2
+  gnome-terminal --geometry=86x44+0+800 --hide-menubar --zoom=1.2 &
 }
 
 function make_filename() {
@@ -70,7 +66,8 @@ function tools_ffmpeg_screen() {
 
 function screen_rec() {
   output="$( make_filename ).mkv"
-  ffmpeg -video_size 1920x1080 -framerate 25 \
+  ffmpeg -video_size 1920x1080 \
+    -framerate 30 \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
     "$output" 
@@ -100,14 +97,15 @@ function record_cam() {
 function rc2() {
   AUDIO_OFFSET="0.33"
   TRIM_END=3
+  SIZE="1920x1080"
 
-  output="$( make_filename ).mp4"
+  output="$( make_filename ).mkv"
 
   echo
   ui_banner "recording: $output"
   ffmpeg  -hide_banner \
     -framerate 30 \
-    -video_size 1280x720 \
+    -video_size $SIZE \
     -f v4l2 -input_format mjpeg -i $CAMERA \
     -f pulse  -ac 2  -i $BLUE \
     "$output" 
@@ -161,19 +159,23 @@ function rablue() {
   ffplay -i  "$output"
 }
 
+function sk_top() {
+  skoff
+  screenkey --scr 1 -p fixed \
+    --opacity 0.8 \
+    -f 'Fira Mono' -s small \
+    -g 1920x40+0+768 &
+}
+alias skoff="pkill -f screenkey"
+
 function kb_cam() {
-  # mpv --really-quiet --no-border \
-    # --osc=no \
-    # --video-zoom=1.3 \
-    # --geometry=800x248+1040+660 \
-    # --saturation=-100 \
-    # $ZIGGI &
+  SIZE=1280x1024
   ffplay -noborder -hide_banner  \
-    -video_size 800x600 \
+    -video_size $SIZE \
     -loglevel quiet \
     -i $ZIGGI \
-    -vf "rotate=PI, crop=800:200, hue=s=0, eq=contrast=2:brightness=-.5" \
-    -left 1040  -top 1388 
+    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -left 1040  -top 1388 &
   export PID_KB=$!
 }
 
@@ -184,29 +186,15 @@ function kboff() {
   fi 
 }
 
-function sk1() {
-  skoff
-  screenkey --scr 1 -p fixed \
-    --opacity 0.5 \
-    -f 'Fira Mono' -s small \
-    -g 800x80+1040+1348
-}
-alias skoff="pkill -f screenkey"
-
-function desk_cam() {
-  ffplay -noborder -hide_banner  \
-    -i $CAMERA \
-    -video_size 800x448 \
-    -left 1040 -top 900 &
-}
 
 function dbf_cam() {
+  dbfoff
   ffplay -noborder -hide_banner  \
     -loglevel quiet \
+    -video_size 1024x768 \
     -i $CAMERA \
-    -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" \
-    -video_size 800x448 \
-    -left 1040 -top 900 
+    -vf "hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -left 1040 -top 900 &
   export PID_DBF=$!
 }
 function dbfoff() {
@@ -214,7 +202,6 @@ function dbfoff() {
     kill $PID_DBF
     unset -v PID_DBF
   fi 
-  
 }
 
 function other_cam() {
@@ -238,10 +225,10 @@ function timelapse() {
 }
 
 function ffconcat() {
-  output="$( make_filename ).mp4"
+  output="$( make_filename ).mkv"
   ffmpeg -hide_banner \
     -f concat -safe 0 \
-    -i <(for f in *.mp4; do echo "file '$PWD/$f'"; done) \
+    -i <(for f in *.mkv; do echo "file '$PWD/$f'"; done) \
     -c copy \
     $output
 }

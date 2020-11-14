@@ -6,12 +6,13 @@ source ~/.photon/tools/ffmpeg/actions.sh
 function tools_ffmpeg() {
 
   clear
-  ui_banner "tools * ffmpeg"
+  ui_header "tools * ffmpeg"
   tab_title "tools * ffmpeg"
 
   pwd
   echo
-  mapfile -t media < <(find . -type f -name "*.mkv" -or -name "*.opus" -or -name "*.mp3" | sort)
+  ffmpeg -hide_banner -sources pulse
+  ffmpeg -hide_banner -sources video4linux2
 
   for (( i = 0; i < ${#media[@]}; i++ ))
   do
