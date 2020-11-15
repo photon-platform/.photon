@@ -47,7 +47,7 @@ function vf() {
 }
 
 function zd() {
-  cd "$(fdfind -H -t d  | fzf)"
+  cd "$(find . -type d | fzf)"
 }
 
 # Determine size of a file or total size of a directory

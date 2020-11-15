@@ -6,6 +6,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
 
+alias C="src; clear -x"
 alias report_plugin="php ~/.photon/report/plugin.php"
 alias report_theme="php ~/.photon/report/theme.php"
 alias readme_html="pandoc -f gfm --css=/home/phi/.photon/report/gfm.css -s -o readme.html --metadata pagetitle="test" README.md ; open readme.html"
@@ -22,8 +23,8 @@ alias photon="cd ~/SITES/photon-platform.net/user; clear; site;"
 alias gdl="cd ~/Downloads;ls -1Ahst | head"
 
 alias dot="cd ~/.photon;ls -A"
-alias dotp="cd ~/.photon/photon;ls -A"
-alias dotpp="cd ~/.photon/photon/pages;ls -A"
+alias dots="cd ~/.photon/sites;ls -A"
+
 alias gpr="cd ~/Projects/;ls -hst"
 alias gge="cd ~/Projects/geometor-explorer;ls -hst"
 alias gyt="cd ~/youtube/;ls -hst"
@@ -49,7 +50,7 @@ alias r="ranger"
 colorflag="--color"
 export LS_COLORS="no=00:\
 fi=00:\
-di=1;34:\
+di=1;33:\
 ln=01;36:\
 pi=40;33:\
 so=01;35:\
