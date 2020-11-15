@@ -64,6 +64,11 @@ echo
 sudo apt install -y pandoc pandoc-citeproc
 
 echo
+h1 "ncal"
+echo
+sudo apt install -y ncal
+
+echo
 h1 "newsboat"
 echo
 sudo apt install -y newsboat
