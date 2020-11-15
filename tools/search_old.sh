@@ -31,7 +31,7 @@ function search_old(){
   done
 
   echo
-  ui_banner "[r] return | [#] jump"
+  ui_footer "[r] return | [#] jump"
   read -n1  search_action
   case $search_action in
     [1-9]*)

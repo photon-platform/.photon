@@ -2,7 +2,7 @@
 
 function tools_git_submodules_add() {
 
-  ui_banner "add submodule from repo"
+  ui_header "add submodule from repo"
   
   h1 "*** checking github repo"
   github="$(ask_value "specify github url" "")"

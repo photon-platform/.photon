@@ -3,7 +3,7 @@
 function tools_git_submodules_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "git actions: q m f u | a r"
+  ui_footer "git actions: q m f u | a r"
 
   read -s -n1  action
   case $action in

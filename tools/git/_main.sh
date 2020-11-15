@@ -16,7 +16,7 @@ alias g-df-s="git config --global diff.submodule log"
 function tools_git() {
 
   clear
-  ui_banner "tools * GIT"
+  ui_header "tools * GIT"
   tab_title "tools * GIT"
 
   pwd

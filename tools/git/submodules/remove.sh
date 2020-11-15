@@ -6,7 +6,7 @@ function tools_git_submodules_remove() {
   orig_dir="$(pwd)"
   g-root
 
-  ui_banner "REMOVE submodule"
+  ui_header "REMOVE submodule"
 
   if [[ $1 ]]; then
     submodule_path=$1

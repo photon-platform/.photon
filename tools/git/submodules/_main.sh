@@ -7,7 +7,7 @@ source ~/.photon/tools/git/submodules/remove.sh
 function tools_git_submodules() {
 
   clear
-  ui_banner "tools * GIT submodules"
+  ui_header "tools * GIT submodules"
   tab_title "tools * GIT submodules"
 
   repo_home=$(g-home)

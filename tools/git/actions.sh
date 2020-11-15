@@ -3,7 +3,7 @@
 function tools_git_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "git actions: q l d a c p u S"
+  ui_footer "git actions: q l d a c p u S"
 
   read -s -n1  action
   case $action in

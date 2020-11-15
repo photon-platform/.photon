@@ -5,7 +5,7 @@ function tools_git_submodules_create() {
   folder="$(basename $PWD)"
   github="https://github.com/photon-platform/grav-plugin-${folder}.git"
 
-  ui_banner "Convert '${folder}' to submodule"
+  ui_header "Convert '${folder}' to submodule"
   
   h1 "*** checking github repo"
   github="$(ask_value "confirm github" "${github}")"

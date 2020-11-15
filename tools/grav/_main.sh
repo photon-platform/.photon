@@ -10,7 +10,7 @@ function tools_grav() {
   cd ..
 
   clear
-  ui_banner "$PROJECT * GRAV"
+  ui_header "$PROJECT * GRAV"
   tab_title "$PROJECT * GRAV"
 
   echo

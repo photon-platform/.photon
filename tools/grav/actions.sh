@@ -3,7 +3,7 @@
 function tools_grav_actions() {
 
   # TODO: show all menu options on '?'
-  ui_banner "grav actions: q v-grav u-plugins c-cache l-clean t-tntsearch"
+  ui_footer "grav actions: q v-grav u-plugins c-cache l-clean t-tntsearch"
 
   read -s -n1  action
   case $action in
