@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-
 source ~/.photon/ui/color.sh
 source ~/.photon/ui/ask.sh
 
@@ -17,13 +16,33 @@ function h2() {
   printf "$fmt" "$1"
 }
 
+function hr() {
+  width=$(tput cols)
+  width=$((width - 2))
+  sty="${txBold}${fgYellow}"
+  fmt="${sty} %-${width}s${txReset} \n"
+  printf -v spaces "%-${width}s"
+  printf "$fmt" "${spaces// /━}"
+}
+
+function ui_header() {
+  hr
+  ui_banner "$1"
+  hr
+  echo
+}
+
+function ui_footer() {
+  hr
+  ui_banner "$1"
+}
 
 function ui_banner() {
   width=$(tput cols)
-  sty="${bgYellow}${black}"
-  fmt="${sty} %-*s${txReset}\n"
-  printf "$fmt" $((width - 1)) "$1"
-  echo
+  width=$((width - 2))
+  sty="${txBold}${fgYellow}"
+  fmt="${sty} %-${width}s${txReset} \n"
+  printf "$fmt" "$1"
 }
 
 function ui_list_item() {
