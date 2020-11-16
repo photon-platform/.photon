@@ -19,10 +19,14 @@ function h2() {
 function hr() {
   width=$(tput cols)
   width=$((width - 2))
-  sty="${txBold}${fgYellow}"
+  char="━"
+  char="─"
+  
+  # sty="${fgYellow}"
+  sty=""
   fmt="${sty} %-${width}s${txReset} \n"
   printf -v spaces "%-${width}s"
-  printf "$fmt" "${spaces// /━}"
+  printf "$fmt" "${spaces// /${char}}"
 }
 
 function ui_header() {
