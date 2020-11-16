@@ -47,6 +47,16 @@ h1 "lmms"
 echo
 sudo apt install -y lmms
 
+echo
+h1 "midicsv"
+echo
+sudo apt install -y midicsv
+
+echo
+h1 "timidity"
+echo
+sudo apt install -y timidity
+
 # sudo add-apt-repository ppa:obsproject/obs-studio
 # sudo apt update
 # sudo apt install -y obs-studio
