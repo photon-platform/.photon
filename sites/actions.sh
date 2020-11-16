@@ -4,7 +4,7 @@ function sites_actions() {
 
   ui_footer "SITES actions: h j k [le] # g G r d q n s ? "
 
-  read -s -n1  action
+  read -s -n1 -p " > " action
   case $action in
     \?)
       echo

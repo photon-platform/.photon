@@ -5,7 +5,7 @@ function pages_actions() {
   # TODO: show all menu options on '?'
   ui_footer "PAGES actions: "
 
-  read -s -n1  action
+  read -s -n1 -p " > "  action
   case $action in
     q) clear; ;;
     t) tree; pages_actions; ;;

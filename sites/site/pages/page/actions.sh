@@ -5,7 +5,7 @@ function page_actions() {
   # TODO: show all menu options on '?'
   ui_footer "PAGE actions: "
 
-  read -s -n1  action
+  read -s -n1 -p " > "  action
   case $action in
     q) clear; ;;
     e) vim *.md; clear; page; ;;

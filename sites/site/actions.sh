@@ -12,7 +12,7 @@ function site_actions() {
   # TODO: show all menu options on '?'
   ui_footer "SITE actions: q p u t c h j k g f o e . l / d G V"
 
-  read -s -n1  action
+  read -s -n1 -p " > "  action
   case $action in
     q) clear; ;;
     r) ranger; clear; site; ;;
@@ -103,7 +103,7 @@ function site_actions() {
     w) clear; swatch; ;;
     *)
       echo
-      echo "not a command"
+      echo " not a command"
       site_actions
       ;;
   esac
