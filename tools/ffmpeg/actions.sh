@@ -14,7 +14,7 @@ function tools_ffmpeg_actions() {
   # TODO: show all menu options on '?'
   ui_footer "ffmpeg actions: q c d k y t s x"
 
-  read -s -n1  action
+  read -s -n1 -p " > "  action
   case $action in
     q) clear; ;; # quit
     c) rc2;  tools_ffmpeg_actions; ;;
