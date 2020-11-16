@@ -79,8 +79,6 @@ call vundle#begin()
   " Plugin 'ddevault/vimspeak'
 
   Plugin 'morhetz/gruvbox'
-  " Plugin 'junegunn/goyo'
-  " Plugin 'junegunn/limelight'
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
 
@@ -93,11 +91,11 @@ call vundle#begin()
 call vundle#end()            " required
 
 set background=dark    " Setting dark mode
-let g:gruvbox_contrast_dark = "hard"
+" let g:gruvbox_contrast_dark = "hard"
 color gruvbox
 
 " Put your non-Plugin stuff after this line
-let g:airline_theme='gruvbox'
+" let g:airline_theme='gruvbox'
 
 " When working with Markdown files, grok the YAML frontmatter...
 let g:vim_markdown_frontmatter = 1

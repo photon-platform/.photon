@@ -11,6 +11,7 @@ nnoremap <leader>yo ggjzo
 nnoremap <leader>yt gg/title:/<cr>:noh<cr>2w
 nnoremap <leader>k k0/[:-]/<cr>:noh<cr>
 nnoremap <leader>j j0/[:-]/<cr>:noh<cr>
+nnoremap <leader>= gg/---/<cr>:noh<cr>j
 
 nnoremap <leader>0 0:s/[#]*\s*//<cr>:noh<cr>
 nnoremap <leader>1 0:s/[#]*\s*/# /<cr>:noh<cr>

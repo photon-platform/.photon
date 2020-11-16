@@ -45,7 +45,9 @@ prompt_git() {
 
     [ -n "${s}" ] && s=" [${s}]"
 
-    echo -e "${1}${branchName}${2}${s}"
+    # echo -e "${fgPurple}${branchName}${txReset}${2}${s}"
+    printf "${fgPurple}%s${txReset} " $branchName
+    printf "${fgRed}%s${txReset} " $s
   else
           return
   fi
@@ -98,8 +100,8 @@ PS1+="${fgWhite}\t "; # time
 # fi
 PS1+=" ${txReset}\n"
 # PS1+="[$(convertsecstomin $timer_show)s] $?\n"
+PS1+=" $(prompt_git)" 
 PS1+=" ${green}\w"; # working directory full path
-PS1+="$(prompt_git "${fgWhite} on ${violet}" "${red}")"; # Git repository details
 PS1+="\n"
 PS1+=" ${fgWhite}> ${txReset}"; 
 export PS1

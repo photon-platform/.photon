@@ -24,6 +24,7 @@ alias gdl="cd ~/Downloads;ls -1Ahst | head"
 
 alias dot="cd ~/.photon;ls -A"
 alias dots="cd ~/.photon/sites;ls -A"
+alias doti="cd ~/.photon/init;ls -A"
 
 alias gpr="cd ~/Projects/;ls -hst"
 alias gge="cd ~/Projects/geometor-explorer;ls -hst"
