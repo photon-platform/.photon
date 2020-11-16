@@ -19,10 +19,10 @@ function tools_git() {
   ui_header "tools * GIT"
   tab_title "tools * GIT"
 
-  pwd
+  printf " %s\n" $( pwd )
+  printf " tag: %s\n" $( gtl )
   echo
   gss
-  echo "tag: " $(gtl)
   echo
 
   tools_git_actions

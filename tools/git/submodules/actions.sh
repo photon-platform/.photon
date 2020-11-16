@@ -5,7 +5,7 @@ function tools_git_submodules_actions() {
   # TODO: show all menu options on '?'
   ui_footer "git actions: q m f u | a r"
 
-  read -s -n1  action
+  read -s -n1 -p " > "  action
   case $action in
     q) clear; ;; # quit
     m) echo; tools_git_submodules_master; pause_enter;  tools_git_submodules  ;;

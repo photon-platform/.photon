@@ -5,7 +5,7 @@ function tools_git_actions() {
   # TODO: show all menu options on '?'
   ui_footer "git actions: q l d a c p u S"
 
-  read -s -n1  action
+  read -s -n1 -p " > "  action
   case $action in
     q) clear; ;; # quit
     l) echo; git log --graph --oneline ;   tools_git  ;;
