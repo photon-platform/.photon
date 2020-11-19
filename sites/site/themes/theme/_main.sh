@@ -13,7 +13,6 @@ function theme() {
   cat blueprints.yaml | head -n 12
   echo
 
-  gsss
   theme_actions
   tab_title
 }

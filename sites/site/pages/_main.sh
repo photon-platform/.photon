@@ -19,8 +19,6 @@ function pages() {
 
   show_dir
 
-  gsss
-  echo
 
   page_children
 

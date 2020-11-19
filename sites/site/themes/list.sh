@@ -14,8 +14,6 @@ function themes_list() {
 
   for theme in ${list[@]}
   do
-    # gsss
-
     # echo -e "$i\t$title $gscount"
     ui_list_item_number $i "$theme"
     ((i++))

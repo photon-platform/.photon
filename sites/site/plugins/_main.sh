@@ -14,8 +14,6 @@ function plugins() {
   tab_title "$PROJECT * PLUGINS"
   show_dir
 
-  gsss
-
   plugins_list
 
   plugins_actions

@@ -15,8 +15,6 @@ function themes() {
 
   show_dir
 
-  gsss
-
   themes_list
 
   themes_actions

@@ -13,7 +13,6 @@ function plugin() {
   cat blueprints.yaml | head -n 12
   echo
 
-  gsss
   plugin_actions
   tab_title
 }

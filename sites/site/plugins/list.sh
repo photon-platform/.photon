@@ -14,7 +14,6 @@ function plugins_list() {
 
   for plugin in ${list[@]}
   do
-    # gsss
     export yaml=$(cat $plugin)
     eval "$(yaml_parse plugin)" 2> /dev/null
 
