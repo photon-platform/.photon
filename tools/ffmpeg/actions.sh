@@ -7,6 +7,8 @@ AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
 CAMERA="/dev/video2"
 ZIGGI="/dev/video0"
 
+FRAMERATE=24
+
 # mapfile -t media < <(find . -type f -name "*.mkv" -or -name "*.opus" -or -name "*.mp3" | sort)
 
 function tools_ffmpeg_actions() {
@@ -17,6 +19,7 @@ function tools_ffmpeg_actions() {
   read -s -n1 -p " > "  action
   case $action in
     q) clear; ;; # quit
+    a) rablue;  tools_ffmpeg_actions; ;;
     c) rc2;  tools_ffmpeg_actions; ;;
     d) dbf_cam ;  tools_ffmpeg_actions;;
     k) kb_cam ;  tools_ffmpeg_actions;;
@@ -67,7 +70,7 @@ function tools_ffmpeg_screen() {
 function screen_rec() {
   output="$( make_filename ).mkv"
   ffmpeg -video_size 1920x1080 \
-    -framerate 30 \
+    -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
     "$output" 
@@ -141,6 +144,7 @@ function ra() {
   ui_banner "recording: $output"
   ffmpeg -y -hide_banner \
     -f pulse -ac 2 -i $MIC \
+    -af "highpass=f=100, volume=volume=5dB, afftdn" \
     "$output" 
 
   ffplay -i  "$output"
@@ -149,80 +153,30 @@ function ra() {
 function rablue() {
 
   output="$( make_filename ).mp3"
+  mkdir -p out
 
-  ui_banner "recording: $output"
+  ui_banner "audio recording: $output"
   ffmpeg -y -hide_banner \
     -f pulse  -i $BLUE \
     "$output" 
-    # -af "highpass=f=100, volume=volume=10dB, afftdn"
 
-  ffplay -i  "$output"
+  ffmpeg -y -hide_banner \
+    -i $output \
+    -af "highpass=f=100, volume=volume=5dB, afftdn" \
+    "out/$output" 
+
+  ffplay -i  "out/$output"
 }
 
-function sk_top() {
+function sk() {
   skoff
   screenkey --scr 1 -p fixed \
     --opacity 0.8 \
     -f 'Fira Mono' -s small \
-    -g 1920x40+0+768 &
+    -g 1920x80+0+768 &
 }
 alias skoff="pkill -f screenkey"
 
-function kb_cam() {
-  SIZE=1280x1024
-  ffplay -noborder -hide_banner  \
-    -video_size $SIZE \
-    -loglevel quiet \
-    -i $ZIGGI \
-    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
-    -left 1040  -top 1388 &
-  export PID_KB=$!
-}
-
-function kboff() {
-  if [[ $PID_KB ]]; then
-    kill $PID_KB
-    unset -v PID_KB
-  fi 
-}
-
-
-function dbf_cam() {
-  dbfoff
-  ffplay -noborder -hide_banner  \
-    -loglevel quiet \
-    -video_size 1024x768 \
-    -i $CAMERA \
-    -vf "hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
-    -left 1040 -top 900 &
-  export PID_DBF=$!
-}
-function dbfoff() {
-  if [[ $PID_DBF ]]; then
-    kill $PID_DBF
-    unset -v PID_DBF
-  fi 
-}
-
-function other_cam() {
-  ffmpeg -top 900 -i $CAMERA -c:v rawvideo -pix_fmt rgb24 -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" -window_size 80x25 -f caca - -top 900
-}
-
-function sky_cam() {
-  ffplay -noborder -hide_banner  \
-    -i /dev/video4 \
-    -video_size 800x448 \
-    -left 1040 -top 900 &
-}
-
-function timelapse() {
-  output="$( make_filename ).mkv"
-  ffmpeg -framerate 1 -f v4l2  \
-    -i $CAMERA \
-    -vf settb=\(1/30\),setpts=N/TB/30 \
-    -r 30 -vcodec libx264 -crf 0 -preset ultrafast -threads 0 \
-    $output
-}
 
 function ffconcat() {
   output="$( make_filename ).mkv"

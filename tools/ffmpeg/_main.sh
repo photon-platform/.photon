@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source ~/.photon/tools/ffmpeg/actions.sh
+source ~/.photon/tools/ffmpeg/cameras.sh
 
 
 function tools_ffmpeg() {
