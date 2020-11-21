@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DOT="•"
+
 # Make vim the default editor.
 export EDITOR='vim';
 
