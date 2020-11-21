@@ -12,6 +12,9 @@ function list_text_files() {
     -type f -name "*.pack.*" -prune -o \
     -type f -name "*.map" -prune -o \
     -type f -name "*.index" -prune -o \
+    -type f -name "*.jpg" -prune -o \
+    -type f -name "*.png" -prune -o \
+    -type f -name "*.gif" -prune -o \
     -type f -name "*" \
     -print | sort | sed 's|\./||'
   

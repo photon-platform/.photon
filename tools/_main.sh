@@ -14,8 +14,7 @@ function show_dir() {
 
   d=$(pwd)
   d=${d##*/user/}
-  pg="$(prompt_git "${violet}" "${red}")"
-  h1 "${pg}${txReset}: ${d}"
+  h1 "${fgPurple}$(git_branch) ${fgRed}$(gsss)${txReset}: ${d}"
   echo
 
 }

@@ -31,6 +31,17 @@ function tools_git() {
 }
 alias G=tools_git
 
+function git_branch() {
+  # Get the short symbolic ref.
+  # If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
+  # Otherwise, just give up.
+  if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+      git rev-parse --short HEAD 2> /dev/null || \
+      echo '(unknown)'
+  fi
+}
+
 function tools_git_tag_delete() {
   git tag -d $1
   git push origin --delete $1
@@ -56,7 +67,9 @@ alias @=g-root
 
 # git summary summary
 function gsss() {
-  gss | awk '{ print substr($1, 1,3) }' | grep -v "##" | sort | uniq -c
+  if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    gss | awk '{ print substr($1, 1,3) }' | grep -v "##" | sort | uniq | tr "\n" " "
+  fi
 }
 
 # Enable tab completion for `g` by marking it as an alias for `git`
