@@ -21,7 +21,7 @@ function v0off() {
   fi 
 }
 
-# main camera
+# sky camera
 function v2() {
   v2off
   SIZE=1024x768
@@ -29,7 +29,7 @@ function v2() {
     -video_size $SIZE \
     -framerate $FRAMERATE \
     -i /dev/video2 \
-    -vf "hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
     -left 1040 -top 900 &
   export PID_v2=$!
 }
@@ -40,7 +40,7 @@ function v2off() {
   fi 
 }
 
-# sky cam
+# desk cam
 function v4() {
   v4off
   SIZE=1024x768
@@ -48,7 +48,7 @@ function v4() {
     -video_size $SIZE \
     -framerate $FRAMERATE \
     -i /dev/video4 \
-    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
     -left 1040 -top 900 &
   export PID_v4=$!
 }

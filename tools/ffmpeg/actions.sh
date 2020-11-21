@@ -67,11 +67,23 @@ function tools_ffmpeg_screen() {
   esac
 }
 
-function screen_rec() {
+function screen_main() {
   output="$( make_filename ).mkv"
-  ffmpeg -video_size 1920x1080 \
+  ffmpeg -hide_banner \
+    -video_size 1920x1080 \
     -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
+    -f pulse -i $BLUE \
+    "$output" 
+  mpv "$output"
+}
+
+function screen_full() {
+  output="$( make_filename ).mkv"
+  ffmpeg -hide_banner \
+    -video_size 1920x1848 \
+    -framerate $FRAMERATE \
+    -f x11grab -i :1+0,0 \
     -f pulse -i $BLUE \
     "$output" 
   mpv "$output"
