@@ -29,6 +29,17 @@ function hr() {
   printf "$fmt" "${spaces// /${char}}"
 }
 
+function hr_prompt() {
+  width=$(tput cols)
+  width=$((width / 2 - 4))
+  char="─"
+  
+  printf -v spaces "%-${width}s"
+
+  fmt=" %s "
+  printf "$fmt" "${spaces// /${char}}"
+}
+
 function ui_header() {
   hr
   ui_banner "$1"
