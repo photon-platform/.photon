@@ -2,75 +2,6 @@
 
 # LAST_ERROR=$?
 
-prompt_git() {
-  s=""
-  branchName=""
-
-  # Check if the current directory is in a Git repository.
-  if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
-
-    # check if the current directory is in .git before running git checks
-    if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
-
-      # Ensure the index is up to date.
-      git update-index --really-refresh -q &>/dev/null
-
-      # Check for uncommitted changes in the index.
-      if ! $(git diff --quiet --ignore-submodules --cached); then
-        s+='+'
-      fi
-
-      # Check for unstaged changes.
-      if ! $(git diff-files --quiet --ignore-submodules --); then
-        s+='!'
-      fi
-
-      # Check for untracked files.
-      if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-        s+='?'
-      fi
-
-      # Check for stashed files.
-      if $(git rev-parse --verify refs/stash &>/dev/null); then
-        s+='$'
-      fi
-    fi
-
-    # Get the short symbolic ref.
-    # If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
-    # Otherwise, just give up.
-    branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
-            git rev-parse --short HEAD 2> /dev/null || \
-            echo '(unknown)')"
-
-    [ -n "${s}" ] && s=" [${s}]"
-
-    # echo -e "${fgPurple}${branchName}${txReset}${2}${s}"
-    printf "${fgPurple}%s${txReset} " $branchName
-    printf "${fgRed}%s${txReset} " $s
-  else
-          return
-  fi
-}
-
-function timer_start {
-  timer=${timer:-$SECONDS}
-}
-
-function timer_stop {
-  timer_show=$(($SECONDS - $timer))
-  unset timer
-}
-
-trap 'timer_start' DEBUG
-
-if [ "$PROMPT_COMMAND" == "" ]; then
-  PROMPT_COMMAND="timer_stop"
-else
- PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
-fi
-
-
 # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
   userStyle="${fgRed}"
@@ -80,35 +11,94 @@ fi
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then
-  hostStyle="${txBold}${fgRed}"
+  hostStyle="${fgRed}"
 else
   hostStyle="${fgAqua}"
 fi
 
-
 # Set the terminal title and prompt.
-PS1="\n$( hr )\n"
-# PS1+="\[${txBold}\]\n"; # newline
-# PS1+="\[${userStyle}\]\u"; # username
-PS1+=" ${userStyle}\u"; # username
-PS1+="${fgWhite} ✴ "
-PS1+="${hostStyle}\h "; # host
-PS1+="${fgWhite}\t "; # time
-# PS1+='[${timer_show}s] $?\n'
+# Use \[...\] around the parts of PS1 that have length 0. 
+PS1='\n'
+# PS1+=`hr_prompt`
+PS1+='$(hr_prompt)'
+PS1+='\n'
+# PS1+=" \[${userStyle}\]\u"; # username
+PS1+=' \u'; # username
+# PS1+="\[${fgWhite}\] ✴ "
+PS1+=' ✴'
+# PS1+="\[${hostStyle}\]\h "; # host
+PS1+=' \h'; # host
+PS1+=' \t'; # time
+PS1+='\n'
 # if [ $LAST_ERROR -ne 0 ]; then
   # PS1+=" ${txBold}${fgRed}$?"
 # fi
-PS1+=" ${txReset}\n"
-# PS1+="[$(convertsecstomin $timer_show)s] $?\n"
-PS1+=" $(prompt_git)" 
-PS1+=" ${green}\w"; # working directory full path
-PS1+="\n"
-PS1+=" ${fgWhite}> ${txReset}"; 
+# PS1+=" \[${txReset}\]\n"
+# g_b=`git_branch`
+# PS1+=" \[${fgPurple}\]${g_b}\[${txReset}\] " 
+PS1+=' '
+# PS1+=`git_branch`
+PS1+='$(git_branch)'
+PS1+=' '
+# PS1+=`gsss`
+PS1+='$(gsss)'
+# PS1+=" \[${fgRed}\]${g_s}\[${txReset}\] " 
+# PS1+=" \[${fgYellow}\]\w"; # working directory full path
+PS1+=' \w'; # working directory full path
+PS1+='\n'
+PS1+=' > '; 
 export PS1
 
 # continuation prompt
-PS2="\[${fgYellow}\]→ \[${reset}\]"
+PS2="   \[${fgYellow}\]→ \[${txReset}\]"
 export PS2
 
-title=${PWD} # current directory
-echo -n -e "\033]0;$title\007"
+# prompt_git() {
+  # s=""
+  # branchName=""
+
+  # # Check if the current directory is in a Git repository.
+  # if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+
+    # # check if the current directory is in .git before running git checks
+    # if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
+
+      # # Ensure the index is up to date.
+      # git update-index --really-refresh -q &>/dev/null
+
+      # # Check for uncommitted changes in the index.
+      # if ! $(git diff --quiet --ignore-submodules --cached); then
+        # s+='+'
+      # fi
+
+      # # Check for unstaged changes.
+      # if ! $(git diff-files --quiet --ignore-submodules --); then
+        # s+='!'
+      # fi
+
+      # # Check for untracked files.
+      # if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        # s+='?'
+      # fi
+
+      # # Check for stashed files.
+      # if $(git rev-parse --verify refs/stash &>/dev/null); then
+        # s+='$'
+      # fi
+    # fi
+
+    # # Get the short symbolic ref.
+    # # If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
+    # # Otherwise, just give up.
+    # branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+            # git rev-parse --short HEAD 2> /dev/null || \
+            # echo '(unknown)')"
+
+    # [ -n "${s}" ] && s=" [${s}]"
+
+    # printf "\[${fgPurple}\]%s\[${txReset}\] " $branchName
+    # printf "\[${fgRed}\]%s\[${txReset}\] " $s
+  # else
+    # return
+  # fi
+# }

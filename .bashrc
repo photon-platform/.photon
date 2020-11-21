@@ -10,17 +10,15 @@ SOURCES+=(ui/_main.sh)
 SOURCES+=(shell/_main.sh)
 SOURCES+=(hosts/_main.sh)
 SOURCES+=(sites/_main.sh)
-# prompt should be last
-SOURCES+=(.prompt)
 
 for file in  ${SOURCES[@]}
 do
   file="$HOME/.photon/$file"
-  # echo $file
   [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
-
 unset file
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # enable vi mode for command line
 set -o vi
@@ -35,11 +33,6 @@ shopt -s histappend
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
-#determines search program for fzf
-if type ag &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
-fi
-
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
@@ -47,7 +40,5 @@ for option in autocd globstar; do
   shopt -s "$option" 2> /dev/null
 done;
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-# [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# prompt should be last
+[ -f ~/.photon/.prompt ] && source ~/.photon/.prompt 
