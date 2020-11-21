@@ -57,10 +57,15 @@ h1 "timidity"
 echo
 sudo apt install -y timidity
 
-# sudo add-apt-repository ppa:obsproject/obs-studio
-# sudo apt update
-# sudo apt install -y obs-studio
+echo
+h1 "losslesscut"
+echo
+sudo snap install losslesscut
 
-# sudo add-apt-repository ppa:kdenlive/kdenlive-stable
-# sudo apt-get update
-# sudo apt install -y kdenlive
+echo
+h1 "editly"
+echo
+sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+sudo npm i -g canvas
+sudo npm i -g editly
+
