@@ -18,23 +18,15 @@ function set_rc() {
   ln -sf ~/.photon/$1 ~/$1
 }
 
-# mv .bashrc .bashrc.$D.bak
-# ln -sf ~/.photon/home/.bashrc
 set_rc .bashrc
 
-# mv .bash_profile .bash_profile.$D.bak
-# ln -sf ~/.photon/home/.bash_profile
 set_rc .bash_profile
 
-# mv .vimrc .vimrc.$D.bak
-# ln -sf ~/.photon/.vimrc
 set_rc .vimrc
 
-# mv .vim .vim.$D.bak
-# ln -sf ~/.photon/.vim
 set_rc .vim
 
-# mv .config/ranger .config/ranger.$D.bak
-# ln -sf ~/.photon/config/ranger ~/.config/ranger
 set_rc .config/ranger 
+
+set_rc .XCompose
 
