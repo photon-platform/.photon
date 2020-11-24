@@ -16,28 +16,35 @@ else
   hostStyle="${fgAqua}"
 fi
 
+BDOT='\[${fgg00}\]$DOT\[${txReset}\]'
+
 # Set the terminal title and prompt.
 # Use \[...\] around the parts of PS1 that have length 0. 
 PS1='\n'
-# PS1+=`hr_prompt`
 PS1+='$(hr_prompt)'
 PS1+='\n'
 # PS1+=" \[${userStyle}\]\u"; # username
-PS1+=' \u'; # username
-# PS1+="\[${fgWhite}\] ✴ "
-PS1+=' $DOT'
+# PS1+=' \u'; # username
+PS1+=' \[${fgg12}\]\u\[${txReset}\]'
+PS1+=' \[${fgg08}\]$DOT\[${txReset}\]'
 # PS1+="\[${hostStyle}\]\h "; # host
-PS1+=' \h'; # host
-PS1+=' $DOT'
+# PS1+=' \h'; # host
+PS1+=' \[${fgg12}\]\h\[${txReset}\]'
+PS1+=' \[${fgg08}\]$DOT\[${txReset}\]'
 PS1+=' \t'; # time
 PS1+='\n'
+PS1+='\[${fgg12}\]'
 PS1+=' $(git_branch)'
-PS1+=' $DOT'
+PS1+='\[${txReset}\]'
+PS1+=' \[${fgg08}\]$DOT\[${txReset}\]'
+PS1+='\[${fgg16}\]'
 PS1+=' $(gsss)'
-PS1+=' $DOT'
+PS1+='\[${txReset}\]'
+PS1+=' \[${fgg08}\]$DOT\[${txReset}\]'
 # PS1+=" \[${fgRed}\]${g_s}\[${txReset}\] " 
 # PS1+=" \[${fgYellow}\]\w"; # working directory full path
-PS1+=' \w'; # working directory full path
+PS1+=' \[${fgg24}\]\w\[${txReset}\]'
+# PS1+=' \w'; # working directory full path
 PS1+='\n'
 # if [ $LAST_ERROR -ne 0 ]; then
   # PS1+=" ${txBold}${fgRed}$?"
