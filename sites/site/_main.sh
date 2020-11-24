@@ -27,6 +27,7 @@ function site() {
   printf "$fmt" "t" $(find ./themes -name "blueprints.yaml" | wc -l ) "themes"
   printf "$fmt" "c" $(find ./config -name "*.yaml" | wc -l ) "config"
 
+  echo
   site_actions
 
   tab_title
