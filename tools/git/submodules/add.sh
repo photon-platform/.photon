@@ -3,8 +3,10 @@
 function tools_git_submodules_add() {
 
   ui_header "add submodule from repo"
+
+  show_dir
   
-  h1 "*** checking github repo"
+  h1 "*** check github repo"
   github="$(ask_value "specify github url" "")"
   git ls-remote -h "${github}" HEAD
   if [[ $? -eq 0  ]]; then
