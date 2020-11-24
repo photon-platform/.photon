@@ -78,6 +78,11 @@ h1 "youtube-dl"
 echo
 sudo pip install --upgrade youtube_dl
 
+echo
+h1 "highlight"
+echo
+sudo apt install -y highlight
+
 
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
