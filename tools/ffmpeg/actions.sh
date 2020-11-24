@@ -110,7 +110,6 @@ function record_cam() {
 }
 
 function rc2() {
-  AUDIO_OFFSET="0.33"
   TRIM_END=3
   SIZE="1920x1080"
 
@@ -149,6 +148,16 @@ function rc2() {
   mpv "$output"
 }
 
+function audio_set() {
+  AUDIO_OFFSET="0.33"
+  ffmpeg -y  -hide_banner \
+    -i "$1" -itsoffset $AUDIO_OFFSET \
+    -i "$1" \
+    -map 0:v -map 1:a  \
+    -af "highpass=f=100, volume=volume=5dB, afftdn" \
+    "out/$1"
+}
+
 function ra() {
 
   output="$( make_filename ).m4a"
@@ -181,11 +190,11 @@ function rablue() {
 }
 
 function sk() {
-  skoff
+  pkill -f screenkey 
   screenkey --scr 1 -p fixed \
     --opacity 0.8 \
     -f 'Fira Mono' -s small \
-    -g 1920x80+0+768 &
+    -g 1920x33+0+768 &
 }
 alias skoff="pkill -f screenkey"
 
@@ -200,10 +209,17 @@ function ffconcat() {
 }
 
 function ffsnap() {
+  output="$( make_filename )"
   ffmpeg -y -video_size 1920x1080 \
-    -f video4linux2 -i $CAMERA  \
-    -vframes 1 test.jpg; ffplay test.jpg
-  # ffmpeg -y -f video4linux2 -i /dev/video0  -vframes 1 test.jpg
+    -f video4linux2 -i /dev/video4  \
+    -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vframes 3 $output-%d.jpg
+  sxiv $output-*.jpg
+}
+
+# create virtual camera on video6 with desktop - for zoom, etc
+function virtual_cam() {
+  ffmpeg -f x11grab -r 15 -s 1920x1080 -i :1+0,768 -vcodec rawvideo -pix_fmt yuv420p -vf "hflip" -threads 0 -f v4l2 /dev/video6
 
   
 }
