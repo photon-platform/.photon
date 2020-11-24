@@ -23,6 +23,12 @@ gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt']"
 
 # https://askubuntu.com/questions/34214/how-do-i-disable-overlay-scrollbars
 
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
+gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+
+gsettings set org.gnome.desktop.interface overlay-scrolling false
+
 h1 gnome-tweak-tool
 sudo apt install -y gnome-tweak-tool
 
