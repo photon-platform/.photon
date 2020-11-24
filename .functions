@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+function log() {
+  v4
+  sleep 2
+  clear
+  source ~/SITES/phiarchitect.com/user/.photon
+  cd ~/SITES/phiarchitect.com/user/pages/04.log/2020-11-22-init
+  page
+}
+
 function apt_upgrade() {
   sudo apt update -y
   sudo apt list --upgradeable
