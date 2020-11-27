@@ -19,6 +19,8 @@ echo
 h1 "vim"
 echo
 sudo apt install -y vim
+# enables + register for system clipboard
+sudo apt install -y vim-gtk3
 
 echo
 h1 "install Vundle plugins"
