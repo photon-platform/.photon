@@ -10,6 +10,7 @@ function page_children() {
   children_count=${#children[@]}
 
   ui_banner "children [$children_count]:"
+  echo
 
   i=1
 
