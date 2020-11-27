@@ -2,10 +2,11 @@
 
 function log() {
   v4
+  v0
   sleep 2
   clear
   source ~/SITES/phiarchitect.com/user/.photon
-  cd ~/SITES/phiarchitect.com/user/pages/04.log/2020-11-22-init
+  cd ~/SITES/phiarchitect.com/user/pages/04.log/
   page
 }
 

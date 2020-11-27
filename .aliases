@@ -6,30 +6,33 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
 
+alias src="source ~/.bashrc"
 alias C="src; clear -x"
+
 alias report_plugin="php ~/.photon/report/plugin.php"
 alias report_theme="php ~/.photon/report/theme.php"
 alias readme_html="pandoc -f gfm --css=/home/phi/.photon/report/gfm.css -s -o readme.html --metadata pagetitle="test" README.md ; open readme.html"
 alias sandbox="cd ~/Projects/sandbox"
 
-alias fd="fdfind"
 
 alias inmotion="ssh illumiphi.com"
 
 alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; clear; site;"
 alias presence="cd ~/SITES/presence/user; clear; site;"
 alias photon="cd ~/SITES/photon-platform.net/user; clear; site;"
+alias phi="cd ~/SITES/phiarchitect.com/user; clear; site;"
 
-alias gdl="cd ~/Downloads;ls -1Ahst | head"
+alias gdl="cd ~/Downloads;ls "
 
-alias dot="cd ~/.photon;ls -A"
-alias dots="cd ~/.photon/sites;ls -A"
-alias doti="cd ~/.photon/init;ls -A"
+alias dot="cd ~/.photon;ls "
+alias dots="cd ~/.photon/sites;ls "
+alias doti="cd ~/.photon/init;ls "
+alias dott="cd ~/.photon/tools;ls "
 
-alias gpr="cd ~/Projects/;ls -hst"
-alias gge="cd ~/Projects/geometor-explorer;ls -hst"
-alias gyt="cd ~/youtube/;ls -hst"
-alias gsnip="cd ~/.vim/Ultisnips/;ls"
+alias gpr="cd ~/Projects/;ls "
+alias gge="cd ~/Projects/geometor-explorer;ls "
+alias gyt="cd ~/youtube/;ls "
+alias gsnip="cd ~/.vim/Ultisnips/;ls "
 alias gm="cd /media/phi"
 
 alias arcturian="cd ~/youtube/arturian-sound; mpv --shuffle *;"
@@ -44,9 +47,6 @@ alias vpr="vim ~/.photon/.prompt"
 alias val="vim ~/.photon/.aliases"
 alias vfc="vim ~/.photon/.functions"
 alias vrang="vim ~/.config/ranger/rc.conf"
-
-
-alias src="source ~/.bashrc"
 
 alias r="ranger"
 
@@ -103,17 +103,18 @@ ex=01;32:\
 *.wav=01;35:\
 "
 
+# Always use color output for `ls`
+alias ls="command ls -At --group-directories-first ${colorflag}"
+
 # List all files colorized in long format
-alias l="ls -lF ${colorflag}"
+alias ll="ls -lF "
 
 # List all files colorized in long format, including dot files
-alias la="ls -laF ${colorflag}"
+# alias la="ls -laF "
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
-# Always use color output for `ls`
-alias ls="command ls ${colorflag}"
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
@@ -124,6 +125,7 @@ alias sudo='sudo '
 
 # Get week number
 alias week='date +%V'
+alias day='date +%j'
 
 
 # IP addresses
