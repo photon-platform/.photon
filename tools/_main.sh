@@ -9,6 +9,7 @@ source ~/.photon/tools/list.sh
 source ~/.photon/tools/git/_main.sh
 source ~/.photon/tools/grav/_main.sh
 source ~/.photon/tools/ffmpeg/_main.sh
+source ~/.photon/tools/log/_main.sh
 
 function show_dir() {
 

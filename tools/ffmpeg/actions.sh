@@ -43,51 +43,6 @@ function make_filename() {
   echo "${ts}${title}"
 }
 
-# system represents two monitors as a combined space
-function tools_ffmpeg_screen() {
-
-  h1 "audio: 0-none 1-mic 2-internal 3-both"
-  read -s -n1  action
-  case $action in
-    q) clear; ;; # quit
-    0) ffmpeg -video_size 1920x1080 -framerate 25 \
-      -f x11grab -i :1+0,768 "$output"
-          ;;
-    1) screen_rec
-          ;;
-    2) ffmpeg -video_size 1920x1080 -framerate 25 \
-      -f x11grab -i :1+0,768 \
-      -f pulse -ac 2 -i $AUDIO_SYSTEM "$output" 
-          ;;
-    3) ffmpeg -video_size 1920x1080 -framerate 25 \
-      -f x11grab -i :1+0,768 \
-      -f pulse -ac 2 -i $AUDIO_SYSTEM \
-      -f pulse -ac 2 -i $MIC "$output" 
-          ;;
-  esac
-}
-
-function screen_main() {
-  output="$( make_filename ).mkv"
-  ffmpeg -hide_banner \
-    -video_size 1920x1080 \
-    -framerate $FRAMERATE \
-    -f x11grab -i :1+0,768 \
-    -f pulse -i $BLUE \
-    "$output" 
-  mpv "$output"
-}
-
-function screen_full() {
-  output="$( make_filename ).mkv"
-  ffmpeg -hide_banner \
-    -video_size 1920x1848 \
-    -framerate $FRAMERATE \
-    -f x11grab -i :1+0,0 \
-    -f pulse -i $BLUE \
-    "$output" 
-  mpv "$output"
-}
 
 function record_cam() {
   output="$( make_filename ).mkv"
