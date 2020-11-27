@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 function log() {
+  wmctrl -T log$$ -r :ACTIVE:
+  sk
   v4
-  v0
   sleep 2
+  wmctrl -a log$$
   clear
   source ~/SITES/phiarchitect.com/user/.photon
   cd ~/SITES/phiarchitect.com/user/pages/04.log/

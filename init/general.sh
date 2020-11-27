@@ -79,6 +79,11 @@ echo
 sudo pip install --upgrade youtube_dl
 
 echo
+h1 "wmctrl"
+echo
+sudo apt install -y wmctrl
+
+echo
 h1 "highlight"
 echo
 sudo apt install -y highlight
