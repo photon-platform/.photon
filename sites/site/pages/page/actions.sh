@@ -78,6 +78,7 @@ function page_actions() {
       clear
       page
       ;;
+    L) tools_log; clear; page; ;;
     T) taxonomy; clear; page; ;;
     G)
       tools_git
