@@ -88,6 +88,11 @@ h1 "highlight"
 echo
 sudo apt install -y highlight
 
+echo
+h1 "neofetch"
+echo
+sudo apt install -y neofetch
+
 
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
