@@ -7,7 +7,6 @@ SOURCES+=(.aliases)
 SOURCES+=(.functions)
 SOURCES+=(tools/_main.sh)
 SOURCES+=(ui/_main.sh)
-SOURCES+=(shell/_main.sh)
 SOURCES+=(hosts/_main.sh)
 SOURCES+=(sites/_main.sh)
 
