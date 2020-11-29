@@ -93,6 +93,17 @@ h1 "neofetch"
 echo
 sudo apt install -y neofetch
 
+echo
+h1 "trash-cli"
+echo
+sudo apt install -y trash-cli
+
+echo
+h1 "tesseract-ocr"
+echo
+sudo apt install -y tesseract-ocr
+
+
 
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
