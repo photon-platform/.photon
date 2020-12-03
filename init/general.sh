@@ -102,6 +102,13 @@ echo
 h1 "tesseract-ocr"
 echo
 sudo apt install -y tesseract-ocr
+    
+echo
+h1 "indicator-multiload"
+echo
+sudo apt install -y indicator-multiload
+
+
 
 
 
