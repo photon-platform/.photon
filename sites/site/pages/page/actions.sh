@@ -68,7 +68,12 @@ function page_actions() {
       page
       ;;
     [1-9]*)
-      cd $(dirname ${children[$((action - 1))]})
+      if [[ ${children[$((action - 1))]} ]]; then
+        dir=$(dirname ${children[$((action - 1))]})
+        if [[ -d "$dir" ]]; then
+          cd "$dir"
+        fi
+      fi
       clear
       page
       ;;
