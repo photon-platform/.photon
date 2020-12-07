@@ -59,4 +59,13 @@ python3 ~/Downloads/rapid-photo-downloader.py
 rm ~/Downloads/rapid-photo-downloader.py
 
 
-# sudo apt install -y fim
+echo
+h1 "librecad"
+echo
+sudo apt install -y librecad
+
+echo
+h1 "freecad"
+echo
+sudo apt install -y freecad
+
