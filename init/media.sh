@@ -11,11 +11,16 @@ echo
 sudo apt install -y jack
 
 echo
-echo
 h1 "ffmpeg"
 echo
 sudo apt install -y ffmpeg
 
+echo
+h1 "gphoto2"
+echo
+sudo apt install -y gphoto2
+
+echo
 h1 "mpv"
 echo
 sudo apt install -y mpv

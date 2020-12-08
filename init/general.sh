@@ -32,6 +32,11 @@ echo
 sudo apt install -y rename
 
 echo
+h1 "libnotify-bin"
+echo
+sudo apt install -y libnotify-bin
+
+echo
 h1 "sendmail-bin"
 echo
 sudo apt install -y sendmail-bin
