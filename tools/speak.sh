@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function speak() {
-  espeak -v mb-en1  -k44 "$1" 
+  espeak -v mb-en1  -k44 "$@" 
 
 }
 
