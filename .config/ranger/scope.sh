@@ -188,7 +188,9 @@ handle_mime() {
         image/*)
             # Preview as text conversion
             # img2txt --gamma=0.6 --width="${PV_WIDTH}" -- "${FILE_PATH}" && exit 4
-            exiftool "${FILE_PATH}" && exit 5
+            # exiftool "${FILE_PATH}" && exit 5
+            # chafa -c 256 "${FILE_PATH}" && exit 5
+            ~/.photon/tools/show_jpg.sh "${FILE_PATH}" && exit 5
             exit 1;;
 
         # Video and audio
