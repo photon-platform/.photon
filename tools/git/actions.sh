@@ -8,6 +8,10 @@ function tools_git_actions() {
   read -s -n1 -p " > "  action
   case $action in
     q) clear; ;; # quit
+
+    g) zd; clear; tools_git; ;;
+    h) cd ..; clear; tools_git; ;;
+
     l) echo; git log --graph --oneline ;   tools_git  ;;
     d) echo; git diff .; pause_enter;  tools_git  ;;
     a) echo; git add .;  tools_git  ;;
