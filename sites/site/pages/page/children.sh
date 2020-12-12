@@ -8,7 +8,7 @@ function page_children() {
   children=( $(page_children_dirs) )
   children_count=${#children[@]}
 
-  ui_banner "children [$children_count]:"
+  ui_banner "children ${fgg08}•${txReset} $children_count"
   echo
 
   i=1
@@ -25,7 +25,7 @@ function page_children() {
     then
       ui_list_item "$subtitle"
     fi
-    ui_list_item "$md"
+    ui_list_item "${fgg08}${md#./}${txReset}"
 
     ((i++))
   done
