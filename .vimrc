@@ -37,9 +37,18 @@ nnoremap <leader>h :noh<cr>
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 nnoremap <leader>f :Files<cr>
+nnoremap <leader>F :GFiles<cr>
 nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>bt :BTags<cr>
-nnoremap <leader>tg :Tags<cr>
+nnoremap <leader>B :BTags<cr>
+nnoremap <leader>T :Tags<cr>
+nnoremap <leader>S :Snippets<cr>
+nnoremap <leader>C :Commands<cr>
+nnoremap <leader>m :Marks<cr>
+nnoremap <leader>M :Maps<cr>
+nnoremap <leader>Y :Commits<cr>
+nnoremap <leader>H :Helptags<cr>
+nnoremap <leader>L :Lines<cr>
+nnoremap <leader>W :Windows<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
 
 

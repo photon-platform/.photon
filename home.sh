@@ -27,6 +27,7 @@ set_rc .vimrc
 set_rc .vim
 
 set_rc .config/ranger 
+set_rc .config/sxiv
 
 set_rc .XCompose
 

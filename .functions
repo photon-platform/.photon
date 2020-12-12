@@ -41,7 +41,7 @@ function cp_bak() {
 
 # Find and open in Vim
 function vf() {
-  local file=$(list_text_files | sort | fzf -m --preview="bat {}")
+  local file=$( list_text_files | sort | fzf )
   if [[ -n $file ]]; then
     vim $file
   fi

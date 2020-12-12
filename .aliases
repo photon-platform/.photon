@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+
+
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -33,7 +36,8 @@ alias gpr="cd ~/Projects/;ls "
 alias gge="cd ~/Projects/geometor-explorer;ls "
 alias gyt="cd ~/youtube/;ls "
 alias gsnip="cd ~/.vim/Ultisnips/;ls "
-alias gm="cd /media/phi"
+alias gm="cd /mnt/md0"
+alias gM="cd ~/Media"
 
 alias arcturian="cd ~/youtube/arturian-sound; mpv --shuffle *;"
 alias dl="youtube-dl"
