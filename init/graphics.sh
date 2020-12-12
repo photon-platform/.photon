@@ -11,6 +11,11 @@ echo
 sudo apt install -y imagemagick 
 
 echo
+h1 "jpegtran"
+echo
+sudo apt install libjpeg-turbo-progs
+
+echo
 h1 "exif"
 echo
 sudo apt install -y exif exiftool
