@@ -15,23 +15,15 @@ function site_actions() {
   read -s -n1 -p " > "  action
   case $action in
     q) clear; ;;
+    /) search; clear; site; ;;
+
     r) ranger; clear; site; ;;
+    t) tre; clear; site; ;;
+    d) ll; echo; site_actions; ;;
+
+    I) images; ;;
     f) vf; clear; site;;
     g) zd; clear; ;;
-    x)
-      clear
-      ui_banner "Site DELETE"
-      echo 
-      gss
-      echo 
-      echo check git status above before continuing.
-      echo
-      read -s -n1 -p "Proceed?:  " -e response
-      if [[ $response == "y" ]]; then
-        echo
-      fi
-
-      ;;
     o)
       echo open
       select target in local localadmin server serveradmin
@@ -54,18 +46,16 @@ function site_actions() {
       done
       site
       ;;
+
     p) cd pages; clear; pages; ;;
     u) cd plugins; clear; plugins; ;;
-    t) cd themes; clear; themes; ;;
+    m) cd themes; clear; themes; ;;
     c) cd config; clear; vf; clear; site; ;;
+
     e) vim README.md; clear; site; ;;
     l) vim CHANGELOG.md; clear; site; ;;
     .) vim .photon; clear; site; ;;
 
-    #TODO: conflict on t action
-    t) tre ; clear; site; ;;
-    /) search; clear; site; ;;
-    d) echo; la; echo; site_actions; ;;
     h) clear; sites; ;;
     j)
       next=$( dirname "${siblings[$((siblings_index + 1))]}" )
@@ -100,7 +90,11 @@ function site_actions() {
       clear
       site
       ;;
-    w) clear; swatch; ;;
+    w) clear;
+      gnome-terminal --working-directory=$PWD -- bash -c "source ~/.bashrc; swatch; exec bash"
+      clear
+      site
+      ;;
     *)
       echo
       echo " not a command"

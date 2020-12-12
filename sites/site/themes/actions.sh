@@ -10,10 +10,13 @@ function themes_actions() {
     q) clear; ;; # quit
     @) clear; site ;;
     /) search; clear; themes; ;;
+
     r) ranger; clear; themes; ;;
-    d) clear; echo; la; echo; themes_actions; ;;
+    t) tre; clear; themes; ;;
+    d) ll; echo; themes_actions; ;;
+    I) images; ;;
+
     h) clear; site; ;;
-    j) cd ../pages; clear; pages; ;;
     k) cd ../pages; clear; pages; ;;
     '#')
       read -p "enter number: " number

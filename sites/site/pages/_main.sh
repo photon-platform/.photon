@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-source ~/.photon/sites/site/pages/list.sh
 source ~/.photon/sites/site/pages/new.sh
 source ~/.photon/sites/site/pages/actions.sh
 source ~/.photon/sites/site/pages/sort.sh

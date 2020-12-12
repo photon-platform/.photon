@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 
-
-function page_siblings_dirs() {
-  parent_dir=$(dirname "$(pwd)")
-  find $parent_dir -maxdepth 2 -mindepth 2 -name "*.md" -type f | sort
-}
-
 function page_siblings() {
-
   siblings=( $(page_siblings_dirs) )
   siblings_count=${#siblings[@]}
 
@@ -20,7 +13,22 @@ function page_siblings() {
     fi
     ((i++))
   done
+}
 
+function page_siblings_dirs() {
+  parent_dir=$(dirname "$(pwd)")
+  find $parent_dir -maxdepth 2 -mindepth 2 -name "*.md" -type f | sort
+}
+
+function page_sibling_get() {
+  id=$1
+  dir=$(dirname ${siblings[$id]})
+  if [[ -d "$dir" ]]
+  then
+    cd "$dir"
+  fi
+  clear
+  page
 }
 
 function page_siblings_move() {

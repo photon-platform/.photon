@@ -10,15 +10,15 @@ function theme_actions() {
     q) clear; ;;
     @) clear; cd ..; site ;;
     /) search; clear; theme; ;;
-    r) ranger; clear; theme; ;;
     e) v README.md ; clear; theme; ;;
     .) v blueprints.yaml ; clear; theme; ;;
     l) vim CHANGELOG.md; clear; theme; ;;
-    R) report_theme > README.md; 
-      mkdir -p docs;
-      cp README.md docs/index.md;
-      v README.md; clear; theme ;;
-    d) clear; echo; ls -hA; echo; theme; ;;
+
+    r) ranger; clear; theme; ;;
+    t) tre; clear; theme; ;;
+    d) ll; echo; theme_actions; ;;
+    I) images; ;;
+
     h) cd ..; clear; themes; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
@@ -45,6 +45,10 @@ function theme_actions() {
       clear
       theme
       ;;
+    R) report_theme > README.md; 
+      mkdir -p docs;
+      cp README.md docs/index.md;
+      v README.md; clear; theme ;;
     n)
       clear
       themes_new

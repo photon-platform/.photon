@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+
+
 function page_actions() {
 
   # TODO: show all menu options on '?'
@@ -10,11 +12,14 @@ function page_actions() {
     q) clear; ;;
     e) vim *.md; clear; page; ;;
     v) sxiv *.jpg; clear; page; ;;
-    t) tree; page_actions; ;;
     @) clear; site ;;
     /) search; clear; page; ;;
+
     r) ranger; clear; page; ;;
-    d) la; echo; page_actions; ;;
+    t) tre; clear; page; ;;
+    d) ll; echo; page_actions; ;;
+    I) images; ;;
+
     m) clear; page_siblings_move; ;;
     y)
       if [[ $PAGESYAML == true ]]
@@ -42,54 +47,21 @@ function page_actions() {
     f) vf; clear; page; ;;
     g) zd; clear; page; ;;
     o) page_open; page_actions ;;
-    j)
-      next=$(dirname ${siblings[$((siblings_index + 1))]})
-      if [[ -d "$next" ]]
-      then
-        cd "$next"
-      fi
-      clear
-      page
-      ;;
-    k)
-      prev=$(dirname ${siblings[$((siblings_index - 1))]})
-      if [[ -d "$prev" ]]
-      then
-        cd "$prev"
-      fi
-      clear
-      page
-      ;;
+    
+    j) page_sibling_get $((siblings_index + 1)) ;;
+    k) page_sibling_get $((siblings_index - 1)) ;;
+
+    [1-9]*) page_child_get $((action - 1)) ;;
+    0) page_child_get $(( ${#children[@]} - 1 )) ;;
+    a) vim "${children[@]}" ;;
     '#')
       read -p "enter number: " number
-      dir="$(dirname ${children[((number-1))]})"
-      cd $dir
-      clear
-      page
+      page_child_get $((number - 1))
       ;;
-    [1-9]*)
-      if [[ ${children[$((action - 1))]} ]]; then
-        dir=$(dirname ${children[$((action - 1))]})
-        if [[ -d "$dir" ]]; then
-          cd "$dir"
-        fi
-      fi
-      clear
-      page
-      ;;
-    0)
-      last=$(( ${#children[@]} - 1 ))
-      cd $(dirname ${children[ last ]})
-      clear
-      page
-      ;;
+
     L) tools_log; clear; page; ;;
     T) taxonomy; clear; page; ;;
-    G)
-      tools_git
-      clear
-      page
-      ;;
+    G) tools_git; clear; page ;;
     b)
       clear
       page_children_renumber
@@ -116,7 +88,4 @@ function page_open() {
   path="$LOCAL/$path"
   echo opening $path
   open "$path"
-  
-
-  
 }

@@ -11,6 +11,7 @@ function sites_list() {
   i=1
 
   ui_banner "sites: ${#sites[@]}"
+  echo
 
   for site in ${sites[@]}
   do

@@ -2,36 +2,62 @@
 
 function sites_actions() {
 
-  ui_footer "SITES actions: h j k [le] # g G r d q n s ? "
+  ui_footer "SITES actions: ? for help "
 
   read -s -n1 -p " > " action
   case $action in
     \?)
       echo
-      h2 "q - quit"
-      h2 "f - find from current directory"
-      h2 "r - ranger"
+      key_item q quit
+      key_item / search
+
+      key_item r ranger
+      key_item t tree
+      key_item d "list current dir"
+
+
+      key_item "1-9" "select site"
+      key_item "#" "select site"
+      key_item "0" "select last site"
+      key_item g "select by folder name"
+
+      key_item n "create new site"
+      key_item s "restore site from github"
+
+      key_item I "images"
+      key_item G "git tools"
       echo
       sites_actions
       ;;
     q) clear; ;;
-    # @) clear; home ;;
     /) search; clear; sites ;;
-    r) ranger; sites_actions ;;
-    d) clear; echo; ls -hA; echo; sites_actions ;;
-    h) cd ..; clear; la; ;;
-    j) sites; ;;
-    k) sites; ;;
+
+    n) clear; sites_new; clear; site ;;
+    s) clear; sites_restore; clear; site ;;
+
+    r) ranger; clear; sites ;;
+    t) tre; clear; sites; ;;
+    d) ll; echo; sites_actions ;;
+    I) images; clear; sites;;
+
     '#')
       read -p "enter number: " number
-      dir="$(dirname ${sites[((number-1))]})"
-      cd $dir
+      if [[ ${sites[$((number - 1))]} ]]; then
+        dir="$(dirname ${sites[((number-1))]})"
+        if [[ -d "$dir" ]]; then
+          cd "$dir"
+        fi
+      fi
       clear
       site
       ;;
     [1-9]*)
-      dir="$(dirname ${sites[((action-1))]})"
-      cd $dir
+      if [[ ${sites[$((action - 1))]} ]]; then
+        dir="$(dirname ${sites[((action-1))]})"
+        if [[ -d "$dir" ]]; then
+          cd "$dir"
+        fi
+      fi
       clear
       site
       ;;
@@ -71,18 +97,6 @@ function sites_actions() {
       read -n1 -p "press any key to continue"
       clear
       sites
-      ;;
-    n)
-      clear
-      sites_new
-      clear
-      site
-      ;;
-    s)
-      clear
-      sites_restore
-      # clear
-      site
       ;;
     *)
       echo

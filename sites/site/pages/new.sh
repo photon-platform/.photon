@@ -6,6 +6,7 @@ function pages_new() {
 
   clear
   ui_header "photon ✴ PAGE new"
+  show_dir
   h1 "Select a template: "
 
   scaffold=$( scaffolds_select )
@@ -13,6 +14,7 @@ function pages_new() {
     
     clear
     ui_header "photon ✴ PAGE new"
+    show_dir
     ncal -3
     echo
     scaffold_name=`sed -n -e 's/% name: \(.*\)/\1/p' $scaffold`

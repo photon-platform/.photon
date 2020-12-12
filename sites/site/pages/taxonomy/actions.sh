@@ -34,12 +34,17 @@ function taxonomy_list_categories() {
 
     '#')
       read -p "enter number: " number
-      tax_key=${tax_keys[$((number - 1))]}
-      vim -c "/$tax_key/" ${tax_category[$tax_key]}
+      if [[ ${tax_keys[$((number - 1))]} ]]; then
+        tax_key=${tax_keys[$((number - 1))]}
+        vim -c "/$tax_key/" ${tax_category[$tax_key]}
+      fi
+      clear
       ;;
     [1-9]*)
-      tax_key=${tax_keys[$((action - 1))]}
-      vim -c "/$tax_key/" ${tax_category[$tax_key]}
+      if [[ ${tax_keys[$((action - 1))]} ]]; then
+        tax_key=${tax_keys[$((action - 1))]}
+        vim -c "/$tax_key/" ${tax_category[$tax_key]}
+      fi
       ;;
   esac
 }
@@ -64,14 +69,17 @@ function taxonomy_list_tags() {
 
     '#')
       read -p "enter number: " number
-      tax_key=${tax_keys[$((number - 1))]}
-      vim -c "/$tax_key/" ${tax_tag[$tax_key]}
+      if [[ ${tax_keys[$((number - 1))]} ]]; then
+        tax_key=${tax_keys[$((number - 1))]}
+        vim -c "/$tax_key/" ${tax_tag[$tax_key]}
+      fi
+      clear
       ;;
     [1-9]*)
-      tax_key=${tax_keys[$((action - 1))]}
-      vim -c "/$tax_key/" ${tax_tag[$tax_key]}
-      clear
-      taxonomy
+      if [[ ${tax_keys[$((action - 1))]} ]]; then
+        tax_key=${tax_keys[$((action - 1))]}
+        vim -c "/$tax_key/" ${tax_tag[$tax_key]}
+      fi
       ;;
   esac
 }
@@ -96,14 +104,17 @@ function taxonomy_list_photon() {
 
     '#')
       read -p "enter number: " number
-      tax_key=${tax_keys[$((number - 1))]}
-      vim -c "/$tax_key/" ${tax_photon[$tax_key]}
+      if [[ ${tax_keys[$((number - 1))]} ]]; then
+        tax_key=${tax_keys[$((number - 1))]}
+        vim -c "/$tax_key/" ${tax_photon[$tax_key]}
+      fi
+      clear
       ;;
     [1-9]*)
-      tax_key=${tax_keys[$((action - 1))]}
-      vim -c "/$tax_key/" ${tax_photon[$tax_key]}
-      clear
-      taxonomy
+      if [[ ${tax_keys[$((action - 1))]} ]]; then
+        tax_key=${tax_keys[$((action - 1))]}
+        vim -c "/$tax_key/" ${tax_photon[$tax_key]}
+      fi
       ;;
   esac
 }

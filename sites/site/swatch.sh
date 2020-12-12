@@ -6,7 +6,7 @@ function swatch() {
   ui_header "$PROJECT * SWATCH "
   tab_title "$PROJECT * SWATCH "
 
-  show_dir
+  h1 $PWD
   h2 "start time: $( date )"
   echo
 

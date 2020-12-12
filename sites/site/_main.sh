@@ -21,11 +21,11 @@ function site() {
   site_siblings
   h2 "$((siblings_index + 1)) of $siblings_count"
   echo
-  fmt="  [%c] ${fgYellow}%3d${txReset} ${txBold}%s${txReset}\n"
-  printf "$fmt" "p" $(find ./pages -name "*.md" | wc -l ) "pages"
-  printf "$fmt" "u" $(find ./plugins -name "blueprints.yaml" | wc -l ) "plugins"
-  printf "$fmt" "t" $(find ./themes -name "blueprints.yaml" | wc -l ) "themes"
-  printf "$fmt" "c" $(find ./config -name "*.yaml" | wc -l ) "config"
+  fmt="  ${fgYellow}%c${txReset} • ${txBold}%s${txReset} • %d\n"
+  printf "$fmt" "p" "pages" $(find ./pages -name "*.md" | wc -l ) 
+  printf "$fmt" "u" "plugins" $(find ./plugins -name "blueprints.yaml" | wc -l ) 
+  printf "$fmt" "m" "themes" $(find ./themes -name "blueprints.yaml" | wc -l )
+  printf "$fmt" "c" "config" $(find ./config -name "*.yaml" | wc -l )
 
   echo
   site_actions

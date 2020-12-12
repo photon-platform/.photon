@@ -8,23 +8,35 @@ function pages_actions() {
   read -s -n1 -p " > "  action
   case $action in
     q) clear; ;;
-    t) tree; pages_actions; ;;
     @) clear; site ;;
     /) search; clear; pages; ;;
+    
     r) ranger; clear; pages; ;;
-    d) la; echo; pages_actions; ;;
+    t) tre; clear; pages; ;;
+    d) ll; echo; pages_actions; ;;
+    I) images; ;;
+
     h) cd ..; clear; site; ;;
-    j) clear; plugins; ;;
-    k) clear; themes; ;;
+    k) cd ../plugins; clear; plugins; ;;
+    j) cd ../themes; clear; themes; ;;
     '#')
       read -p "enter number: " number
-      dir="$(dirname ${children[((number-1))]})"
-      cd $dir
+      if [[ ${children[$((number - 1))]} ]]; then
+        dir="$(dirname ${children[((number-1))]})"
+        if [[ -d "$dir" ]]; then
+          cd "$dir"
+        fi
+      fi
       clear
       page
       ;;
     [1-9]*)
-      cd $(dirname ${children[$((action - 1))]})
+      if [[ ${children[$((action - 1))]} ]]; then
+        dir="$(dirname ${children[((action-1))]})"
+        if [[ -d "$dir" ]]; then
+          cd "$dir"
+        fi
+      fi
       clear
       page
       ;;
@@ -33,6 +45,9 @@ function pages_actions() {
       cd $(dirname ${children[ last ]})
       clear
       page
+      ;;
+    a)
+      vim "${children[@]}"
       ;;
     f) vf; clear; pages; ;;
     g) zd; clear; page; ;;

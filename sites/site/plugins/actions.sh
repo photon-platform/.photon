@@ -10,11 +10,14 @@ function plugins_actions() {
     q) clear; ;;
     @) clear; site ;;
     /) search; clear; plugins; ;;
+
     r) ranger; clear; plugins; ;;
-    d) clear; echo; la; echo; plugins_actions; ;;
+    t) tre; clear; plugins; ;;
+    d) ll; echo; plugins_actions; ;;
+    I) images; ;;
+
     h) clear; site; ;;
     j) cd ../pages; clear; pages; ;;
-    k) cd ../themes; clear; themes; ;;
     '#')
       read -p "enter number: " number
       dir="$(dirname ${list[((number-1))]})"

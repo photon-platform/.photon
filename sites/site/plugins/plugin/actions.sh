@@ -10,16 +10,16 @@ function plugin_actions() {
     q) clear; ;;
     @) clear; cd ..; site ;;
     /) search; clear; plugin; ;;
+
     r) ranger; clear; plugin; ;;
-    R) report_plugin > README.md; 
-      mkdir -p docs;
-      cp README.md docs/index.md;
-      v README.md; 
-      clear; plugin ;;
-    d) clear; echo; ls -hA; echo; plugin; ;;
+    t) tre; clear; plugin; ;;
+    d) ll; echo; plugin_actions; ;;
+    I) images; ;;
+
     e) v README.md ; clear; plugin; ;;
     .) v blueprints.yaml ; clear; plugin; ;;
     l) vim CHANGELOG.md; clear; plugin; ;;
+
     h) cd ..; clear; plugins; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
@@ -41,6 +41,11 @@ function plugin_actions() {
       ;;
     f) vf; clear; plugin; ;;
     g) zd; clear; ;;
+    R) report_plugin > README.md;
+      mkdir -p docs;
+      cp README.md docs/index.md;
+      v README.md;
+      clear; plugin ;;
     G)
       tools_git
       clear

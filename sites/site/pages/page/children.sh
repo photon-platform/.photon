@@ -5,7 +5,6 @@ function page_children_dirs() {
 }
 
 function page_children() {
-
   children=( $(page_children_dirs) )
   children_count=${#children[@]}
 
@@ -33,16 +32,16 @@ function page_children() {
   echo
 }
 
-function test_list_nullsep() {
-  children=()
-  while IFS=  read -r -d $'\0'; do
-      children+=("$REPLY")
-  done < <(find . -maxdepth 2 -mindepth 2 -name "*.md" -type f -print0 | sort )
-  IFS=$'\n' children=($(sort <<<"${children[*]}"))
-  unset IFS
-  echo ${children[@]}
+function page_child_get() {
+  id=$1
+  dir=$(dirname ${children[$id]})
+  if [[ -d "$dir" ]]
+  then
+    cd "$dir"
+  fi
+  clear
+  page
 }
-
 
 function page_children_renumber() {
   ui_header "renumber children:"
