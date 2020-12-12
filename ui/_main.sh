@@ -3,6 +3,8 @@
 source ~/.photon/ui/color.sh
 source ~/.photon/ui/ask.sh
 
+SEP="${fgg08}•${txReset}"
+
 fmt_child="${fgYellow}%3d)${txReset} %s${fgAqua}%s${txReset}\n"
 fmt_child2="     %s\n"
 
@@ -61,16 +63,17 @@ function ui_banner() {
 }
 
 function ui_list_item() {
-  printf "     %s${txReset}\n" "$1"
+  printf "       %s${txReset}\n" "$1"
 }
 
 function ui_list_item_number() {
-  fmt="${fgYellow}%3d)${txReset} ${txBold}%s${fgAqua}%s${txReset}\n"
-  printf "$fmt" $1 "$2"
+  fmt="${fgYellow}%4d${txReset} ${SEP} ${txBold}%s${fgAqua}%s${txReset}\n"
+  printf "$fmt" "$1" "$2"
 }
 
-function ui_display_numbered_list() {
-  echo
+function key_item() {
+  fmt="${fgYellow}%6s${txReset} ${SEP} %s\n"
+  printf "$fmt" "$1" "$2"
 }
 
 function tab_title {
