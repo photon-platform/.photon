@@ -4,7 +4,7 @@
 MIC="alsa_input.usb-046d_HD_Pro_Webcam_C920_B11A2C0F-02.analog-stereo"
 BLUE="alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo"
 AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
-CAMERA="/dev/video2"
+CAMERA="/dev/video4"
 ZIGGI="/dev/video0"
 
 FRAMERATE=24

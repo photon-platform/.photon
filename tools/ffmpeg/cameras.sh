@@ -59,27 +59,15 @@ function v4off() {
   fi 
 }
 
-function alter() {
-  alteroff
-  SIZE=1024x768
-  ffplay -noborder -hide_banner -loglevel quiet \
-    -video_size $SIZE \
-    -framerate $FRAMERATE \
-    -i /dev/video2 \
-    -c:v rawvideo -pix_fmt rgb24 \ 
-    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
-    -window_size 80x25 -f caca \ 
-    -left 1040 -top 900 &
-  export PID_alter=$!
-}
-function alteroff() {
-  if [[ $PID_alter ]]; then
-    kill $PID_alter
-    unset -v PID_alter
-  fi 
-}
-function other_cam() {
-  ffmpeg -i $CAMERA -c:v rawvideo -pix_fmt rgb24 -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" -window_size 80x25 -f caca - -top 900
+function alter_cam() {
+  v4off
+  # window proportion 16x5
+  ffmpeg -hide_banner -loglevel quiet \
+    -i $CAMERA -c:v rawvideo -pix_fmt rgb24 \
+    -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -window_size 112x35 \
+    -window_title 'ALTER' \
+    -f caca - -top 900 
 }
 
 function sky_cam() {
