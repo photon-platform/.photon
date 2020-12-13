@@ -2,10 +2,9 @@
 
 function tools_git_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "git actions: q l d a c p u S"
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}GIT${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;; # quit
 

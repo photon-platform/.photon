@@ -2,10 +2,9 @@
 
 function tools_grav_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "grav actions: q v-grav u-plugins c-cache l-clean t-tntsearch"
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}GRAV${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;; # quit
     v) bin/gpm self-upgrade; echo; tools_grav_actions; ;;

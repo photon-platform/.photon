@@ -11,10 +11,9 @@ FRAMERATE=24
 
 function tools_log_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "log actions: q y t s x"
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}LOG${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;; # quit
     y) sk2; tools_log_actions ;;

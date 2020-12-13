@@ -6,10 +6,9 @@
 
 function image_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "IMAGE actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}IMAGE${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; images; ;;
     e) gimp "$file"; clear; image "$file" $image_index; ;;

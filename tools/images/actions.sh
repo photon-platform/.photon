@@ -2,10 +2,9 @@
 
 function images_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "IMAGES actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}IMAGES${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;;
     /) search; clear; images; ;;

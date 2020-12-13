@@ -13,10 +13,9 @@ FRAMERATE=24
 
 function tools_ffmpeg_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "ffmpeg actions: q c d k y t s x"
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}FFMPEG${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;; # quit
     a) rablue;  tools_ffmpeg_actions; ;;
