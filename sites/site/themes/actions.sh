@@ -2,10 +2,9 @@
 
 function themes_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "themes actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}THEMES${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;; # quit
     @) clear; site ;;

@@ -10,16 +10,21 @@ function plugins_list() {
 
   i=1
 
-  ui_banner "plugins:"
+  ui_banner "plugins $SEP $list_count"
+  echo
 
   for plugin in ${list[@]}
   do
     export yaml=$(cat $plugin)
     eval "$(yaml_parse plugin)" 2> /dev/null
 
-    # echo -e "$i\t$title $gscount"
-    ui_list_item_number $i "$(remove_quotes "$plugin_name") - $plugin_version"
-    # ui_list_item "$(dirname "$plugin")"
+    dir=$(dirname "$plugin")
+
+    tmp=$PWD
+    cd $dir
+    stat=" $SEP ${fgPurple}$(git_branch) $SEP ${fgRed}$(gsss)${txReset} "
+    cd $tmp
+    ui_list_item_number $i "$(remove_quotes "$plugin_name") $SEP $plugin_version $stat"
     ((i++))
   done
   echo

@@ -26,9 +26,9 @@ function sites() {
 
   cd $SITESROOT
   
-  clear
-  ui_header "photon ✴ SITES"
-  tab_title "photon ✴ SITES"
+  clear -x
+
+  ui_header "SITES $SEP $PROJECT"
 
   sites_list
 

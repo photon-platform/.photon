@@ -8,10 +8,10 @@ function plugins() {
   @
   source .photon
   cd plugins
+  clear -x 
 
-  clear
-  ui_header "$PROJECT * PLUGINS"
-  tab_title "$PROJECT * PLUGINS"
+  ui_header "PLUGINS $SEP $PROJECT"
+
   show_dir
 
   plugins_list

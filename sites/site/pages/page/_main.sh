@@ -13,8 +13,9 @@ function remove_quotes() {
 
 function page() {
 
-  ui_header "$PROJECT * PAGE "
-  tab_title "$PROJECT * PAGE "
+  clear -x
+
+  ui_header "PAGE $SEP $PROJECT"
 
   show_dir
 
@@ -64,7 +65,8 @@ function page() {
     summary=$(tail -n +2 $md | sed -n -e '/^---$/,/^===$/{ /^---$/d; /^===$/d; p; }' | sed 's/^/ /')
     if [[ -n $summary ]]
     then
-      echo "$summary" | fold -w $((width-1)) -s
+      width=$(tput cols)
+      echo "$summary" | fold -w $((width-4)) -s
     fi
 
     # show headings from document indented
@@ -76,7 +78,6 @@ function page() {
 
     page_children
 
-    echo
     page_actions
   else
     h1 "page not found"

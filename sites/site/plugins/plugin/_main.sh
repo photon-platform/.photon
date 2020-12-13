@@ -4,13 +4,15 @@ source ~/.photon/sites/site/plugins/plugin/actions.sh
 source ~/.photon/sites/site/plugins/plugin/siblings.sh
 
 function plugin() {
-  ui_header "$PROJECT * PLUGIN "
-  tab_title "$PROJECT * PLUGIN "
+  clear -x
+
+  ui_header "PLUGINS $SEP $PROJECT"
 
   show_dir
   plugin_siblings
 
-  cat blueprints.yaml | head -n 12
+  cat blueprints.yaml | head -n 12 | awk '{printf "  %s\n", $0}'
+  # | xargs printf "    %s"
   echo
 
   plugin_actions

@@ -13,8 +13,9 @@ function pages() {
   source .photon
   cd pages
 
-  ui_header "$PROJECT * PAGES"
-  tab_title "$PROJECT * PAGES"
+  clear -x
+
+  ui_header "PAGES $SEP $PROJECT"
 
   show_dir
 

@@ -2,9 +2,9 @@
 
 function sites_actions() {
 
-  ui_footer "SITES actions: ? for help "
-
-  read -s -n1 -p " > " action
+  hr
+  P=" ${fgYellow}SITES${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     \?)
       echo
@@ -100,7 +100,7 @@ function sites_actions() {
       ;;
     *)
       echo
-      echo "not a command"
+      echo " '$action' ${fgRed}not a command${txReset}"
       sites_actions
       ;;
   esac

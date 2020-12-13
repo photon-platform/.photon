@@ -2,10 +2,9 @@
 
 function taxonomy_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "TAXONOMY actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}TAXONOMY${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; pages ;;
     c) taxonomy_list_categories; clear; taxonomy; ;;

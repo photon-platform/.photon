@@ -19,7 +19,11 @@ function sites_list() {
   do
     dir=$(dirname "$site")
 
-    title=$(sed -n -e 's/title: \(.*\)/\1/p' "$dir/config/site.yaml")
+    tmp=$PWD
+    cd $dir
+    title=$(sed -n -e 's/title: \(.*\)/\1/p' "config/site.yaml")
+    title+=" $SEP ${fgPurple}$(git_branch) $SEP ${fgRed}$(gsss)${txReset} "
+    cd $tmp
 
     ui_list_item_number $i "$title"
     ui_list_item "${fgg08}${dir#$PWD/}${txReset}"

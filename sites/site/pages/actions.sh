@@ -2,10 +2,9 @@
 
 function pages_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "PAGES actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}PAGES${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;;
     @) clear; site ;;

@@ -4,10 +4,9 @@
 
 function page_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "PAGE actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}PAGE${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;;
     e) vim *.md; clear; page; ;;

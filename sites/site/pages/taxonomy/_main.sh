@@ -3,8 +3,9 @@ source ~/.photon/sites/site/pages/taxonomy/actions.sh
 
 function taxonomy() {
 
-  ui_header "$PROJECT * TAXONOMY "
-  tab_title "$PROJECT * TAXONOMY "
+  clear -x
+
+  ui_header "TAXONOMY $SEP $PROJECT"
 
 
   declare -A tax_category

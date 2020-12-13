@@ -4,8 +4,9 @@ source ~/.photon/sites/site/themes/theme/actions.sh
 source ~/.photon/sites/site/themes/theme/siblings.sh
 
 function theme() {
-  ui_header "$PROJECT * theme "
-  tab_title "$PROJECT * theme "
+  clear -x
+  
+  ui_header "THEME $SEP $PROJECT"
 
   show_dir
   theme_siblings

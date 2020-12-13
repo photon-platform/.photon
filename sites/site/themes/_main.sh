@@ -8,10 +8,9 @@ function themes() {
   @
   source .photon
   cd themes
+  clear -x
 
-  clear
-  ui_header "$PROJECT * THEMES"
-  tab_title "$PROJECT * THEMES"
+  ui_header "THEMES $SEP $PROJECT"
 
   show_dir
 

@@ -10,12 +10,21 @@ function themes_list() {
 
   i=1
 
-  ui_banner "themes:"
+  ui_banner "themes $SEP $list_count"
+  echo
 
   for theme in ${list[@]}
   do
-    # echo -e "$i\t$title $gscount"
-    ui_list_item_number $i "$theme"
+    export yaml=$(cat $theme)
+    eval "$(yaml_parse theme)" 2> /dev/null
+
+    dir=$(dirname "$theme")
+
+    tmp=$PWD
+    cd $dir
+    stat=" $SEP ${fgPurple}$(git_branch) $SEP ${fgRed}$(gsss)${txReset} "
+    cd $tmp
+    ui_list_item_number $i "$(remove_quotes "$theme_name") $SEP $theme_version $stat"
     ((i++))
   done
   echo

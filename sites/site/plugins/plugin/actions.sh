@@ -2,10 +2,9 @@
 
 function plugin_actions() {
 
-  # TODO: show all menu options on '?'
-  ui_footer "plugin actions: "
-
-  read -s -n1 -p " > "  action
+  hr
+  P=" ${fgYellow}PLUGIN${txReset}"
+  read -s -n1 -p "$P > " action
   case $action in
     q) clear; ;;
     @) clear; cd ..; site ;;

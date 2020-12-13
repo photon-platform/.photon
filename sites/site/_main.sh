@@ -11,17 +11,18 @@ source ~/.photon/sites/site/swatch.sh
 function site() {
   @
   source .photon
-  # clear
-  ui_header "$PROJECT * SITE "
-  tab_title "$PROJECT * SITE "
+  
+  clear -x
+
+  ui_header "SITE $SEP $PROJECT"
 
   show_dir
 
   h1 "$(sed -n "s/^\(\s*title:\s*\)\(.*\)/\2/p" config/site.yaml)"
   site_siblings
-  h2 "$((siblings_index + 1)) of $siblings_count"
+  h2 "$((siblings_index + 1)) ${fgg08}of${txReset} $siblings_count"
   echo
-  fmt="  ${fgYellow}%c${txReset} • ${txBold}%s${txReset} • %d\n"
+  fmt="  ${fgYellow}%c${txReset} $SEP ${txBold}%s${txReset} $SEP %d\n"
   printf "$fmt" "p" "pages" $(find ./pages -name "*.md" | wc -l ) 
   printf "$fmt" "u" "plugins" $(find ./plugins -name "blueprints.yaml" | wc -l ) 
   printf "$fmt" "m" "themes" $(find ./themes -name "blueprints.yaml" | wc -l )
