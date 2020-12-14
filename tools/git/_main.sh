@@ -16,14 +16,12 @@ alias g-df-s="git config --global diff.submodule log"
 function tools_git() {
 
   clear
-  ui_header "tools * GIT"
-  tab_title "tools * GIT"
+  ui_header "GIT $SEP $PWD"
 
-  printf " %s\n" $( pwd )
-  printf " tag: %s\n" $( gtl )
   echo
   gss
   echo
+  printf " ${fgYellow}tag:${txReset} %s\n" $( gtl )
 
   tools_git_actions
 

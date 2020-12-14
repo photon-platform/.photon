@@ -6,14 +6,12 @@ source ~/.photon/tools/git/submodules/remove.sh
 
 function tools_git_submodules() {
 
-  clear
-  ui_header "tools * GIT submodules"
-  tab_title "tools * GIT submodules"
+  clear -x
 
   repo_home=$(g-home)
 
-  echo
-  echo $repo_home
+  ui_header "GIT $SEP SUBMODULES $SEP $repo_home"
+  echo 
 
   gm="$repo_home/.gitmodules"
   if [[ -f $gm ]]
