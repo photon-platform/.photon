@@ -1,23 +1,40 @@
 #!/usr/bin/env bash
 
 function tools_git_actions() {
+  declare -A actions
+  actions['?']="help"
+  actions[q]="quit"
+  actions[g]="zd"
+  actions[h]="cd .."
+  actions[l]="git log --graph --oneline"
+  actions[d]="git diff ."
+  actions[a]="git add ."
+  actions[c]="git commit"
+  actions[p]="git push "
+  actions[u]="git pull --recurse-submodules"
+  actions[S]="SUBMODULES"
 
   hr
   P=" ${fgYellow}GIT${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
-    q) clear; ;; # quit
-
-    g) zd; clear; tools_git; ;;
-    h) cd ..; clear; tools_git; ;;
-
-    l) echo; git log --graph --oneline ;   tools_git  ;;
-    d) echo; git diff .; pause_enter;  tools_git  ;;
-    a) echo; git add .;  tools_git  ;;
-    c) echo; git commit;  tools_git  ;;
-    p) echo; git push; pause_enter;  tools_git  ;;
-    u) echo; git pull --recurse-submodules; pause_enter;  tools_git  ;;
-    S) echo; tools_git_submodules;  tools_git  ;;
+    \?)
+      for key in "${!actions[@]}"; do 
+        key_item $key "${actions[$key]}"
+      done
+      tools_git_actions
+      ;;
+    q) clear -x; ;;
+    g) zd;  tools_git; ;;
+    h) cd ..;  tools_git; ;;
+    l) git log --graph --oneline ;   tools_git  ;;
+    d) git diff .; pause_enter;  tools_git  ;;
+    a) git add .;  tools_git  ;;
+    c) git commit;  tools_git  ;;
+    p) git push; pause_enter;  tools_git  ;;
+    u) git pull --recurse-submodules; pause_enter;  tools_git  ;;
+    S) tools_git_submodules;  tools_git  ;;
     *)
       clear
       tools_git
