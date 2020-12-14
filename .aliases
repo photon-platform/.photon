@@ -38,6 +38,7 @@ alias gyt="cd ~/youtube/;ls "
 alias gsnip="cd ~/.vim/Ultisnips/;ls "
 alias gm="cd /mnt/md0"
 alias gM="cd ~/Media"
+alias gL="cd ~/Logs"
 
 alias arcturian="cd ~/youtube/arturian-sound; mpv --shuffle *;"
 alias dl="youtube-dl"

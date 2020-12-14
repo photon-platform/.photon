@@ -30,4 +30,6 @@ set_rc .config/ranger
 set_rc .config/sxiv
 
 set_rc .XCompose
+set_rc .Xresources
+xrdb -load .Xresources
 
