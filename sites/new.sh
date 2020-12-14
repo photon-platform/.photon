@@ -9,8 +9,8 @@ function sites_new() {
   PROJECT=""
   TITLE=""
 
-  clear
-  ui_header "photon ✴ SITES new"
+  clear -x
+  ui_header "SITES $SEP NEW $SEP $PWD"
 
   sudo pwd
 

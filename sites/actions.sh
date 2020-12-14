@@ -29,11 +29,11 @@ function sites_actions() {
       echo
       sites_actions
       ;;
-    q) clear; ;;
+    q) clear -x; ;;
     /) search; sites ;;
 
-    n) clear; sites_new; site ;;
-    s) clear; sites_restore; site ;;
+    n) sites_new; site ;;
+    s) sites_restore; site ;;
 
     r) ranger;  sites ;;
     t) tre; sites; ;;
