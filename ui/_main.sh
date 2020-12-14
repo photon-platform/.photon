@@ -19,13 +19,14 @@ function h2() {
 }
 
 function hr() {
-  width=$(tput cols)
-  width=$((width - 2))
+  # width=$(tput cols)
+  # width=$((width - 2))
+  width=3
   char="━"
-  char="─"
+  # char="─"
   
   # sty="${fgYellow}"
-  sty=""
+  sty="${fgg08}"
   fmt="${sty} %-${width}s${txReset} \n"
   printf -v spaces "%-${width}s"
   printf "$fmt" "${spaces// /${char}}"
