@@ -8,11 +8,9 @@ function sites_list() {
   sites=( $( sites_dirs ))
   sites_count=${#sites[@]}
 
-  h1 "$PWD"
-
   i=1
 
-  ui_banner "sites ${SEP} ${#sites[@]}"
+  # ui_banner "sites ${SEP} ${#sites[@]}"
   echo
 
   for site in ${sites[@]}

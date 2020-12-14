@@ -12,15 +12,19 @@ function sites_new() {
   clear
   ui_header "photon ✴ SITES new"
 
+  sudo pwd
+
   githuborg_set
 
-  echo
-  read -p "specify PROJECT repo name: " PROJECT
+  # echo
+  # read -p "specify PROJECT repo name: " PROJECT
+  PROJECT="$(ask_value "specify PROJECT repo name")"
 
   repo_check
   
-  echo
-  read -p "specify site TITLE: " TITLE
+  # echo
+  # read -p "specify site TITLE: " TITLE
+  TITLE="$(ask_value "specify site TITLE")"
 
   if [ -n $PROJECT ]
   then
@@ -42,10 +46,11 @@ function sites_new() {
     cd $SITESROOT/$PROJECT
     rm -rf user
     git clone --recurse-submodules $SITESROOT/$CLONE/user/.git $SITESROOT/$PROJECT/user
-    git submodule foreach "pwd; \
-      git checkout master; \
-      git status -sb; \
-      echo"
+    tools_git_submodules_update
+    # git submodule foreach "pwd; \
+      # git checkout master; \
+      # git status -sb; \
+      # echo"
 
 
     echo
@@ -103,18 +108,20 @@ function sites_new() {
     END_TIME="$(date -u +%s)"
     ELAPSED="$(($END_TIME-$START_TIME))"
     TIME=$(convertsecstomin $ELAPSED)
+    
+    h1 "clone to ${fgYellow}$PROJECT${txReset} is complete."
+    h2 "✴ elapsed: ${txBold}$TIME${txReset} m:s"
     echo
-    echo "✴ elapsed: $TIME m:s"
+    h2 "type ${fgYellow}site${txReset} to enter"
 
+    # echo
+    # echo "✴ push to GitHub"
 
-    echo
-    echo "✴ push to GitHub"
-
-    read -p "push now? (Y|n): " PUSH
-    if [ $PUSH = 'Y' ]
-    then
-      git push -fu origin master
-    fi
+    # read -p "push now? (Y|n): " PUSH
+    # if [ $PUSH = 'Y' ]
+    # then
+      # git push -fu origin master
+    # fi
 
   else
     echo "no project name"

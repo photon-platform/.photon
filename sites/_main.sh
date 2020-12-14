@@ -18,17 +18,13 @@ source ~/.photon/sites/restore.sh
 source ~/.photon/sites/apache.sh
 source ~/.photon/sites/site/_main.sh
 
-# alias grav-core="wget -O _grav-core.zip https://getgrav.org/download/core/grav/1.6.9 "
-# alias grav-admin="wget -O _grav-admin.zip https://getgrav.org/download/core/grav/1.6.9 "
-alias grav-update="cd $SITESROOT/grav;bin/gpm self-upgrade;"
-
 function sites() {
 
   cd $SITESROOT
   
   clear -x
 
-  ui_header "SITES $SEP $PROJECT"
+  ui_header "SITES $SEP $PWD"
 
   sites_list
 
@@ -40,7 +36,7 @@ function sites() {
 
 function githuborg_set() {
   echo
-  read -e -i "$GITHUBORG" -p "specify GITHUB Org name: " GITHUBORG
+  read -e -i "$GITHUBORG" -p "${fgYellow}specify GITHUB Org name:${txReset} " GITHUBORG
 }
 
 function repo_check() {

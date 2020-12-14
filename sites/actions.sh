@@ -30,15 +30,15 @@ function sites_actions() {
       sites_actions
       ;;
     q) clear; ;;
-    /) search; clear; sites ;;
+    /) search; sites ;;
 
-    n) clear; sites_new; clear; site ;;
-    s) clear; sites_restore; clear; site ;;
+    n) clear; sites_new; site ;;
+    s) clear; sites_restore; site ;;
 
-    r) ranger; clear; sites ;;
-    t) tre; clear; sites; ;;
-    d) ll; echo; sites_actions ;;
-    I) images; clear; sites;;
+    r) ranger;  sites ;;
+    t) tre; sites; ;;
+    d) ll; sites_actions ;;
+    I) images; sites;;
 
     '#')
       read -p "enter number: " number
@@ -48,7 +48,6 @@ function sites_actions() {
           cd "$dir"
         fi
       fi
-      clear
       site
       ;;
     [1-9]*)
@@ -58,21 +57,17 @@ function sites_actions() {
           cd "$dir"
         fi
       fi
-      clear
       site
       ;;
     0)
       last=$(( ${#sites[@]} - 1 ))
       cd $(dirname ${sites[ last ]})
-      clear
       site
       ;;
     g)
       echo
       dir=$(sites_dirs | sed -e "s|$SITESROOT/\(.*\)/user/.photon|\1|" | fzf )
       cd "$SITESROOT/$dir/user"
-      # read -p continue
-      clear
       site
       ;;
     G)
@@ -95,7 +90,6 @@ function sites_actions() {
         ((i++))
       done
       read -n1 -p "press any key to continue"
-      clear
       sites
       ;;
     *)
@@ -104,24 +98,4 @@ function sites_actions() {
       sites_actions
       ;;
   esac
-
-    case $1 in
-      newhost)
-        ~/.photon/sites/newhost.sh "$2" "$3"
-        cd $SITESROOT/$2/user
-        ;;
-      archive)
-        cd $SITESROOT
-        if [[ $2 ]]; then
-          D=$(date +"%Y%m%d-%T")
-          cp -a "$2" .archive/$2.$D
-          ls .archive | grep $2
-        else
-          echo "specify valid site: sites archive sitename"
-          ls
-        fi
-        ;;
-    esac
-
-
 }

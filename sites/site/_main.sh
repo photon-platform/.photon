@@ -22,11 +22,20 @@ function site() {
   site_siblings
   h2 "$((siblings_index + 1)) ${fgg08}of${txReset} $siblings_count"
   echo
-  fmt="  ${fgYellow}%c${txReset} $SEP ${txBold}%s${txReset} $SEP %d\n"
-  printf "$fmt" "p" "pages" $(find ./pages -name "*.md" | wc -l ) 
-  printf "$fmt" "u" "plugins" $(find ./plugins -name "blueprints.yaml" | wc -l ) 
-  printf "$fmt" "m" "themes" $(find ./themes -name "blueprints.yaml" | wc -l )
-  printf "$fmt" "c" "config" $(find ./config -name "*.yaml" | wc -l )
+  fmt="  ${fgYellow}%c${txReset} $SEP ${txBold}%s${txReset} $SEP %d $SEP ${fgRed}%s${txReset}\n"
+  
+  tmp=$PWD
+  
+  cd $tmp/pages
+  printf "$fmt" "p" "pages" $(find . -name "*.md" | wc -l ) "$(gsss)"
+  cd $tmp/plugins
+  printf "$fmt" "u" "plugins" $(find . -name "blueprints.yaml" | wc -l ) "$(gsss)"
+  cd $tmp/themes
+  printf "$fmt" "m" "themes" $(find . -name "blueprints.yaml" | wc -l ) "$(gsss)"
+  cd $tmp/config
+  printf "$fmt" "c" "config" $(find . -name "*.yaml" | wc -l ) "$(gsss)"
+
+  cd $tmp
 
   echo
   site_actions
