@@ -6,12 +6,9 @@ source ~/.photon/tools/ffmpeg/cameras.sh
 
 function tools_ffmpeg() {
 
-  clear
-  ui_header "tools * ffmpeg"
-  tab_title "tools * ffmpeg"
+  clear -x
+  ui_header "FFMPEG $SEP $PWD"
 
-  pwd
-  echo
   ffmpeg -hide_banner -sources pulse
   ffmpeg -hide_banner -sources video4linux2
 

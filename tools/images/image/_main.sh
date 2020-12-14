@@ -5,11 +5,11 @@ source ~/.photon/tools/images/image/actions.sh
 function image() {
   clear
 
-  ui_header "$PWD * IMAGE "
-  tab_title "$PWD * IMAGE "
 
   file=$1
   image_index=$2
+
+  ui_header "IMAGE $SEP $file"
 
   if test -f "$file";
   then

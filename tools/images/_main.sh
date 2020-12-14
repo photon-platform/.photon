@@ -8,10 +8,7 @@ source ~/.photon/tools/images/image/_main.sh
 function images() {
   clear
 
-  ui_header "photon * IMAGES"
-  tab_title "photon * IMAGES"
-
-  show_dir
+  ui_header "IMAGES $SEP $PWD"
 
   images_list
 

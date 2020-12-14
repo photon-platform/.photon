@@ -7,11 +7,8 @@ alias L=tools_log
 function tools_log() {
 
   clear
-  ui_header "tools * log"
-  tab_title "tools * log"
+  ui_header "LOG $SEP $PWD"
 
-  pwd
-  echo
   
   tools_log_actions
 

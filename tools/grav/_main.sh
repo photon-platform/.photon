@@ -14,10 +14,8 @@ function tools_grav() {
   cd ..
 
   clear
-  ui_header "$PROJECT * GRAV"
-  tab_title "$PROJECT * GRAV"
+  ui_header "GRAV $SEP $PROJECT"
 
-  echo
   bin/grav -V
   echo
 
