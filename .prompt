@@ -42,7 +42,8 @@ function prompt_gsss() {
 
 # Set the terminal title and prompt.
 # Use \[...\] around the parts of PS1 that have length 0. 
-PS1='$(hr)'
+PS1='\n'
+PS1+='$(hr)'
 PS1+='\n'
 PS1+=' \[${fgg12}\]\u\[${txReset}\]'
 PS1+=$PDOT
