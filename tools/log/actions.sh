@@ -19,8 +19,13 @@ function tools_log_actions() {
     y) sk2; tools_log_actions ;;
     t) set_term; tools_log_actions ;;
     s) screen_main;  tools_log_actions; ;;
+    c) log_concat; ;; 
     *) clear; tools_log ;;
   esac
+}
+
+function log_concat() {
+  ffmpeg -f concat -safe 0 -i .log  -c copy ~/Logs/$(basename $PWD).mkv
 }
 
 function make_logname() {
@@ -65,7 +70,7 @@ function screen_main() {
     -af "highpass=f=100, volume=volume=5dB, afftdn" \
     $output
 
-  echo $output >> .log
+  echo file $output >> .log
   rm tmp.mkv
 
   mpv $output
