@@ -25,14 +25,21 @@ function image() {
     echo
     h1 "$file"
     hr
-    exiftool -imagewidth "$file"
-    exiftool -imageheight "$file"
-    # exiftool -imagesize "$file"
-    exiftool -datetimeoriginal "$file"
+    getExif "$file"
+    echo " $( getExifValue "ImageWidth" ) x $( getExifValue "ImageHeight" )"
+    echo " created $SEP $( getExifValue "DateTimeOriginal" ) "
     hr
-    exiftool -title "$file"
-    exiftool -image-description "$file"
-    exiftool -copyright "$file"
+    echo " title $SEP $( getExifValue "Title" ) "
+    echo " caption $SEP $( getExifValue "Description" )" 
+    echo " alt-text $SEP $( getExifValue "Notes" )" 
+    echo " subject $SEP $( getExifValue "Subject" )" 
+    hr
+    echo " rating $SEP $( getExifValue "Rating" )" 
+    echo " labels $SEP $( getExifValue "Colorlabels" )" 
+    hr
+    echo " creator $SEP $( getExifValue "Creator" ) "
+    echo " publisher $SEP $( getExifValue "Publisher" ) "
+    echo " copyright $SEP $( getExifValue "Copyright" ) "
 
     echo
     image_actions
@@ -44,12 +51,14 @@ function image() {
 }
 
 function getExif() {
-  type="$1"
-  cmd="exiftool -$type '$img'"
-  result=$(eval $cmd)
-  IFS=':'
-  read -ra arr <<< "$result"
-  IFS=' '
-  echo "${arr[1]# }"
+  unset -v  $( ( set -o posix ; set ) | grep exif_ | sed -n 's/\(.*\)\=(.*/\1/p' )
+  img="$1"
+  exif_json=`exiftool "$img" -j`
 }
 
+function getExifValue() {
+  value=$( echo $exif_json | jq ".[0].$1" )
+  if [[ $value != null ]]; then
+    echo $value | sed 's/^"//' | sed 's/"$//'
+  fi
+}
