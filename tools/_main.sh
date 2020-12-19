@@ -15,6 +15,7 @@ source ~/.photon/tools/log/_main.sh
 source ~/.photon/tools/shell/_main.sh
 source ~/.photon/tools/hosts/_main.sh
 source ~/.photon/tools/images/_main.sh
+source ~/.photon/tools/capture/_main.sh
 
 function show_dir() {
 
