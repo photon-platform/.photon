@@ -20,6 +20,15 @@ function v0off() {
     unset -v PID_v0
   fi 
 }
+function v0b() {
+  SIZE=1280x1024
+  ffplay -noborder -hide_banner -loglevel quiet \
+    -video_size $SIZE \
+    -framerate $FRAMERATE \
+    -i /dev/video0 \
+    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -left 1040 -top 900 
+}
 
 # sky camera
 function v2() {
@@ -39,6 +48,7 @@ function v2off() {
     unset -v PID_v2
   fi 
 }
+
 
 # desk cam
 function v4() {
