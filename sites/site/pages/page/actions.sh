@@ -1,25 +1,22 @@
 #!/usr/bin/env bash
 
-
-
 function page_actions() {
 
   hr
   P=" ${fgYellow}PAGE${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;;
-    e) vim *.md; clear; page; ;;
-    v) sxiv *.jpg; clear; page; ;;
-    @) clear; site ;;
-    /) search; clear; page; ;;
+    q) clear -x; ;;
+    e) vim *.md; page; ;;
+    @) site ;;
+    /) search; page; ;;
 
-    r) ranger; clear; page; ;;
-    t) tre; clear; page; ;;
+    r) ranger; page; ;;
+    t) tre; page; ;;
     d) ll; echo; page_actions; ;;
     I) images; ;;
 
-    m) clear; page_siblings_move; ;;
+    m) page_siblings_move; ;;
     y)
       if [[ $PAGESYAML == true ]]
       then
@@ -43,8 +40,8 @@ function page_actions() {
         page
       fi
       ;;
-    f) vf; clear; page; ;;
-    g) zd; clear; page; ;;
+    f) vf; page; ;;
+    g) zd; page; ;;
     o) page_open; page_actions ;;
     
     j) page_sibling_get $((siblings_index + 1)) ;;
@@ -58,9 +55,9 @@ function page_actions() {
       page_child_get $((number - 1))
       ;;
 
-    L) tools_log; clear; page; ;;
-    T) taxonomy; clear; page; ;;
-    G) tools_git; clear; page ;;
+    L) tools_log; page; ;;
+    T) taxonomy; page; ;;
+    G) tools_git; page ;;
     b)
       clear
       page_children_renumber

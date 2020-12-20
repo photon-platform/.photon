@@ -6,27 +6,26 @@ function plugin_actions() {
   P=" ${fgYellow}PLUGIN${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;;
-    @) clear; cd ..; site ;;
-    /) search; clear; plugin; ;;
+    q) clear -x; ;;
+    @) cd ..; site ;;
+    /) search; plugin; ;;
 
-    r) ranger; clear; plugin; ;;
-    t) tre; clear; plugin; ;;
+    r) ranger; plugin; ;;
+    t) tre; plugin; ;;
     d) ll; echo; plugin_actions; ;;
     I) images; ;;
 
-    e) v README.md ; clear; plugin; ;;
-    .) v blueprints.yaml ; clear; plugin; ;;
-    l) vim CHANGELOG.md; clear; plugin; ;;
+    e) v README.md ; plugin; ;;
+    .) v blueprints.yaml ; plugin; ;;
+    l) vim CHANGELOG.md; plugin; ;;
 
-    h) cd ..; clear; plugins; ;;
+    h) cd ..; plugins; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
       if [[ -d "$next" ]]
       then
         cd "$next"
       fi
-      clear
       plugin
       ;;
     k)
@@ -35,25 +34,22 @@ function plugin_actions() {
       then
         cd "$prev"
       fi
-      clear
       plugin
       ;;
-    f) vf; clear; plugin; ;;
-    g) zd; clear; ;;
+    f) vf; plugin; ;;
+    g) zd; ;;
     R) report_plugin > README.md;
       mkdir -p docs;
       cp README.md docs/index.md;
       v README.md;
-      clear; plugin ;;
+      plugin ;;
+    F) folder; plugin; ;;
     G)
       tools_git
-      clear
       plugin
       ;;
     n)
-      clear
       plugins_new
-      clear
       plugin
       ;;
     *)

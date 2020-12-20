@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
 
+function ranger_dir() {
+  ranger --choosedir=$HOME/.rangerdir
+  LASTDIR=`cat $HOME/.rangerdir`
+  cd "$LASTDIR"
+}
+alias rd=ranger_dir
+
 function apt_upgrade() {
   sudo apt update -y
   sudo apt list --upgradeable

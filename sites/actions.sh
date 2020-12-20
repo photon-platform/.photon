@@ -15,7 +15,6 @@ function sites_actions() {
       key_item t tree
       key_item d "list current dir"
 
-
       key_item "1-9" "select site"
       key_item "#" "select site"
       key_item "0" "select last site"
@@ -35,7 +34,7 @@ function sites_actions() {
     n) sites_new; site ;;
     s) sites_restore; site ;;
 
-    r) ranger;  sites ;;
+    r) ranger_dir;  sites ;;
     t) tre; sites; ;;
     d) ll; sites_actions ;;
     I) images; sites;;

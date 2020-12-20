@@ -8,6 +8,8 @@ source ~/.photon/tools/list.sh
 source ~/.photon/tools/search.sh
 source ~/.photon/tools/server.sh
 source ~/.photon/tools/compkeys.sh
+
+source ~/.photon/tools/folder/_main.sh
 source ~/.photon/tools/git/_main.sh
 source ~/.photon/tools/grav/_main.sh
 source ~/.photon/tools/ffmpeg/_main.sh

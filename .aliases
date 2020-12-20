@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -17,25 +14,23 @@ alias report_theme="php ~/.photon/report/theme.php"
 alias readme_html="pandoc -f gfm --css=/home/phi/.photon/report/gfm.css -s -o readme.html --metadata pagetitle="test" README.md ; open readme.html"
 alias sandbox="cd ~/Projects/sandbox"
 
-
 alias inmotion="ssh illumiphi.com"
 
-alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; clear; site;"
-alias presence="cd ~/SITES/presence/user; clear; site;"
-alias photon="cd ~/SITES/photon-platform.net/user; clear; site;"
-alias phi="cd ~/SITES/phiarchitect.com/user; clear; site;"
+alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; site;"
+alias presence="cd ~/SITES/presence/user; site;"
+alias photon="cd ~/SITES/photon-platform.net/user; site;"
+alias phi="cd ~/SITES/phiarchitect.com/user; site;"
 
-alias gdl="cd ~/Downloads;ls "
+alias dot="cd ~/.photon; folder;"
+alias dots="cd ~/.photon/sites; folder; "
+alias doti="cd ~/.photon/init; folder; "
+alias dott="cd ~/.photon/tools; folder; "
 
-alias dot="cd ~/.photon;ls "
-alias dots="cd ~/.photon/sites;ls "
-alias doti="cd ~/.photon/init;ls "
-alias dott="cd ~/.photon/tools;ls "
-
-alias gpr="cd ~/Projects/;ls "
-alias gge="cd ~/Projects/geometor-explorer;ls "
-alias gyt="cd ~/youtube/;ls "
-alias gsnip="cd ~/.vim/Ultisnips/;ls "
+alias gdl="cd ~/Downloads; folder; "
+alias gpr="cd ~/Projects/; folder; "
+alias gge="cd ~/Projects/geometor-explorer; folder; "
+alias gyt="cd ~/youtube/; folder; "
+alias gsnip="cd ~/.vim/Ultisnips/; folder; "
 alias gm="cd /mnt/md0"
 alias gM="cd ~/Media"
 alias gL="cd ~/Logs"
@@ -114,12 +109,8 @@ alias ls="command ls -At --group-directories-first ${colorflag}"
 # List all files colorized in long format
 alias ll="ls -lF "
 
-# List all files colorized in long format, including dot files
-# alias la="ls -laF "
-
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
-
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.

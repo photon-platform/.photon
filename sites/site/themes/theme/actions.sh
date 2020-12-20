@@ -6,26 +6,25 @@ function theme_actions() {
   P=" ${fgYellow}THEME${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;;
-    @) clear; cd ..; site ;;
-    /) search; clear; theme; ;;
-    e) v README.md ; clear; theme; ;;
-    .) v blueprints.yaml ; clear; theme; ;;
-    l) vim CHANGELOG.md; clear; theme; ;;
+    q) clear -x; ;;
+    @) cd ..; site ;;
+    /) search; theme; ;;
+    e) v README.md ; theme; ;;
+    .) v blueprints.yaml ; theme; ;;
+    l) vim CHANGELOG.md; theme; ;;
 
-    r) ranger; clear; theme; ;;
-    t) tre; clear; theme; ;;
+    r) ranger; theme; ;;
+    t) tre; theme; ;;
     d) ll; echo; theme_actions; ;;
     I) images; ;;
 
-    h) cd ..; clear; themes; ;;
+    h) cd ..; themes; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
       if [[ -d "$next" ]]
       then
         cd "$next"
       fi
-      clear
       theme
       ;;
     k)
@@ -34,28 +33,23 @@ function theme_actions() {
       then
         cd "$prev"
       fi
-      clear
       theme
       ;;
-    f) vf; clear; theme; ;;
-    g) zd; clear; theme; ;;
-    G)
-      tools_git
-      clear
-      theme
-      ;;
+    f) vf; theme; ;;
+    g) zd; theme; ;;
+
+    F) folder; theme; ;;
+    G) tools_git; theme; ;;
     R) report_theme > README.md; 
       mkdir -p docs;
       cp README.md docs/index.md;
-      v README.md; clear; theme ;;
+      v README.md; 
+      theme ;;
     n)
-      clear
       themes_new
-      clear
       theme
       ;;
     *)
-      clear
       theme
       ;;
   esac
