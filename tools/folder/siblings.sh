@@ -17,7 +17,7 @@ function folder_siblings() {
 
 function folder_siblings_dirs() {
   parent_dir=$(dirname "$(pwd)")
-  find $parent_dir -maxdepth 1 -mindepth 1 -type d | sort
+  find $parent_dir -maxdepth 1 -mindepth 1 -type d ! -name ".git" | sort 
 }
 
 function folder_sibling_get() {
