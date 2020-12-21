@@ -17,11 +17,10 @@ function tools_ffmpeg() {
     echo ${media[i]}
   done
 
-  echo
   
   tools_ffmpeg_actions
 
   tab_title "$PWD"
 }
-alias F=tools_ffmpeg
+alias ff=tools_ffmpeg
 

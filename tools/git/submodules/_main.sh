@@ -29,11 +29,8 @@ function tools_git_submodules() {
     done
     cd $old_dir
 
-    echo
     tools_git_submodules_actions
   fi
-
-  echo
 
   tab_title "$PWD"
 }

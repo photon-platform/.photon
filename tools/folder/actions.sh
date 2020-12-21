@@ -1,11 +1,42 @@
 #!/usr/bin/env bash
 
 function folder_actions() {
+  declare -A actions
+  actions['?']="help"
+  actions[q]="quit"
+  actions[/]="search"
 
+  actions[r]="ranger_dir"
+  actions[t]="tre"
+  actions[d]="ll"
+
+  actions[g]="zd"
+  actions[h]="move to parent folder"
+  actions[j]="move to next sibling folder"
+  actions[k]="move to prev sibling folder"
+  actions['1-9']="select child by number"
+  actions['0']="select last child"
+  actions['#']="select child by number (multi-digit, type enter)"
+
+  actions[f]="vf"
+  actions[v]="vr"
+
+  actions[I]="images"
+  actions[G]="git"
+
+  echo
   hr
+
   P=" ${fgYellow}FOLDER${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
+    \?)
+      for key in "${!actions[@]}"; do 
+        key_item $key "${actions[$key]}"
+      done
+      folder_actions
+      ;;
     q) clear -x; ;;
     /) search; folder; ;;
 
@@ -40,12 +71,11 @@ function folder_actions() {
       ;;
     j) folder_sibling_get $((siblings_index + 1)) ;;
     k) folder_sibling_get $((siblings_index - 1)) ;;
-    # a)  echo; folder_list_get | sxiv -o - ; pause_enter; clear; folder ;;
     f) vf; folder; ;;
+    v) vr; folder; ;;
     G) tools_git; folder; ;;
-    I) images; folder; ;;
+    I) images; ;;
     *)
-      clear
       folder
       ;;
   esac

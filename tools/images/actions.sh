@@ -2,52 +2,56 @@
 
 function images_actions() {
 
+  echo
   hr
+
   P=" ${fgYellow}IMAGES${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
-    q) clear; ;;
-    /) search; clear; images; ;;
+    \?)
+      for key in "${!actions[@]}"; do 
+        key_item $key "${actions[$key]}"
+      done
+      images_actions
+      ;;
+    q) clear -x; ;;
+    /) search; images; ;;
 
-    r) ranger; clear; images; ;;
-    t) tre; clear; images; ;;
-    d) ll; echo; images_actions; ;;
+    r) ranger; images; ;;
+    t) tre; images; ;;
+    d) ll; images_actions; ;;
 
-    g) zd; clear; images; ;;
-    h) cd ..; clear; images; ;;
+    g) zd; images; ;;
+    h) cd ..; images; ;;
     '#')
       read -p "enter number: " number
       id=$((number - 1))
       if [[ ${list[$id]} ]]; then
-        clear
         image "${list[$id]}" $id
       else
-        clear
         images
       fi
       ;;
     [1-9]*)
       id=$((action - 1))
       if [[ ${list[$id]} ]]; then
-        clear
         image "${list[$id]}" $id
       else
-        clear
         images
       fi
       ;;
     # 0)
       # last=$(( ${#children[@]} - 1 ))
       # cd $(dirname ${children[ last ]})
-      # clear
       # page
       # ;;
-    a)  echo; images_list_get | sxiv -o - ; pause_enter; clear; images ;;
-    f)  echo; images_list_get | fzf | sxiv -o - ; pause_enter; clear; images; ;;
-    # T) taxonomy; clear; page; ;;
-    G) tools_git; clear; images; ;;
+    a)  echo; images_list_get | sxiv -o - ; pause_enter; images ;;
+    f)  echo; images_list_get | fzf | sxiv -o - ; pause_enter; images; ;;
+    # T) taxonomy; page; ;;
+    F) folder; ;;
+    G) tools_git; images; ;;
     *)
-      clear
       images
       ;;
   esac

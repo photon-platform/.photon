@@ -14,6 +14,7 @@ function tools_git_actions() {
   actions[u]="git pull --recurse-submodules"
   actions[S]="SUBMODULES"
 
+  echo
   hr
   P=" ${fgYellow}GIT${txReset}"
   read -n1 -p "$P > " action

@@ -14,7 +14,6 @@ alias g-df="git diff --cached --submodule"
 alias g-df-s="git config --global diff.submodule log"
 
 function tools_git() {
-
   clear -x
   ui_header "GIT $SEP $PWD"
 

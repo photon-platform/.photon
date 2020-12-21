@@ -5,6 +5,7 @@ source ~/.photon/tools/images/list.sh
 source ~/.photon/tools/images/convert.sh
 source ~/.photon/tools/images/image/_main.sh
 
+alias I=images
 function images() {
   clear
 

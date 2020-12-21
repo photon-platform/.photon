@@ -10,17 +10,32 @@ FRAMERATE=24
 # mapfile -t media < <(find . -type f -name "*.mkv" -or -name "*.opus" -or -name "*.mp3" | sort)
 
 function tools_log_actions() {
+  declare -A actions
+  actions['?']="help"
+  actions[q]="quit"
+  actions[y]="screenkeys on"
+  actions[t]="set_term"
+  actions[s]="screen_main"
+  actions[c]="log_concat"
 
+  echo
   hr
   P=" ${fgYellow}LOG${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
-    q) clear; ;; # quit
+    \?)
+      for key in "${!actions[@]}"; do 
+        key_item $key "${actions[$key]}"
+      done
+      tools_log_actions
+      ;;
+    q) clear -x; ;; # quit
     y) sk2; tools_log_actions ;;
     t) set_term; tools_log_actions ;;
     s) screen_main;  tools_log_actions; ;;
     c) log_concat; ;; 
-    *) clear; tools_log ;;
+    *) clear -x; tools_log ;;
   esac
 }
 

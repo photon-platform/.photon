@@ -13,10 +13,18 @@ FRAMERATE=24
 
 function tools_ffmpeg_actions() {
 
+  echo
   hr
   P=" ${fgYellow}FFMPEG${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
+    \?)
+      for key in "${!actions[@]}"; do 
+        key_item $key "${actions[$key]}"
+      done
+      tools_ffmpeg_actions
+      ;;
     q) clear; ;; # quit
     a) rablue;  tools_ffmpeg_actions; ;;
     c) rc2;  tools_ffmpeg_actions; ;;

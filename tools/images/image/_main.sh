@@ -3,8 +3,7 @@
 source ~/.photon/tools/images/image/actions.sh
 
 function image() {
-  clear
-
+  clear -x
 
   file=$1
   image_index=$2
@@ -41,7 +40,6 @@ function image() {
     echo " publisher $SEP $( getExifValue "Publisher" ) "
     echo " copyright $SEP $( getExifValue "Copyright" ) "
 
-    echo
     image_actions
   else
     h1 "image not found"

@@ -17,7 +17,6 @@ function tools_grav() {
   ui_header "GRAV $SEP $PROJECT"
 
   bin/grav -V
-  echo
 
   tools_grav_actions
 

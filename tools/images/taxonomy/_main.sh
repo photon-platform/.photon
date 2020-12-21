@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source ~/.photon/sites/site/pages/taxonomy/actions.sh
+# source ~/.photon/sites/site/pages/taxonomy/actions.sh
 
 function images_taxonomy() {
 
@@ -34,7 +34,6 @@ function images_taxonomy() {
   join_by , "${tax_keys[@]}" 
   echo
   
-  echo
   taxonomy_actions
 }
 

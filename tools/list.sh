@@ -1,11 +1,28 @@
 #!/usr/bin/env bash
 
+function list_working_files() {
+  find . \
+    -name ".git" -prune -o \
+    -name "bundle" -prune -o \
+    -name "vendor" -prune -o \
+    -name "node_modules" -prune -o \
+    -name "cache" -prune -o \
+    -type f -name "tags" -prune -o \
+    -type f -name "*.min.*" -prune -o \
+    -type f -name "*.pack.*" -prune -o \
+    -type f -name "*.map" -prune -o \
+    -type f -name "*.index" -prune -o \
+    -type f -name "*" \
+    -print | sort | sed 's|\./||'
+}
+
 function list_text_files() {
   find . \
     -name ".git" -prune -o \
     -name "bundle" -prune -o \
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
+    -name "cache" -prune -o \
     -type f -name "tags" -prune -o \
     -type f -name "*.min.*" -prune -o \
     -type f -name "*.pack.*" -prune -o \
@@ -19,12 +36,13 @@ function list_text_files() {
 }
 
 
-function recent() {
+function list_recent() {
   find . \
     -name ".git" -prune -o \
     -name "bundle" -prune -o \
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
+    -name "cache" -prune -o \
     -type f -name "tags" -prune -o \
     -type f -name "*.min.*" -prune -o \
     -type f -name "*.pack.*" -prune -o \

@@ -5,10 +5,8 @@ source ~/.photon/tools/log/actions.sh
 alias L=tools_log
 
 function tools_log() {
-
-  clear
+  clear -x
   ui_header "LOG $SEP $PWD"
-
   
   tools_log_actions
 
