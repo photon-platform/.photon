@@ -30,7 +30,7 @@ function taxonomy_list_categories() {
   echo
   ui_banner "CATEGORY LIST actions: "
 
-  read -s -n1  action
+  read -n1  action
   case $action in
 
     '#')
@@ -65,7 +65,7 @@ function taxonomy_list_tags() {
   echo
   ui_banner "TAG LIST actions: "
 
-  read -s -n1  action
+  read -n1  action
   case $action in
 
     '#')
@@ -100,7 +100,7 @@ function taxonomy_list_photon() {
   echo
   ui_banner "TAG LIST actions: "
 
-  read -s -n1  action
+  read -n1  action
   case $action in
 
     '#')

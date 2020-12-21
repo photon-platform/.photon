@@ -27,7 +27,7 @@ function image_actions() {
   echo
   hr
   P=" ${fgYellow}IMAGE${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
   printf " $SEP ${actions[$action]}\n\n"
   case $action in
     \?)
@@ -62,8 +62,10 @@ function image_actions() {
       fi
       ;;
     # T) taxonomy; clear; page; ;;
+    E) tools_exif_actions; 
+      image "$file" $image_index
+      ;;
     *)
-      clear
       image "$file" $image_index;
       ;;
   esac

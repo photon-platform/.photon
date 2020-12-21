@@ -1,71 +1,44 @@
 #!/usr/bin/env bash
 
-# function image_siblings() {
-  
-# }
-
-function image_actions() {
+function tools_exif_actions() {
   declare -A actions
   actions['?']="help"
   actions[q]="quit"
 
-  actions[e]="gimp"
-  actions[v]="sxiv"
-  actions[d]="darktable"
 
-  actions[h]="back to images"
-  actions[j]="move to next sibling image"
-  actions[k]="move to prev sibling image"
-  actions['#']="select child by number (multi-digit, type enter)"
-
-  actions[f]="vf"
-  actions[v]="vr"
-
-  actions[I]="images"
-  actions[G]="git"
-
-  echo
   hr
-  P=" ${fgYellow}IMAGE${txReset}"
-  read -s -n1 -p "$P > " action
+  P=" ${fgYellow}EXIF${txReset}"
+  read  -n1 -p "$P > " action
   printf " $SEP ${actions[$action]}\n\n"
   case $action in
     \?)
       for key in "${!actions[@]}"; do 
         key_item $key "${actions[$key]}"
       done
-      image_actions
+      tools_exif_actions
       ;;
-    q) clear; images; ;;
-    e) gimp "$file"; clear; image "$file" $image_index; ;;
-    v) sxiv "$file"; clear; image "$file" $image_index; ;;
-    d) darktable "$file"; clear; image "$file" $image_index; ;;
-    h) clear; images ;;
-    j)
-      id=$((image_index + 1))
-      if [[ ${list[$id]} ]]; then
-        clear
-        image "${list[$id]}" $id
-      else
-        clear
-        image "$file" $image_index
-      fi
-      ;;
-    k)
-      id=$((image_index - 1))
-      if [[ ${list[$id]} ]]; then
-        clear
-        image "${list[$id]}" $id
-      else
-        clear
-        image "$file" $image_index
-      fi
-      ;;
-    # T) taxonomy; clear; page; ;;
+    q) clear -x; ;;
+    t) updateExif Title;  ;;
+    d) updateExif Description;  ;;
+    n) updateExif Notes;  ;;
+    s) updateExif Subject;  ;;
+    r) updateExif Rating;  ;;
+    l) updateExif Colorlabels;  ;;
+    c) updateExif Creator;  ;;
+    p) updateExif Publisher;  ;;
+    y) updateExif Copyright;  ;;
     *)
-      clear
-      image "$file" $image_index;
+      tools_exif_actions
       ;;
   esac
 }
 
+function updateExif() {
+  key=$1
+  if [[ $key ]]; then
+    value="$(ask_value "$key" "$( getExifValue "$key" )" )"
+    exiftool -$key="$value" "$file"
+  else
+    echo " provide key"
+  fi
+}

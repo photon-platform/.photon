@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source ~/.photon/tools/images/image/actions.sh
+source ~/.photon/tools/images/exif/actions.sh
 
-function image() {
+function tools_exif() {
   clear -x
 
   file=$1
@@ -40,7 +40,7 @@ function image() {
     echo " publisher $SEP $( getExifValue "Publisher" ) "
     echo " copyright $SEP $( getExifValue "Copyright" ) "
 
-    image_actions
+    tools_exif_actions
   else
     h1 "image not found"
   fi
