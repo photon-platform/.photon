@@ -20,7 +20,9 @@ function folder() {
   ui_banner "files $SEP $(find $PWD -type f ! -wholename "*.git/*" | wc -l)"
   echo
   # find $PWD -type f ! -wholename "*.git/*" | xargs -I {} basename "{}" | sed 's/.*\.\(.*\)$/\1/' | sort | uniq -c | sort -nr | head -n20
-  list_working_files | xargs -I {} basename "{}" | sed 's/.*\.\(.*\)$/\1/' | sort | uniq -c | sort -nr | head -n20
+  # list_working_files | xargs -I {} basename "{}" | sed 's/.*\.\(.*\)$/\1/' | sort | uniq -c | sort -nr | head -n20
+  printf '%s\0' $( list_working_files ) | xargs -0 -I {} basename "{}" |  sed 's/.*\.\(.*\)$/\1/' | sort | uniq -c | sort -nr | head -n20
+
   echo
 
   folder_children
