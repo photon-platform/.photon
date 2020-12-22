@@ -32,8 +32,8 @@ function ask_truefalse() {
 }
 
 function pause_enter() {
-  echo; read -s -p "${fgRed}enter to continue: ${txReset}"
+  echo; read -s -p " ${fgRed}ENTER${txReset} >"
 }
 function pause_any() {
-  echo; read -n1 -s -p "${fgGreen}any key to continue: ${txReset}"
+  echo; read -n1 -s -p " ${fgGreen}ANY${txReset} >"
 }
