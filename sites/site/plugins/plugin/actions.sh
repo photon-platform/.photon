@@ -2,6 +2,7 @@
 
 function plugin_actions() {
 
+  echo
   hr
   P=" ${fgYellow}PLUGIN${txReset}"
   read -s -n1 -p "$P > " action
@@ -10,15 +11,15 @@ function plugin_actions() {
     @) cd ..; site ;;
     /) search; plugin; ;;
 
-    r) ranger; plugin; ;;
+    r) ranger_dir; folder; ;;
     t) tre; plugin; ;;
-    d) ll; echo; plugin_actions; ;;
-    I) images; ;;
+    d) ll; plugin_actions; ;;
 
     e) v README.md ; plugin; ;;
     .) v blueprints.yaml ; plugin; ;;
     l) vim CHANGELOG.md; plugin; ;;
 
+    g) zd; folder;;
     h) cd ..; plugins; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
@@ -37,13 +38,13 @@ function plugin_actions() {
       plugin
       ;;
     f) vf; plugin; ;;
-    g) zd; ;;
     R) report_plugin > README.md;
       mkdir -p docs;
       cp README.md docs/index.md;
       v README.md;
       plugin ;;
-    F) folder; plugin; ;;
+    I) images; ;;
+    F) folder; ;;
     G)
       tools_git
       plugin
@@ -53,7 +54,6 @@ function plugin_actions() {
       plugin
       ;;
     *)
-      clear
       plugin
       ;;
   esac

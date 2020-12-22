@@ -9,20 +9,19 @@ alias grav-log="cd ${PROJECT_DIR};bin/grav logviewer"
 
 function site_actions() {
 
+  echo
   hr
   P=" ${fgYellow}SITE${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;;
-    /) search; clear; site; ;;
+    q) clear -x; ;;
+    /) search; site; ;;
 
-    r) ranger; clear; site; ;;
-    t) tre; clear; site; ;;
+    r) ranger; site; ;;
+    t) tre; site; ;;
     d) ll; echo; site_actions; ;;
 
-    I) images; ;;
-    f) vf; clear; site;;
-    g) zd; clear; ;;
+    g) zd; folder;;
     o)
       echo open
       select target in local localadmin server serveradmin
@@ -46,16 +45,16 @@ function site_actions() {
       site
       ;;
 
-    p) cd pages; clear; pages; ;;
-    u) cd plugins; clear; plugins; ;;
-    m) cd themes; clear; themes; ;;
-    c) cd config; clear; vf; clear; site; ;;
+    p) cd pages; pages; ;;
+    u) cd plugins; plugins; ;;
+    m) cd themes; themes; ;;
+    c) cd config; folder; site; ;;
 
-    e) vim README.md; clear; site; ;;
-    l) vim CHANGELOG.md; clear; site; ;;
-    .) vim .photon; clear; site; ;;
+    e) vim README.md; site; ;;
+    l) vim CHANGELOG.md; site; ;;
+    .) vim .photon; site; ;;
 
-    h) clear; sites; ;;
+    h) sites; ;;
     j)
       next=$( dirname "${siblings[$((siblings_index + 1))]}" )
       echo $next
@@ -63,7 +62,6 @@ function site_actions() {
       then
         cd ${next}
       fi
-      clear
       site
       ;;
     k)
@@ -75,23 +73,17 @@ function site_actions() {
           cd ${prev}
         fi
       fi
-      clear
       site
       ;;
-    V)
-      clear
-      tools_grav
-      clear
-      site
-      ;;
-    G)
-      tools_git
-      clear
-      site
-      ;;
-    w) clear;
+    
+    f) vf; site;;
+    v) vr; site;;
+    V) tools_grav; site ;;
+    F) folder; ;;
+    I) images; ;;
+    G) tools_git; site ;;
+    w) 
       gnome-terminal --working-directory=$PWD -- bash -c "source ~/.bashrc; swatch; exec bash"
-      clear
       site
       ;;
     *)

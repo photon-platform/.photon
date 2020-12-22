@@ -13,11 +13,11 @@ function theme_actions() {
     .) v blueprints.yaml ; theme; ;;
     l) vim CHANGELOG.md; theme; ;;
 
-    r) ranger; theme; ;;
+    r) ranger_dir; folder; ;;
     t) tre; theme; ;;
     d) ll; echo; theme_actions; ;;
-    I) images; ;;
 
+    g) zd; folder; ;;
     h) cd ..; themes; ;;
     j)
       next=$(dirname ${siblings[$((siblings_index + 1))]})
@@ -35,10 +35,12 @@ function theme_actions() {
       fi
       theme
       ;;
-    f) vf; theme; ;;
-    g) zd; theme; ;;
 
-    F) folder; theme; ;;
+    f) vf; theme; ;;
+    v) vr; theme; ;;
+
+    I) images; ;;
+    F) folder;  ;;
     G) tools_git; theme; ;;
     R) report_theme > README.md; 
       mkdir -p docs;

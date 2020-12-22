@@ -2,22 +2,23 @@
 
 function pages_actions() {
 
+  echo
   hr
   P=" ${fgYellow}PAGES${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;;
-    @) clear; site ;;
-    /) search; clear; pages; ;;
+    q) clear -x; ;;
+    @) site ;;
+    /) search; pages; ;;
     
-    r) ranger; clear; pages; ;;
-    t) tre; clear; pages; ;;
+    r) ranger; pages; ;;
+    t) tre; pages; ;;
     d) ll; echo; pages_actions; ;;
-    I) images; ;;
 
-    h) cd ..; clear; site; ;;
-    k) cd ../plugins; clear; plugins; ;;
-    j) cd ../themes; clear; themes; ;;
+    g) zd; page; ;;
+    h) cd ..; site; ;;
+    k) cd ../plugins; plugins; ;;
+    j) cd ../themes; themes; ;;
     '#')
       read -p "enter number: " number
       if [[ ${children[$((number - 1))]} ]]; then
@@ -26,7 +27,6 @@ function pages_actions() {
           cd "$dir"
         fi
       fi
-      clear
       page
       ;;
     [1-9]*)
@@ -36,35 +36,29 @@ function pages_actions() {
           cd "$dir"
         fi
       fi
-      clear
       page
       ;;
     0)
       last=$(( ${#children[@]} - 1 ))
       cd $(dirname ${children[ last ]})
-      clear
       page
       ;;
     a)
       vim "${children[@]}"
       ;;
-    f) vf; clear; pages; ;;
-    g) zd; clear; page; ;;
-    T) taxonomy; clear; page; ;;
-    G)
-      tools_git
-      clear
-      pages
-      ;;
+    f) vf; pages; ;;
+    v) vr; pages; ;;
+    F) folder; ;;
+    I) images; ;;
+    T) taxonomy; page; ;;
+    G) tools_git; pages ;;
     b)
-      clear
       page_children_renumber
       clear
       pages
       ;;
     n) clear; pages_new; clear; page; ;;
     *)
-      clear
       pages
       ;;
   esac

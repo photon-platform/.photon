@@ -48,9 +48,16 @@ function cp_bak() {
 
 # Find and open in Vim
 function vf() {
-  local file=$( list_text_files | sort | fzf )
-  if [[ -n $file ]]; then
-    vim $file
+  files=$( list_text_files | sort | fzf )
+  if [[ $files ]]; then
+    vim $files
+  fi
+}
+
+function vr() {
+  files=$( list_recent | fzf )
+  if [[ $files ]]; then
+    vim $files
   fi
 }
 

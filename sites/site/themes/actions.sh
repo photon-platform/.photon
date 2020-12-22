@@ -2,39 +2,40 @@
 
 function themes_actions() {
 
+  echo
   hr
   P=" ${fgYellow}THEMES${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;; # quit
-    @) clear; site ;;
-    /) search; clear; themes; ;;
+    q) clear -x; ;; # quit
+    @) site ;;
+    /) search; themes; ;;
 
-    r) ranger; clear; themes; ;;
-    t) tre; clear; themes; ;;
-    d) ll; echo; themes_actions; ;;
+    r) ranger_dir; folder; ;;
+    t) tre; themes; ;;
+    d) ll; themes_actions; ;;
     I) images; ;;
 
-    h) clear; site; ;;
-    k) cd ../pages; clear; pages; ;;
+    g) zd; folder ;;
+    h) site; ;;
+    k) cd ../pages; pages; ;;
     '#')
       read -p "enter number: " number
       dir="$(dirname ${list[((number-1))]})"
       cd $dir
-      clear
       theme
       ;;
     [1-9]*)
       cd "$( dirname ${list[(($action-1))]} )"
       # read
-      clear
       theme
       ;;
-    f) vf; clear; themes;;
-    g) zd; clear ;;
+    f) vf; themes;;
+    v) vr; pages; ;;
+    F) folder; ;;
+    I) images; ;;
     G)
       tools_git
-      clear
       themes
       ;;
     n)
@@ -50,7 +51,6 @@ function themes_actions() {
       # initialize a submodule
       ;;
     *)
-      clear
       themes
       ;;
   esac

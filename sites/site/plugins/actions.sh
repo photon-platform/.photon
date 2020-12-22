@@ -2,39 +2,42 @@
 
 function plugins_actions() {
 
+  echo
   hr
   P=" ${fgYellow}PLUGINS${txReset}"
   read -s -n1 -p "$P > " action
   case $action in
-    q) clear; ;;
-    @) clear; site ;;
-    /) search; clear; plugins; ;;
+    q) clear -x; ;;
+    @) site ;;
+    /) search; plugins; ;;
 
-    r) ranger; clear; plugins; ;;
-    t) tre; clear; plugins; ;;
-    d) ll; echo; plugins_actions; ;;
+    r) ranger_dir; folder; ;;
+    t) tre; plugins; ;;
+    d) ll; plugins_actions; ;;
     I) images; ;;
 
-    h) clear; site; ;;
-    j) cd ../pages; clear; pages; ;;
+    g) zd; folder ;;
+    h) site; ;;
+    j) cd ../pages; pages; ;;
     '#')
       read -p "enter number: " number
       dir="$(dirname ${list[((number-1))]})"
       cd $dir
-      clear
       plugin
       ;;
     [1-9]*)
       cd "$( dirname ${list[(($action-1))]} )"
       # read
-      clear
       plugin
       ;;
-    f) vf; clear; plugins;;
-    g) zd; clear; plugin ;;
+
+    f) vf; plugins;;
+    v) vr; pages; ;;
+
+    F) folder; ;;
+    I) images; ;;
     G)
       tools_git
-      clear
       plugins
       ;;
     n)
@@ -43,10 +46,9 @@ function plugins_actions() {
       bin/plugin photon newplugin
       ;;
     c) plugin_create_submodule ;;
-    b) plugin_restore ;;
+    b) plugin_restore;  ;;
     remove) plugin_remove_submodule ;;
     *)
-      clear
       plugins
       ;;
   esac

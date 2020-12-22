@@ -37,7 +37,6 @@ function sites_actions() {
     r) ranger_dir;  sites ;;
     t) tre; sites; ;;
     d) ll; sites_actions ;;
-    I) images; sites;;
 
     '#')
       read -p "enter number: " number
@@ -69,8 +68,10 @@ function sites_actions() {
       cd "$SITESROOT/$dir/user"
       site
       ;;
+    F) folder; ;;
+    I) images; ;;
     G)
-      clear
+      clear -x
       ui_banner "git SITES"
       echo
       i=1
