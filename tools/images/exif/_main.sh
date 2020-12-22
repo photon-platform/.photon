@@ -51,10 +51,20 @@ function tools_exif() {
 function getExif() {
   unset -v  $( ( set -o posix ; set ) | grep exif_ | sed -n 's/\(.*\)\=(.*/\1/p' )
   img="$1"
-  exif_json=`exiftool "$img" -j`
+  # exif_json=`exiftool "$img" -j`
+  mapfile -t exif_data < <( exiftool "$img" -S )
 }
 
 function getExifValue() {
+  key=$1
+  # value=$( echo $exif_data  | sed -n "/^$key\:/p" | sed "s/^$key\: \(.*\)/\1/" )
+  value=$( printf "%s\n" "${exif_data[@]}"  | sed -n "/^$key\:/p" | sed "s/^$key\: \(.*\)/\1/" )
+  # value=$( exiftool -$key "$file" -S |  sed "s/^$key\: \(.*\)/\1/" )
+  if [[ $value != null ]]; then
+    echo $value | sed 's/^"//' | sed 's/"$//'
+  fi
+}
+function getExifValue2() {
   value=$( echo $exif_json | jq ".[0].$1" )
   if [[ $value != null ]]; then
     echo $value | sed 's/^"//' | sed 's/"$//'
