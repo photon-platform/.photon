@@ -7,6 +7,10 @@ function list_working_files() {
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
     -name "cache" -prune -o \
+    -name ".cache" -prune -o \
+    -name ".mozilla" -prune -o \
+    -name ".thunderbird" -prune -o \
+    -name ".local" -prune -o \
     -type f -name "tags" -prune -o \
     -type f -name "*.min.*" -prune -o \
     -type f -name "*.pack.*" -prune -o \
@@ -23,6 +27,10 @@ function list_text_files() {
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
     -name "cache" -prune -o \
+    -name ".cache" -prune -o \
+    -name ".mozilla" -prune -o \
+    -name ".thunderbird" -prune -o \
+    -name ".local" -prune -o \
     -type f -name "tags" -prune -o \
     -type f -name "*.min.*" -prune -o \
     -type f -name "*.pack.*" -prune -o \
@@ -43,6 +51,10 @@ function list_recent() {
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
     -name "cache" -prune -o \
+    -name ".cache" -prune -o \
+    -name ".mozilla" -prune -o \
+    -name ".thunderbird" -prune -o \
+    -name ".local" -prune -o \
     -type f -name "tags" -prune -o \
     -type f -name "*.min.*" -prune -o \
     -type f -name "*.pack.*" -prune -o \
