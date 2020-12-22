@@ -32,10 +32,13 @@ function images_actions() {
       images_select $((action - 1))
       ;;
     0)
-      images_select $(( ${#children[@]} - 1 ))
+      images_select $(( ${#list[@]} - 1 ))
       ;;
     a)  echo; images_list_get | sxiv -o - ; pause_enter; images ;;
-    f)  echo; images_list_get | fzf | sxiv -o - ; pause_enter; images; ;;
+    v)  
+      mapfile -t selected_images < <( images_list_get | fzf | sxiv -o - )
+      images_selected_actions
+      images; ;;
     F) folder; ;;
     G) tools_git; images; ;;
     *)
@@ -43,6 +46,7 @@ function images_actions() {
       ;;
   esac
 }
+
 
 function images_select() {
   id=$1
@@ -53,3 +57,31 @@ function images_select() {
   fi
 }
 
+function images_selected_actions() {
+  if [[ ${#selected_images[@]} != 0 ]]; then
+
+    printf " %s\n" "${selected_images[@]}"
+    echo
+    hr
+
+    P=" ${fgYellow}SELECTED${txReset}"
+    read -n1 -p "$P > " action
+    printf " $SEP ${actions[$action]}\n\n"
+    case $action in
+      \?)
+        for key in "${!actions[@]}"; do 
+          key_item $key "${actions[$key]}"
+        done
+        images_actions
+        ;;
+      q) clear -x; ;;
+
+      m) echo migrate selected; ;;
+      E) echo Exif selected; images_selected_actions; ;;
+      *)
+        images_selected_actions
+        ;;
+    esac
+  fi
+  
+}

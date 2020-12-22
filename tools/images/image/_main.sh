@@ -23,11 +23,17 @@ function image() {
 
     echo
     h1 "$file"
+    img_dt=$(date -d"$( getExifValue "DateTimeOriginal" | tr ":" " " |  awk '{printf "%s/%s/%s %s:%s:%s", $2, $3, $1, $4, $5, $6}' )" )
+    echo " $img_dt"
+
     hr
     getExif "$file"
-    echo " $( getExifValue "ImageWidth" ) x $( getExifValue "ImageHeight" )"
-    echo " created $SEP $( getExifValue "DateTimeOriginal" ) "
+    echo " $( getExifValue "ImageWidth" ) ${fgg08}x${txReset} $( getExifValue "ImageHeight" ) ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
+    echo -n " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
+    echo " $SEP $( getExifValue "Aperture" ) $SEP $( getExifValue "ShutterSpeed" ) $SEP $( getExifValue "FocalLength" )"
     hr
+
+    echo
     exif_keyvalue Title
     exif_keyvalue Description
     exif_keyvalue Notes
@@ -37,10 +43,7 @@ function image() {
     exif_keyvalue Creator
     exif_keyvalue Publisher
     exif_keyvalue Copyright
-    hr
-    echo " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
-    echo " $( getExifValue "Aperture" ) $SEP $( getExifValue "ShutterSpeed" ) $SEP $( getExifValue "FocalLength" )"
-    
+
     image_actions
   else
     h1 "image not found"
@@ -50,5 +53,4 @@ function image() {
 
 function exif_keyvalue() {
     echo " ${fgg12}$1 $SEP $( getExifValue "$1" ) "
-  
 }
