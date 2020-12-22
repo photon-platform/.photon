@@ -28,7 +28,7 @@ function images_actions() {
       read -p "enter number: " number
       images_select $((number - 1))
       ;;
-    [1-9]*)
+    [1-9])
       images_select $((action - 1))
       ;;
     0)
