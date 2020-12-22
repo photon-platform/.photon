@@ -1,15 +1,6 @@
 #!/usr/bin/bash
 source ~/.photon/.functions
 
-function getExif() {
-  type="$1"
-  cmd="exiftool -$type '$img'"
-  result=$(eval $cmd)
-  IFS=':'
-  read -ra arr <<< "$result"
-  IFS=' '
-  echo "${arr[1]# }"
-}
 
 imgexportdir="${PROJECT_DIR}/user/images/exports"
 
