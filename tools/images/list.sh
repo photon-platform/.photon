@@ -10,7 +10,7 @@ function images_list_get() {
 }
 
 function images_list() {
-  list=( $(images_list_get) )
+  mapfile -t list < <( images_list_get )
   list_count=${#list[@]}
 
   i=1
@@ -18,7 +18,7 @@ function images_list() {
   ui_banner "images • ${txReset}${list_count}"
   echo
 
-  for img in ${list[@]}
+  for img in "${list[@]}"
   do
     ui_list_item_number $i "$img"
     ((i++))
