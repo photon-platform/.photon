@@ -70,27 +70,28 @@ function image_migrate() {
   ext=${img##*.}
   ext=$( slugify "$ext" )
 
-  img_project=$( ask_value "project" "$img_project" )
-  img_project=$( slugify "$img_project" )
+  project=$( ask_value "project" "$project" )
+  project=$( slugify "$project" )
 
-  img_activity=$( ask_value "activity" "$img_activity" )
-  img_activity=$( slugify "$img_activity" )
+  activity=$( ask_value "activity" "$activity" )
+  activity=$( slugify "$activity" )
 
   img_dt=$( exiftool -DateTimeOriginal "$img" -S | \
     sed -n 's/^DateTimeOriginal\: \(.*\)/\1/p' | \
     tr ":" " "  \
     )
-  img_folder="$HOME/Media/$img_project/"
+  img_folder="$HOME/Media/$project/"
   img_folder+=$( echo $img_dt | awk '{printf "%s/%s/%s/", $1, $2, $3}' )
 
   img_file=$( echo $img_dt | awk '{printf "%s%s%s", $4, $5, $6}' )
-  img_file+="-$img_activity"
+  img_file+="-$activity"
 
   img_path="$img_folder$img_file"
 
-  i=1
+  c=1
   while [[ -f "$img_path.$ext" ]]; do
-    img_path="$img_folder$img_file.$i"
+    img_path="$img_folder$img_file.$c"
+    c++
   done
   img_path+=".$ext"
 
