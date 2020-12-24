@@ -9,6 +9,7 @@ function image_actions() {
   actions[v]="sxiv"
   actions[d]="darktable"
   actions[m]="image_migrate"
+  actions[x]="image_trash"
 
   actions[h]="back to images"
   actions[j]="move to next sibling image"
@@ -31,6 +32,7 @@ function image_actions() {
       ;;
     q) images; ;;
     m) image_migrate "$file"; images; ;;
+    x) image_trash "$file"; images; ;;
     e) gimp "$file"; image "$file" $image_index; ;;
     v) sxiv "$file"; image "$file" $image_index; ;;
     d) darktable "$file"; image "$file" $image_index; ;;
@@ -101,4 +103,19 @@ function image_migrate() {
   mkdir -p "$img_folder"
   mv "$img" "$img_path"
   pause_any
+}
+
+
+function image_trash() {
+  img=$1
+
+  hr
+  ui_banner "TRASH $SEP $img"
+  echo
+
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    gio trash "$img"
+    
+  fi
+
 }

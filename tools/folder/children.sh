@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function folder_children_dirs() {
-  find $PWD -maxdepth 1 -mindepth 1 -type d ! -name ".git" | sort 
+  find "$PWD" -maxdepth 1 -mindepth 1 -type d ! -name ".git" | sort 
 }
 
 
@@ -15,10 +15,10 @@ function folder_children() {
 
   i=1
 
-  for child in ${children[@]}
+  for child in "${children[@]}"
   do
     # ui_list_item_number $i "${child#$PWD/} $SEP $(du -s $child | awk '{ print $1}' )"
-    ui_list_item_number $i "${child#$PWD/} $SEP ${fgg12}$( folder_total_bytes "$child" )${txReset} $SEP ${fgRed}$(cd "$child"; gsss)${txReset}"
+    ui_list_item_number $i ""${child#$PWD/}" $SEP ${fgg12}$( folder_total_bytes "$child" )${txReset} $SEP ${fgRed}$(cd "$child"; gsss)${txReset}"
 
     ((i++))
   done

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 function list_working_files() {
-  find . \
+  # find . \
+  find "$PWD" \
     -name ".git" -prune -o \
     -name "bundle" -prune -o \
     -name "vendor" -prune -o \

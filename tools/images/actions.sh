@@ -63,6 +63,9 @@ function images_selected_actions() {
 
     printf " %s\n" "${selected_images[@]}"
     echo
+    printf " selected: %s\n" "${#selected_images[@]}"
+    echo
+    
     hr
 
     P=" ${fgYellow}SELECTED${txReset}"
@@ -89,7 +92,7 @@ function images_selected_actions() {
 function images_selected_migrate() {
   
   hr
-  ui_banner "SELECTED $SEP MIGRATE $SEP $img"
+  ui_banner "SELECTED $SEP MIGRATE "
   echo
 
   project=$( ask_value "project" "$project" )
@@ -130,6 +133,8 @@ function images_selected_migrate() {
     mv "$img" "$img_path"
     
   done
+  echo " migrated: $i"
+  echo
   pause_any
 }
 
