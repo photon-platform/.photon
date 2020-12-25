@@ -5,9 +5,7 @@ function video_actions() {
   actions['?']="help"
   actions[q]="quit"
 
-  actions[e]="gimp"
-  actions[v]="sxiv"
-  actions[d]="darktable"
+  actions[v]="mpv"
   actions[m]="video_migrate"
   actions[x]="video_trash"
 
@@ -33,9 +31,7 @@ function video_actions() {
     q) videos; ;;
     m) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
-    e) gimp "$file"; video "$file" $video_index; ;;
-    v) sxiv "$file"; video "$file" $video_index; ;;
-    d) darktable "$file"; video "$file" $video_index; ;;
+    v) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
     h) videos ;;
     j)
       id=$((video_index + 1))

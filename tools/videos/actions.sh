@@ -42,6 +42,7 @@ function videos_actions() {
       videos_selected_actions
       videos; ;;
     F) folder; ;;
+    I) images; ;;
     G) tools_git; videos; ;;
     *)
       videos

@@ -42,6 +42,7 @@ function images_actions() {
       images_selected_actions
       images; ;;
     F) folder; ;;
+    V) videos; ;;
     G) tools_git; images; ;;
     *)
       images

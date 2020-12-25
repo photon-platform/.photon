@@ -19,7 +19,9 @@ function video() {
     h=$(tput lines)
     # h=$((h / 2))
 
-    chafa -c 240 -s "$wx$h" "$file"
+    ffmpeg -hide_banner -loglevel quiet -y -i "$file"  -vf  "thumbnail,scale=640:360" -frames:v 1 .thumb.jpg
+    chafa -c 240 -s "$wx$h" .thumb.jpg
+    rm .thumb.jpg
 
     echo
     h1 "$file"
