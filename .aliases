@@ -34,6 +34,8 @@ alias gsnip="cd ~/.vim/Ultisnips/; folder; "
 alias gm="cd /mnt/md0"
 alias gM="cd ~/Media"
 alias gL="cd ~/Logs"
+alias gP="cd ~/Pictures"
+alias gV="cd ~/Videos"
 
 alias arcturian="cd ~/youtube/arturian-sound; mpv --shuffle *;"
 alias dl="youtube-dl"
