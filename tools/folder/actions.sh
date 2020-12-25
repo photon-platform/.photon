@@ -74,6 +74,7 @@ function folder_actions() {
     f) vf; folder; ;;
     v) vr; folder; ;;
     G) tools_git; folder; ;;
+    V) videos; ;;
     I) images; ;;
     *)
       folder
