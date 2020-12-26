@@ -86,7 +86,9 @@ function screen_main() {
   echo file $output >> .log
   rm tmp.mp4
 
-  mpv $output
+  exiftool -DateTimeOriginal="$( date -r "$output" "+%Y:%m:%d %H:%M:%S" )" "$output"
+
+  video "$output"
 }
 
 
