@@ -12,6 +12,8 @@ function video() {
 
   if test -f "$file";
   then
+    getExif "$file"
+
     mimetype="$(file -b -i "$file")"
 
     w=$(tput cols)
@@ -29,7 +31,6 @@ function video() {
     echo " $img_dt"
 
     hr
-    getExif "$file"
     echo " $( getExifValue "ImageWidth" ) ${fgg08}x${txReset} $( getExifValue "ImageHeight" ) ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
     echo " $( getExifValue "Duration" )" 
     echo -n " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
