@@ -18,6 +18,7 @@ function tools_exif_actions() {
       tools_exif_actions
       ;;
     q) clear -x; ;;
+    o) updateExif DateTimeOriginal;  ;;
     t) updateExif Title;  ;;
     d) updateExif Description;  ;;
     n) updateExif Notes;  ;;
@@ -38,6 +39,8 @@ function updateExif() {
   if [[ $key ]]; then
     value="$(ask_value "$key" "$( getExifValue "$key" )" )"
     exiftool -$key="$value" "$file"
+    getExif "$file"
+    pause_any
   else
     echo " provide key"
   fi

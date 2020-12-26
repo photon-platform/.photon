@@ -18,8 +18,8 @@ function folder_actions() {
   actions['0']="select last child"
   actions['#']="select child by number (multi-digit, type enter)"
 
-  actions[f]="vf"
-  actions[v]="vr"
+  actions[f]="vf; # select files for vim"
+  actions[v]="vr; # select most recent foles for vim"
 
   actions[I]="images"
   actions[G]="git"
@@ -42,7 +42,7 @@ function folder_actions() {
 
     r) ranger_dir; folder; ;;
     t) tre; folder; ;;
-    d) ll; folder_actions; ;;
+    l) ll; folder_actions; ;;
 
     g) zd; folder; ;;
     h) cd ..; folder; ;;
@@ -76,6 +76,8 @@ function folder_actions() {
     G) tools_git; folder; ;;
     V) videos; ;;
     I) images; ;;
+    s) site; ;;
+    S) sites; ;;
     *)
       folder
       ;;

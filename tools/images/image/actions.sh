@@ -53,6 +53,7 @@ function image_actions() {
         image "$file" $image_index
       fi
       ;;
+    i) exiftool "$file" | less ; video "$file" $video_index; ;;
     E) tools_exif_actions;
       image "$file" $image_index
       ;;
@@ -93,13 +94,12 @@ function image_migrate() {
   c=1
   while [[ -f "$img_path.$ext" ]]; do
     img_path="$img_folder$img_file.$c"
-    c++
+    (( c++ ))
   done
   img_path+=".$ext"
 
   echo
-  ui_banner "Migrate to "
-  h1 "$img_path"
+  img_path=$( ask_value "migrate to" "$img_path" ) 
   mkdir -p "$img_folder"
   mv "$img" "$img_path"
   pause_any

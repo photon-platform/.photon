@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-# keyboard
 function v0() {
   v0off
   SIZE=1280x1024
@@ -14,12 +11,14 @@ function v0() {
     -left 1040 -top 900 &
   export PID_v0=$!
 }
+
 function v0off() {
   if [[ $PID_v0 ]]; then
     kill $PID_v0
     unset -v PID_v0
   fi 
 }
+
 function v0b() {
   SIZE=1280x1024
   ffplay -noborder -hide_banner -loglevel quiet \
@@ -88,7 +87,7 @@ function sky_cam() {
 }
 
 function timelapse() {
-  output="$( make_filename ).mkv"
+  output="$( make_filename ).mp4"
   ffmpeg -framerate 1 -f v4l2  \
     -i $CAMERA \
     -vf settb=\(1/30\),setpts=N/TB/30 \

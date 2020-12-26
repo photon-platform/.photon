@@ -7,8 +7,6 @@ AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
 
 FRAMERATE=24
 
-# mapfile -t media < <(find . -type f -name "*.mkv" -or -name "*.opus" -or -name "*.mp3" | sort)
-
 function tools_log_actions() {
   declare -A actions
   actions['?']="help"
@@ -40,7 +38,7 @@ function tools_log_actions() {
 }
 
 function log_concat() {
-  ffmpeg -f concat -safe 0 -i .log  -c copy ~/Logs/$(basename $PWD).mkv
+  ffmpeg -f concat -safe 0 -i .log  -c copy ~/Logs/$(basename $PWD).mp4
 }
 
 function make_logname() {
@@ -67,7 +65,7 @@ function screen_main() {
   echo
 
   AUDIO_OFFSET="0.33"
-  output="$HOME/Logs/$( make_logname ).mkv"
+  output="$HOME/Logs/$( make_logname ).mp4"
 
   countdown
 
@@ -76,24 +74,24 @@ function screen_main() {
     -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
-    tmp.mkv
+    tmp.mp4
 
   ffmpeg -hide_banner \
-    -i tmp.mkv -itsoffset $AUDIO_OFFSET \
-    -i tmp.mkv \
+    -i tmp.mp4 -itsoffset $AUDIO_OFFSET \
+    -i tmp.mp4 \
     -map 0:v -map 1:a  \
     -af "highpass=f=100, volume=volume=5dB, afftdn" \
     $output
 
   echo file $output >> .log
-  rm tmp.mkv
+  rm tmp.mp4
 
   mpv $output
 }
 
 
 # function screen_full() {
-  # output="$( make_filename ).mkv"
+  # output="$( make_filename ).mp4"
   # ffmpeg -hide_banner \
     # -video_size 1920x1848 \
     # -framerate $FRAMERATE \

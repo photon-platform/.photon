@@ -31,6 +31,7 @@ function video() {
     hr
     getExif "$file"
     echo " $( getExifValue "ImageWidth" ) ${fgg08}x${txReset} $( getExifValue "ImageHeight" ) ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
+    echo " $( getExifValue "Duration" )" 
     echo -n " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
     echo " $SEP $( getExifValue "Aperture" ) $SEP $( getExifValue "ShutterSpeed" ) $SEP $( getExifValue "FocalLength" )"
     hr

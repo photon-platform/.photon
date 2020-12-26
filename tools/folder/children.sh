@@ -17,8 +17,8 @@ function folder_children() {
 
   for child in "${children[@]}"
   do
-    # ui_list_item_number $i "${child#$PWD/} $SEP $(du -s $child | awk '{ print $1}' )"
-    ui_list_item_number $i ""${child#$PWD/}" $SEP ${fgg12}$( folder_total_bytes "$child" )${txReset} $SEP ${fgRed}$(cd "$child"; gsss)${txReset}"
+    # ui_list_item_number $i "${child#$PWD/} $SEP $(du -s $child | awk '{ print $1}' "
+    ui_list_item_number $i "$( basename "${child}" ) $SEP ${fgg12}$( folder_total_bytes "$child" )${txReset} $SEP ${fgRed}$(cd "$child"; gsss)${txReset}"
 
     ((i++))
   done

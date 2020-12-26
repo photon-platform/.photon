@@ -9,7 +9,6 @@ ZIGGI="/dev/video0"
 
 FRAMERATE=24
 
-# mapfile -t media < <(find . -type f -name "*.mkv" -or -name "*.opus" -or -name "*.mp3" | sort)
 
 function tools_ffmpeg_actions() {
 
@@ -52,21 +51,21 @@ function make_filename() {
 
 
 function record_cam() {
-  output="$( make_filename ).mkv"
+  output="$( make_filename ).mp4"
 
   ui_banner "recording: $output"
   ffmpeg -y -hide_banner -i $CAMERA \
     -f pulse -ac 2 -i $MIC "$output" 
 
   ui_banner "fix offset"
-  ffmpeg -y  -hide_banner -i "$output" -itsoffset 0.44 -i "$output" -map 0:v -map 1:a -c copy "tmp.mkv"
-  # ffmpeg -y -i tmp.mkv -ss 3 -c copy $output
+  ffmpeg -y  -hide_banner -i "$output" -itsoffset 0.44 -i "$output" -map 0:v -map 1:a -c copy "tmp.mp4"
+  # ffmpeg -y -i tmp.mp4 -ss 3 -c copy $output
 
   ui_banner "trim 5 seconds off end"
-  dur=$(ffprobe -hide_banner -i "tmp.mkv"  -show_entries format=duration -v quiet -of csv="p=0")
+  dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
   trim=$( echo $dur - 5 | bc )
-  ffmpeg -y -hide_banner -t $trim -i tmp.mkv -c copy $output
-  rm tmp.mkv 
+  ffmpeg -y -hide_banner -t $trim -i tmp.mp4 -c copy $output
+  rm tmp.mp4 
   
   mpv "$output"
 }
@@ -75,7 +74,7 @@ function rc2() {
   TRIM_END=3
   SIZE="1920x1080"
 
-  output="$( make_filename ).mkv"
+  output="$( make_filename ).mp4"
 
   echo
   ui_banner "recording: $output"
@@ -94,17 +93,17 @@ function rc2() {
     -map 0:v -map 1:a  \
     -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
     -af "highpass=f=100, volume=volume=5dB, afftdn" \
-    "tmp.mkv"
-  mv tmp.mkv "$output"
+    "tmp.mp4"
+  mv tmp.mp4 "$output"
 
   # echo
   # ui_banner "trim $trim seconds off end"
-  # dur=$(ffprobe -hide_banner -i "tmp.mkv"  -show_entries format=duration -v quiet -of csv="p=0")
+  # dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
   # trim=$( echo $dur - $TRIM_END | bc )
   # ffmpeg -y -hide_banner -t $trim \
-    # -i tmp.mkv -c copy \
+    # -i tmp.mp4 -c copy \
     # "$output"
-  # rm tmp.mkv 
+  # rm tmp.mp4 
 
   
   mpv "$output"
@@ -162,10 +161,10 @@ alias skoff="pkill -f screenkey"
 
 
 function ffconcat() {
-  output="$( make_filename ).mkv"
+  output="$( make_filename ).mp4"
   ffmpeg -hide_banner \
     -f concat -safe 0 \
-    -i <(for f in *.mkv; do echo "file '$PWD/$f'"; done) \
+    -i <(for f in *.mp4; do echo "file '$PWD/$f'"; done) \
     -c copy \
     $output
 }
@@ -181,7 +180,7 @@ function ffsnap() {
 
 # create virtual camera on video6 with desktop - for zoom, etc
 function virtual_cam() {
-  ffmpeg -f x11grab -r 15 -s 1920x1080 -i :1+0,768 -vcodec rawvideo -pix_fmt yuv420p -vf "hflip" -threads 0 -f v4l2 /dev/video6
-
-  
+  ffmpeg -f x11grab -r 15 -s 1920x1080 \
+    -i :1+0,768 -vcodec rawvideo -pix_fmt yuv420p \
+    -vf "hflip" -threads 0 -f v4l2 /dev/video6
 }
