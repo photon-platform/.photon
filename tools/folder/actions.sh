@@ -69,8 +69,9 @@ function folder_actions() {
       fi
       folder
       ;;
-    j) folder_sibling_get $((siblings_index + 1)) ;;
-    k) folder_sibling_get $((siblings_index - 1)) ;;
+    j) folder_sibling_get $((siblings_index + 1)) ; folder;;
+    k) folder_sibling_get $((siblings_index - 1)) ; folder;;
+    a) vim $( list_text_files ); folder; ;;
     f) vf; folder; ;;
     v) vr; folder; ;;
     G) tools_git; folder; ;;

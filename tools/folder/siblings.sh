@@ -27,7 +27,6 @@ function folder_sibling_get() {
   then
     cd "$dir"
   fi
-  folder
 }
 
 function folder_siblings_move() {
