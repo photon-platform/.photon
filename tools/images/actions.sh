@@ -20,7 +20,7 @@ function images_actions() {
     q) clear -x; ;;
     /) search; images; ;;
 
-    r) ranger; images; ;;
+    r) ranger_dir; images; ;;
     t) tre; images; ;;
     d) ll; images_actions; ;;
 
@@ -32,6 +32,8 @@ function images_actions() {
       ;;
     [1-9]) images_select $((action - 1)) ;;
     0) images_select $(( ${#list[@]} - 1 )) ;;
+    j) folder_sibling_get $((siblings_index + 1)) ; images ;;
+    k) folder_sibling_get $((siblings_index - 1)) ; images;;
     a) 
       #view all
       mapfile -t selected_images < <( images_list_get  | sxiv -o - )

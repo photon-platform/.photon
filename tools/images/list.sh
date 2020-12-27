@@ -5,6 +5,7 @@ function images_list_get() {
     -type f -iname "*.jpg" -o \
     -iname "*.jpeg" -o \
     -iname "*.png" -o \
+    -iname "*.tif" -o \
     -iname "*.gif"  \
      | sort | sed 's|\./||'
 }

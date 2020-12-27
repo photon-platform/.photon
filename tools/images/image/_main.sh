@@ -12,6 +12,7 @@ function image() {
 
   if test -f "$file";
   then
+    getExif "$file"
     mimetype="$(file -b -i "$file")"
 
     w=$(tput cols)
@@ -27,7 +28,6 @@ function image() {
     echo " $img_dt"
 
     hr
-    getExif "$file"
     echo " $( getExifValue "ImageWidth" ) ${fgg08}x${txReset} $( getExifValue "ImageHeight" ) ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
     echo -n " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
     echo " $SEP $( getExifValue "Aperture" ) $SEP $( getExifValue "ShutterSpeed" ) $SEP $( getExifValue "FocalLength" )"

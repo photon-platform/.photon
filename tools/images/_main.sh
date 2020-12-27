@@ -12,6 +12,10 @@ function images() {
 
   ui_header "IMAGES $SEP $PWD"
 
+  folder_siblings
+  h2 "$(( siblings_index + 1 )) ${fgg08}of${txReset} $siblings_count"
+  show_dir
+
   images_list
 
   images_actions
