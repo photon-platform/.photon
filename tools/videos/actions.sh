@@ -20,7 +20,7 @@ function videos_actions() {
     q) clear -x; ;;
     /) search; videos; ;;
 
-    r) ranger; videos; ;;
+    r) ranger_dir; videos; ;;
     t) tre; videos; ;;
     d) ll; videos_actions; ;;
 
@@ -31,6 +31,8 @@ function videos_actions() {
       videos_select $((number - 1))
       ;;
     [1-9]) videos_select $((action - 1)) ;;
+    j) folder_sibling_get $((siblings_index + 1)) ; videos;;
+    k) folder_sibling_get $((siblings_index - 1)) ; videos;;
     0) videos_select $(( ${#list[@]} - 1 )) ;;
     a) 
       #view all

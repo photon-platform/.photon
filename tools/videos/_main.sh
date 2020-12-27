@@ -9,6 +9,10 @@ function videos() {
 
   ui_header "VIDEOS $SEP $PWD"
 
+  folder_siblings
+  h2 "$(( siblings_index + 1 )) ${fgg08}of${txReset} $siblings_count"
+  show_dir
+
   videos_list
 
   videos_actions
