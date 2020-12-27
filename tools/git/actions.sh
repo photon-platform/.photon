@@ -21,16 +21,23 @@ function tools_git_actions() {
   printf " $SEP ${actions[$action]}\n\n"
   case $action in
     \?)
-      for key in "${!actions[@]}"; do 
+      for key in "${!actions[@]}"; do
         key_item $key "${actions[$key]}"
       done
       tools_git_actions
       ;;
     q) clear -x; ;;
+
+    r) ranger_dir; tools_git; ;;
+    t) tre; tools_git; ;;
+
     g) zd;  tools_git; ;;
     h) cd ..;  tools_git; ;;
-    l) git log --graph --oneline ;   tools_git  ;;
-    d) git diff .; pause_enter;  tools_git  ;;
+    j) folder_sibling_get $((siblings_index + 1)); tools_git ;;
+    k) folder_sibling_get $((siblings_index - 1)); tools_git ;;
+
+    l) git log --graph --oneline; tools_git  ;;
+    d) git diff .; pause_enter; tools_git  ;;
     a) git add .;  tools_git  ;;
     c) git commit;  tools_git  ;;
     p) git push; pause_enter;  tools_git  ;;

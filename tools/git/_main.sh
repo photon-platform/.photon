@@ -17,6 +17,10 @@ function tools_git() {
   clear -x
   ui_header "GIT $SEP $PWD"
 
+  folder_siblings
+  h2 "$(( siblings_index + 1 )) ${fgg08}of${txReset} $siblings_count"
+  show_dir
+
   gss
   echo
   printf " ${fgYellow}tag:${txReset} %s\n" $( gtl )
