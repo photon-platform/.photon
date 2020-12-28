@@ -14,7 +14,7 @@ function page_actions() {
 
     r) ranger; page; ;;
     t) tre; page; ;;
-    d) ll;  page_actions; ;;
+    l) ll;  page_actions; ;;
 
     m) page_siblings_move; ;;
     y)

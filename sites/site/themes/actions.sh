@@ -13,8 +13,9 @@ function themes_actions() {
 
     r) ranger_dir; folder; ;;
     t) tre; themes; ;;
-    d) ll; themes_actions; ;;
-    I) images; ;;
+    l) ll; themes_actions; ;;
+
+    e) v README.md; pages; ;;
 
     g) zd; folder ;;
     h) site; ;;
@@ -37,18 +38,6 @@ function themes_actions() {
     G)
       tools_git
       themes
-      ;;
-    n)
-      # new theme from template
-      ;;
-    c)
-      # create submodule
-      ;;
-    b)
-      # restore submodule
-      ;;
-    remove)
-      # initialize a submodule
       ;;
     *)
       themes

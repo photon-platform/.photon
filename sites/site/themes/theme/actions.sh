@@ -9,13 +9,14 @@ function theme_actions() {
     q) clear -x; ;;
     @) cd ..; site ;;
     /) search; theme; ;;
-    e) v README.md ; theme; ;;
-    .) v blueprints.yaml ; theme; ;;
-    l) vim CHANGELOG.md; theme; ;;
-
+    
     r) ranger_dir; folder; ;;
     t) tre; theme; ;;
-    d) ll; echo; theme_actions; ;;
+    l) ll; echo; theme_actions; ;;
+
+    e) v README.md ; theme; ;;
+    c) v CHANGELOG.md; theme; ;;
+    .) v blueprints.yaml ; theme; ;;
 
     g) zd; folder; ;;
     h) cd ..; themes; ;;

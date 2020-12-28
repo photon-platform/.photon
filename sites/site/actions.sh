@@ -19,7 +19,11 @@ function site_actions() {
 
     r) ranger; site; ;;
     t) tre; site; ;;
-    d) ll; echo; site_actions; ;;
+    l) ll; echo; site_actions; ;;
+
+    e) v README.md; site; ;;
+    C) v CHANGELOG.md; site; ;;
+    .) v .photon ; site; ;;
 
     g) zd; folder;;
     o)
@@ -50,9 +54,6 @@ function site_actions() {
     m) cd themes; themes; ;;
     c) cd config; folder; site; ;;
 
-    e) vim README.md; site; ;;
-    l) vim CHANGELOG.md; site; ;;
-    .) vim .photon; site; ;;
 
     h) sites; ;;
     j)

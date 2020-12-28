@@ -36,7 +36,10 @@ function sites_actions() {
 
     r) ranger_dir;  sites ;;
     t) tre; sites; ;;
-    d) ll; sites_actions ;;
+    l) ll; sites_actions ;;
+
+    e) v README.md; sites; ;;
+    c) v CHANGELOG.md; sites; ;;
 
     '#')
       read -p "enter number: " number

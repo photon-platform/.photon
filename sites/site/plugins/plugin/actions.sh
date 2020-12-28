@@ -13,11 +13,11 @@ function plugin_actions() {
 
     r) ranger_dir; folder; ;;
     t) tre; plugin; ;;
-    d) ll; plugin_actions; ;;
+    l) ll; plugin_actions; ;;
 
     e) v README.md ; plugin; ;;
+    c) v CHANGELOG.md; plugin; ;;
     .) v blueprints.yaml ; plugin; ;;
-    l) vim CHANGELOG.md; plugin; ;;
 
     g) zd; folder;;
     h) cd ..; plugins; ;;

@@ -13,8 +13,9 @@ function plugins_actions() {
 
     r) ranger_dir; folder; ;;
     t) tre; plugins; ;;
-    d) ll; plugins_actions; ;;
-    I) images; ;;
+    l) ll; plugins_actions; ;;
+
+    e) v README.md; plugins; ;;
 
     g) zd; folder ;;
     h) site; ;;

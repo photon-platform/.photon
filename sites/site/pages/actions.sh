@@ -13,7 +13,9 @@ function pages_actions() {
     
     r) ranger; pages; ;;
     t) tre; pages; ;;
-    d) ll; echo; pages_actions; ;;
+    l) ll; echo; pages_actions; ;;
+
+    e) v README.md; pages; ;;
 
     g) zd; page; ;;
     h) cd ..; site; ;;
