@@ -28,6 +28,7 @@ set_rc .vim
 
 set_rc .config/ranger 
 set_rc .config/sxiv
+set_rc .config/mpv
 
 set_rc .XCompose
 set_rc .Xresources
