@@ -36,11 +36,11 @@ function videos_actions() {
     0) videos_select $(( ${#list[@]} - 1 )) ;;
     a) 
       #view all
-      mapfile -t selected_videos < <( videos_list_get  | sxiv -o - )
+      mapfile -t selected_videos < <( videos_list_get )
       videos_selected_actions
       videos; ;;
     v)  
-      mapfile -t selected_videos < <( videos_list_get | fzf | sxiv -o - )
+      mapfile -t selected_videos < <( videos_list_get | fzf )
       videos_selected_actions
       videos; ;;
     F) folder; ;;
@@ -83,6 +83,7 @@ function videos_selected_actions() {
         ;;
       q) clear -x; ;;
 
+      p) videos_selected_play; ;;
       m) videos_selected_migrate; ;;
       E) videos_selected_exif; videos_selected_actions; ;;
       *)
@@ -90,6 +91,11 @@ function videos_selected_actions() {
         ;;
     esac
   fi
+}
+
+function videos_selected_play() {
+  printf " %s\n" "${selected_videos[@]}" |
+  mpv --keep-open=yes --playlist=-
 }
 
 function videos_selected_migrate() {
