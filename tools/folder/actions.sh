@@ -8,7 +8,7 @@ function folder_actions() {
 
   actions[r]="ranger_dir"
   actions[t]="tre"
-  actions[d]="ll"
+  actions[l]="ll"
 
   actions[g]="zd"
   actions[h]="move to parent folder"
@@ -18,6 +18,7 @@ function folder_actions() {
   actions['0']="select last child"
   actions['#']="select child by number (multi-digit, type enter)"
 
+  actions[a]="open all text files in vim"
   actions[f]="vf; # select files for vim"
   actions[v]="vr; # select most recent foles for vim"
 
