@@ -5,7 +5,7 @@ function video_actions() {
   actions['?']="help"
   actions[q]="quit"
 
-  actions[v]="mpv"
+  actions[p]="mpv"
   actions[m]="video_migrate"
   actions[x]="video_trash"
 
@@ -31,7 +31,7 @@ function video_actions() {
     q) videos; ;;
     m) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
-    v) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
+    p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
     h) videos ;;
     j)
       id=$((video_index + 1))

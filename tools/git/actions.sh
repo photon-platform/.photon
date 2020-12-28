@@ -31,6 +31,8 @@ function tools_git_actions() {
     r) ranger_dir; tools_git; ;;
     t) tre; tools_git; ;;
 
+    e) v README.md; tools_git; ;;
+
     g) zd;  tools_git; ;;
     h) cd ..;  tools_git; ;;
     j) folder_sibling_get $((siblings_index + 1)); tools_git ;;

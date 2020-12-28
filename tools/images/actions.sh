@@ -22,7 +22,9 @@ function images_actions() {
 
     r) ranger_dir; images; ;;
     t) tre; images; ;;
-    d) ll; images_actions; ;;
+    l) ll; images_actions; ;;
+
+    e) v README.md; images; ;;
 
     g) zd; images; ;;
     h) cd ..; images; ;;

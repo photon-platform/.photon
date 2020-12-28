@@ -45,6 +45,8 @@ function folder_actions() {
     t) tre; folder; ;;
     l) ll; folder_actions; ;;
 
+    e) v README.md; folder; ;;
+
     g) zd; folder; ;;
     h) cd ..; folder; ;;
     '#')

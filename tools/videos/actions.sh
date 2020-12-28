@@ -22,7 +22,9 @@ function videos_actions() {
 
     r) ranger_dir; videos; ;;
     t) tre; videos; ;;
-    d) ll; videos_actions; ;;
+    l) ll; videos_actions; ;;
+
+    e) v README.md; videos; ;;
 
     g) zd; videos; ;;
     h) cd ..; videos; ;;
