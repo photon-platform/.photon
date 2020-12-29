@@ -29,6 +29,7 @@ function video_actions() {
       video_actions
       ;;
     q) videos; ;;
+    n) image_rename "$file"; videos; ;;
     m) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
     p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
