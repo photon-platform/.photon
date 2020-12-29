@@ -31,11 +31,14 @@ function image_actions() {
       image_actions
       ;;
     q) images; ;;
+
     m) image_migrate "$file"; images; ;;
+    n) image_rename "$file"; images; ;;
     x) image_trash "$file"; images; ;;
     e) gimp "$file"; image "$file" $image_index; ;;
     v) sxiv "$file"; image "$file" $image_index; ;;
     d) darktable "$file"; image "$file" $image_index; ;;
+    
     h) images ;;
     j)
       id=$((image_index + 1))
@@ -102,6 +105,35 @@ function image_migrate() {
   img_path=$( ask_value "migrate to" "$img_path" ) 
   mkdir -p "$img_folder"
   mv "$img" "$img_path"
+  pause_any
+}
+
+function image_rename() {
+  img=$1
+  img=$(realpath "$img")
+  file=$(basename "$img")
+  file=${file%.*}
+  file=$( slugify "$file" )
+  ext=${img##*.}
+  ext=$( slugify "$ext" )
+  path=$(dirname "$img")
+
+  hr
+  ui_banner "RENAME $SEP $img"
+  echo
+
+  echo
+  path=$( ask_value "path:" "$path" ) 
+  file=$( ask_value "file:" "$file" ) 
+  file=$( slugify $file )
+  new_file="$path/$file.$ext" 
+  c=1
+  while [[ -f "$new_file" ]]; do
+    new_file="$path/$file.$c.$ext"
+    (( c++ ))
+  done
+  mkdir -p "$( dirname "$new_file" )"
+  mv "$img" "$new_file"
   pause_any
 }
 

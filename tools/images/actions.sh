@@ -38,11 +38,11 @@ function images_actions() {
     k) folder_sibling_get $((siblings_index - 1)) ; images;;
     a) 
       #view all
-      mapfile -t selected_images < <( images_list_get  | sxiv -o - )
+      mapfile -t selected_images < <( images_list_get  | sxiv -t -o - )
       images_selected_actions
       images; ;;
     v)  
-      mapfile -t selected_images < <( images_list_get | fzf | sxiv -o - )
+      mapfile -t selected_images < <( images_list_get | fzf | sxiv -t -o - )
       images_selected_actions
       images; ;;
     F) folder; ;;
@@ -85,8 +85,13 @@ function images_selected_actions() {
         ;;
       q) clear -x; ;;
 
+      x) images_selected_trash; ;;
       m) images_selected_migrate; ;;
       E) images_selected_exif; images_selected_actions; ;;
+      v)  
+        mapfile -t selected_images < <( printf "%s\n" "${selected_images[@]}" | fzf | sxiv -t -o - )
+        images_selected_actions
+        ;;
       *)
         images_selected_actions
         ;;
@@ -97,7 +102,7 @@ function images_selected_actions() {
 function images_selected_migrate() {
   
   hr
-  ui_banner "SELECTED $SEP MIGRATE "
+  ui_banner "SELECTED $SEP MIGRATE $SEP ${#selected_images[@]}"
   echo
 
   project=$( ask_value "project" "$project" )
@@ -146,4 +151,19 @@ function images_selected_migrate() {
 function images_selected_exif() {
  echo Exif selected 
   
+}
+
+
+function images_selected_trash() {
+  hr
+  ui_banner "SELECTED $SEP TRASH $SEP ${#selected_images[@]}"
+  echo
+
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    for (( i = 0; i < ${#selected_images[@]}; i++ )); do
+      img=${selected_images[i]}
+      echo "  $1 $SEP $img"
+      gio trash "$img"
+    done
+  fi
 }
