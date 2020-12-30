@@ -85,6 +85,7 @@ function videos_selected_actions() {
         ;;
       q) clear -x; ;;
 
+      x) videos_selected_trash; ;;
       p) videos_selected_play; ;;
       m) videos_selected_migrate; ;;
       E) videos_selected_exif; videos_selected_actions; ;;
@@ -152,4 +153,18 @@ function videos_selected_migrate() {
 function videos_selected_exif() {
  echo Exif selected 
   
+}
+
+function videos_selected_trash() {
+  hr
+  ui_banner "SELECTED $SEP TRASH $SEP ${#selected_images[@]}"
+  echo
+
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    for (( i = 0; i < ${#selected_images[@]}; i++ )); do
+      img=${selected_images[i]}
+      echo "  $1 $SEP $img"
+      gio trash "$img"
+    done
+  fi
 }
