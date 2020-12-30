@@ -23,7 +23,11 @@ function folder_actions() {
   actions[v]="vr; # select most recent foles for vim"
 
   actions[I]="images"
+  actions[V]="videos"
+  actions[A]="audios"
   actions[G]="git"
+  actions[S]="sites"
+  actions[s]="site"
 
   echo
   hr
@@ -33,7 +37,7 @@ function folder_actions() {
   printf " $SEP ${actions[$action]}\n\n"
   case $action in
     \?)
-      for key in "${!actions[@]}"; do 
+      for key in "${!actions[@]}"; do
         key_item $key "${actions[$key]}"
       done
       folder_actions
@@ -74,10 +78,13 @@ function folder_actions() {
       ;;
     j) folder_sibling_get $((siblings_index + 1)) ; folder;;
     k) folder_sibling_get $((siblings_index - 1)) ; folder;;
+
     a) vim $( list_text_files ); folder; ;;
     f) vf; folder; ;;
     v) vr; folder; ;;
+
     G) tools_git; folder; ;;
+    A) audios; ;;
     V) videos; ;;
     I) images; ;;
     s) site; ;;
