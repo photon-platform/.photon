@@ -5,7 +5,7 @@ function videos_actions() {
   echo
   hr
 
-  P=" ${fgYellow}videos${txReset}"
+  P=" ${fgYellow}VIDEOS${txReset}"
   read -n1 -p "$P > " action
   echo
   echo
@@ -157,14 +157,14 @@ function videos_selected_exif() {
 
 function videos_selected_trash() {
   hr
-  ui_banner "SELECTED $SEP TRASH $SEP ${#selected_images[@]}"
+  ui_banner "SELECTED $SEP TRASH $SEP ${#selected_videos[@]}"
   echo
 
   if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    for (( i = 0; i < ${#selected_images[@]}; i++ )); do
-      img=${selected_images[i]}
-      echo "  $1 $SEP $img"
-      gio trash "$img"
+    for (( i = 0; i < ${#selected_videos[@]}; i++ )); do
+      file=${selected_videos[i]}
+      echo "  $1 $SEP $file"
+      gio trash "$file"
     done
   fi
 }
