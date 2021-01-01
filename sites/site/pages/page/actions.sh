@@ -2,10 +2,10 @@
 
 function page_actions() {
 
-  echo
-  hr
   P=" ${fgYellow}PAGE${txReset}"
-  read -s -n1 -p "$P > " action
+  read -n1 -p "$P > " action
+  echo
+  echo
   case $action in
     q) clear -x; ;;
     e) vim *.md; page; ;;
@@ -28,16 +28,7 @@ function page_actions() {
       page
       ;;
     g) zd; page; ;;
-    h)
-      # if parent equals pages call pages
-      cd ..
-      if [[ $(pwd) == "$PROJECT_DIR/user/pages" ]]; then
-        pages
-      else
-        page
-      fi
-      ;;
-    
+    h) page_parent; ;;
     j) page_sibling_get $((siblings_index + 1)) ;;
     k) page_sibling_get $((siblings_index - 1)) ;;
 
@@ -53,6 +44,7 @@ function page_actions() {
     v) vr; page; ;;
 
     o) page_open; page_actions ;;
+    x) page_trash; ;;
     I) images; ;;
     F) folder; ;;
     L) tools_log; page; ;;
@@ -81,4 +73,36 @@ function page_open() {
   path="$LOCAL/$path"
   echo opening $path
   open "$path"
+}
+
+
+function page_trash() {
+  echo
+  hr
+  ui_banner "TRASH $SEP $PWD"
+  echo
+  h1 "Trash Current Page: $PWD"
+  echo
+
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    current=$PWD
+    cd ..
+    gio trash "$current"
+    # TODO: clear cache
+    if [[ "$PWD" == "$PROJECT_DIR/user/pages" ]]; then
+      pages
+    else
+      page
+    fi
+  fi
+}
+
+function page_parent() {
+  # if parent equals pages call pages
+  cd ..
+  if [[ "$PWD" == "$PROJECT_DIR/user/pages" ]]; then
+    pages
+  else
+    page
+  fi
 }
