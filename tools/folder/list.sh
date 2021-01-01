@@ -26,3 +26,6 @@ function folder_list() {
   echo
 }
 
+function folder_list_dupes() {
+  find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD
+}
