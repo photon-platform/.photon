@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+
 
 GRAV=1.6.28
 
-source ~/.photon/hosts/_main.sh
+source ~/.photon/tools/hosts/_main.sh
 source ~/.photon/ui/_main.sh
 
 clear -x
