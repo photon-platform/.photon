@@ -147,7 +147,5 @@ function image_trash() {
 
   if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
     gio trash "$img"
-    
   fi
-
 }
