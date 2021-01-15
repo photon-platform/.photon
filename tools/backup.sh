@@ -5,5 +5,4 @@ function backup() {
     --exclude ".cache" \
     --delete \
     --backup-dir=/mnt/md0/_HOME_TRASH/
-  
 }
