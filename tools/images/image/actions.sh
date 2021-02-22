@@ -9,6 +9,7 @@ function image_actions() {
   actions[v]="sxiv"
   actions[d]="darktable"
   actions[m]="image_migrate"
+  actions[r]="image_rename"
   actions[x]="image_trash"
 
   actions[h]="back to images"
@@ -33,7 +34,7 @@ function image_actions() {
     q) images; ;;
 
     m) image_migrate "$file"; images; ;;
-    n) image_rename "$file"; images; ;;
+    r) image_rename "$file"; images; ;;
     x) image_trash "$file"; images; ;;
     e) gimp "$file"; image "$file" $image_index; ;;
     v) sxiv "$file"; image "$file" $image_index; ;;
