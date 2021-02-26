@@ -58,8 +58,8 @@ function page_siblings_move() {
     if test -f $sib_md;
     then
       yaml=$(cat $sib_md | sed -n '/---/,/---/p')
-      title=$(echo "$yaml" | yq r - title )
-      printf "$fmt_child" $i "$current$title"
+      # title=$(echo "$yaml" | yq e "title" - )
+      # printf "$fmt_child" $i "$current$title"
       # printf "$fmt_child2" "$sib_md"
       printf "$fmt_child2" "$(basename $(dirname ${sib_md}))"
     else

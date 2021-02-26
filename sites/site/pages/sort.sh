@@ -24,8 +24,8 @@ function sort_in_siblings() {
     md=${mds[0]}
     if test -f $md; then
       yaml=$(cat $md | sed -n '/---/,/---/p')
-      title=$(echo "$yaml" | yq r - title )
-      printf "$fmt_child" $i "$current$title"
+      # title=$(echo "$yaml" | yq e title - )
+      # printf "$fmt_child" $i "$current$title"
       printf "$fmt_child2" "$sib"
     else
       printf "$fmt_child" $i "no page"

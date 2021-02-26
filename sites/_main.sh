@@ -18,6 +18,8 @@ source ~/.photon/sites/restore.sh
 source ~/.photon/sites/apache.sh
 source ~/.photon/sites/site/_main.sh
 
+alias S=sites
+
 function sites() {
 
   cd $SITESROOT
