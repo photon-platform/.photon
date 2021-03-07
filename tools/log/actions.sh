@@ -29,7 +29,7 @@ function tools_log_actions() {
       tools_log_actions
       ;;
     q) clear -x; ;; # quit
-    y) sk2; tools_log_actions ;;
+    y) sk; tools_log_actions ;;
     t) set_term; tools_log_actions ;;
     s) screen_main;  tools_log_actions; ;;
     c) log_concat; ;; 
