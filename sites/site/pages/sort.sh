@@ -3,8 +3,10 @@
 
 
 function sort_in_siblings() {
+  clear -x
   ui_header "move within siblings"
 
+  fmt_child="${fgYellow}%3d)${txReset} %s${txReset}\n"
   siblings=($(find $(dirname "$(pwd)") \
     -maxdepth 1 -mindepth 1 -type d | sort))
 
@@ -23,10 +25,11 @@ function sort_in_siblings() {
     mds=(${sib}/*.md)
     md=${mds[0]}
     if test -f $md; then
-      yaml=$(cat $md | sed -n '/---/,/---/p')
+      # yaml=$(cat $md | sed -n '/---/,/---/p')
       # title=$(echo "$yaml" | yq e title - )
-      # printf "$fmt_child" $i "$current$title"
-      printf "$fmt_child2" "$sib"
+      echo $sib
+      printf "$fmt_child" $i "$current$sib"
+      # printf "$fmt_child2" "$current$sib"
     else
       printf "$fmt_child" $i "no page"
     fi

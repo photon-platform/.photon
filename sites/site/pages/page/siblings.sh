@@ -32,6 +32,7 @@ function page_sibling_get() {
 }
 
 function page_siblings_move() {
+  clear -x
   ui_header "Move page within siblings"
 
   h1 "$(dirname $(pwd))"
@@ -57,11 +58,11 @@ function page_siblings_move() {
 
     if test -f $sib_md;
     then
-      yaml=$(cat $sib_md | sed -n '/---/,/---/p')
+      # yaml=$(cat $sib_md | sed -n '/---/,/---/p')
       # title=$(echo "$yaml" | yq e "title" - )
-      # printf "$fmt_child" $i "$current$title"
+      # printf "$fmt_child" $i "$current$si_mdb"
       # printf "$fmt_child2" "$sib_md"
-      printf "$fmt_child2" "$(basename $(dirname ${sib_md}))"
+      printf "$fmt_child" $i "$current$(basename $(dirname ${sib_md}))"
     else
       printf "$fmt_child" $i "no page"
     fi

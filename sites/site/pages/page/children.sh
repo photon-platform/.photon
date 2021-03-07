@@ -71,9 +71,10 @@ function page_children_renumber() {
   done
   echo
 
-  ask=$(ask_truefalse "continue")
+  ask=$(ask_truefalse "y to accept")
   echo
   if [[ $ask == "true" ]]; then
+    echo
     for (( i = $(( ${#children[@]}-1 )); i>= 0; i-- )); do
       f=${children[$i]}
       dir=$(dirname "$f")
@@ -92,7 +93,7 @@ function page_children_renumber() {
         echo "not a numbered folder"
       fi
     done
-    ask=$(ask_truefalse "any key continue")
+    pause_any
     echo
   fi
 }
