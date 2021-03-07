@@ -29,7 +29,7 @@ function tools_ffmpeg_actions() {
     c) rc2;  tools_ffmpeg_actions; ;;
     d) dbf_cam ;  tools_ffmpeg_actions;;
     k) kb_cam ;  tools_ffmpeg_actions;;
-    y) sk2; tools_ffmpeg_actions ;; 
+    y) sk; tools_ffmpeg_actions ;; 
     t) set_term; tools_ffmpeg_actions ;; 
     x) dbfoff; kboff; skoff; tools_ffmpeg_actions;;
     s) screen_rec;  tools_ffmpeg_actions; ;;
@@ -155,7 +155,8 @@ function sk() {
   screenkey --scr 1 -p fixed \
     --opacity 0.8 \
     -f 'Fira Mono' -s small \
-    -g 1920x33+0+768 &
+    --font-color gold \
+    -g 500x33+1050+768 &
 }
 alias skoff="pkill -f screenkey"
 
