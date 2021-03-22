@@ -80,5 +80,6 @@ h1 "v4l2loopback"
 echo
 sudo apt install v4l2loopback-dkms
 sudo modprobe v4l2loopback video_nr=6 card_label=photon
+sudo apt install v4l-utils
 
 

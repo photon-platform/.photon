@@ -64,6 +64,11 @@ echo
 sudo apt install -y xmlstarlet
 
 echo
+h1 "tidy"
+echo
+sudo apt install -y tidy
+
+echo
 h1 "pandoc"
 echo
 sudo apt install -y pandoc pandoc-citeproc
