@@ -41,9 +41,12 @@ function log_concat() {
   ffmpeg -f concat -safe 0 -i .log  -c copy ~/Logs/$(basename $PWD).mp4
 }
 
+function log_date() {
+  date +%g-%j 
+}
+
 function make_logname() {
-  ts=$( date +%g-%j )
-  read  -p " log title: " -i "${ts}-" -e title
+  read  -p " log title: " -i "$( log_date )-" -e title
   title=$( slugify "$title" )
   # [[ $title ]] && title="-$title"
   echo "${title}"
