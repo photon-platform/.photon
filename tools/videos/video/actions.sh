@@ -5,6 +5,8 @@ function video_actions() {
   actions['?']="help"
   actions[q]="quit"
 
+  actions[l]="losslesscut"
+  actions[s]="shotcut"
   actions[p]="mpv"
   actions[m]="video_migrate"
   actions[x]="video_trash"
@@ -30,6 +32,8 @@ function video_actions() {
       ;;
     q) videos; ;;
     n) image_rename "$file"; videos; ;;
+    l) losslesscut "$file"; videos; ;;
+    s) shotcut "$file"; videos; ;;
     m) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
     p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
