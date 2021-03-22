@@ -75,6 +75,47 @@ function rc2() {
   SIZE="1920x1080"
 
   output="$( make_filename ).mp4"
+  AUDIO_OFFSET="0.33"
+
+  echo
+  ui_banner "recording: $output"
+  ffmpeg  -hide_banner \
+    -framerate 30 \
+    -video_size $SIZE \
+    -f v4l2 -input_format mjpeg -i /dev/video2 \
+    -f pulse  -ac 2  -i $BLUE \
+    "$output" 
+
+  echo
+  ui_banner "fix offset"
+  ffmpeg -y  -hide_banner \
+    -i "$output" -itsoffset $AUDIO_OFFSET \
+    -i "$output" \
+    -map 0:v -map 1:a  \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -af "highpass=f=100, volume=volume=5dB, afftdn" \
+    "tmp.mp4"
+  # mv tmp.mp4 "$output"
+
+  echo
+  ui_banner "trim $trim seconds off end"
+  dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
+  trim=$( echo $dur - $TRIM_END | bc )
+  ffmpeg -y -hide_banner -t $trim \
+    -i tmp.mp4 -c copy \
+    "$output"
+  rm tmp.mp4 
+
+  
+  mpv "$output"
+}
+
+function rc4() {
+  TRIM_END=3
+  SIZE="1920x1080"
+
+  output="$( make_filename ).mp4"
+  AUDIO_OFFSET="0.33"
 
   echo
   ui_banner "recording: $output"
@@ -94,16 +135,16 @@ function rc2() {
     -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
     -af "highpass=f=100, volume=volume=5dB, afftdn" \
     "tmp.mp4"
-  mv tmp.mp4 "$output"
+  # mv tmp.mp4 "$output"
 
-  # echo
-  # ui_banner "trim $trim seconds off end"
-  # dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
-  # trim=$( echo $dur - $TRIM_END | bc )
-  # ffmpeg -y -hide_banner -t $trim \
-    # -i tmp.mp4 -c copy \
-    # "$output"
-  # rm tmp.mp4 
+  echo
+  ui_banner "trim $trim seconds off end"
+  dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
+  trim=$( echo $dur - $TRIM_END | bc )
+  ffmpeg -y -hide_banner -t $trim \
+    -i tmp.mp4 -c copy \
+    "$output"
+  rm tmp.mp4 
 
   
   mpv "$output"
@@ -180,8 +221,13 @@ function ffsnap() {
 }
 
 # create virtual camera on video6 with desktop - for zoom, etc
-function virtual_cam() {
+function virtual_desktop() {
   ffmpeg -f x11grab -r 15 -s 1920x1080 \
     -i :1+0,768 -vcodec rawvideo -pix_fmt yuv420p \
     -vf "hflip" -threads 0 -f v4l2 /dev/video6
+}
+function virtual_cam() {
+  sudo modprobe v4l2loopback devices=2
+  ffmpeg -f v4l2 -i /dev/video4 -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -f v4l2 /dev/video6 
 }

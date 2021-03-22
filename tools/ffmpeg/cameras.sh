@@ -12,6 +12,18 @@ function v0() {
   export PID_v0=$!
 }
 
+function v0a() {
+  v0off
+  SIZE=1280x1024
+  ffplay -noborder -hide_banner -loglevel quiet \
+    -video_size $SIZE \
+    -framerate $FRAMERATE \
+    -i /dev/video0 \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -left 1040 -top 900 &
+  export PID_v0=$!
+}
+
 function v0off() {
   if [[ $PID_v0 ]]; then
     kill $PID_v0
@@ -41,6 +53,17 @@ function v2() {
     -left 1040 -top 900 &
   export PID_v2=$!
 }
+function v2full() {
+  v2off
+  SIZE=1920x1080
+  ffplay -noborder -hide_banner -loglevel quiet \
+    -video_size $SIZE \
+    -framerate $FRAMERATE \
+    -i /dev/video2 \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    &
+  export PID_v2=$!
+}
 function v2off() {
   if [[ $PID_v2 ]]; then
     kill $PID_v2
@@ -61,6 +84,17 @@ function v4() {
     -left 1040 -top 900 &
   export PID_v4=$!
 }
+function v4full() {
+  v4off
+  SIZE=1920x1080
+  ffplay -noborder -hide_banner -loglevel quiet \
+    -video_size $SIZE \
+    -framerate $FRAMERATE \
+    -i /dev/video4 \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    &
+  export PID_v4=$!
+}
 function v4off() {
   if [[ $PID_v4 ]]; then
     kill $PID_v4
@@ -73,10 +107,10 @@ function alter_cam() {
   # window proportion 16x5
   ffmpeg -hide_banner -loglevel quiet \
     -i $CAMERA -c:v rawvideo -pix_fmt rgb24 \
-    -vf "hflip, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
     -window_size 112x35 \
     -window_title 'ALTER' \
-    -f caca - -top 900 
+    -f caca - -top 820 
 }
 
 function sky_cam() {
