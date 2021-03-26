@@ -195,7 +195,7 @@ function sk() {
   pkill -f screenkey 
   screenkey --scr 1 -p fixed \
     --opacity 0.8 \
-    -f 'Fira Mono' -s small \
+    -f 'Fira Mono' -s large \
     --font-color gold \
     -g 500x33+1050+768 &
 }
