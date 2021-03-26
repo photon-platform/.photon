@@ -2,40 +2,16 @@
     <img src="https://photon-platform.net/images/photon-logo-bg.png" alt="photon" title="photon" align="right" height="120" />
 </a>
 
-# photon ✴ CONFIG
+# .photon
+## configurations for the PHOTON platform - running on Pop!_OS
 
 Configuration files for the photon PLATFORM - bash scripts and dotfiles, atom editor configuration, file sync, git helpers
 
-You can view a demo of the starter site at https://starter.photon-platform.net
-
-
 > The photon ✴ PLATFORM is an integrated system of open-source components and online services for the development, publishing and management of digital content.
 
-for more about the **photon ✴ PLATFORM**, visit https://photon-platform.net
+for more about the **PHOTON platform**, visit https://photon-platform.net
 
-Check out the videos on the [photon PLATFORM YouTube Channel](https://www.youtube.com/channel/UCYzRQS16EBmsbKuyKMFHSFQ)
 
-**TOC**
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-<!-- code_chunk_output -->
-
-* [provisioning](#provisioning)
-	* [install VirtualBox](#install-virtualbox)
-	* [download the operating system](#download-the-operating-system)
-	* [create new virtual machine](#create-new-virtual-machine)
-	* [run installation script](#run-installation-script)
-* [bash config](#bash-config)
-	* [home script](#home-script)
-	* [bash_prompt](#bash_prompt)
-* [atom config](#atom-config)
-* [site management scripts and functions](#site-management-scripts-and-functions)
-	* [`sites`](#sites)
-	* [`sites status`](#sites-status)
-	* [`sites <foldername>`](#sites-foldername)
-* [file sync routines](#file-sync-routines)
-* [git helpers](#git-helpers)
-
-<!-- /code_chunk_output -->
 
 ## provisioning
 
@@ -97,7 +73,6 @@ cd ~/.photon
 the script runs a number of subscripts for setup found in the init folder of this projects. The following scripts are run
 
 - minor desktop settings
-- atom editor
 - apache web server
 - php langauge and support services for apache
 - setup a default Grav instance from zip file
@@ -125,21 +100,7 @@ custom prompt config
 
 shows user, machine, time, directory, and git branch & status (if available)
 
-<pre><font color="#D75F00"><b>phi</b></font><font color="#EEEEEC"><b> ✴ </b></font><font color="#AF8700"><b>pop-os </b></font><font color="#00AFAF"><b>11:44:44</b></font>
-<font color="#5F8700"><b>~/.atom</b></font><font color="#EEEEEC"><b> on </b></font><font color="#5F5FAF"><b>master</b></font><font color="#0087FF"><b> [!?]</b></font>
-<font color="#EEEEEC"><b>$ </b></font>
-</pre>
 
-## atom config
-**photon** maintains a curated set of packages for atom theough the `Package Sync` package.
-
-when packages are added and removed from atom, they are tracked in `.atom/packages.cson`
-
-this is a great way to maintain an atom configuration across machines.
-
-but you will need to run the `Package Sync: Sync` command to restore packages when the list has changed.
-
-The installation script preinstalls all the packages in the list with the `apm` command
 
 ## site management scripts and functions
 
@@ -165,7 +126,7 @@ the user folder in each site created by photon contains a `.photon` source file 
 typing `sites` followed by the site folder name, will `cd` to the `user` folder of the site and load its `.photon` source file.
 it also prints the title of the site from the command line.
 
-once you have this site context, you can use the the following commands
+once you have this site context, you can use the following commands
 
 - `th` - jump to photon theme submodule
 - `ch` - jump to child theme folder
