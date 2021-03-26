@@ -1,12 +1,55 @@
 #!/usr/bin/env bash
 
 function page_actions() {
+  declare -A actions
+  actions['?']="help"
+  actions[q]="quit"
+  actions[/]="search"
 
+  actions[r]="ranger_dir"
+  actions[t]="tre"
+  actions[l]="ll"
+
+  actions[g]="zd"
+  actions[h]="move to parent folder"
+  actions[j]="move to next sibling folder"
+  actions[k]="move to prev sibling folder"
+  actions['1-9']="select child by number"
+  actions['0']="select last child"
+  actions['#']="select child by number (multi-digit, type enter)"
+
+  actions[a]="open all text files in vim"
+  actions[f]="vf; # select files for vim"
+  actions[v]="vr; # select most recent foles for vim"
+
+  actions[m]="move page in ordered siblings"
+  actions[x]="trash page"
+  actions[o]="open in browser"
+  actions[y]="toggle YAML"
+
+  actions['@']="site"
+  actions[e]="vim *.md"
+  actions[b]="renumber child folders"
+  actions[n]="add new child page"
+
+  actions[F]="folder"
+  actions[I]="images"
+  actions[V]="videos"
+  actions[A]="audios"
+  actions[G]="git"
+
+  echo
+  hr
   P=" ${fgYellow}PAGE${txReset}"
   read -n1 -p "$P > " action
-  echo
-  echo
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
+    \?)
+      for key in "${!actions[@]}"; do
+        key_item $key "${actions[$key]}"
+      done
+      page_actions
+      ;;
     q) clear -x; ;;
     e) vim *.md; page; ;;
     @) site ;;
@@ -34,7 +77,7 @@ function page_actions() {
 
     [1-9]*) page_child_get $((action - 1)) ;;
     0) page_child_get $(( ${#children[@]} - 1 )) ;;
-    a) vim "${children[@]}" ;;
+    a) vim "${children[@]}" ; page ;;
     '#')
       read -p "enter number: " number
       page_child_get $((number - 1))

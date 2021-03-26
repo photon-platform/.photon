@@ -1,19 +1,63 @@
 #!/usr/bin/env bash
 
 # TODO convert aliases to actions
-alias serve="php -S localhost:${PORT} system/router.php"
 alias archive="cp -r ${PROJECT_DIR} ~/SITES/.archive/$PROJECT.$(date +"%Y%m%d")"
 
-alias grav-cc="cd ${PROJECT_DIR};bin/grav clearcache"
 alias grav-log="cd ${PROJECT_DIR};bin/grav logviewer"
 
 function site_actions() {
+  declare -A actions
+  actions['?']="help"
+  actions[q]="quit"
+  actions[/]="search"
+
+  actions[r]="ranger_dir"
+  actions[t]="tre"
+  actions[l]="ll"
+
+  actions[g]="zd"
+  actions[h]="move to parent folder"
+  actions[j]="move to next sibling folder"
+  actions[k]="move to prev sibling folder"
+  actions['1-9']="select child by number"
+  actions['0']="select last child"
+  actions['#']="select child by number (multi-digit, type enter)"
+
+  actions[a]="open all text files in vim"
+  actions[f]="vf; # select files for vim"
+  actions[v]="vr; # select most recent foles for vim"
+
+  actions[e]="vim README.md"
+  actions[C]="vim CHANGELOG.md"
+  actions[.]="vim .photon"
+  
+  actions[o]="open in browser"
+
+  actions[p]="pages"
+  actions[u]="plugins"
+  actions[m]="themes"
+  actions[c]="config"
+
+  actions[w]="scss --watch"
+
+  actions[F]="folder"
+  actions[I]="images"
+  actions[V]="videos"
+  actions[A]="audios"
+  actions[G]="git"
 
   echo
   hr
   P=" ${fgYellow}SITE${txReset}"
   read -s -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
+    \?)
+      for key in "${!actions[@]}"; do
+        key_item $key "${actions[$key]}"
+      done
+      site_actions
+      ;;
     q) clear -x; ;;
     /) search; site; ;;
 

@@ -13,7 +13,7 @@ function remove_quotes() {
 
 function page() {
 
-  clear -x
+  clear
 
   ui_header "PAGE $SEP $PROJECT"
 
@@ -27,10 +27,10 @@ function page() {
 
     md_type=${md%.*}
 
-    h2 "$md - $( date '+%F %H:%M'  -r ${md} )"
+    h2 "$fgg12$md - $( date '+%F %H:%M'  -r ${md} )"
 
     page_siblings
-    h2 "$((siblings_index + 1)) of $siblings_count"
+    h2 "$fgg12$((siblings_index + 1)) of $siblings_count"
     echo
 
     markdown_yaml_get $md
@@ -49,16 +49,11 @@ function page() {
         h2 "$(date '+%A, %B %d, %Y, %I:%M %p'   -d "$dt")"
       fi
 
-      echo
       page_cats="$(join_by , "${page_taxonomy_category[@]}" )"
-      h2 "cat: ${page_cats}"
 
       page_tags="$(join_by , "${page_taxonomy_tag[@]}" )"
-      h2 "tag: ${page_tags}"
       
       page_pho="$(join_by , "${page_taxonomy_photon[@]}" )"
-      h2 "pho: ${page_pho}"
-      echo
 
     fi
 
@@ -67,11 +62,22 @@ function page() {
     then
       width=$(tput cols)
       echo "$summary" | fold -w $((width-4)) -s
+      echo
     fi
+
+    if [[ $page_cats ]]; then
+      h2 "  ${fgGreen}c:${txReset} ${page_cats}"
+    fi
+    if [[ $page_tags ]]; then
+      h2 "  ${fgGreen}t:${txReset} ${page_tags}"
+    fi
+    if [[ $page_pho ]]; then
+      h2 "  ${fgGreen}p:${txReset} ${page_pho}"
+    fi
+    echo
 
     # show headings from document indented
     grep -e "^#\{1,6\}" "$md"| sed -e "s/#/  /g"
-
     echo
 
     unset -v  $( ( set -o posix ; set ) | grep page_ | sed -n 's/\(.*\)\=(.*/\1/p' )

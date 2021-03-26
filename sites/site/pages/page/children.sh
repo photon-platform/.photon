@@ -17,8 +17,8 @@ function page_children() {
   do
     yaml="$(cat $md | sed -n -e '/^---$/,/^---$/{ /^---$/d; /^---$/d; p; }')"
     # yaml=$(cat $md | sed -n '/---/,/---/p')
-    title=$( echo "$yaml" | sed -n -e 's/^title: \(.*\)/\1/p' )
-    subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle: \(.*\)/\1/p' )
+    title=$( echo "$yaml" | sed -n -e 's/^title:\s*\(.*\)/\1/p' )
+    subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle:\s*\(.*\)/\1/p' )
 
     ui_list_item_number $i "$title"
     if [[ $subtitle ]]

@@ -1,31 +1,47 @@
 #!/usr/bin/env bash
 
 function sites_actions() {
+  declare -A actions
+  actions[\?]="help"
+  actions[q]="quit"
+  actions[/]="search"
 
+  actions[r]="ranger_dir"
+  actions[t]="tre"
+  actions[l]="ll"
+
+  actions[g]="zd"
+  actions[h]="move to parent folder"
+  actions[j]="move to next sibling folder"
+  actions[k]="move to prev sibling folder"
+  actions['1-9']="select child by number"
+  actions['0']="select last child"
+  actions['#']="select child by number (multi-digit, type enter)"
+
+  actions[a]="open all text files in vim"
+  actions[f]="vf; # select files for vim"
+  actions[v]="vr; # select most recent foles for vim"
+
+  actions[e]="vim README.md"
+  actions[C]="vim CHANGELOG.md"
+
+  actions[F]="folder"
+  actions[I]="images"
+  actions[G]="git"
+
+  actions[n]="create new site"
+  actions[s]="restore site from github"
+
+  echo
   hr
   P=" ${fgYellow}SITES${txReset}"
   read -s -n1 -p "$P > " action
+  printf " $SEP ${actions[$action]}\n\n"
   case $action in
     \?)
-      echo
-      key_item q quit
-      key_item / search
-
-      key_item r ranger
-      key_item t tree
-      key_item d "list current dir"
-
-      key_item "1-9" "select site"
-      key_item "#" "select site"
-      key_item "0" "select last site"
-      key_item g "select by folder name"
-
-      key_item n "create new site"
-      key_item s "restore site from github"
-
-      key_item I "images"
-      key_item G "git tools"
-      echo
+      for key in "${!actions[@]}"; do
+        key_item $key "${actions[$key]}"
+      done
       sites_actions
       ;;
     q) clear -x; ;;
@@ -39,7 +55,7 @@ function sites_actions() {
     l) ll; sites_actions ;;
 
     e) v README.md; sites; ;;
-    c) v CHANGELOG.md; sites; ;;
+    C) v CHANGELOG.md; sites; ;;
 
     '#')
       read -p "enter number: " number
