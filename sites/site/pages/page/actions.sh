@@ -40,7 +40,7 @@ function page_actions() {
 
   echo
   hr
-  P=" ${fgYellow}PAGE${txReset}"
+  P=" ${fgYellow}ARTICLE${txReset}"
   read -n1 -p "$P > " action
   printf " $SEP ${actions[$action]}\n\n"
   case $action in

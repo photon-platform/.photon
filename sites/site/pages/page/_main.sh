@@ -15,7 +15,7 @@ function page() {
 
   clear
 
-  ui_header "PAGE $SEP $PROJECT"
+  ui_header "ARTICLE $SEP $PROJECT"
 
   show_dir
 

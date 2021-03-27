@@ -14,7 +14,7 @@ function site() {
   
   clear -x
 
-  ui_header "SITE $SEP $PROJECT"
+  ui_header "ARCHIVE $SEP $PROJECT"
 
   show_dir
 
@@ -27,7 +27,7 @@ function site() {
   tmp=$PWD
   
   cd $tmp/pages
-  printf "$fmt" "p" "pages" $(find . -name "*.md" | wc -l ) "$(gsss)"
+  printf "$fmt" "p" "articles" $(find . -name "*.md" | wc -l ) "$(gsss)"
   cd $tmp/plugins
   printf "$fmt" "u" "plugins" $(find . -name "blueprints.yaml" | wc -l ) "$(gsss)"
   cd $tmp/themes

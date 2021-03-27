@@ -15,7 +15,7 @@ function pages() {
 
   clear -x
 
-  ui_header "PAGES $SEP $PROJECT"
+  ui_header "ARTICLES $SEP $PROJECT"
 
   show_dir
 

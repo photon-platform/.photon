@@ -26,7 +26,7 @@ function sites() {
   
   clear -x
 
-  ui_header "SITES $SEP $PWD"
+  ui_header "ARCHIVES $SEP $PWD"
 
   sites_list
 

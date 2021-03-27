@@ -33,7 +33,7 @@ function site_actions() {
   
   actions[o]="open in browser"
 
-  actions[p]="pages"
+  actions[p]="articles"
   actions[u]="plugins"
   actions[m]="themes"
   actions[c]="config"
@@ -48,7 +48,7 @@ function site_actions() {
 
   echo
   hr
-  P=" ${fgYellow}SITE${txReset}"
+  P=" ${fgYellow}ARCHIVE${txReset}"
   read -s -n1 -p "$P > " action
   printf " $SEP ${actions[$action]}\n\n"
   case $action in

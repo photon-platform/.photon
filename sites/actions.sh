@@ -34,7 +34,7 @@ function sites_actions() {
 
   echo
   hr
-  P=" ${fgYellow}SITES${txReset}"
+  P=" ${fgYellow}ARCHIVES${txReset}"
   read -s -n1 -p "$P > " action
   printf " $SEP ${actions[$action]}\n\n"
   case $action in
