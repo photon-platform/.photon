@@ -20,10 +20,10 @@ function page_children() {
     title=$( echo "$yaml" | sed -n -e 's/^title:\s*\(.*\)/\1/p' )
     subtitle=$( echo "$yaml" | sed -n -e 's/^subtitle:\s*\(.*\)/\1/p' )
 
-    ui_list_item_number $i "$title"
+    ui_list_item_number $i "$( remove_quotes "$title" )"
     if [[ $subtitle ]]
     then
-      ui_list_item "$subtitle"
+      ui_list_item "$( remove_quotes "$subtitle" )"
     fi
     ui_list_item "${fgg08}${md#./}${txReset}"
 

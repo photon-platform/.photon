@@ -7,7 +7,9 @@ source ~/.photon/sites/site/pages/page/children.sh
 function join_by { local IFS="$1"; shift; echo "$*"; }
 function remove_quotes() {
   temp="${1%\'}"
+  temp="${temp%\"}"
   temp="${temp#\'}"
+  temp="${temp#\"}"
   echo "$temp"
 }
 
@@ -41,7 +43,7 @@ function page() {
       echo "$yaml"
     else
       h1 "$( remove_quotes "$page_title" )"
-      h2 "$page_subtitle"
+      h2 "$( remove_quotes "$page_subtitle" )"
 
       if [[ $page_data_event_startDate ]]
       then

@@ -222,9 +222,10 @@ function ffsnap() {
 
 # create virtual camera on video6 with desktop - for zoom, etc
 function virtual_desktop() {
+  sudo modprobe v4l2loopback devices=2
   ffmpeg -f x11grab -r 15 -s 1920x1080 \
     -i :1+0,768 -vcodec rawvideo -pix_fmt yuv420p \
-    -vf "hflip" -threads 0 -f v4l2 /dev/video6
+    -threads 0 -f v4l2 /dev/video6
 }
 function virtual_cam() {
   sudo modprobe v4l2loopback devices=2
