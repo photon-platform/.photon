@@ -119,7 +119,10 @@ echo
 sudo apt install -y indicator-multiload
 
 
-
+echo
+h1 "calibre ebook"
+echo
+sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 
 
 # sudo apt install -y silversearcher-ag
