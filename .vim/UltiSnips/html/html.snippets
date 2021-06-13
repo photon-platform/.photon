@@ -60,7 +60,7 @@ endsnippet
 # HTML TAGS #
 #############
 snippet a "Link" w
-<a href="${1:http://www.${2:url.com}}"${3: target="_blank"}>${4:Anchor Text}</a>
+<a href="${1:https://${2:url.com}}"${3: target="_blank"}>${0:${VISUAL}}</a>
 endsnippet
 
 snippet abbr "<abbr>" w
@@ -155,6 +155,7 @@ snippet div "<div>" w
 <div>
 	${0:${VISUAL}}
 </div>
+
 endsnippet
 
 snippet div# "<div> with ID & class" w
