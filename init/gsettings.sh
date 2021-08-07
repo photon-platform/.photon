@@ -5,7 +5,6 @@ source ~/.photon/ui/_main.sh
 clear -x
 ui_banner "gnome settings"
 
-sudo hostnamectl set-hostname 'photon'
 
 bg="file:///home/${USERNAME}/.photon/graphics/photon-wallpaper.png"
 

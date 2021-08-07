@@ -92,9 +92,6 @@ init/nextcloud.sh
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
 
-#####################################
-
-title installed apps
 
 subtitle "apache2"
 apache2 -v
@@ -128,3 +125,9 @@ subtitle "firefox"
 firefox --version
 
 
+#####################################
+
+title change hostname
+sudo hostnamectl set-hostname 'photon'
+
+echo $fgred reboot system
