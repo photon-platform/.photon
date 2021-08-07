@@ -1,3 +1,8 @@
+# javascript main
+
+snippet cl "console.log(obj)"
+console.log(${1:obj})
+endsnippet
 
 snippet f "function (named)" b
 function ${1:function_name}(${2:argument}) {
@@ -21,9 +26,6 @@ snippet =>r "arrow function"
 }
 endsnippet
 
-###########################################################################
-#                             TextMate Snippets                           #
-###########################################################################
 snippet get "Get Elements"
 getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
 endsnippet
@@ -48,15 +50,21 @@ snippet : "Object key key: 'value'"
 ${1:key}: ${2:"${3:value}"}${4:, }
 endsnippet
 
-snippet for "for (...) {...} (faster)"
-for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; $2--){
+snippet for "for - 0 to array.length - 1"
+for (var ${2:i} = 0; $2 < ${1:array_name}.length; $2++) {
+  ${3:$1[$2]}$0
+}
+endsnippet
+
+snippet forr "for - array.length - 1 to 0"
+for (var ${2:i} = ${1:array_name}.length - 1; $2 >= 0; $2--) {
   ${3:$1[$2]}$0
 }
 endsnippet
 
 snippet foreach "foreach loop"
-for (var ${key} in ${items}) {
-  $0
+for (var ${2:key} in ${1:items}) {
+  ${3:$1[$2]}$0
 }
 endsnippet
 

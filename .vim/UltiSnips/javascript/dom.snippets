@@ -1,0 +1,13 @@
+# javascript DOM helpers
+
+snippet qs "querySelector" 
+let ${1:element} = ${3:document}.querySelector('${2:query}')
+endsnippet
+
+snippet qsa "querySelectorAll" 
+let ${1:elements} = ${3:document}.querySelectorAll('${2:query}')
+$1.forEach( (${4:element}) => {
+  // $4
+}
+endsnippet
+

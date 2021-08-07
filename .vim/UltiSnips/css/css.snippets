@@ -13,7 +13,7 @@ border: ${1:0};$0
 endsnippet
 
 snippet d "display"
-display: ${1:none};$0
+display: ${1|none,block,flex,grid,inline|};$0
 endsnippet
 
 snippet bg "background"
@@ -288,24 +288,24 @@ snippet float "float: left:right:none (float)"
 float: ${1:left/right/none};$0
 endsnippet
 
-snippet font "font-family:   family (font)"
+snippet ffs "font-family:   family (font)"
 font-family: ${1:Arial, "MS Trebuchet"}, ${2:sans-}serif;$0
 endsnippet
 
-snippet font "font-size: size (font)"
+snippet fz "font-size: size (font)"
 font-size: ${1:100%};$0
 endsnippet
 
-snippet font "font-style:   normal:italic:oblique (font)"
+snippet fy "font-style:   normal:italic:oblique (font)"
 font-style: ${1:normal/italic/oblique};$0
 endsnippet
 
-snippet font "font-variant:   normal:small-caps (font)"
-font-variant: ${1:normal/small-caps};$0
+snippet fv "font-variant:   normal:small-caps (font)"
+font-variant: ${1|normal,small-caps|};$0
 endsnippet
 
-snippet font "font-weight: weight (font)"
-font-weight: ${1:normal/bold};$0
+snippet fw "font-weight: weight (font)"
+font-weight: ${1|normal,bold,400,700|};$0
 endsnippet
 
 snippet font "font:   style variant weight size:line-height font -family (font)"
