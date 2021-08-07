@@ -8,6 +8,8 @@ function tools_log() {
   clear -x
   ui_header "LOG $SEP $PWD"
   
+  videos_list
+
   tools_log_actions
 
   tab_title "$PWD"

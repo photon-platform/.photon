@@ -31,8 +31,27 @@ function video() {
     echo " $img_dt"
 
     hr
-    echo " $( getExifValue "ImageWidth" ) ${fgg08}x${txReset} $( getExifValue "ImageHeight" ) ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
-    echo " $( getExifValue "Duration" )" 
+    size="$( getExifValue "ImageWidth" )${fgg08}x${txReset}$( getExifValue "ImageHeight" )"
+    vfr="$( getExifValue "VideoFrameRate")"
+    echo " $size $SEP $vfr f/s ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
+    
+    duration=$( getExifValue "Duration")
+    if [[ "$duration" == *"s" ]]; then
+      seconds=${duration% s}
+      hms=$( convertsecstohours $seconds )
+    else
+      hms=$duration
+      IFS=':' read -r -a parts <<< "$duration"
+      h=$(( ${parts[0]} * 3600 ))
+      m=$(( ${parts[1]} * 60 ))
+      s=${parts[2]}
+      seconds=$(( h + m + s ))
+
+    fi
+    frames=$( echo "$seconds * $vfr" | bc )
+
+    echo " $hms $SEP $seconds s $SEP $frames frames"
+
     echo -n " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
     echo " $SEP $( getExifValue "Aperture" ) $SEP $( getExifValue "ShutterSpeed" ) $SEP $( getExifValue "FocalLength" )"
     hr
@@ -57,4 +76,10 @@ function video() {
 
 function exif_keyvalue() {
     echo " ${fgg12}$1 $SEP $( getExifValue "$1" ) "
+}
+
+function check_sound() {
+  file=${1:-$file}
+  ffmpeg -hide_banner -i $file  -filter_complex volumedetect -c:v copy -f null /dev/null
+
 }

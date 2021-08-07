@@ -1,17 +1,6 @@
 #!/usr/bin/env bash
 
-#run `ffmpeg -sources pulse` to list the system audio devices
-MIC="alsa_input.usb-046d_HD_Pro_Webcam_C920_B11A2C0F-02.analog-stereo"
-BLUE="alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo"
-AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
-CAMERA="/dev/video4"
-ZIGGI="/dev/video0"
-
-FRAMERATE=24
-
-
 function tools_ffmpeg_actions() {
-
   echo
   hr
   P=" ${fgYellow}FFMPEG${txReset}"
@@ -26,13 +15,13 @@ function tools_ffmpeg_actions() {
       ;;
     q) clear; ;; # quit
     a) rablue;  tools_ffmpeg_actions; ;;
-    c) rc2;  tools_ffmpeg_actions; ;;
-    d) dbf_cam ;  tools_ffmpeg_actions;;
-    k) kb_cam ;  tools_ffmpeg_actions;;
-    y) sk; tools_ffmpeg_actions ;; 
-    t) set_term; tools_ffmpeg_actions ;; 
-    x) dbfoff; kboff; skoff; tools_ffmpeg_actions;;
+    c) rc;  tools_ffmpeg_actions; ;;
     s) screen_rec;  tools_ffmpeg_actions; ;;
+    # d) dbf_cam ;  tools_ffmpeg_actions;;
+    # k) kb_cam ;  tools_ffmpeg_actions;;
+    y) sk; tools_ffmpeg_actions ;; 
+    # t) set_term; tools_ffmpeg_actions ;; 
+    x) dbfoff; kboff; skoff; tools_ffmpeg_actions;;
     *) clear; tools_ffmpeg ;;
   esac
 }
@@ -49,105 +38,108 @@ function make_filename() {
   echo "${ts}${title}"
 }
 
-
-function record_cam() {
-  output="$( make_filename ).mp4"
-
-  ui_banner "recording: $output"
-  ffmpeg -y -hide_banner -i $CAMERA \
-    -f pulse -ac 2 -i $MIC "$output" 
-
-  ui_banner "fix offset"
-  ffmpeg -y  -hide_banner -i "$output" -itsoffset 0.44 -i "$output" -map 0:v -map 1:a -c copy "tmp.mp4"
-  # ffmpeg -y -i tmp.mp4 -ss 3 -c copy $output
-
-  ui_banner "trim 5 seconds off end"
-  dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
-  trim=$( echo $dur - 5 | bc )
-  ffmpeg -y -hide_banner -t $trim -i tmp.mp4 -c copy $output
-  rm tmp.mp4 
-  
-  mpv "$output"
-}
-
-function rc2() {
-  TRIM_END=3
+function rc() {
+  CAMERA=${1:-$MAIN}
+  MIC=${2:-$BLUE}
+  TRIM_END=0
   SIZE="1920x1080"
 
-  output="$( make_filename ).mp4"
-  AUDIO_OFFSET="0.33"
+  read -p "title: " title
+  createdt=$( date )
+  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
 
-  echo
-  ui_banner "recording: $output"
-  ffmpeg  -hide_banner \
-    -framerate 30 \
-    -video_size $SIZE \
-    -f v4l2 -input_format mjpeg -i /dev/video2 \
-    -f pulse  -ac 2  -i $BLUE \
-    "$output" 
-
-  echo
-  ui_banner "fix offset"
-  ffmpeg -y  -hide_banner \
-    -i "$output" -itsoffset $AUDIO_OFFSET \
-    -i "$output" \
-    -map 0:v -map 1:a  \
-    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
-    -af "highpass=f=100, volume=volume=5dB, afftdn" \
-    "tmp.mp4"
-  # mv tmp.mp4 "$output"
-
-  echo
-  ui_banner "trim $trim seconds off end"
-  dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
-  trim=$( echo $dur - $TRIM_END | bc )
-  ffmpeg -y -hide_banner -t $trim \
-    -i tmp.mp4 -c copy \
-    "$output"
-  rm tmp.mp4 
-
+  slug=$( slugify "$title" )
   
-  mpv "$output"
-}
-
-function rc4() {
-  TRIM_END=3
-  SIZE="1920x1080"
-
-  output="$( make_filename ).mp4"
-  AUDIO_OFFSET="0.33"
+  output="$ts.$slug.raw.mp4"
 
   echo
   ui_banner "recording: $output"
+  countdown
+
   ffmpeg  -hide_banner \
-    -framerate 30 \
+    -framerate $FRAMERATE \
     -video_size $SIZE \
     -f v4l2 -input_format mjpeg -i $CAMERA \
-    -f pulse  -ac 2  -i $BLUE \
+    -f pulse  -ac 2  -i $MIC \
     "$output" 
 
   echo
-  ui_banner "fix offset"
+  ui_banner "offset: $AUDIO_OFFSET"
   ffmpeg -y  -hide_banner \
     -i "$output" -itsoffset $AUDIO_OFFSET \
     -i "$output" \
+    -map_metadata 0 \
     -map 0:v -map 1:a  \
-    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
-    -af "highpass=f=100, volume=volume=5dB, afftdn" \
-    "tmp.mp4"
-  # mv tmp.mp4 "$output"
+    -c copy \
+    "tmp.mp4" 
 
-  echo
-  ui_banner "trim $trim seconds off end"
-  dur=$(ffprobe -hide_banner -i "tmp.mp4"  -show_entries format=duration -v quiet -of csv="p=0")
-  trim=$( echo $dur - $TRIM_END | bc )
-  ffmpeg -y -hide_banner -t $trim \
-    -i tmp.mp4 -c copy \
+  mv "tmp.mp4" "$output"
+
+  exiftool \
+    -Title="$ts • $title" \
+    -Creator="phi ARCHITECT" \
+    -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
+    -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
+    -overwrite_original \
     "$output"
-  rm tmp.mp4 
 
-  
-  mpv "$output"
+  video "$output"
+}
+
+function process_video() {
+  input=$1
+  # folder=$(dirname "$input")
+  # file=$(basename "$input")
+  # mkdir -p "$folder/processed"
+  if [[ "$input" == *.raw.mp4 ]]; then
+    output="${input%.raw.mp4}.mp4"
+
+    if [[ $output ]]; then
+      mv $output $output.bak
+    fi
+
+    vf="hue=s=0, eq=contrast=2:brightness=-.5" 
+    af="highpass=f=100, volume=volume=5dB, afftdn" 
+    # dur=$(ffprobe -hide_banner -i "$input"  -show_entries format=duration -v quiet -of csv="p=0")
+
+    echo
+    ui_banner "process video: bw"
+    ffmpeg -y  -hide_banner \
+      -i "$input" \
+      -map_metadata 0 \
+      -vf "$vf" \
+      -af "$af" \
+      "$output" 
+
+    echo
+
+    getExif "$input"
+    notes="$(getExifValue "Notes")"
+    processed="processed $( date +"%g.%j.%H%M%S" ) : vf='$vf' : af='$af' "
+    if [[ $notes == "" ]]; then
+      notes="$processed"
+    else
+      notes+=" | $processed"
+    fi
+
+    exiftool -ec \
+      -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
+      -Title="$(getExifValue "Title")" \
+      -Description="$(getExifValue "Description")" \
+      -Notes="$notes" \
+      -Subject="$(getExifValue "Subject")" \
+      -Rating="$(getExifValue "Rating")" \
+      -Colorlabels="$(getExifValue "Colorlabels")" \
+      -Creator=$(getExifValue "Creator") \
+      -Publisher="$(getExifValue "Publisher")" \
+      -Copyright="$(getExifValue "Copyright")" \
+      -overwrite_original \
+      "$output"
+
+    video "$output"
+  else
+    echo "$input is not a raw file"
+  fi
 }
 
 function audio_set() {
@@ -228,7 +220,10 @@ function virtual_desktop() {
     -threads 0 -f v4l2 /dev/video6
 }
 function virtual_cam() {
-  sudo modprobe v4l2loopback devices=2
-  ffmpeg -f v4l2 -i /dev/video4 -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
-    -f v4l2 /dev/video6 
+  CAMERA=${1:-$MAIN}
+  SIZE="1920x1080"
+
+  sudo modprobe v4l2loopback exclusive_caps=1 video_nr="44" card_label="Main BW" max_buffers=2
+  ffmpeg -f v4l2 -i $CAMERA -pix_fmt yuyv422 -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -f v4l2 /dev/video44 
 }

@@ -3,6 +3,7 @@
 source ~/.photon/tools/git/submodules/actions.sh
 source ~/.photon/tools/git/submodules/add.sh
 source ~/.photon/tools/git/submodules/remove.sh
+source ~/.photon/tools/git/submodules/create.sh
 
 function tools_git_submodules() {
 

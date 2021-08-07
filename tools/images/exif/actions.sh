@@ -38,7 +38,7 @@ function updateExif() {
   key=$1
   if [[ $key ]]; then
     value="$(ask_value "$key" "$( getExifValue "$key" )" )"
-    exiftool -$key="$value" "$file"
+    exiftool -$key="$value" "$file" -overwrite_original
     getExif "$file"
     pause_any
   else

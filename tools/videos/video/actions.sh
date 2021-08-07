@@ -8,6 +8,9 @@ function video_actions() {
   actions[l]="losslesscut"
   actions[s]="shotcut"
   actions[p]="mpv"
+  actions[r]="process_video"
+  actions[e]="video_edl"
+  actions[b]="video_build"
   actions[m]="video_migrate"
   actions[x]="video_trash"
 
@@ -32,8 +35,11 @@ function video_actions() {
       ;;
     q) videos; ;;
     n) image_rename "$file"; videos; ;;
-    l) losslesscut "$file"; videos; ;;
-    s) shotcut "$file"; videos; ;;
+    l) losslesscut "$file"; video_actions; ;;
+    s) shotcut "$file"; video_actions; ;;
+    r) process_video "$file"; video_actions; ;;
+    e) video_edl "$file"; video_actions; ;;
+    b) video_build "$file"; video_actions; ;;
     m) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
     p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
@@ -54,6 +60,7 @@ function video_actions() {
         video "$file" $video_index
       fi
       ;;
+    b) process_video "$file" ;;
     i) exiftool "$file" | less ; video "$file" $video_index; ;;
     E) tools_exif_actions;
       video "$file" $video_index
@@ -105,6 +112,99 @@ function video_migrate() {
   mv "$img" "$img_path"
 }
 
+function video_edl() {
+  video_file=$1
+  edl_file="${video_file%.*}-llc-edl.csv"
+  awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file"
+  if [[ -f "$edl_file" ]]; then
+    mapfile  segments \
+      < <( awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
+    # segments_count=${#segments[@]}
+    # for segment in "${segments[@]}"; do
+      # echo $segment
+    # done
+    if [[ "$( ask_truefalse "edit?" )" == "true" ]]; then
+      vim "$edl_file"
+    fi
+  fi
+}
+
+# melt 21.207.130205.offset-test.mp4   \
+  # -attach watermark:caption.one.png in=44 out=66 -transition luma a_track=0 b_track=1 \
+  # -attach watermark:caption.two.png in=66 out=88 -transition luma a_track=0 b_track=1 \
+  # -consumer xml:melt.mlt
+
+function video_build() {
+  video_file=$1
+  edl_file="${video_file%.*}-llc-edl.csv"
+  tracks=()
+  main_in=0
+  main_out=0
+  main_offset=0
+
+  if [[ -f "$edl_file" ]]; then
+    echo $edl_file
+    mapfile -t segments \
+      < <( awk -F, '{printf "%8s,%8s,%s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
+    # segments_count=${#segments[@]}
+    for segment in "${segments[@]}"; do
+      echo $segment
+      in=$( echo $segment | awk -F, '{print $1}' )
+      in=$(( in * 1 ))
+      out=$( echo $segment | awk -F, '{print $2}' )
+      out=$(( out * 1 ))
+      action=$( echo $segment | awk -F, '{print $3}' )
+      cmd=$( echo $action | awk -F ": " '{print $1}' )
+      echo $action
+      case $cmd in
+        'trim' )
+          # echo trim!
+          text=$( echo $action | awk -F":" '{print $2}' )
+          if [[ $text == *start ]]; then
+            main_in=$out
+            main_offset=$(( main_offset + main_in ))
+            
+            # echo "trim: start - $main_in"
+          fi
+          if [[ $text == *end ]]; then
+            main_out=$in
+            # echo "trim: end - $main_out"
+          fi
+          ;;
+        'img' )
+          text=$( echo $action | awk -F":" '{print $2}' )
+          caption_file=$( img_caption "IMG: $text" )
+          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          in=$(( in - main_offset ))
+          out=$(( out - main_offset ))
+          track=" -attach watermark:$caption_file in=$in out=$out -transition luma a_track=0 b_track=1"
+          tracks+=( $track )
+          ;;
+        'mp4' )
+          text=$( echo $action | awk -F":" '{print $2}' )
+          caption_file=$( img_caption "MP4: $text" )
+          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          in=$(( in - main_offset ))
+          out=$(( out - main_offset ))
+          track=" -attach watermark:$caption_file in=$in out=$out -transition luma a_track=0 b_track=1"
+          tracks+=( $track )
+          ;;
+        'caption' )
+          text=$( echo $action | awk -F":" '{print $2}' )
+          caption_file=$( img_caption "$text" )
+          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          in=$(( in - main_offset ))
+          out=$(( out - main_offset ))
+          track=" -attach watermark:$caption_file in=$in out=$out -transition luma a_track=0 b_track=1"
+          tracks+=( $track )
+          ;;
+      esac
+    done
+  fi
+  echo ${tracks[@]}
+  melt $video_file in=$main_in out=$main_out ${tracks[@]} -consumer xml:"$PWD/$video_file.mlt"
+  melt "$video_file.mlt"
+}
 
 function video_trash() {
   img=$1
@@ -115,7 +215,5 @@ function video_trash() {
 
   if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
     gio trash "$img"
-    
   fi
-
 }

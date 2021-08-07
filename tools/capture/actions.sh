@@ -33,7 +33,7 @@ function tools_capture_get_all_files() {
   capture_subject=$( ask_value "subject" "$capture_subject" )
   capture_subject=$( slugify "$capture_subject" )
   
-  gphoto2 --get-all-files --filename "${HOME}/Media/${capture_project}/%Y/%m/%d/%H%M%S-${capture_subject}-%03n.%C" 
+  gphoto2 --get-all-files --filename "${HOME}/Media/${capture_project}/%y.%j.%H%M%S.${capture_subject}-%03n.%C" 
 }
 
 function tools_capture_delete_all_files() {

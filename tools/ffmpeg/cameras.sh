@@ -1,5 +1,44 @@
 #!/usr/bin/env bash
 
+declare -A PID=()
+declare -A SIZES=()
+
+
+function camera_show() {
+  CAMERA=${1:-$MAIN}
+  camera_off "$CAMERA"
+  SIZE=1024x768
+  HFLIP="hflip, "
+  ffplay -noborder -hide_banner -loglevel quiet \
+    -video_size $SIZE \
+    -framerate $FRAMERATE \
+    -i $CAMERA \
+    -vf "$HFLIP crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -left 1040 -top 900 &
+  PID[$CAMERA]=$!
+}
+
+function camera_full() {
+  CAMERA=${1:-$MAIN}
+  camera_off "$CAMERA"
+  SIZE=1920x1080
+  ffplay -fs -noborder -hide_banner -loglevel quiet \
+    -video_size $SIZE \
+    -framerate $FRAMERATE \
+    -i $CAMERA \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    &
+  PID[$CAMERA]=$!
+}
+
+function camera_off() {
+  CAMERA=$1
+  if [[ ${PID[$CAMERA]} ]]; then
+    kill ${PID[$CAMERA]}
+    PID[$CAMERA]=""
+  fi 
+}
+
 function v0() {
   v0off
   SIZE=1280x1024
@@ -72,41 +111,13 @@ function v2off() {
 }
 
 
-# desk cam
-function v4() {
-  v4off
-  SIZE=1024x768
-  ffplay -noborder -hide_banner -loglevel quiet \
-    -video_size $SIZE \
-    -framerate $FRAMERATE \
-    -i /dev/video4 \
-    -vf "hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
-    -left 1040 -top 900 &
-  export PID_v4=$!
-}
-function v4full() {
-  v4off
-  SIZE=1920x1080
-  ffplay -noborder -hide_banner -loglevel quiet \
-    -video_size $SIZE \
-    -framerate $FRAMERATE \
-    -i /dev/video4 \
-    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
-    &
-  export PID_v4=$!
-}
-function v4off() {
-  if [[ $PID_v4 ]]; then
-    kill $PID_v4
-    unset -v PID_v4
-  fi 
-}
+
 
 function alter_cam() {
   v4off
   # window proportion 16x5
   ffmpeg -hide_banner -loglevel quiet \
-    -i $CAMERA -c:v rawvideo -pix_fmt rgb24 \
+    -i $MAIN -c:v rawvideo -pix_fmt rgb24 \
     -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
     -window_size 112x35 \
     -window_title 'ALTER' \
