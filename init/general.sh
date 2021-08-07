@@ -53,11 +53,6 @@ h1 "screenkey"
 echo
 sudo apt install -y screenkey
 
-# echo
-# h1 "python-appindicator"
-# echo
-# sudo apt install -y python-appindicator
-
 echo
 h1 "xmlstarlet"
 echo
@@ -67,16 +62,6 @@ echo
 h1 "tidy"
 echo
 sudo apt install -y tidy
-
-echo
-h1 "pandoc"
-echo
-sudo apt install -y pandoc pandoc-citeproc
-
-echo
-h1 "latex"
-echo
-sudo apt install -y texlive-full
 
 echo
 h1 "ncal"

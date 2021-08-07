@@ -133,4 +133,8 @@ cp_bak ~/.profile
 title "change hostname"
 sudo hostnamectl set-hostname 'photon'
 
+echo install manually
+echo pandoc.sh 
+echo latex.sh
+echo
 echo $fgRed reboot system
