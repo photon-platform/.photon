@@ -36,9 +36,9 @@ h1 "apt upgradeable"
 echo
 sudo apt list --upgradeable
 
-echo
-read -n1 -p "run upgrade?" run_upgrade
-if [[ $run_upgrade == "y" ]]; then
+# echo
+# read -n1 -p "run upgrade?" run_upgrade
+# if [[ $run_upgrade == "y" ]]; then
   echo
   h1 "apt upgrade"
   echo
@@ -47,7 +47,7 @@ if [[ $run_upgrade == "y" ]]; then
   h1 "apt autoremove"
   echo
   sudo apt autoremove -y
-fi
+# fi
 
 init/gsettings.sh
 
