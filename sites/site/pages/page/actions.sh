@@ -90,6 +90,10 @@ function page_actions() {
     x) page_trash; ;;
     I) images; ;;
     F) folder; ;;
+    L) 
+      gnome-terminal --working-directory=$PWD -- bash -c "source ~/.bashrc; tools_log; exec bash"
+      page
+      ;;
     L) tools_log; page; ;;
     T) taxonomy; page; ;;
     G) tools_git; page ;;
