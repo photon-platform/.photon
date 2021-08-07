@@ -6,6 +6,11 @@ clear -x
 ui_banner "media"
 
 echo
+h1 "pavucontrol"
+echo
+sudo apt install -y pavucontrol
+
+echo
 h1 "jack"
 echo
 sudo apt install -y jack

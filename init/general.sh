@@ -74,6 +74,11 @@ echo
 sudo apt install -y pandoc pandoc-citeproc
 
 echo
+h1 "latex"
+echo
+sudo apt install -y texlive-full
+
+echo
 h1 "ncal"
 echo
 sudo apt install -y ncal
@@ -86,7 +91,7 @@ sudo apt install -y newsboat
 echo
 h1 "youtube-dl"
 echo
-sudo pip install --upgrade youtube_dl
+sudo pip install --upgrade youtube-dl
 
 echo
 h1 "wmctrl"
@@ -124,6 +129,16 @@ h1 "calibre ebook"
 echo
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 
+echo
+h1 "Qt5"
+echo
+sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
+
+echo
+h1 "python accessories"
+echo
+sudo apt install -y python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich
+sudo apt install -y python3-tk python3-pyqt5 python3-pyqtwebengine python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
 
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find

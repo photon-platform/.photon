@@ -14,4 +14,5 @@ sudo apt-get install -y nodejs
 echo
 h1 "npm"
 echo
-sudo apt install -y npm
+# sudo apt install -y npm
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
