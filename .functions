@@ -47,7 +47,7 @@ function timestamp() {
 
 function cp_bak() {
   if [[ -f $1 ]]; then
-    cp $1 $1.$(timestamp).bak
+    cp $1 $1.$(timestamp)
   fi
 }
 

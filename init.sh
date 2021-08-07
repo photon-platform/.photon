@@ -87,7 +87,7 @@ init/thunderbird.sh
 
 init/node.sh
 
-init/nextcloud.sh
+# init/nextcloud.sh
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
@@ -127,7 +127,10 @@ firefox --version
 
 #####################################
 
-title change hostname
+title "disable .profile"
+cp_bak ~/.profile
+
+title "change hostname"
 sudo hostnamectl set-hostname 'photon'
 
-echo $fgred reboot system
+echo $fgRed reboot system
