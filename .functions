@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 
+function bk() {
+  gnome-terminal --working-directory=$PWD -- bash -c "source ~/.bashrc; backup; exec bash"
+  
+}
 function ranger_dir() {
   ranger --choosedir=$HOME/.rangerdir
   LASTDIR=`cat $HOME/.rangerdir`
@@ -19,9 +23,10 @@ function apt_upgrade() {
 }
 
 convertsecstohours() {
-  ((h=${1}/3600))
-  ((m=(${1}%3600)/60))
-  ((s=${1}%60))
+  d=${1%.*}
+  h=$(( ${d}/3600 ))
+  m=$(( (${d}%3600)/60 ))
+  s=$(( ${d}%60 ))
   printf "%02d:%02d:%02d\n" $h $m $s
 }
 
@@ -139,4 +144,13 @@ function newsh() {
   chmod +x $scriptname.sh
   vim $scriptname.sh
 }
+
+function untar() {
+  tgz="$1"
+  folder="${tgz%.tgz}"
+  mkdir -p "$folder"
+  tar -xf "$tgz" -C "$folder"
+}
+  
+  
 

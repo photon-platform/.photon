@@ -145,3 +145,5 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
+alias root3="cd ~/SITES/constructions/root3/slides;./golden.sh"
+

@@ -11,6 +11,8 @@ set smartcase
 set incsearch
 set hls
 
+set wildmenu
+
 set foldenable
 set foldmethod=indent
 set foldlevel=99
@@ -51,6 +53,7 @@ nnoremap <leader>L :Lines<cr>
 nnoremap <leader>W :Windows<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
 
+nnoremap <leader>ue :UltiSnipsEdit<cr>
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
