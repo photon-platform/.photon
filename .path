@@ -8,6 +8,6 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export PATH=$PATH:~/.photon/dart-sass
 
 export PATH=$PATH:~/bin:~/.local/bin
-export PATH=$PATH:~/.npm-global
-export PATH=$PATH:$(npm get prefix)/bin
+# export PATH=$PATH:~/.npm-global
+# export PATH=$PATH:$(npm get prefix)/bin
 
