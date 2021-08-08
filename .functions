@@ -51,6 +51,12 @@ function cp_bak() {
   fi
 }
 
+function mv_bak() {
+  if [[ -f $1 ]]; then
+    mv $1 $1.$(timestamp)
+  fi
+}
+
 # Find and open in Vim
 function vf() {
   files=$( list_text_files | sort | fzf )

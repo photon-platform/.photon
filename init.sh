@@ -79,7 +79,7 @@ init/graphics.sh
 
 init/media.sh
 
-init/thunderbird.sh
+# init/thunderbird.sh
 
 
 # title "neomutt"
@@ -126,7 +126,7 @@ firefox --version
 #####################################
 
 title "disable .profile"
-cp_bak ~/.profile
+mv_bak ~/.profile
 
 title "change hostname"
 sudo hostnamectl set-hostname 'photon'
@@ -134,6 +134,7 @@ sudo hostnamectl set-hostname 'photon'
 echo install manually:
 echo - pandoc.sh 
 echo - latex.sh
+echo - thunderbird.sh
 echo
 echo $fgRed reboot system
 echo
