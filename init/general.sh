@@ -110,11 +110,6 @@ sudo apt install -y indicator-multiload
 
 
 echo
-h1 "calibre ebook"
-echo
-sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
-
-echo
 h1 "Qt5"
 echo
 sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev

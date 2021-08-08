@@ -57,9 +57,6 @@ init/general.sh
 
 init/vim.sh
 
-# subtitle "preopen firefox"
-# firefox &
-
 init/apache.sh
 
 init/php.sh
@@ -79,13 +76,6 @@ init/graphics.sh
 
 init/media.sh
 
-# init/thunderbird.sh
-
-
-# title "neomutt"
-# init/neomutt.sh
-
-# init/nextcloud.sh
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
@@ -135,6 +125,7 @@ echo install manually:
 echo - pandoc.sh 
 echo - latex.sh
 echo - thunderbird.sh
+echo - epub.sh
 echo
 echo $fgRed reboot system
 echo
