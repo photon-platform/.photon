@@ -75,7 +75,7 @@ sudo snap install losslesscut
 echo
 h1 "editly"
 echo
-sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+sudo apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 sudo npm i -g canvas
 sudo npm i -g editly
 
@@ -83,8 +83,8 @@ sudo npm i -g editly
 echo
 h1 "v4l2loopback"
 echo
-sudo apt install v4l2loopback-dkms
+sudo apt install -y v4l2loopback-dkms
 sudo modprobe v4l2loopback video_nr=6 card_label=photon
-sudo apt install v4l-utils
+sudo apt install -y v4l-utils
 
 
