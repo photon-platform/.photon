@@ -73,11 +73,7 @@ init/starter.sh
 title "chrome"
 init/chrome.sh
 
-# title "thunderbird"
-# init/thunderbird.sh
-
-# title "neomutt"
-# init/neomutt.sh
+init/node.sh
 
 init/graphics.sh
 
@@ -85,7 +81,9 @@ init/media.sh
 
 init/thunderbird.sh
 
-init/node.sh
+
+# title "neomutt"
+# init/neomutt.sh
 
 # init/nextcloud.sh
 
@@ -133,8 +131,9 @@ cp_bak ~/.profile
 title "change hostname"
 sudo hostnamectl set-hostname 'photon'
 
-echo install manually
-echo pandoc.sh 
-echo latex.sh
+echo install manually:
+echo - pandoc.sh 
+echo - latex.sh
 echo
 echo $fgRed reboot system
+echo
