@@ -26,10 +26,10 @@ echo
 sudo apt install -y neomutt
 
 # TODO: make mutt-wizard a submodule of photon
-# echo
-# h1 "mutt-wizard"
-# echo
-# git clone https://github.com/LukeSmithxyz/mutt-wizard
-# cd mutt-wizard
-# sudo make install
+echo
+h1 "mutt-wizard"
+echo
+git clone https://github.com/LukeSmithxyz/mutt-wizard ~/Downloads/mutt-wizard
+cd ~/Downloads/mutt-wizard
+sudo make install
 
