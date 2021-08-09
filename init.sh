@@ -2,10 +2,12 @@
 
 source ~/.photon/ui/_main.sh
 source ~/.photon/.functions
+LOGMD=~/init.log.md
 
 title() {
   clear -x
   ui_banner "$1"
+
   echo 
 }
 subtitle() {
