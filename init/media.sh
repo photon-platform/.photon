@@ -5,6 +5,12 @@ source ~/.photon/ui/_main.sh
 clear -x
 ui_banner "media"
 
+h1 "v4l2loopback"
+echo
+sudo apt install -y v4l2loopback-dkms
+sudo modprobe v4l2loopback video_nr=6 card_label=photon
+sudo apt install -y v4l-utils
+
 echo
 h1 "pavucontrol"
 echo
@@ -75,16 +81,22 @@ sudo snap install losslesscut
 echo
 h1 "editly"
 echo
-sudo apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-sudo npm i -g canvas
-sudo npm i -g editly
+sudo apt install -y \
+  build-essential \
+  libcairo2-dev \
+  libpango1.0-dev \
+  libjpeg-dev \
+  libgif-dev \
+  librsvg2-dev
+npm i -g canvas
+npm i -g editly
+
+echo
+h1 "timecut & timesnap"
+echo
+npm i -g timespan timecut
 
 
 echo
-h1 "v4l2loopback"
-echo
-sudo apt install -y v4l2loopback-dkms
-sudo modprobe v4l2loopback video_nr=6 card_label=photon
-sudo apt install -y v4l-utils
 
 
