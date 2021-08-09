@@ -76,7 +76,8 @@ function rc() {
   mv "tmp.mp4" "$output"
 
   exiftool \
-    -Title="$ts • $title" \
+    -Title="$title" \
+    -Description="$ts" \
     -Creator="phi ARCHITECT" \
     -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
     -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \

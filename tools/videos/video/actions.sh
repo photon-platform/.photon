@@ -191,7 +191,7 @@ function video_build() {
           ;;
         'caption' )
           text=$( echo $action | awk -F":" '{print $2}' )
-          caption_file=$( img_caption "$text" )
+          caption_file=$( overlay_caption "$text" )
           # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))

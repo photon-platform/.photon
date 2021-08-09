@@ -67,7 +67,7 @@ function screen_main() {
   title=$( slugify "$title" )
   echo "${title}"
   
-  output="$HOME/Logs/$( make_logname ).mp4"
+  output="$title.mp4"
 
   countdown
 

@@ -22,6 +22,7 @@ source ~/.photon/tools/images/_main.sh
 source ~/.photon/tools/videos/_main.sh
 source ~/.photon/tools/audios/_main.sh
 source ~/.photon/tools/capture/_main.sh
+source ~/.photon/tools/overlays/_main.sh
 
 function show_dir() {
 
