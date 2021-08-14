@@ -15,7 +15,7 @@ source ~/.photon/tools/folder/_main.sh
 source ~/.photon/tools/git/_main.sh
 source ~/.photon/tools/grav/_main.sh
 source ~/.photon/tools/ffmpeg/_main.sh
-source ~/.photon/tools/log/_main.sh
+source ~/.photon/tools/record/_main.sh
 source ~/.photon/tools/shell/_main.sh
 source ~/.photon/tools/hosts/_main.sh
 source ~/.photon/tools/images/_main.sh

@@ -10,8 +10,9 @@ function video_actions() {
   actions[p]="mpv"
   actions[r]="process_video"
   actions[e]="video_edl"
+  actions[m]="video_melt"
   actions[b]="video_build"
-  actions[m]="video_migrate"
+  actions[i]="video_migrate"
   actions[x]="video_trash"
 
   actions[h]="back to videos"
@@ -39,8 +40,9 @@ function video_actions() {
     s) shotcut "$file"; video_actions; ;;
     r) process_video "$file"; video_actions; ;;
     e) video_edl "$file"; video_actions; ;;
+    m) video_melt "$file"; video_actions; ;;
     b) video_build "$file"; video_actions; ;;
-    m) video_migrate "$file"; videos; ;;
+    i) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
     p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
     h) videos ;;
@@ -134,7 +136,7 @@ function video_edl() {
   # -attach watermark:caption.two.png in=66 out=88 -transition luma a_track=0 b_track=1 \
   # -consumer xml:melt.mlt
 
-function video_build() {
+function video_melt() {
   video_file=$1
   edl_file="${video_file%.*}-llc-edl.csv"
   tracks=()
@@ -155,7 +157,7 @@ function video_build() {
       out=$(( out * 1 ))
       action=$( echo $segment | awk -F, '{print $3}' )
       cmd=$( echo $action | awk -F ": " '{print $1}' )
-      echo $action
+      # echo $action
       case $cmd in
         'trim' )
           # echo trim!
@@ -172,31 +174,40 @@ function video_build() {
           fi
           ;;
         'img' )
-          text=$( echo $action | awk -F":" '{print $2}' )
-          caption_file=$( img_caption "IMG: $text" )
-          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          img=$( echo $action | awk -F":" '{print $2}' )
+          img=$( echo -e "$img" | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' )
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))
-          track=" -attach watermark:$caption_file in=$in out=$out -transition luma a_track=0 b_track=1"
+          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          track=" -attach watermark:$img in=$in out=$out -transition luma a_track=0 b_track=1"
           tracks+=( $track )
           ;;
         'mp4' )
-          text=$( echo $action | awk -F":" '{print $2}' )
-          caption_file=$( img_caption "MP4: $text" )
-          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          mp4=$( echo $action | awk -F":" '{print $2}' )
+          mp4=$( echo -e "$mp4" | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' )
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))
-          track=" -attach watermark:$caption_file in=$in out=$out -transition luma a_track=0 b_track=1"
+          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          track=" -attach watermark:$mp4 in=$in out=$out -transition luma a_track=0 b_track=1"
           tracks+=( $track )
+          ;;
+        'title' )
+          text=$( echo $action | awk -F":" '{print $2}' )
+          overlay_img=$( overlay_title "$text" )
+          in=$(( in - main_offset ))
+          out=$(( out - main_offset ))
+          track=" -attach watermark:$overlay_img in=$in out=$out -transition luma a_track=0 b_track=1"
+          tracks+=( $track )
+          echo $overlay_img
           ;;
         'caption' )
           text=$( echo $action | awk -F":" '{print $2}' )
-          caption_file=$( overlay_caption "$text" )
-          # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
+          overlay_img=$( overlay_left "$text" )
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))
-          track=" -attach watermark:$caption_file in=$in out=$out -transition luma a_track=0 b_track=1"
+          track=" -attach watermark:$overlay_img in=$in out=$out -transition luma a_track=0 b_track=1 in=0 out=24"
           tracks+=( $track )
+          echo $overlay_img
           ;;
       esac
     done

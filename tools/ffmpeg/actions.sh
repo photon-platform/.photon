@@ -38,54 +38,6 @@ function make_filename() {
   echo "${ts}${title}"
 }
 
-function rc() {
-  CAMERA=${1:-$MAIN}
-  MIC=${2:-$BLUE}
-  TRIM_END=0
-  SIZE="1920x1080"
-
-  read -p "title: " title
-  createdt=$( date )
-  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
-
-  slug=$( slugify "$title" )
-  
-  output="$ts.$slug.raw.mp4"
-
-  echo
-  ui_banner "recording: $output"
-  countdown
-
-  ffmpeg  -hide_banner \
-    -framerate $FRAMERATE \
-    -video_size $SIZE \
-    -f v4l2 -input_format mjpeg -i $CAMERA \
-    -f pulse  -ac 2  -i $MIC \
-    "$output" 
-
-  echo
-  ui_banner "offset: $AUDIO_OFFSET"
-  ffmpeg -y  -hide_banner \
-    -i "$output" -itsoffset $AUDIO_OFFSET \
-    -i "$output" \
-    -map_metadata 0 \
-    -map 0:v -map 1:a  \
-    -c copy \
-    "tmp.mp4" 
-
-  mv "tmp.mp4" "$output"
-
-  exiftool \
-    -Title="$title" \
-    -Description="$ts" \
-    -Creator="phi ARCHITECT" \
-    -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
-    -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
-    -overwrite_original \
-    "$output"
-
-  video "$output"
-}
 
 function process_video() {
   input=$1
