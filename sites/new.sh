@@ -4,36 +4,35 @@
 # copy additional files
 # set up apache
 
+CLONE=starter.photon-platform.net
+
 function sites_new() {
-
-  PROJECT=""
-  TITLE=""
-
   clear -x
   ui_header "SITES $SEP NEW $SEP $PWD"
 
-  sudo pwd
 
-  githuborg_set
+  ORGNAME="$1"
+  if [[ -z $ORGNAME ]]; then
+    echo
+    read -p "specify ORGNAME: " ORGNAME
+  fi
 
-  # echo
-  # read -p "specify PROJECT repo name: " PROJECT
-  PROJECT="$(ask_value "specify PROJECT repo name")"
+  PROJECT="$2"
+  if [[ -z $PROJECT ]]; then
+    echo
+    read -p "specify PROJECT in $ORGNAME: " PROJECT
+  fi
 
-  repo_check
-  
-  # echo
-  # read -p "specify site TITLE: " TITLE
-  TITLE="$(ask_value "specify site TITLE")"
+  repo_check "$ORGNAME" "$PROJECT"
+  REPO="git@github.com:$ORGNAME/$PROJECT.git"
 
-  if [ -n $PROJECT ]
+  # test for repo check error
+  if [[ $? = 0 ]]
   then
+    sudo pwd
+    TITLE="$(ask_value "specify site TITLE")"
 
     START_TIME="$(date -u +%s)"
-
-    CLONE=starter.photon-platform.net
-
-    sudo pwd
 
     echo
     echo "✴ cloning grav"
@@ -47,11 +46,6 @@ function sites_new() {
     rm -rf user
     git clone --recurse-submodules $SITESROOT/$CLONE/user/.git $SITESROOT/$PROJECT/user
     tools_git_submodules_update
-    # git submodule foreach "pwd; \
-      # git checkout master; \
-      # git status -sb; \
-      # echo"
-
 
     echo
     echo "✴ set config files"
@@ -59,35 +53,28 @@ function sites_new() {
     echo "✴ rename server config folder"
     mv starter.photon-platform.net $PROJECT
 
-
-    # echo
-    # echo "✴ set accounts"
-    # cd $SITESROOT/$PROJECT/user
-    # cp $SITESROOT/$CLONE/user/accounts/*.yaml accounts/
-
     echo
     echo "✴ set config files"
     # update theme
     # sed -i "s/^\(\s*theme:\s*\).*/\1photon/" config/system.yaml
-    ag --nonumbers "theme:" config/system.yaml
+    grep "theme:" config/system.yaml
 
     # update site title
     sed -i "s/^\(\s*title:\s*\).*/\1$TITLE/" config/site.yaml
-    ag --nonumbers "title:" config/site.yaml
+    grep "title:" config/site.yaml
 
     # update admin title
     sed -i "s/^\(\s*logo_text:\s*\).*/\1$TITLE/" config/plugins/admin.yaml
-    ag --nonumbers "title:" config/plugins/admin.yaml
+    grep "title:" config/plugins/admin.yaml
 
     # update project key
     sed -i -e "s/^\(\s*export PROJECT=\).*/\1$PROJECT/" \
            -e "s/ph.*net/$PROJECT/g" \
            .photon
-    ag --nonumbers "title:" .photon
-
+    grep "title:" .photon
 
     apache_new $PROJECT
-
+    
     git remote set-url origin "$REPO"
 
     git add .
@@ -114,16 +101,8 @@ function sites_new() {
     echo
     h2 "type ${fgYellow}site${txReset} to enter"
 
-    # echo
-    # echo "✴ push to GitHub"
-
-    # read -p "push now? (Y|n): " PUSH
-    # if [ $PUSH = 'Y' ]
-    # then
-      # git push -fu origin master
-    # fi
-
   else
-    echo "no project name"
+    echo ${fgRed}ERROR!!${txReset}
+    echo "$REPO" not found
   fi
 }

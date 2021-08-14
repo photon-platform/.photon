@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 
 function sites_restore() {
-
   clear -x
   ui_header "photon ✴ SITES restore"
 
-  PROJECT="$1"
-  if [[ -z $PROJECT ]]; then
+  ORGNAME="$1"
+  if [[ -z $ORGNAME ]]; then
     echo
-    read -p "specify PROJECT repo name to restore: " PROJECT
+    read -p "specify ORGNAME: " ORGNAME
   fi
 
-  githuborg_set
-  repo_check
+  PROJECT="$2"
+  if [[ -z $PROJECT ]]; then
+    echo
+    read -p "specify PROJECT in $ORGNAME: " PROJECT
+  fi
 
-  if [ -n $PROJECT ]
+  repo_check "$ORGNAME" "$PROJECT"
+  REPO="git@github.com:$ORGNAME/$PROJECT.git"
+
+  # test for repo check error
+  if [[ $? = 0 ]]
   then
-
     echo
     h1 "sandbox grav"
     echo
@@ -53,6 +58,7 @@ function sites_restore() {
     cd $SITESROOT/$PROJECT/user
     
   else
-    echo "no project name"
+    echo ${fgRed}ERROR!!${txReset}
+    echo "$REPO" not found
   fi
 }

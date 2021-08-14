@@ -9,7 +9,7 @@ then
 fi
 
 # default org for github operations
-GITHUBORG="photon-platform"
+# GITHUBORG="photon-platform"
 
 source ~/.photon/sites/list.sh
 source ~/.photon/sites/actions.sh
@@ -21,7 +21,6 @@ source ~/.photon/sites/site/_main.sh
 alias S=sites
 
 function sites() {
-
   cd $SITESROOT
   
   clear -x
@@ -33,26 +32,25 @@ function sites() {
   sites_actions
 
   tab_title
-
-}
-
-function githuborg_set() {
-  echo
-  read -e -i "$GITHUBORG" -p "${fgYellow}specify GITHUB Org name:${txReset} " GITHUBORG
 }
 
 function repo_check() {
-  REPO="https://github.com/$GITHUBORG/$PROJECT.git"
+  ORGNAME="$1"
+  if [[ -z $ORGNAME ]]; then
+    echo
+    read -p "specify ORGNAME: " ORGNAME
+  fi
+
+  PROJECT="$2"
+  if [[ -z $PROJECT ]]; then
+    echo
+    read -p "specify PROJECT in $ORGNAME: " PROJECT
+  fi
+
+  REPO="git@github.com:$ORGNAME/$PROJECT.git"
   echo
   echo "✴ check remote repo"
   echo $REPO
   echo
   git ls-remote $REPO
-  if [ $? -ne 0 ]
-  then
-    echo ""
-    echo "check if REPO exists"
-    exit 1
-  fi
-  
 }
