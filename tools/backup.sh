@@ -8,7 +8,13 @@ function backup() {
 }
 
 function backup2() {
-  rsync -aP /mnt/md0/_HOME /media/phi/Hitachi/ \
-    --exclude ".git"
+  rsync -aP /mnt/md0/_HOME /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete 
+  rsync -aP /mnt/md0/_ARCHIVE /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete 
+  rsync -aP /mnt/md0/_GRAPHICS /media/phi/Maxtor/ \
+    --exclude ".git" \
     --delete 
 }
