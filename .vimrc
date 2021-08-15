@@ -55,6 +55,11 @@ nnoremap <leader>w :%s/\s\+$//e<cr>
 
 nnoremap <leader>ue :UltiSnipsEdit<cr>
 
+" Primeagen remaps
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
