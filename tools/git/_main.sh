@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source ~/.photon/tools/git/actions.sh
+source ~/.photon/tools/git/convert.sh
 source ~/.photon/tools/git/submodules/_main.sh
 
 
