@@ -6,3 +6,9 @@ function backup() {
     --delete \
     --backup-dir=/mnt/md0/_HOME_TRASH/
 }
+
+function backup2() {
+  rsync -aP /mnt/md0/_HOME /media/phi/Hitachi/ \
+    --exclude ".git"
+    --delete 
+}
