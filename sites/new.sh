@@ -10,7 +10,6 @@ function sites_new() {
   clear -x
   ui_header "SITES $SEP NEW $SEP $PWD"
 
-
   ORGNAME="$1"
   if [[ -z $ORGNAME ]]; then
     echo
@@ -48,26 +47,27 @@ function sites_new() {
     tools_git_submodules_update
 
     echo
-    echo "✴ set config files"
+    h1 "✴ set config files"
     cd $SITESROOT/$PROJECT/user
     echo "✴ rename server config folder"
     mv starter.photon-platform.net $PROJECT
 
     echo
     echo "✴ set config files"
-    # update theme
-    # sed -i "s/^\(\s*theme:\s*\).*/\1photon/" config/system.yaml
     grep "theme:" config/system.yaml
 
-    # update site title
+    echo
+    echo update site title
     sed -i "s/^\(\s*title:\s*\).*/\1$TITLE/" config/site.yaml
     grep "title:" config/site.yaml
 
-    # update admin title
+    echo
+    echo update admin title
     sed -i "s/^\(\s*logo_text:\s*\).*/\1$TITLE/" config/plugins/admin.yaml
     grep "title:" config/plugins/admin.yaml
 
-    # update project key
+    echo
+    echo update .photon title
     sed -i -e "s/^\(\s*export PROJECT=\).*/\1$PROJECT/" \
            -e "s/ph.*net/$PROJECT/g" \
            .photon
@@ -80,6 +80,8 @@ function sites_new() {
     git add .
     git commit -m "init"
 
+    echo
+    h1 "create admin account"
     cd $SITESROOT/$PROJECT
     bin/plugin login new-user \
       -u phi \
@@ -87,8 +89,9 @@ function sites_new() {
       -P b \
       -N "phi ARCHITECT" \
       -t "admin"
+
     echo
-    echo "✴ init tntsearch"
+    h1 "✴ init tntsearch"
     bin/plugin tntsearch index
     cd $SITESROOT/$PROJECT/user
 
@@ -96,10 +99,9 @@ function sites_new() {
     ELAPSED="$(($END_TIME-$START_TIME))"
     TIME=$(convertsecstomin $ELAPSED)
     
-    h1 "clone to ${fgYellow}$PROJECT${txReset} is complete."
-    h2 "✴ elapsed: ${txBold}$TIME${txReset} m:s"
     echo
-    h2 "type ${fgYellow}site${txReset} to enter"
+    h1 "clone to ${fgYellow}$PROJECT${txReset} is complete."
+    h2 "elapsed: ${txBold}$TIME${txReset} m:s"
 
   else
     echo ${fgRed}ERROR!!${txReset}
