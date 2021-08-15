@@ -120,6 +120,10 @@ echo
 sudo apt install -y python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich
 sudo apt install -y python3-tk python3-pyqt5 python3-pyqtwebengine python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
 
+echo
+h1 "fdupes"
+echo
+sudo apt install -y fdupes
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
 # sudo snap install  jq
