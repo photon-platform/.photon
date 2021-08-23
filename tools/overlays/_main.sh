@@ -5,15 +5,18 @@ OVERLAY_OUTPUT=~/tmp/overlay.html
 
 function overlay_left() {
   title="$1"
+  output="$2"
 
   if [[ ! "$title" ]]; then
     read -p "overlay title: " title 
   fi
 
-  createdt=$( date )
-  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
-  slug=$( slugify "$title" )
-  output="left.$slug.png"
+  if [[ ! "$output" ]]; then
+    createdt=$( date )
+    ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+    slug=$( slugify "$title" )
+    output="left.$slug.png"
+  fi
 
   php -f "$OVERLAY_PHP/left.php" title="$title" > "$OVERLAY_OUTPUT"
   timesnap "$OVERLAY_OUTPUT" \
@@ -26,7 +29,44 @@ function overlay_left() {
   exiftool \
     -Title="$title" \
     -Description="$ts" \
-    -Subject="left title" \
+    -Subject="left caption" \
+    -Creator="phi ARCHITECT" \
+    -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
+    -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
+    -overwrite_original \
+    "$output" \
+    &> /dev/null
+
+  echo $output
+}
+
+function overlay_right() {
+  title="$1"
+  output="$2"
+
+  if [[ ! "$title" ]]; then
+    read -p "overlay title: " title 
+  fi
+
+  if [[ ! "$output" ]]; then
+    createdt=$( date )
+    ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+    slug=$( slugify "$title" )
+    output="right.$slug.png"
+  fi
+
+  php -f "$OVERLAY_PHP/right.php" title="$title" > "$OVERLAY_OUTPUT"
+  timesnap "$OVERLAY_OUTPUT" \
+    --viewport "1920,1080" \
+    --transparent-background \
+    --frames=1 \
+    --output-pattern="$output" \
+    &> /dev/null
+
+  exiftool \
+    -Title="$title" \
+    -Description="$ts" \
+    -Subject="right caption" \
     -Creator="phi ARCHITECT" \
     -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
     -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
@@ -39,15 +79,18 @@ function overlay_left() {
 
 function overlay_title() {
   title="$1"
+  output="$2"
 
   if [[ ! "$title" ]]; then
     read -p "overlay title: " title 
   fi
 
-  createdt=$( date )
-  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
-  slug=$( slugify "$title" )
-  output="title.$slug.png"
+  if [[ ! "$output" ]]; then
+    createdt=$( date )
+    ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+    slug=$( slugify "$title" )
+    output="left.$slug.png"
+  fi
 
   php -f "$OVERLAY_PHP/title.php" title="$title" > "$OVERLAY_OUTPUT"
   timesnap "$OVERLAY_OUTPUT" \
@@ -73,15 +116,18 @@ function overlay_title() {
 
 function overlay_caption() {
   caption="$1"
+  output="$2"
 
-  if [[ ! "$caption" ]]; then
-    read -p "overlay caption: " caption 
+  if [[ ! "$title" ]]; then
+    read -p "overlay title: " title 
   fi
 
-  createdt=$( date )
-  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
-  slug=$( slugify "$caption" )
-  output="caption.$slug.png"
+  if [[ ! "$output" ]]; then
+    createdt=$( date )
+    ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+    slug=$( slugify "$title" )
+    output="left.$slug.png"
+  fi
 
   php -f "$OVERLAY_PHP/caption.php" caption="$caption" > "$OVERLAY_OUTPUT"
   timesnap "$OVERLAY_OUTPUT" \

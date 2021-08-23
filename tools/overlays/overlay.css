@@ -1,0 +1,24 @@
+
+* {
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  color: #C90;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: "Fira Sans Condensed";
+}
+
+div {
+  width: 33vw;
+  text-align: center;
+  font-size: 4em;
+  padding: 2em;
+}
