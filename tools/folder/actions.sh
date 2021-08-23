@@ -22,6 +22,7 @@ function folder_actions() {
   actions[f]="vf; # select files for vim"
   actions[v]="vr; # select most recent foles for vim"
 
+  actions[R]="record"
   actions[I]="images"
   actions[V]="videos"
   actions[A]="audios"
@@ -84,6 +85,7 @@ function folder_actions() {
     v) vr; folder; ;;
 
     G) tools_git; folder; ;;
+    R) record; ;;
     A) audios; ;;
     V) videos; ;;
     I) images; ;;
