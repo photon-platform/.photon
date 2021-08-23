@@ -8,7 +8,7 @@ function video_actions() {
   actions[l]="losslesscut"
   actions[s]="shotcut"
   actions[p]="mpv"
-  actions[r]="process_video"
+  actions[r]="video_process"
   actions[e]="video_edl"
   actions[m]="video_melt"
   actions[b]="video_build"
@@ -36,15 +36,16 @@ function video_actions() {
       ;;
     q) videos; ;;
     n) image_rename "$file"; videos; ;;
-    l) losslesscut "$file"; video_actions; ;;
-    s) shotcut "$file"; video_actions; ;;
-    r) process_video "$file"; video_actions; ;;
-    e) video_edl "$file"; video_actions; ;;
-    m) video_melt "$file"; video_actions; ;;
-    b) video_build "$file"; video_actions; ;;
+    r) video_process "$file"; ;;
+    e) video_edl "$file"; video "$file" $video_index; ;;
+    m) video_melt "$file"; video "$file" $video_index; ;;
+    b) video_build "$file"; ;;
+    w) video_wrap "$file"; ;;
     i) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
+    l) losslesscut "$file"; video "$file" $video_index; ;;
     p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
+    s) shotcut "$file"; video "$file" $video_index; ;;
     h) videos ;;
     j)
       id=$((video_index + 1))
@@ -62,7 +63,6 @@ function video_actions() {
         video "$file" $video_index
       fi
       ;;
-    b) process_video "$file" ;;
     i) exiftool "$file" | less ; video "$file" $video_index; ;;
     E) tools_exif_actions;
       video "$file" $video_index
@@ -115,34 +115,97 @@ function video_migrate() {
 }
 
 function video_edl() {
-  video_file=$1
-  edl_file="${video_file%.*}-llc-edl.csv"
-  awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file"
+  file=$1
+  edl_file="${file%.*}-llc-edl.csv"
   if [[ -f "$edl_file" ]]; then
-    mapfile  segments \
-      < <( awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
+    awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file"
+    # mapfile  segments \
+      # < <( awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
     # segments_count=${#segments[@]}
     # for segment in "${segments[@]}"; do
       # echo $segment
     # done
+    echo
     if [[ "$( ask_truefalse "edit?" )" == "true" ]]; then
       vim "$edl_file"
     fi
   fi
 }
 
-# melt 21.207.130205.offset-test.mp4   \
-  # -attach watermark:caption.one.png in=44 out=66 -transition luma a_track=0 b_track=1 \
-  # -attach watermark:caption.two.png in=66 out=88 -transition luma a_track=0 b_track=1 \
-  # -consumer xml:melt.mlt
+# vf="hue=s=0, eq=contrast=2:brightness=-.5" 
+VIDEO_FILTERS=()
+VIDEO_FILTERS+=("hue=s=0")
+VIDEO_FILTERS+=("eq=contrast=2:brightness=-.5")
+VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
+VF="${VF%,}"
+
+function video_process() {
+  input=$1
+  if [[ "$input" == *.raw.mp4 ]]; then
+    output="${input%.raw.mp4}.mp4"
+
+    if [[ $output ]]; then
+      mv $output $output.bak
+    fi
+
+    # dur=$(ffprobe -hide_banner -i "$input"  -show_entries format=duration -v quiet -of csv="p=0")
+
+    echo
+    ui_banner "process video: "
+    h1 "vf=$VF"
+    h1 "af=$AF"
+    ffmpeg -y  -hide_banner \
+      -i "$input" \
+      -map_metadata 0 \
+      -vf "$VF" \
+      -af "$AF" \
+      "$output" 
+
+    echo
+
+    getExif "$input"
+    notes="$(getExifValue "Notes")"
+    processed="processed $( date +"%g.%j.%H%M%S" ) : vf='$VF' : af='$AF' "
+    if [[ $notes == "" ]]; then
+      notes="$processed"
+    else
+      notes+=" | $processed"
+    fi
+
+    exiftool -ec \
+      -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
+      -Title="$(getExifValue "Title")" \
+      -Description="$(getExifValue "Description")" \
+      -Notes="$notes" \
+      -Subject="$(getExifValue "Subject")" \
+      -Rating="$(getExifValue "Rating")" \
+      -Colorlabels="$(getExifValue "Colorlabels")" \
+      -Creator=$(getExifValue "Creator") \
+      -Publisher="$(getExifValue "Publisher")" \
+      -Copyright="$(getExifValue "Copyright")" \
+      -overwrite_original \
+      "$output"
+
+    video "$output"
+  else
+    echo "$input is not a raw file"
+  fi
+}
 
 function video_melt() {
+  tr=12
+  
+  cmd="melt "
   video_file=$1
   edl_file="${video_file%.*}-llc-edl.csv"
   tracks=()
-  main_in=0
-  main_out=0
-  main_offset=0
+  clip_in=0
+  clip_out=0
+  clip_offset=0
+  clip_track=0
+  clip_length=0
+
+  track_ctr=0
 
   if [[ -f "$edl_file" ]]; then
     echo $edl_file
@@ -156,22 +219,20 @@ function video_melt() {
       out=$( echo $segment | awk -F, '{print $2}' )
       out=$(( out * 1 ))
       action=$( echo $segment | awk -F, '{print $3}' )
-      cmd=$( echo $action | awk -F ": " '{print $1}' )
+      action_cmd=$( echo $action | awk -F ": " '{print $1}' )
       # echo $action
-      case $cmd in
-        'trim' )
-          # echo trim!
+      case $action_cmd in
+        'clip' )
           text=$( echo $action | awk -F":" '{print $2}' )
-          if [[ $text == *start ]]; then
-            main_in=$out
-            main_offset=$(( main_offset + main_in ))
-            
-            # echo "trim: start - $main_in"
-          fi
-          if [[ $text == *end ]]; then
-            main_out=$in
-            # echo "trim: end - $main_out"
-          fi
+
+          clip_track=$track_ctr
+          (( track_ctr++ ))
+
+          clip_offset=$(( clip_offset + clip_length ))
+          cmd+=" -track -blank $clip_offset "$video_file" in=$in out=$out "
+          clip_in=$in
+          clip_out=$out
+          clip_length=$(( out - in ))
           ;;
         'img' )
           img=$( echo $action | awk -F":" '{print $2}' )
@@ -179,8 +240,7 @@ function video_melt() {
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))
           # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
-          track=" -attach watermark:$img in=$in out=$out -transition luma a_track=0 b_track=1"
-          tracks+=( $track )
+          cmd+="    -attach watermark:$img in=$in out=$out -transition luma a_track=0 b_track=1 \ \n"
           ;;
         'mp4' )
           mp4=$( echo $action | awk -F":" '{print $2}' )
@@ -188,35 +248,84 @@ function video_melt() {
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))
           # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
-          track=" -attach watermark:$mp4 in=$in out=$out -transition luma a_track=0 b_track=1"
-          tracks+=( $track )
+          cmd+="    -attach watermark:$mp4 in=$in out=$out -transition luma a_track=0 b_track=1 "
           ;;
         'title' )
           text=$( echo $action | awk -F":" '{print $2}' )
+          ((img_ctr++))
+          img_file="${video_file%.*}.$(printf "%02d" $img_ctr).png"
           overlay_img=$( overlay_title "$text" )
           in=$(( in - main_offset ))
           out=$(( out - main_offset ))
-          track=" -attach watermark:$overlay_img in=$in out=$out -transition luma a_track=0 b_track=1"
-          tracks+=( $track )
-          echo $overlay_img
+          cmd+="    -attach watermark:$overlay_img in=$in out=$out -transition luma a_track=0 b_track=1 "
           ;;
-        'caption' )
+        'caption' | 'left' )
           text=$( echo $action | awk -F":" '{print $2}' )
-          overlay_img=$( overlay_left "$text" )
-          in=$(( in - main_offset ))
-          out=$(( out - main_offset ))
-          track=" -attach watermark:$overlay_img in=$in out=$out -transition luma a_track=0 b_track=1 in=0 out=24"
-          tracks+=( $track )
-          echo $overlay_img
+          img_file="${video_file%.*}.$(printf "%02d" $track_ctr).png"
+          overlay_img=$( overlay_left "$text" "$img_file" )
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
+          cmd+="  -track -blank $(( clip_offset + in )) "$img_file" out=$((out - in))"
+          cmd+="    -transition luma  in=$(( clip_offset + in )) out=$(( clip_offset + in + tr )) a_track=$clip_track b_track=$track_ctr"
+          cmd+="    -transition luma  in=$(( clip_offset + out - tr )) out=$(( clip_offset + out + 1)) reverse=1 a_track=$clip_track b_track=$track_ctr"
+          cmd+="    -transition composite  a_track=$clip_track b_track=$track_ctr"
+          (( track_ctr++ ))
+          ;;
+        'right' )
+          text=$( echo $action | awk -F":" '{print $2}' )
+          img_file="${video_file%.*}.$(printf "%02d" $track_ctr).png"
+          overlay_img=$( overlay_right "$text" "$img_file" )
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
+          cmd+="  -track -blank $(( clip_offset + in )) "$img_file" out=$((out - in))"
+          cmd+="    -transition luma  in=$(( clip_offset + in )) out=$(( clip_offset + in + tr )) a_track=$clip_track b_track=$track_ctr"
+          cmd+="    -transition luma  in=$(( clip_offset + out - tr )) out=$(( clip_offset + out + 1)) reverse=1 a_track=$clip_track b_track=$track_ctr"
+          cmd+="    -transition composite  a_track=$clip_track b_track=$track_ctr"
+          (( track_ctr++ ))
+          ;;
+        'alter' )
+          text=$( echo $action | awk -F":" '{print $2}' )
+          # file="${video_file%.*}.$(printf "%02d" $track_ctr).png"
+          audio_file=$( speak_wav "$text" )
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
+          cmd+="  -track -blank $(( clip_offset + in )) "$audio_file" out=$((out - in))"
+          # cmd+="    -transition luma  in=$(( clip_offset + in )) out=$(( clip_offset + in + tr )) a_track=$clip_track b_track=$track_ctr"
+          # cmd+="    -transition luma  in=$(( clip_offset + out - tr )) out=$(( clip_offset + out + 1)) reverse=1 a_track=$clip_track b_track=$track_ctr"
+          cmd+="    -transition mix  a_track=$clip_track b_track=$track_ctr"
+          (( track_ctr++ ))
           ;;
       esac
     done
   fi
-  echo ${tracks[@]}
-  melt $video_file in=$main_in out=$main_out ${tracks[@]} -consumer xml:"$PWD/$video_file.mlt"
+  cmd+="  -consumer xml:"$PWD/$video_file.mlt" "
+
+  echo "$cmd"
+  echo
+  $cmd
+
+  # melt $video_file in=$main_in out=$main_out ${tracks[@]} -consumer xml:"$PWD/$video_file.mlt"
   melt "$video_file.mlt"
 }
 
+function video_build() {
+  video_file=$1
+  melt "$video_file.mlt"  -consumer avformat:"$video_file.mlt.mp4" 
+  video "$video_file.mlt.mp4"
+}
+
+function video_wrap() {
+  video_file=$1
+  # -attach watermark:21.221.134012.creating-a-digital-archive.png in=100 out=144 -transition luma a_track=0 b_track=1 \
+  melt ~/Media/photon-logo.mp4 \
+  "$video_file.mlt" \
+  -mix 48 -mixer luma -mixer mix:-1 \
+  ~/Media/photon-logo.reversed.mp4 \
+  -mix 48 -mixer luma -mixer mix:-1 \
+  -consumer avformat:build.mp4
+  video build.mp4
+
+}
 function video_trash() {
   img=$1
 

@@ -45,8 +45,10 @@ function videos_actions() {
       mapfile -t selected_videos < <( videos_list_get | fzf )
       videos_selected_actions
       videos; ;;
+    R) record; ;;
     F) folder; ;;
     I) images; ;;
+    A) audios; ;;
     G) tools_git; videos; ;;
     *)
       videos

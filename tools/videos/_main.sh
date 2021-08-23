@@ -4,6 +4,7 @@ source ~/.photon/tools/videos/actions.sh
 source ~/.photon/tools/videos/list.sh
 source ~/.photon/tools/videos/video/_main.sh
 
+alias V=videos
 function videos() {
   clear -x
 
