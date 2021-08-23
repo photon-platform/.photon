@@ -10,11 +10,30 @@ function backup() {
 function backup2() {
   rsync -aP /mnt/md0/_HOME /media/phi/Maxtor/ \
     --exclude ".git" \
-    --delete 
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
+  rsync -aP /mnt/md0/Logs /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
+  rsync -aP /mnt/md0/Media /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
+  rsync -aP /mnt/md0/Music /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
+  rsync -aP /mnt/md0/Sessions /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
+  rsync -aP /mnt/md0/Installs /media/phi/Maxtor/ \
+    --exclude ".git" \
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
   rsync -aP /mnt/md0/_ARCHIVE /media/phi/Maxtor/ \
     --exclude ".git" \
-    --delete 
-  rsync -aP /mnt/md0/_GRAPHICS /media/phi/Maxtor/ \
-    --exclude ".git" \
-    --delete 
+    --delete \
+    --backup-dir=/media/phi/Maxtor/_TRASH/
 }

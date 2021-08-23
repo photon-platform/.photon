@@ -2,7 +2,13 @@
 
 function speak() {
   espeak -v mb-en1 -s 150  "$*" 
+}
 
+function speak_wav() {
+  text="$*"
+  slug=$( slugify "$text" )
+  espeak -v mb-en1 -s 150 -w "$slug.wav"  "$*" 
+  echo $slug.wav
 }
 
 function now() {
