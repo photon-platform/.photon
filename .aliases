@@ -52,6 +52,8 @@ alias vrang="vim ~/.config/ranger/rc.conf"
 
 alias r="ranger"
 
+alias music="cd /mnt/md0/Music;F"
+
 colorflag="--color"
 export LS_COLORS="no=00:\
 fi=00:\
