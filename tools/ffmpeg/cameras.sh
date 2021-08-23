@@ -26,7 +26,7 @@ function camera_full() {
     -video_size $SIZE \
     -framerate $FRAMERATE \
     -i $CAMERA \
-    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "$VF" \
     &
   PID[$CAMERA]=$!
 }

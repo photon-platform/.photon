@@ -41,9 +41,7 @@ function make_filename() {
 
 function process_video() {
   input=$1
-  # folder=$(dirname "$input")
-  # file=$(basename "$input")
-  # mkdir -p "$folder/processed"
+
   if [[ "$input" == *.raw.mp4 ]]; then
     output="${input%.raw.mp4}.mp4"
 
