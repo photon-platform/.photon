@@ -16,6 +16,8 @@ function audio() {
 
     mimetype="$(file -b -i "$file")"
 
+    # ffmpeg -i "$file" -filter_complex "showwavespic=s=1920x1080" -frames:v 1 "$file.png"
+
     w=$(tput cols)
     w=$((w - 1))
     h=$(tput lines)

@@ -4,6 +4,7 @@ source ~/.photon/tools/audios/actions.sh
 source ~/.photon/tools/audios/list.sh
 source ~/.photon/tools/audios/audio/_main.sh
 
+alias A=audios
 function audios() {
   clear -x
 

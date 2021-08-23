@@ -45,8 +45,10 @@ function audios_actions() {
       mapfile -t selected_audios < <( audios_list_get | fzf )
       audios_selected_actions
       audios; ;;
+    R) record; ;;
     F) folder; ;;
     I) images; ;;
+    V) videos; ;;
     G) tools_git; audios; ;;
     *)
       audios
