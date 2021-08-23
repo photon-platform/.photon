@@ -5,10 +5,18 @@ function tools_record_actions() {
   declare -A actions
   actions['?']="help"
   actions[q]="quit"
+  actions[a]="record_audio"
   actions[c]="record_camera"
-  actions[s]="record_camera"
+  actions[s]="record_screen"
+
   actions[y]="screenkeys on"
   actions[t]="set_term"
+  actions[v]="camera preview"
+
+  actions[F]="folder"
+  actions[I]="images"
+  actions[V]="videos"
+  actions[A]="audios"
 
   echo
   hr
@@ -23,10 +31,17 @@ function tools_record_actions() {
       tools_record_actions
       ;;
     q) clear -x; ;; # quit
-    r) rc;  tools_record_actions; ;;
+    a) record_audio;  tools_record_actions; ;;
+    c) record_camera;  tools_record_actions; ;;
     s) record_screen;  tools_record_actions; ;;
     y) sk; tools_record_actions ;;
     t) set_term; tools_record_actions ;;
+    v) camera_full; tools_record_actions ;;
+    G) tools_git; record; ;;
+    F) folder; ;;
+    A) audios; ;;
+    V) videos; ;;
+    I) images; ;;
     *) clear -x; tools_record ;;
   esac
 }
@@ -53,7 +68,9 @@ function record_screen() {
 
   slug=$( slugify "$title" )
   
-  output="$ts.$slug.raw.mp4"
+  raw="$ts.$slug.raw.mp4"
+  output="$ts.$slug.mp4"
+  af="highpass=f=100, volume=volume=5dB, afftdn" 
 
   countdown
 
@@ -62,17 +79,7 @@ function record_screen() {
     -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
-    tmp.mp4
-
-  ffmpeg -hide_banner \
-    -i tmp.mp4 -itsoffset $AUDIO_OFFSET \
-    -i tmp.mp4 \
-    -map 0:v -map 1:a  \
-    -af "highpass=f=100, volume=volume=5dB, afftdn" \
-    $output
-
-  echo file $output >> .record
-  rm tmp.mp4
+    "$raw"
 
   exiftool \
     -Title="$title" \
@@ -81,21 +88,104 @@ function record_screen() {
     -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
     -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
     -overwrite_original \
+    "$raw"
+
+  ffmpeg -hide_banner \
+    -i "$raw" -itsoffset $AUDIO_OFFSET \
+    -i "$raw" \
+    -map 0:v -map 1:a  \
+    -af "$af" \
+    $output
+
+  getExif "$raw"
+  notes="$(getExifValue "Notes")"
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$af' "
+  if [[ $notes == "" ]]; then
+    notes="$processed"
+  else
+    notes+=" | $processed"
+  fi
+
+  exiftool -ec \
+    -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
+    -Title="$(getExifValue "Title")" \
+    -Description="$(getExifValue "Description")" \
+    -Notes="$notes" \
+    -Subject="$(getExifValue "Subject")" \
+    -Rating="$(getExifValue "Rating")" \
+    -Colorlabels="$(getExifValue "Colorlabels")" \
+    -Creator=$(getExifValue "Creator") \
+    -Publisher="$(getExifValue "Publisher")" \
+    -Copyright="$(getExifValue "Copyright")" \
+    -overwrite_original \
     "$output"
 
+  echo file $output >> .record
   video "$output"
 }
 
-# function screen_full() {
-  # output="$( make_filename ).mp4"
-  # ffmpeg -hide_banner \
-    # -video_size 1920x1848 \
-    # -framerate $FRAMERATE \
-    # -f x11grab -i :1+0,0 \
-    # -f pulse -i $BLUE \
+alias Ra=record_audio
+function record_audio() {
+  clear -x
+  ui_banner "RECORD • audio"
+  echo
+
+  read -p " title: " title
+  createdt=$( date )
+  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+
+  slug=$( slugify "$title" )
+  
+  raw="$ts.$slug.raw.m4a"
+  output="$ts.$slug.m4a"
+  # af="$AF"
+
+  countdown
+
+  ffmpeg -y -hide_banner \
+    -f pulse -i $BLUE \
+    $raw
+
+  exiftool \
+    -Title="$title" \
+    -Description="$ts" \
+    -Creator="phi ARCHITECT" \
+    -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
+    -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
+    -overwrite_original \
+    "$raw"
+
+  # ffmpeg -y -hide_banner \
+    # -i $raw \
+    # -af "$af" \
+    # "$output" 
+
+  # getExif "$raw"
+  # notes="$(getExifValue "Notes")"
+  # processed="processed $( date +"%g.%j.%H%M%S" ) : af='$af' "
+  # if [[ $notes == "" ]]; then
+    # notes="$processed"
+  # else
+    # notes+=" | $processed"
+  # fi
+
+  # exiftool -ec \
+    # -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
+    # -Title="$(getExifValue "Title")" \
+    # -Description="$(getExifValue "Description")" \
+    # -Notes="$notes" \
+    # -Subject="$(getExifValue "Subject")" \
+    # -Rating="$(getExifValue "Rating")" \
+    # -Colorlabels="$(getExifValue "Colorlabels")" \
+    # -Creator=$(getExifValue "Creator") \
+    # -Publisher="$(getExifValue "Publisher")" \
+    # -Copyright="$(getExifValue "Copyright")" \
+    # -overwrite_original \
     # "$output"
-  # mpv "$output"
-# }
+
+  echo file $raw >> .record
+  audio "$raw"
+}
 
 alias Rc=record_camera
 function record_camera() {
@@ -144,5 +234,18 @@ function record_camera() {
     -overwrite_original \
     "$output"
 
+  echo file $output >> .record
   video "$output"
 }
+
+# function screen_full() {
+  # output="$( make_filename ).mp4"
+  # ffmpeg -hide_banner \
+    # -video_size 1920x1848 \
+    # -framerate $FRAMERATE \
+    # -f x11grab -i :1+0,0 \
+    # -f pulse -i $BLUE \
+    # "$output"
+  # mpv "$output"
+# }
+
