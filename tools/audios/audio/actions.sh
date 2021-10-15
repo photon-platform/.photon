@@ -126,8 +126,8 @@ AF="${AF%,}"
 
 function audio_process() {
   input=$1
-  if [[ "$input" == *.raw.m4a ]]; then
-    output="${input%.raw.m4a}.m4a"
+  if [[ "$input" == *.raw.flac ]]; then
+    output="${input%.raw.flac}.m4a"
 
     if [[ $output ]]; then
       mv $output $output.bak
