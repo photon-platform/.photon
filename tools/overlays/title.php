@@ -17,18 +17,23 @@ parse_str(implode('&', array_slice($argv, 1)), $_GET);
   padding: 0;
 }
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 1920px;
+  height: 1080px;
   color: #C90;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   font-family: "Fira Sans";
+  background: url("../Sessions/smolen/title/wall.jpg");
 }
 h1 {
-  font-size: 4em;
+  text-align: center;
+  font-size: 100px;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
   padding: 2em;
+  font-weight: 400;
 }
     </style>
   </head>
