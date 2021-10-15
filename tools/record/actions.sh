@@ -81,6 +81,12 @@ function record_screen() {
     -f pulse -i $BLUE \
     "$raw"
 
+  ll $raw
+  echo
+  h1 "Press ENTER to complete metadata"
+  pause_enter
+  echo
+
   exiftool \
     -Title="$title" \
     -Description="$ts" \
@@ -136,15 +142,19 @@ function record_audio() {
 
   slug=$( slugify "$title" )
   
-  raw="$ts.$slug.raw.m4a"
-  output="$ts.$slug.m4a"
-  # af="$AF"
+  raw="$ts.$slug.raw.flac"
 
   countdown
 
   ffmpeg -y -hide_banner \
     -f pulse -i $BLUE \
     $raw
+
+  ll $raw
+  echo
+  h1 "Press ENTER to complete metadata"
+  pause_enter
+  echo
 
   exiftool \
     -Title="$title" \
@@ -155,33 +165,6 @@ function record_audio() {
     -overwrite_original \
     "$raw"
 
-  # ffmpeg -y -hide_banner \
-    # -i $raw \
-    # -af "$af" \
-    # "$output" 
-
-  # getExif "$raw"
-  # notes="$(getExifValue "Notes")"
-  # processed="processed $( date +"%g.%j.%H%M%S" ) : af='$af' "
-  # if [[ $notes == "" ]]; then
-    # notes="$processed"
-  # else
-    # notes+=" | $processed"
-  # fi
-
-  # exiftool -ec \
-    # -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
-    # -Title="$(getExifValue "Title")" \
-    # -Description="$(getExifValue "Description")" \
-    # -Notes="$notes" \
-    # -Subject="$(getExifValue "Subject")" \
-    # -Rating="$(getExifValue "Rating")" \
-    # -Colorlabels="$(getExifValue "Colorlabels")" \
-    # -Creator=$(getExifValue "Creator") \
-    # -Publisher="$(getExifValue "Publisher")" \
-    # -Copyright="$(getExifValue "Copyright")" \
-    # -overwrite_original \
-    # "$output"
 
   echo file $raw >> .record
   audio "$raw"
@@ -212,6 +195,12 @@ function record_camera() {
     -f v4l2 -input_format mjpeg -i $CAMERA \
     -f pulse  -ac 2  -i $MIC \
     "$output" 
+
+  ll $output
+  echo
+  h1 "Press ENTER to complete metadata"
+  pause_enter
+  echo
 
   echo
   ui_banner "offset: $AUDIO_OFFSET"
