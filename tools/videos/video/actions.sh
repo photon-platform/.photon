@@ -223,7 +223,7 @@ function video_melt() {
       # echo $action
       case $action_cmd in
         'clip' )
-          text=$( echo $action | awk -F":" '{print $2}' )
+          text=$( echo $action | awk -F": " '{print $2}' )
 
           clip_track=$track_ctr
           (( track_ctr++ ))
@@ -235,32 +235,39 @@ function video_melt() {
           clip_length=$(( out - in ))
           ;;
         'img' )
-          img=$( echo $action | awk -F":" '{print $2}' )
+          img=$( echo $action | awk -F": " '{print $2}' )
           img=$( echo -e "$img" | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' )
-          in=$(( in - main_offset ))
-          out=$(( out - main_offset ))
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
           # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
           cmd+="    -attach watermark:$img in=$in out=$out -transition luma a_track=0 b_track=1 \ \n"
           ;;
         'mp4' )
-          mp4=$( echo $action | awk -F":" '{print $2}' )
+          mp4=$( echo $action | awk -F": " '{print $2}' )
           mp4=$( echo -e "$mp4" | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' )
-          in=$(( in - main_offset ))
-          out=$(( out - main_offset ))
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
           # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
           cmd+="    -attach watermark:$mp4 in=$in out=$out -transition luma a_track=0 b_track=1 "
           ;;
+        'volume' )
+          volume=$( echo $action | awk -F": " '{print $2}' )
+          volume=$( echo -e "$volume" | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' )
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
+          cmd+="    -attach avfilter.volume av.volume=$volume in=$in out=$out "
+          ;;
         'title' )
-          text=$( echo $action | awk -F":" '{print $2}' )
+          text=$( echo $action | awk -F": " '{print $2}' )
           ((img_ctr++))
           img_file="${video_file%.*}.$(printf "%02d" $img_ctr).png"
           overlay_img=$( overlay_title "$text" )
-          in=$(( in - main_offset ))
-          out=$(( out - main_offset ))
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
           cmd+="    -attach watermark:$overlay_img in=$in out=$out -transition luma a_track=0 b_track=1 "
           ;;
         'caption' | 'left' )
-          text=$( echo $action | awk -F":" '{print $2}' )
+          text=$( echo $action | awk -F": " '{print $2}' )
           img_file="${video_file%.*}.$(printf "%02d" $track_ctr).png"
           overlay_img=$( overlay_left "$text" "$img_file" )
           in=$(( in - clip_in ))
@@ -272,7 +279,7 @@ function video_melt() {
           (( track_ctr++ ))
           ;;
         'right' )
-          text=$( echo $action | awk -F":" '{print $2}' )
+          text=$( echo $action | awk -F": " '{print $2}' )
           img_file="${video_file%.*}.$(printf "%02d" $track_ctr).png"
           overlay_img=$( overlay_right "$text" "$img_file" )
           in=$(( in - clip_in ))
@@ -284,7 +291,7 @@ function video_melt() {
           (( track_ctr++ ))
           ;;
         'alter' )
-          text=$( echo $action | awk -F":" '{print $2}' )
+          text=$( echo $action | awk -F": " '{print $2}' )
           # file="${video_file%.*}.$(printf "%02d" $track_ctr).png"
           audio_file=$( speak_wav "$text" )
           in=$(( in - clip_in ))
