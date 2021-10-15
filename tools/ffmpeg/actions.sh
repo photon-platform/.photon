@@ -173,8 +173,11 @@ function virtual_desktop() {
 function virtual_cam() {
   CAMERA=${1:-$MAIN}
   SIZE="1920x1080"
+  SIZE="1280x720"
 
   sudo modprobe v4l2loopback exclusive_caps=1 video_nr="44" card_label="Main BW" max_buffers=2
-  ffmpeg -f v4l2 -i $CAMERA -pix_fmt yuyv422 -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+  ffmpeg -s $SIZE -i $CAMERA -vcodec rawvideo -pix_fmt yuv420p \
+    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -threads 0 \
     -f v4l2 /dev/video44 
 }
