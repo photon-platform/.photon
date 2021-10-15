@@ -36,6 +36,7 @@ alias gM="cd ~/Media"
 alias gL="cd ~/Logs"
 alias gP="cd ~/Pictures"
 alias gV="cd ~/Videos"
+alias gS="cd ~/Sessions"
 
 alias arcturian="cd ~/youtube/arturian-sound; mpv --shuffle *;"
 alias dl="youtube-dl"
