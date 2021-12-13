@@ -32,4 +32,9 @@ echo
 h1 "install git"
 echo
 sudo apt install -y git
+
+h1 "install git-lfs"
+echo
+sudo apt install -y git-lfs
+
 git --version
