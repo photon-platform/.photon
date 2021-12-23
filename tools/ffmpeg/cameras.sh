@@ -8,12 +8,13 @@ function camera_show() {
   CAMERA=${1:-$MAIN}
   camera_off "$CAMERA"
   SIZE=1024x768
-  HFLIP="hflip, "
+  VF="hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" 
+  VF="hflip, crop=940:500, eq=contrast=2:brightness=-.5" 
   ffplay -noborder -hide_banner -loglevel quiet \
     -video_size $SIZE \
     -framerate $FRAMERATE \
     -i $CAMERA \
-    -vf "$HFLIP crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "$VF" \
     -left 1040 -top 900 &
   PID[$CAMERA]=$!
 }
@@ -83,23 +84,28 @@ function v0b() {
 # sky camera
 function v2() {
   v2off
-  SIZE=1024x768
+  SIZE=1280x720
+  # VF="crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" 
+  VF="crop=940:500, eq=contrast=2:brightness=-.5" 
+  # VF="crop=940:500"
   ffplay -noborder -hide_banner -loglevel quiet \
     -video_size $SIZE \
     -framerate $FRAMERATE \
     -i /dev/video2 \
-    -vf "crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "$VF" \
     -left 1040 -top 900 &
   export PID_v2=$!
 }
 function v2full() {
   v2off
   SIZE=1920x1080
+  VF="crop=940:500, eq=contrast=2:brightness=-.5" 
+  VF="eq=contrast=2:brightness=-.5" 
   ffplay -noborder -hide_banner -loglevel quiet \
     -video_size $SIZE \
     -framerate $FRAMERATE \
     -i /dev/video2 \
-    -vf "hue=s=0, eq=contrast=2:brightness=-.5" \
+    -vf "$VF" \
     &
   export PID_v2=$!
 }

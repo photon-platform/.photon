@@ -134,7 +134,7 @@ function video_edl() {
 
 # vf="hue=s=0, eq=contrast=2:brightness=-.5" 
 VIDEO_FILTERS=()
-VIDEO_FILTERS+=("hue=s=0")
+# VIDEO_FILTERS+=("hue=s=0")
 VIDEO_FILTERS+=("eq=contrast=2:brightness=-.5")
 VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
 VF="${VF%,}"
@@ -205,12 +205,15 @@ function video_melt() {
   clip_track=0
   clip_length=0
 
+  vfr="$( getExifValue "VideoFrameRate")"
+  echo vfr: $vfr
+
   track_ctr=0
 
   if [[ -f "$edl_file" ]]; then
     echo $edl_file
     mapfile -t segments \
-      < <( awk -F, '{printf "%8s,%8s,%s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
+      < <( awk -F, -v vfr=$vfr '{printf "%8s,%8s,%s\n", int(vfr*$1), int(vfr*$2), $3}' "$edl_file" )
     # segments_count=${#segments[@]}
     for segment in "${segments[@]}"; do
       echo $segment
@@ -241,6 +244,14 @@ function video_melt() {
           out=$(( out - clip_in ))
           # track=" -track -blank $in $caption_file bgcolour=0x00000000 out=44"
           cmd+="    -attach watermark:$img in=$in out=$out -transition luma a_track=0 b_track=1 \ \n"
+          ;;
+        'audio' )
+          audio_file=$( echo $action | awk -F": " '{print $2}' )
+          in=$(( in - clip_in ))
+          out=$(( out - clip_in ))
+          cmd+="  -track -blank $(( clip_offset + in )) "$audio_file" -attach avfilter.volume av.volume=.5  "
+          cmd+="    -transition mix  in=$(( clip_offset + in ))  a_track=$clip_track b_track=$track_ctr"
+          (( track_ctr++ ))
           ;;
         'mp4' )
           mp4=$( echo $action | awk -F": " '{print $2}' )
