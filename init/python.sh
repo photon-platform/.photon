@@ -6,3 +6,7 @@ pip install ipywidgets
 pip install ipympl
 
 pip install ffmpeg-python
+
+pip install py_midicsv
+
+
