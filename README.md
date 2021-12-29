@@ -13,22 +13,6 @@ for more about the **PHOTON platform**, visit https://photon-platform.net
 
 
 
-## provisioning
-
-A key aspect of the **photon PLATFORM** is to set up a fully functioning development environment with all the tools necessary to develop, publish and manage digital content - and do it quickly and as automatically as possible.
-
-watch the video playlist on [YouTube](https://www.youtube.com/channel/UCYzRQS16EBmsbKuyKMFHSFQ):
-
-[Provisioning the photon PLATFORM](https://www.youtube.com/watch?v=w554w_dDNdA&list=PLruFHGFsvC_xDBtZejbC4_DltTowQ24Wm)
-
-after installing VirtualBox and downloading the OS, takes about an hour to install the OS and applications
-
-### install VirtualBox
-
-downloads and instructions can be found here:
-https://www.virtualbox.org/
-
-### download the operating system
 
 **photon** is standardized on the Pop!_OS linux distribution by System76
 
@@ -46,19 +30,11 @@ https://pop.system76.com/docs/keyboard-shortcuts/
 
 https://pop.system76.com/docs/
 
-### create new virtual machine
-
-Installing Pop!_OS into a virtual machine is covered in the [first provisioing video](https://www.youtube.com/watch?v=w554w_dDNdA)
-
-
-###  run installation script
-once you have successfully installed the environment and logged in with your user account you are ready to install the applications and other settings
-this `.photon` project contains all the scripts necessary to download and install the packages required to make the system work.
 
 clone this repository to the users home directory
 ```
 cd ~
-git clone "https://github.com/photon-platform/.photon"
+git clone --recurse-submodules git@github.com:photon-platform/.photon.git
 ```
 
 This will create a new folder called `.photon`
