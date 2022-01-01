@@ -16,30 +16,25 @@ alias sandbox="cd ~/Projects/sandbox"
 
 alias inmotion="ssh illumiphi.com"
 
-alias port="cd ~/SITES/port-of-alsea.illumiphi.com/user; site;"
 alias presence="cd ~/SITES/presence/user; site;"
-alias photon="cd ~/SITES/photon-platform.net/user; site;"
 alias phi="cd ~/SITES/phiarchitect.com/user; site;"
+alias geometor="cd ~/SITES/geometor.com/user; site;"
+alias euclid="cd ~/SITES/euclid.geometor.com/user; site;"
 
 alias dot="cd ~/.photon; folder;"
 alias dots="cd ~/.photon/sites; folder; "
 alias doti="cd ~/.photon/init; folder; "
 alias dott="cd ~/.photon/tools; folder; "
 
-alias gdl="cd ~/Downloads; folder; "
-alias gpr="cd ~/Projects/; folder; "
-alias gge="cd ~/Projects/geometor-explorer; folder; "
-alias gyt="cd ~/youtube/; folder; "
-alias gsnip="cd ~/.vim/Ultisnips/; folder; "
+alias gsnip="cd ~/.vim/Ultisnips/; "
 alias gm="cd /mnt/md0"
-alias gM="cd ~/Media"
-alias gL="cd ~/Logs"
-alias gP="cd ~/Pictures"
-alias gV="cd ~/Videos"
-alias gS="cd ~/Sessions"
 
-alias arcturian="cd ~/youtube/arturian-sound; mpv --shuffle *;"
-alias dl="youtube-dl"
+alias gD="cd ~/Downloads; "
+alias gM="cd ~/Media"
+alias gP="cd ~/Projects"
+alias gpr="cd ~/Projects "
+alias gS="cd ~/Sessions"
+alias gN="cd ~/Notebooks"
 
 alias open=xdg-open
 
@@ -53,7 +48,7 @@ alias vrang="vim ~/.config/ranger/rc.conf"
 
 alias r="ranger"
 
-alias music="cd /mnt/md0/Music;F"
+alias music="cd /mnt/md0/Music;A"
 
 colorflag="--color"
 export LS_COLORS="no=00:\

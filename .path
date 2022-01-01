@@ -11,3 +11,4 @@ export PATH=$PATH:~/bin:~/.local/bin
 # export PATH=$PATH:~/.npm-global
 # export PATH=$PATH:$(npm get prefix)/bin
 
+# eval "$(/home/phi/anaconda3/bin/conda shell.bash hook)"
