@@ -26,7 +26,7 @@ git config --global pull.rebase false  # merge (the default strategy)
 ## git new keygen (if ncessary)
 mkdir -p ~/.ssh
 cd ~/.ssh
-key_file="id_ed25519_github_$username"
+key_file="id_ed25519"
 
 h1 "generate key files"
 echo
