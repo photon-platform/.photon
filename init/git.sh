@@ -22,6 +22,35 @@ git config --global credential.helper 'cache --timeout=10000000'
 
 git config --global pull.rebase false  # merge (the default strategy)
 
+
+## git new keygen (if ncessary)
+mkdir -p ~/.ssh
+cd ~/.ssh
+key_file="id_rsa_github_$username"
+
+ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
+
+# start agent
+eval "$(ssh-agent -s)"
+# add key to agent for single signon
+ssh-add $key_file
+
+# Copies the contents of the id_rsa.pub file to your clipboard - paste to github settings
+sudo apt install xclip
+xclip -sel clip < $key_file.pub
+
+echo
+git --version
+echo
+
+h1 "Public Key in Clipboard"
+h2 "$key_file.pub"
+echo paste contents into Github SSH public key form
+echo
+pause_enter
+
+
+
 # echo
 # h1 "load ppa"
 # echo
@@ -36,27 +65,3 @@ git config --global pull.rebase false  # merge (the default strategy)
 # h1 "install git-lfs"
 # echo
 # sudo apt install -y git-lfs
-
-## git new keygen (if ncessary)
-key_file="~/.ssh/id_rsa_github_$username"
-
-ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
-
-# start agent
-eval "$(ssh-agent -s)"
-# add key to agent for single signon
-ssh-add $key_file
-
-# Copies the contents of the id_rsa.pub file to your clipboard - paste to github settings
-sudo apt install xclip
-xclip -sel clip < $key_file.pub
-
-
-
-git --version
-
-h1 "Public Key in Clipboard"
-h2 "$key_file.pub"
-echo paste contents into Github SSH public key form
-echo
-pause_enter
