@@ -41,11 +41,12 @@ echo
 sudo apt autoremove -y
 
 
-init/git.sh
-
 init/general.sh
 
-init/vim.sh
+init/git.sh
+
+
+# init/vim.sh
 
 
 
