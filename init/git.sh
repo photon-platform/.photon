@@ -38,19 +38,18 @@ git config --global pull.rebase false  # merge (the default strategy)
 # sudo apt install -y git-lfs
 
 ## git new keygen (if ncessary)
-key_file = "id_rsa_github_$username"
+key_file = "~/.ssh/id_rsa_github_$username"
 
 ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
-# save to id_rsa_phi_illumiphi
 
 # start agent
 eval "$(ssh-agent -s)"
 # add key to agent for single signon
-ssh-add ~/.ssh/$key_file
+ssh-add $key_file
 
 # Copies the contents of the id_rsa.pub file to your clipboard - paste to github settings
 sudo apt install xclip
-xclip -sel clip < ~/.ssh/$key_file.pub
+xclip -sel clip < $key_file.pub
 
 
 
