@@ -34,7 +34,7 @@ pip install ipympl
 # pip install ffmpeg-python
 
 pip install py_midicsv
-pip install python-rtmidi
+# pip install python-rtmidi
 pip install mido
 
 # pip install pygame
