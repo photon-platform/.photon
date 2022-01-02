@@ -30,7 +30,7 @@ key_file="id_rsa_github_$username"
 
 h1 "generate key files"
 echo
-ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
+ssh-keygen -t ed25519 -C "$useremail" -f "$key_file"
 
 # start agent
 echo
