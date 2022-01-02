@@ -38,7 +38,7 @@ git config --global pull.rebase false  # merge (the default strategy)
 # sudo apt install -y git-lfs
 
 ## git new keygen (if ncessary)
-key_file = "~/.ssh/id_rsa_github_$username"
+key_file="~/.ssh/id_rsa_github_$username"
 
 ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
 
