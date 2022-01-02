@@ -22,19 +22,42 @@ git config --global credential.helper 'cache --timeout=10000000'
 
 git config --global pull.rebase false  # merge (the default strategy)
 
-echo
-h1 "load ppa"
-echo
-sudo add-apt-repository -y ppa:git-core/ppa
-sudo apt update
+# echo
+# h1 "load ppa"
+# echo
+# sudo add-apt-repository -y ppa:git-core/ppa
+# sudo apt update
 
-echo
-h1 "install git"
-echo
-sudo apt install -y git
+# echo
+# h1 "install git"
+# echo
+# sudo apt install -y git
 
-h1 "install git-lfs"
-echo
-sudo apt install -y git-lfs
+# h1 "install git-lfs"
+# echo
+# sudo apt install -y git-lfs
+
+## git new keygen (if ncessary)
+key_file = "id_rsa_github_$username"
+
+ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
+# save to id_rsa_phi_illumiphi
+
+# start agent
+eval "$(ssh-agent -s)"
+# add key to agent for single signon
+ssh-add ~/.ssh/$key_file
+
+# Copies the contents of the id_rsa.pub file to your clipboard - paste to github settings
+sudo apt install xclip
+xclip -sel clip < ~/.ssh/$key_file.pub
+
+
 
 git --version
+
+h1 "Public Key in Clipboard"
+h2 "$key_file.pub"
+echo paste contents into Github SSH public key form
+echo
+pause_enter

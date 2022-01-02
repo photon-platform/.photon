@@ -16,30 +16,35 @@ h1 "fzf"
 echo
 sudo apt install -y fzf
 
-echo
-h1 "entr"
-echo
-sudo apt install -y entr
+# echo
+# h1 "entr"
+# echo
+# sudo apt install -y entr
 
 echo
 h1 "tree"
 echo
 sudo apt install -y tree
 
-echo
-h1 "rename"
-echo
-sudo apt install -y rename
+# echo
+# h1 "rename"
+# echo
+# sudo apt install -y rename
+
+# echo
+# h1 "libnotify-bin"
+# echo
+# sudo apt install -y libnotify-bin
+
+# echo
+# h1 "sendmail-bin"
+# echo
+# sudo apt install -y sendmail-bin
 
 echo
-h1 "libnotify-bin"
+h1 "highlight"
 echo
-sudo apt install -y libnotify-bin
-
-echo
-h1 "sendmail-bin"
-echo
-sudo apt install -y sendmail-bin
+sudo apt install -y highlight
 
 echo
 h1 "bat"
@@ -53,40 +58,35 @@ h1 "screenkey"
 echo
 sudo apt install -y screenkey
 
-echo
-h1 "xmlstarlet"
-echo
-sudo apt install -y xmlstarlet
+# echo
+# h1 "xmlstarlet"
+# echo
+# sudo apt install -y xmlstarlet
 
-echo
-h1 "tidy"
-echo
-sudo apt install -y tidy
+# echo
+# h1 "tidy"
+# echo
+# sudo apt install -y tidy
 
-echo
-h1 "ncal"
-echo
-sudo apt install -y ncal
+# echo
+# h1 "ncal"
+# echo
+# sudo apt install -y ncal
 
-echo
-h1 "newsboat"
-echo
-sudo apt install -y newsboat
+# echo
+# h1 "newsboat"
+# echo
+# sudo apt install -y newsboat
 
 echo
 h1 "youtube-dl"
 echo
 sudo pip install --upgrade youtube-dl
 
-echo
-h1 "wmctrl"
-echo
-sudo apt install -y wmctrl
-
-echo
-h1 "highlight"
-echo
-sudo apt install -y highlight
+# echo
+# h1 "wmctrl"
+# echo
+# sudo apt install -y wmctrl
 
 echo
 h1 "neofetch"
@@ -103,27 +103,15 @@ h1 "tesseract-ocr"
 echo
 sudo apt install -y tesseract-ocr
     
-echo
-h1 "indicator-multiload"
-echo
-sudo apt install -y indicator-multiload
+# echo
+# h1 "indicator-multiload"
+# echo
+# sudo apt install -y indicator-multiload
 
-
-echo
-h1 "Qt5"
-echo
-sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
-
-echo
-h1 "python accessories"
-echo
-sudo apt install -y python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich
-sudo apt install -y python3-tk python3-pyqt5 python3-pyqtwebengine python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
-
-echo
-h1 "fdupes"
-echo
-sudo apt install -y fdupes
+# echo
+# h1 "fdupes"
+# echo
+# sudo apt install -y fdupes
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
 # sudo snap install  jq
