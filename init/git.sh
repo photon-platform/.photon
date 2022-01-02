@@ -36,8 +36,8 @@ eval "$(ssh-agent -s)"
 ssh-add $key_file
 
 # Copies the contents of the id_rsa.pub file to your clipboard - paste to github settings
-sudo apt install xclip
-xclip -sel clip < $key_file.pub
+# sudo apt install xclip
+# xclip -sel clip < $key_file.pub
 
 echo
 git --version
@@ -46,6 +46,8 @@ echo
 h1 "Public Key in Clipboard"
 h2 "$key_file.pub"
 echo paste contents into Github SSH public key form
+echo
+cat "$key_file.pub"
 echo
 pause_enter
 
