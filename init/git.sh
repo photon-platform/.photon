@@ -26,7 +26,7 @@ git config --global pull.rebase false  # merge (the default strategy)
 ## git new keygen (if ncessary)
 mkdir -p ~/.ssh
 cd ~/.ssh
-key_file="id_rsa_github_$username"
+key_file="id_ed25519_github_$username"
 
 h1 "generate key files"
 echo
@@ -48,13 +48,19 @@ echo
 git --version
 echo
 
-h1 "Public Key in Clipboard"
+h1 "Copy Public Key to GitHub"
 h2 "$key_file.pub"
 echo
-echo paste contents into Github SSH public key form
+echo paste contents into GitHub SSH public key form
 echo
 cat "$key_file.pub"
 echo
+pause_enter
+
+echo
+h1 "test connection"
+echo
+ssh -T git@github.com
 pause_enter
 
 
