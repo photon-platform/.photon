@@ -4,7 +4,9 @@ h1 "Anaconda Prerequisites"
 echo
 sudo apt install libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
 
-anaconda = Anaconda3-2021.11-Linux-x86_64.sh
+sudo apt install python3-pip
+
+anaconda=Anaconda3-2021.11-Linux-x86_64.sh
 echo
 h1 "Download, Check, Install: $anaconda"
 echo

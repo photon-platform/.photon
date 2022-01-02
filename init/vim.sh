@@ -5,10 +5,10 @@ source ~/.photon/ui/_main.sh
 clear -x
 ui_banner "vim"
 
-echo
-h1 "cmake"
-echo
-sudo apt install -y cmake #for YouCompleteMe
+# echo
+# h1 "cmake"
+# echo
+# sudo apt install -y cmake #for YouCompleteMe
 
 echo
 h1 "exuberant-ctags"

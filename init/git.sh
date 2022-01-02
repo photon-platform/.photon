@@ -28,9 +28,14 @@ mkdir -p ~/.ssh
 cd ~/.ssh
 key_file="id_rsa_github_$username"
 
+h1 "generate key files"
+echo
 ssh-keygen -t rsa -b 4096 -C "$useremail" -f "$key_file"
 
 # start agent
+echo
+h1 "add key"
+echo
 eval "$(ssh-agent -s)"
 # add key to agent for single signon
 ssh-add $key_file
@@ -45,6 +50,7 @@ echo
 
 h1 "Public Key in Clipboard"
 h2 "$key_file.pub"
+echo
 echo paste contents into Github SSH public key form
 echo
 cat "$key_file.pub"
