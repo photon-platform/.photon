@@ -10,6 +10,7 @@ anaconda=Anaconda3-2021.11-Linux-x86_64.sh
 echo
 h1 "Download, Check, Install: $anaconda"
 echo
+mkdir -p ~/Downloads
 wget https://repo.anaconda.com/archive/$anaconda -O ~/Downloads/$anaconda
 sha256sum ~/Downloads/$anaconda
 bash ~/Downloads/$anaconda
