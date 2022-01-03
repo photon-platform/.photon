@@ -10,7 +10,7 @@ function set_rc() {
   echo
   h1 $1
   echo
-  if [[ -f ~/$1 ]]; then
+  if [[ -e ~/$1 ]]; then
     echo mv ~/$1 ~/$1.$D.bak
     mv ~/$1 ~/$1.$D.bak
   fi
