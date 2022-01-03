@@ -138,4 +138,4 @@ let g:NERDSpaceDelims = 1
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 map <F5> <Esc>:w<CR>:!clear;python %<CR>
 
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
