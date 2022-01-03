@@ -98,10 +98,10 @@ h1 "trash-cli"
 echo
 sudo apt install -y trash-cli
 
-echo
-h1 "tesseract-ocr"
-echo
-sudo apt install -y tesseract-ocr
+# echo
+# h1 "tesseract-ocr"
+# echo
+# sudo apt install -y tesseract-ocr
     
 # echo
 # h1 "indicator-multiload"
