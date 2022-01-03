@@ -68,14 +68,14 @@ call vundle#begin()
 
   Plugin 'VundleVim/Vundle.vim'
 
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'airblade/vim-gitgutter'
+  " Plugin 'tpope/vim-fugitive'
+  " Plugin 'airblade/vim-gitgutter'
 
-  Plugin 'ludovicchabant/vim-gutentags'
+  " Plugin 'ludovicchabant/vim-gutentags'
 
-  Plugin 'sirver/ultisnips'
+  " Plugin 'sirver/ultisnips'
 
-  Plugin 'godlygeek/tabular'
+  " Plugin 'godlygeek/tabular'
   
   Plugin 'mattn/emmet-vim'
 
@@ -95,14 +95,14 @@ call vundle#begin()
 
   " Plugin 'ddevault/vimspeak'
 
-  Plugin 'morhetz/gruvbox'
+  " Plugin 'morhetz/gruvbox'
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
 
-  Plugin 'jasonshell/vim-svg-indent'
+  " Plugin 'jasonshell/vim-svg-indent'
   Plugin 'chrisbra/unicode.vim'
 
-  Plugin 'GutenYe/json5.vim'
+  " Plugin 'GutenYe/json5.vim'
   " Plugin 'ycm-core/YouCompleteMe'
 
 
@@ -110,7 +110,7 @@ call vundle#end()            " required
 
 set background=dark    " Setting dark mode
 " let g:gruvbox_contrast_dark = "hard"
-color gruvbox
+" color pablo
 
 " Put your non-Plugin stuff after this line
 " let g:airline_theme='gruvbox'
