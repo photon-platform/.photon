@@ -37,8 +37,8 @@ pip install matplotlib
 
 pip install mplcursors
 
-# pip install ipywidgets
-# pip install ipympl
+pip install ipywidgets
+pip install ipympl
 
 # pip install ffmpeg-python
 
