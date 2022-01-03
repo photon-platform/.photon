@@ -87,7 +87,7 @@ call vundle#begin()
 
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'vim-syntastic/syntastic'
+  " Plugin 'vim-syntastic/syntastic'
   Plugin 'prettier/vim-prettier'
 
   Plugin 'tpope/vim-surround'
