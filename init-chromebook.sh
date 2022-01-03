@@ -41,7 +41,6 @@ h1 "apt autoremove"
 echo
 sudo apt autoremove -y
 
-dd
 init/general.sh
 
 init/git.sh
