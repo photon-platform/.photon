@@ -35,20 +35,27 @@ echo
 h1 "apt upgrade"
 echo
 sudo apt upgrade -y
+
 echo
 h1 "apt autoremove"
 echo
 sudo apt autoremove -y
 
-
+dd
 init/general.sh
 
 init/git.sh
 
+cd ~
 
-# init/vim.sh
+rm -rf .photon
+git clone --recurse-submodules git@github.com:photon-platform/.photon
 
+cd .photon
 
+init/vim.sh
+
+init/python.sh
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
