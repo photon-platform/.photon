@@ -23,14 +23,19 @@ echo
 # # enables + register for system clipboard
 sudo apt install -y vim-nox
 
-# echo
-# h1 "install Vundle plugins"
-# echo
-# vim +PluginInstall +qall
 cd ~
+D=$(date +"%Y%m%d-%T")
+
+if [[ -e ~/.vim ]]; then
+    echo mv ~/.vim ~/.vim.$D.bak
+    mv ~/.vim ~/.vim.$D.bak
+fi
 git clone git@github.com:photon-platform/.vim --recurse-submodules
 ~/.vim/set_vimrc.sh
 
+echo
+h1 "build photon-vim-completion"
+echo
 # build YouCompleteMe util
 cd ~/.vim/photon/completion
 git submodule update --init --recursive
