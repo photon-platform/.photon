@@ -22,10 +22,6 @@ set_rc .bashrc
 
 set_rc .bash_profile
 
-set_rc .vimrc
-
-set_rc .vim
-
 set_rc .config/ranger 
 set_rc .config/sxiv
 set_rc .config/mpv
