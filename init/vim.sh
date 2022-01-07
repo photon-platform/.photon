@@ -16,23 +16,29 @@ echo
 sudo apt install -y exuberant-ctags
 
 echo
-h1 "vim"
+h1 "python3-dev"
 echo
-# sudo apt install -y vim
+sudo apt install -y python3-dev
 
+echo
+h1 "vim-gtk"
+echo
 # enables + register for system clipboard
 # and support for python
 sudo apt install -y vim-gtk
 
-cd ~
+echo
+h1 "clone .vim"
+echo
+
+cd $HOME
 D=$(date +"%Y%m%d-%T")
 
-if [[ -e ~/.vim ]]; then
+if [[ -e $HOME/.vim ]]; then
     echo mv ~/.vim ~/.vim.$D.bak
-    mv ~/.vim ~/.vim.$D.bak
+    mv $HOME/.vim $HOME/.vim.$D.bak
 fi
 git clone git@github.com:photon-platform/.vim --recurse-submodules
-~/.vim/set_vimrc.sh
 
 echo
 h1 "build photon-vim-completion"
