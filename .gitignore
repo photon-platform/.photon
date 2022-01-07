@@ -1,14 +1,3 @@
-.atom/blob-store
-.atom/compile-cache
-.atom/packages
-.atom/storage
-.atom/.apm
-.atom/.node-gyp
-.atom/recovery
-.atom/nohup.out
-.atom/.atom-socket*
-.vim/bundle
-.vim/.netrwhist
 *.sw?
 .*.sw?
 tags

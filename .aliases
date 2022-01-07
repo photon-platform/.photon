@@ -39,7 +39,7 @@ alias gN="cd ~/Notebooks"
 alias open=xdg-open
 
 alias v="vim"
-alias vrc="vim ~/.vimrc"
+alias vrc="vim ~/.vim/vimrc"
 alias vbr="vim ~/.photon/.bashrc"
 alias vpr="vim ~/.photon/.prompt"
 alias val="vim ~/.photon/.aliases"
