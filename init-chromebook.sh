@@ -7,9 +7,9 @@ LOGMD=~/init.log.md
 title() {
   clear -x
   ui_banner "$1"
-
   echo 
 }
+
 subtitle() {
   echo
   h1 "$1"
