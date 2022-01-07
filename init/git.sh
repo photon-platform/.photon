@@ -40,10 +40,6 @@ eval "$(ssh-agent -s)"
 # add key to agent for single signon
 ssh-add $key_file
 
-# Copies the contents of the id_rsa.pub file to your clipboard - paste to github settings
-# sudo apt install xclip
-# xclip -sel clip < $key_file.pub
-
 echo
 git --version
 echo
@@ -52,6 +48,7 @@ h1 "Copy Public Key to GitHub"
 h2 "$key_file.pub"
 echo
 echo paste contents into GitHub SSH public key form
+echo https://github.com/settings/keys
 echo
 cat "$key_file.pub"
 echo

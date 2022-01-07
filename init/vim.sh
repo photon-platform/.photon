@@ -21,12 +21,13 @@ echo
 # sudo apt install -y vim
 
 # # enables + register for system clipboard
-sudo apt install -y vim-gtk
+sudo apt install -y vim-nox
 
 # echo
 # h1 "install Vundle plugins"
 # echo
 # vim +PluginInstall +qall
+cd ~
 git clone git@github.com:photon-platform/.vim --recurse-submodules
 ~/.vim/set_vimrc.sh
 
