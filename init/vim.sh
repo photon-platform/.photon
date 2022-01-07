@@ -20,8 +20,9 @@ h1 "vim"
 echo
 # sudo apt install -y vim
 
-# # enables + register for system clipboard
-sudo apt install -y vim-nox
+# enables + register for system clipboard
+# and support for python
+sudo apt install -y vim-gtk
 
 cd ~
 D=$(date +"%Y%m%d-%T")
