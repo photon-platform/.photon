@@ -26,7 +26,7 @@ alias dots="cd ~/.photon/sites; folder; "
 alias doti="cd ~/.photon/init; folder; "
 alias dott="cd ~/.photon/tools; folder; "
 
-alias gsnip="cd ~/.vim/Ultisnips/; "
+alias gv="cd ~/.vim"
 alias gm="cd /mnt/md0"
 
 alias gD="cd ~/Downloads; "
@@ -143,5 +143,4 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
-alias root3="cd ~/SITES/constructions/root3/slides;./golden.sh"
 
