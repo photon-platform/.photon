@@ -41,6 +41,12 @@ fi
 git clone git@github.com:photon-platform/.vim --recurse-submodules
 
 echo
+h1 "install fzf"
+echo
+cd ~/.vim/photon/fzf-util
+./install --all
+
+echo
 h1 "build photon-vim-completion"
 echo
 # build YouCompleteMe util

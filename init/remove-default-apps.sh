@@ -20,7 +20,14 @@ h1 gnome-calendar
 echo
 sudo apt -y remove gnome-calendar
 
+# echo
+# h1 firefox
+# echo
+# sudo apt -y remove firefox
+
 echo
 h1 cleanup
 echo
 sudo apt -y autoremove
+
+

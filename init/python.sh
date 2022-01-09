@@ -10,16 +10,6 @@ echo
 
 sudo apt install -y python3-pip
 
-# anaconda=Anaconda3-2021.11-Linux-x86_64.sh
-# echo
-# h1 "Download, Check, Install: $anaconda"
-# echo
-# mkdir -p ~/Downloads
-# wget https://repo.anaconda.com/archive/$anaconda -O ~/Downloads/$anaconda
-# sha256sum ~/Downloads/$anaconda
-# bash ~/Downloads/$anaconda
-# conda init
-
 # h1 "Qt5"
 # echo
 # sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
@@ -47,3 +37,5 @@ pip install py_midicsv
 pip install mido
 
 # pip install pygame
+
+
