@@ -12,34 +12,9 @@ echo
 sudo apt install -y ranger
 
 echo
-h1 "fzf"
-echo
-sudo apt install -y fzf
-
-# echo
-# h1 "entr"
-# echo
-# sudo apt install -y entr
-
-echo
 h1 "tree"
 echo
 sudo apt install -y tree
-
-# echo
-# h1 "rename"
-# echo
-# sudo apt install -y rename
-
-# echo
-# h1 "libnotify-bin"
-# echo
-# sudo apt install -y libnotify-bin
-
-# echo
-# h1 "sendmail-bin"
-# echo
-# sudo apt install -y sendmail-bin
 
 echo
 h1 "highlight"
