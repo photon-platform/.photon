@@ -20,7 +20,7 @@ function tools_git_submodules() {
     echo
 
     old_dir=$(pwd)
-    mapfile -t subs < <( awk '/^\s*path/ {print $3}' "${gm}" | sort )
+    mapfile -t subs < <( awk '/path/ {print $3}' "${gm}" | sort )
     for (( i = 0; i <  ${#subs[@]}; i++ )); do
       sub_path="${subs[$i]}"
       sub_dir="${repo_home}/${sub_path}"
@@ -47,6 +47,19 @@ function tools_git_submodules_fetch() {
     cd "${sub_dir}"
     ui_list_item_number $i "${sub_path} ${fgRed}$(git branch)${txReset}"
     git fetch
+    git status -s
+  done
+  cd $old_dir
+}
+
+function tools_git_submodules_main() {
+  old_dir=$(pwd)
+  for (( i = 0; i <  ${#subs[@]}; i++ )); do
+    sub_path="${subs[$i]}"
+    sub_dir="${repo_home}/${sub_path}"
+    cd "${sub_dir}"
+    ui_list_item_number $i "${sub_path} ${fgRed}$(git branch)${txReset}"
+    git checkout main
     git status -s
   done
   cd $old_dir

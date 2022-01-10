@@ -15,7 +15,7 @@ function tools_git_submodules_actions() {
       tools_git_submodules_actions
       ;;
     q) clear -x; ;; # quit
-    m) echo; tools_git_submodules_master; pause_enter;  tools_git_submodules  ;;
+    m) echo; tools_git_submodules_main; pause_enter;  tools_git_submodules  ;;
     f) echo; tools_git_submodules_fetch; pause_enter;  tools_git_submodules  ;;
     u) echo; tools_git_submodules_update; pause_enter;  tools_git_submodules  ;;
     a) echo; tools_git_submodules_add; pause_enter;  tools_git_submodules  ;;
