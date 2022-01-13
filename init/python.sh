@@ -9,6 +9,7 @@ echo
 # sudo apt install libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
 
 sudo apt install -y python3-pip
+sudo apt install -y python3-venv
 
 # h1 "Qt5"
 # echo

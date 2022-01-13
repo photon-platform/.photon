@@ -22,6 +22,7 @@ git config --global credential.helper 'cache --timeout=10000000'
 
 git config --global pull.rebase false  # merge (the default strategy)
 
+git config --global init.defaultBranch main
 
 ## git new keygen (if ncessary)
 mkdir -p ~/.ssh
