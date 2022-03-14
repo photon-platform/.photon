@@ -27,6 +27,8 @@ pip install numpy
 pip install matplotlib
 
 pip install mplcursors
+pip install mpl_interactions
+pip install mpl_interactions[jupyter]
 
 pip install ipywidgets
 pip install ipympl
