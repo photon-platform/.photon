@@ -10,7 +10,7 @@ echo
 
 sudo apt install -y python3-pip
 sudo apt install -y python3-venv
-
+sudo apt install -y python3-gi-cairo
 # h1 "Qt5"
 # echo
 # sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
@@ -27,6 +27,8 @@ pip install numpy
 pip install matplotlib
 
 pip install mplcursors
+pip install mpl_interactions
+pip install mpl_interactions[jupyter]
 
 pip install ipywidgets
 pip install ipympl
