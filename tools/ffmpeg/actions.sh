@@ -94,7 +94,7 @@ function process_video() {
 }
 
 function audio_set() {
-  AUDIO_OFFSET="0.33"
+  # AUDIO_OFFSET="0.33"
   ffmpeg -y  -hide_banner \
     -i "$1" -itsoffset $AUDIO_OFFSET \
     -i "$1" \

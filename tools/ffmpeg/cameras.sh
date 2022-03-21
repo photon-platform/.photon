@@ -9,7 +9,7 @@ function camera_show() {
   camera_off "$CAMERA"
   SIZE=1024x768
   VF="hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" 
-  VF="hflip, crop=940:500, eq=contrast=2:brightness=-.5" 
+  # VF="hflip, crop=940:500, eq=contrast=2:brightness=-.5" 
   ffplay -noborder -hide_banner -loglevel quiet \
     -video_size $SIZE \
     -framerate $FRAMERATE \

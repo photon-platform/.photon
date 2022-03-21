@@ -41,16 +41,18 @@ function video() {
       hms=$( convertsecstohours $seconds )
     else
       hms=$duration
-      IFS=':' read -r -a parts <<< "$duration"
-      h=$(( ${parts[0]} * 3600 ))
-      m=$(( ${parts[1]} * 60 ))
-      s=${parts[2]}
-      seconds=$(( h + m + s ))
+      # IFS=':' read -r -a parts <<< "$duration"
+      # h=$(( ${parts[0]} * 3600 ))
+      # m=$(( ${parts[1]} * 60 ))
+      # s=${parts[2]}
+      # seconds=$(( h + m + s ))
 
     fi
-    frames=$( echo "$seconds * $vfr" | bc )
+    # frames=$( echo "$seconds * $vfr" | bc )
 
-    echo " $hms $SEP $seconds s $SEP $frames frames"
+    # echo " $hms $SEP $seconds s $SEP $frames frames"
+    echo " $duration"
+    # echo " $hms $SEP $seconds s $SEP $frames frames"
 
     echo -n " $( getExifValue "Make" ) $SEP $( getExifValue "Model" )"
     echo " $SEP $( getExifValue "Aperture" ) $SEP $( getExifValue "ShutterSpeed" ) $SEP $( getExifValue "FocalLength" )"
