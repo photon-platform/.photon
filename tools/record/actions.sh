@@ -62,6 +62,8 @@ function record_screen() {
   ui_banner "RECORD • main screen"
   echo
 
+  AUDIO_OFFSET="0.33"
+
   read -p " title: " title
   createdt=$( date )
   ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )

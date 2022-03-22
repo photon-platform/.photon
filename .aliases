@@ -32,7 +32,7 @@ alias gm="cd /mnt/md0"
 alias gD="cd ~/Downloads; "
 alias gM="cd ~/Media"
 alias gP="cd ~/Projects"
-alias gpr="cd ~/Projects "
+alias gPg="cd ~/Projects/GEOMETOR/explorer-notebooks; rd "
 alias gS="cd ~/Sessions"
 alias gN="cd ~/Notebooks"
 

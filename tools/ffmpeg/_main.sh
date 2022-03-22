@@ -7,8 +7,8 @@ WEBCAM="alsa_input.usb-046d_HD_Pro_Webcam_C920_B11A2C0F-02.analog-stereo"
 BLUE="alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo"
 AUDIO_SYSTEM="alsa_output.pci-0000_0a_00.6.analog-stereo.monitor"
 
-MAIN="/dev/video2"
-SIDE="/dev/video0"
+MAIN="/dev/video0"
+SIDE="/dev/video2"
 
 AUDIO_OFFSET="0.16"
 
