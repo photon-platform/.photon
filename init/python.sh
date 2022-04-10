@@ -21,24 +21,34 @@ sudo apt install -y python3-gi-cairo
 # sudo apt install -y python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich
 # sudo apt install -y python3-tk python3-pyqt5 python3-pyqtwebengine python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
 
-pip install jupyterlab
-pip install sympy
-pip install numpy
-pip install matplotlib
+pip install -U pip
 
-pip install mplcursors
-pip install mpl_interactions
-pip install mpl_interactions[jupyter]
+pip install -U jupyterlab
+pip install -U sympy
+pip install -U numpy
+pip install -U matplotlib
+pip install -U scipy
 
-pip install ipywidgets
-pip install ipympl
+pip install -U mplcursors
+pip install -U mpl_interactions
+pip install -U mpl_interactions[jupyter]
 
-# pip install ffmpeg-python
+pip install -U ipywidgets
+pip install -U ipympl
 
-pip install py_midicsv
-# pip install python-rtmidi
-pip install mido
+# pip install -U ffmpeg-python
 
-# pip install pygame
+pip install -U py_midicsv
+# pip install -U python-rtmidi
+pip install -U mido
 
+# pip install -U pygame
 
+pip install -U build
+pip install -U twine
+pip install -U Sphinx
+pip install -U graphviz
+pip install -U pydot
+
+# pip install -U ladybug-core
+# pip install -U lbt-ladybug
