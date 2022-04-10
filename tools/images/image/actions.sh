@@ -37,7 +37,7 @@ function image_actions() {
     r) image_rename "$file"; images; ;;
     x) image_trash "$file"; images; ;;
     e) gimp "$file"; image "$file" $image_index; ;;
-    v) sxiv "$file"; image "$file" $image_index; ;;
+    v) sxiv -fba "$file"; image "$file" $image_index; ;;
     d) darktable "$file"; image "$file" $image_index; ;;
     
     h) images ;;

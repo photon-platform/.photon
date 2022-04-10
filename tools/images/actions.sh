@@ -38,11 +38,11 @@ function images_actions() {
     k) folder_sibling_get $((siblings_index - 1)) ; images;;
     a) 
       #view all
-      mapfile -t selected_images < <( images_list_get  | sxiv -t -o - )
+      mapfile -t selected_images < <( images_list_get  | sxiv -fba -o - )
       images_selected_actions
       images; ;;
     v)  
-      mapfile -t selected_images < <( images_list_get | fzf | sxiv -t -o - )
+      mapfile -t selected_images < <( images_list_get | fzf | sxiv -fba -o - )
       images_selected_actions
       images; ;;
     F) folder; ;;
@@ -89,7 +89,7 @@ function images_selected_actions() {
       m) images_selected_migrate; ;;
       E) images_selected_exif; images_selected_actions; ;;
       v)  
-        mapfile -t selected_images < <( printf "%s\n" "${selected_images[@]}" | fzf | sxiv -t -o - )
+        mapfile -t selected_images < <( printf "%s\n" "${selected_images[@]}" | fzf | sxiv -fba -o - )
         images_selected_actions
         ;;
       *)
