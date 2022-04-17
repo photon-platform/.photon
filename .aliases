@@ -9,17 +9,9 @@ alias -- -="cd -"
 alias src="source ~/.bashrc"
 alias C="src; clear -x"
 
-alias report_plugin="php ~/.photon/report/plugin.php"
-alias report_theme="php ~/.photon/report/theme.php"
-alias readme_html="pandoc -f gfm --css=/home/phi/.photon/report/gfm.css -s -o readme.html --metadata pagetitle="test" README.md ; open readme.html"
-alias sandbox="cd ~/Projects/sandbox"
+alias timidity="timidity -c ~/.photon/timidity.cfg"
 
 alias inmotion="ssh illumiphi.com"
-
-alias presence="cd ~/SITES/presence/user; site;"
-alias phi="cd ~/SITES/phiarchitect.com/user; site;"
-alias geometor="cd ~/SITES/geometor.com/user; site;"
-alias euclid="cd ~/SITES/euclid.geometor.com/user; site;"
 
 alias dot="cd ~/.photon; folder;"
 alias dots="cd ~/.photon/sites; folder; "
