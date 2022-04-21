@@ -52,3 +52,5 @@ pip install -U pydot
 
 # pip install -U ladybug-core
 # pip install -U lbt-ladybug
+
+pip install -U google-api-python-client
