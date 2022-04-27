@@ -25,23 +25,31 @@ def build_band(mf):
     #  solo = pm.make_solo_aah(mf)
     return bass, vibes, horns, strings, kick, ride
 
-#  PROJECT = 'phi-midi'
-#  NAME = 'root3'
+def set_volume_envelope(inst, dur):
+    b = dur/ 32
+    #  dur_in = dur / 8
+    #  dur_out = 7 * dur / 8
+    #  steps = np.arange(32, 96, 4)
+    #  for val in steps:
+    val = 32
+    for _ in range(8):
+        inst.set_volume(val, b)
+        val += 6
+    for _ in range(24):
+        inst.set_volume(val, b)
+        val -= 2
 
-#  folder = f'{PROJECT}/{NAME}'
-#  filename = f'{NAME}.mid'
-#  title = f'{PROJECT} - {NAME}'
-
-
-
-#  perms = list(itertools.combinations(scale, 4))
-#  random.shuffle(perms)
-
-#  choir = strings
-
-#  print(f'steps: {len(steps)}')
-#  print(steps)
-
-#  chords = pm.progressions.i_vi_ii_V(root)
-
+def set_volume_envelope_reverse(inst, dur):
+    b = dur/ 32
+    #  dur_in = dur / 8
+    #  dur_out = 7 * dur / 8
+    #  steps = np.arange(32, 96, 4)
+    #  for val in steps:
+    val = 32
+    for _ in range(24):
+        inst.set_volume(val, b)
+        val += 2
+    for _ in range(8):
+        inst.set_volume(val, b)
+        val -= 6
 

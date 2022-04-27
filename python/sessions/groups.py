@@ -23,28 +23,34 @@ def build_groups(d, scale, tempo, tick=True, music=True):
     beat = mf.ticks_per_beat
 
     bass, vibes, horns, strings, kick, ride = build_band(mf)
-    steps = np.arange(32, 96, 4)
+    choir = pm.make_choir_swell(mf)
 
     os.makedirs(f'{folder}/build', exist_ok=True)
     with open(f'{folder}/build/build.lst', 'w') as lst:
-        frames = []
         files = [f for f in pngs if 'zoom' not in f]
-        for f_id, f in enumerate(sorted(files)):
+        steps = np.linspace(32, 96, num=len(files), dtype=int)
+        for f_id, f in enumerate(reversed(sorted(files))):
             png = os.path.join(folder, f)
             mp4 = f'{folder}/build/{f}.mp4'
             notes = []
-            notes.append(random.choice(scale))
-            notes.append(random.choice(scale))
+            n1 = random.randint(0, len(scale) - 1)
+            n2 = (n1 + 2) % len(scale)
+            notes.append(scale[n1])
+            notes.append(scale[n2])
 
-            r = 2
             if tick:
                 ride.set_hit(beat)
             if music:
-                pm.add_arp_up(vibes, notes, beat)
-                strings.set_notes(notes, beat)
+                vibe_notes = [note + 24 for note in notes]
+                pm.add_arp_up(vibes, vibe_notes, beat)
+                strings.set_notes(notes, beat, velocity=40)
+
+                vibes.set_volume(steps[f_id], beat)
+                strings.set_volume(steps[f_id], beat)
 
             lst.write(f'file {png}\n')
-            lst.write(f'duration { float( 1 / r ) }\n')
+            dur = pm.tick2second(beat, beat, tempo)
+            lst.write(f'duration { float(dur) }\n')
 
             print(f' • {f}')
 
@@ -52,20 +58,28 @@ def build_groups(d, scale, tempo, tick=True, music=True):
 
         # add summary
         lst.write(f'file {d}/sections/summary.png\n')
-        lst.write(f'duration 4\n')
+        dur = pm.tick2second(beat, beat, tempo)
+        lst.write(f'duration { float(dur) }\n')
+        num_beats = 32
         if tick:
-            ride.set_hits(4 * beat, 4)
+            ride.set_hits(num_beats * beat, num_beats)
         if music:
             notes = []
-            for i in [1, 3, 5, 7, 9, 11, 13]:
+            for i in [0, 2, 4, 6, 8, 10, 12]:
                 notes.append(scale[i])
-            horns.set_notes(notes[0:3], 4 * beat)
-            strings.set_rest(beat)
-            strings.set_notes(notes[2:4], 3 * beat)
-            vibes.set_rest(2 * beat)
-            pm.add_arp_up(vibes, notes, 2 * beat)
+            strings.set_notes(notes[0:3], num_beats * beat)
+            set_volume_envelope(strings, num_beats * beat)
+
+            choir.set_rest(len(files) * beat)
+            choir.set_notes(notes, num_beats * beat)
+            set_volume_envelope_reverse(strings, num_beats * beat)
+
+            #  num_beats = int(num_beats / 2)
+            #  vibes.set_rest(num_beats * beat)
+            #  pm.add_arp_up(vibes, notes, num_beats * beat)
+            #  vibes.set_notes(notes[4:7], 2 * beat)
+        ride.set_hits(num_beats * beat, num_beats)
         
-    #  midi_path = pm.save_midi(mf, f'{folder}/build', 'build.mid')
     midi_path = f'{folder}/build/build.mid'
     mf.save(midi_path)
 
@@ -88,6 +102,6 @@ def build_groups(d, scale, tempo, tick=True, music=True):
     proc.append(f'{folder}/build/build.ogg')
     proc.append('-r')
     proc.append('60')
-    proc.append(f'{d}/groups.mp4')
+    proc.append(f'{folder}/groups.mp4')
     subprocess.run(proc)
 

@@ -7,20 +7,6 @@ console = Console()
 
 from sessions.music import *
 
-def set_volume_envelope(inst, dur):
-    b = dur/ 32
-    #  dur_in = dur / 8
-    #  dur_out = 7 * dur / 8
-    #  steps = np.arange(32, 96, 4)
-    #  for val in steps:
-    val = 32
-    for _ in range(8):
-        inst.set_volume(val, b)
-        val += 6
-    for _ in range(24):
-        inst.set_volume(val, b)
-        val -= 2
-
 def build_sequence(d, scale, tempo, tick=True, music=True):
     '''will expect correct folders and files'''
     
@@ -33,6 +19,31 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
     pngs = list(sorted(pngs))
     pngs = [f for f in pngs if 'summary' not in f]
 
+    files = [f for f in pngs if 'zoom' not in f]
+
+    build_sequence_list(folder, files, scale, tempo)
+
+
+def build_sequence_elements(d, scale, tempo, tick=True, music=True):
+    '''will expect correct folders and files'''
+    
+    folder = 'sequences'
+    d = os.path.abspath(d)
+    folder = os.path.join(d, folder)
+    console.rule(folder)
+
+    pngs = [f.path for f in os.scandir(folder) if 'png' in f.path]
+    pngs = list(sorted(pngs))
+    pngs = [f for f in pngs if 'summary' not in f]
+
+    files = [f for f in pngs if 'zoom' not in f]
+    files = [f for f in files if 'line' in f or 'circle' in f or 'polygon' in f]
+
+    build_sequence_list(folder, files, scale, tempo)
+
+
+
+def build_sequence_list(folder, files, scale, tempo, tick=True, music=True):
     title = folder
     mf = pm.new_midi(title=title, tempo=tempo)
     M = 4 * mf.ticks_per_beat
@@ -44,11 +55,25 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
 
     os.makedirs(f'{folder}/build', exist_ok=True)
     with open(f'{folder}/build/build.lst', 'w') as lst:
-        frames = []
-        files = [f for f in pngs if 'zoom' not in f]
+        # filter files to find elements for held tones
         elements = [f for f in list(enumerate(files)) ]
         elements = [f for f in elements if 'line' in f[1] or 'circle' in f[1] or 'polygon' in f[1]]
         #  breakpoint()
+
+        # start with summary image
+        lst.write(f'file ../summary.png\n')
+        img_beats = 4
+
+        dur = pm.tick2second(img_beats * beat, beat, tempo)
+        lst.write(f'duration { float(dur) }\n')
+
+        dur = img_beats * beat
+        tick.set_hits(img_beats * beat, img_beats)
+        vibes.set_rest(dur)
+        horns.set_rest(dur)
+        strings.set_rest(dur)
+        strings.set_volume(0, dur)
+        horns.set_volume(0, dur)
 
         # rest horns and strings until first note
         dur = 2 * beat
@@ -62,20 +87,21 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
             note_id = f_id % len(scale)
             note = scale[note_id]
 
-            r = 2
+            img_beats = 1
             if 'line' in f:
-                hold = 2
+                img_beats = 2
+                hold = img_beats
+                # add beats to next element to hold
                 for i, el in enumerate(elements):
                     if el[0] == f_id and i < len(elements) - 1:
                         hold += elements[i+1][0] - f_id - 1
                         break
-                r = 1
                 dur = hold * beat
                 #  breakpoint()
                 if tick:
-                    tick.set_hits(2 * beat, 2)
+                    tick.set_hits(img_beats * beat, 2)
                 if music:
-                    vibes.set_rest(2 * beat)
+                    vibes.set_rest(img_beats * beat)
 
                     strings.set_note(note, dur)
                     set_volume_envelope(strings, dur)
@@ -83,19 +109,19 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
                     horns.set_rest(dur)
                     horns.set_volume(0, dur)
             elif 'circle' in f:
-                r = 1
-                hold = 2
+                img_beats = 2
+                hold = img_beats
+                # add beats to next element to hold
                 for i, el in enumerate(elements):
                     if el[0] == f_id and i < len(elements) - 1:
                         hold += elements[i+1][0] - f_id - 1
                         break
-                r = 1
                 dur = hold * beat
                 #  breakpoint()
                 if tick:
-                    tick.set_hits(2 * beat, 2)
+                    tick.set_hits(img_beats * beat, 2)
                 if music:
-                    vibes.set_rest(2 * beat)
+                    vibes.set_rest(img_beats * beat)
 
                     horns.set_note(note - 12, dur)
                     set_volume_envelope(horns, dur)
@@ -103,8 +129,8 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
                     strings.set_rest(dur)
                     strings.set_volume(0, dur)
             elif 'polygon' in f:
-                r = 1 / 2
-                dur = 4 * beat
+                img_beats = 4
+                dur = img_beats * beat
                 if tick:
                     tick.set_hits(dur, 4)
                 if music:
@@ -116,24 +142,23 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
                     horns.set_note(note - 12 , dur)
                     set_volume_envelope(horns, dur)
             else:
-                r = 2
                 if tick:
                     tick.set_hit(beat)
                 if music:
-                    vibes.set_note(note, beat)
+                    vibes.set_note(note + 12, beat)
 
 
+            # append to concat list
             lst.write(f'file {png}\n')
-            lst.write(f'duration { float( 1 / r ) }\n')
+            dur = pm.tick2second(img_beats * beat, beat, tempo)
+            lst.write(f'duration { float(dur) }\n')
 
-            print(f' • {f}')
-
-            #  f = os.path.splitext(f)[0] 
-            #  #  num, *type = f.split('-')
-            #  #  print(int(num), *type)
+            print(dur, f)
 
         # rest horns and strings for last notes
-        dur = beat
+        last_el = elements[-1][0]
+        num_beats = len(files) - last_el
+        dur = num_beats * beat
         horns.set_rest(dur)
         strings.set_rest(dur)
         strings.set_volume(40, dur)
@@ -141,9 +166,9 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
 
         # add summary
         lst.write(f'file ../summary.png\n')
-        lst.write(f'duration 4\n')
+        lst.write(f'duration 8\n')
         if tick:
-            tick.set_hits(4 * beat, 4)
+            tick.set_hits(8 * beat, 8)
         if music:
             notes = []
             for i in [0, 2, 4, 6, 8, 10, 12]:
@@ -151,13 +176,16 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
             horns.set_notes(notes[0:3], 8 * beat)
             set_volume_envelope(horns, 8 * beat)
             
-            strings.set_rest(beat)
-            strings.set_notes(notes[2:4], 7 * beat)
-            set_volume_envelope(strings, beat)
+            strings.set_rest(4 * beat)
+            set_volume_envelope(strings, 4 * beat)
+            strings.set_notes(notes[3:6], 4 * beat)
+            set_volume_envelope(strings, 4 * beat)
             
-            arp_notes = [n + 12 for n in notes]
-            vibes.set_rest(6 * beat)
-            pm.add_arp_up(vibes, scale, 2 * beat)
+            #  arp_notes = [n + 12 for n in notes]
+            #  vibes.set_rest(4 * beat)
+            #  pm.add_arp_up(vibes, scale, 4 * beat)
+
+        tick.set_hits(4 * beat, 4)
         
     midi_path = f'{folder}/build/build.mid'
     mf.save(midi_path)
@@ -180,6 +208,6 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
     proc.append(f'{folder}/build/build.ogg')
     proc.append('-r')
     proc.append('60')
-    proc.append(f'{d}/sequences.mp4')
+    proc.append(f'{folder}/sequences.mp4')
     subprocess.run(proc)
 

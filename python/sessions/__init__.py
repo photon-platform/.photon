@@ -8,6 +8,7 @@ from sessions.music import *
 from sessions.sequences import *
 from sessions.sections import *
 from sessions.groups import *
+#  from sessions.splash import *
 
 import ffmpeg
 
@@ -30,15 +31,18 @@ def build_session(session_dir, scale, tempo, tick=True, music=True):
     build_groups(session_dir, scale, tempo, tick=tick, music=music)
 
     with open(f'{session_dir}/session.lst', 'w') as lst:
-        lst.write('file sequences.mp4\n')
-        lst.write('file sections.mp4\n')
-        lst.write('file groups.mp4\n')
+        lst.write('file /home/phi/Sessions/splash/session.mp4\n')
+        lst.write('file sequences/sequences.mp4\n')
+        lst.write('file sections/sections.mp4\n')
+        lst.write('file groups/groups.mp4\n')
 
     proc = ['ffmpeg']
     proc.append('-y')
     proc.append('-hide_banner')
     proc.append('-f')
     proc.append('concat')
+    proc.append('-safe')
+    proc.append('0')
     proc.append('-i')
     proc.append(f'{session_dir}/session.lst')
     #  proc.append('-r')
@@ -56,3 +60,30 @@ def build_project(project_dir, scale, tempo, tick=True, music=True):
 
     for session_dir in sorted(list(session_dirs)):
         build_session(session_dir, scale, tempo, tick=tick, music=music)
+        
+
+def build_splash(session_dir, scale, tempo, tick=True, music=True):
+    session_dir = os.path.abspath(session_dir)
+    console.rule(session_dir)
+
+    build_sequence_elements(session_dir, scale, tempo, tick=tick, music=music)
+    build_groups(session_dir, scale, tempo, tick=tick, music=music)
+
+    with open(f'{session_dir}/session.lst', 'w') as lst:
+        lst.write('file sequences/sequences.mp4\n')
+        lst.write('file groups/groups.mp4\n')
+
+    proc = ['ffmpeg']
+    proc.append('-y')
+    proc.append('-hide_banner')
+    proc.append('-f')
+    proc.append('concat')
+    proc.append('-safe')
+    proc.append('0')
+    proc.append('-i')
+    proc.append(f'{session_dir}/session.lst')
+    #  proc.append('-r')
+    #  proc.append('60')
+    proc.append(f'{session_dir}/session.mp4')
+    subprocess.run(proc)
+
