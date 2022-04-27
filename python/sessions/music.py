@@ -1,7 +1,7 @@
 import os
 import sys
-pm_path = os.path.expanduser('~/Projects/phi-midi')
-sys.path.append(pm_path)
+#  pm_path = os.path.expanduser('~/Projects/phi-midi')
+#  sys.path.append(pm_path)
 
 import phimidi as pm
 import math as math

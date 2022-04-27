@@ -10,6 +10,8 @@ from sessions.sections import *
 from sessions.groups import *
 #  from sessions.splash import *
 
+from geometor.title import *
+
 import ffmpeg
 
 root = pm.N.A3
@@ -30,8 +32,33 @@ def build_session(session_dir, scale, tempo, tick=True, music=True):
     build_sections(session_dir, scale, tempo, tick=tick, music=music)
     build_groups(session_dir, scale, tempo, tick=tick, music=music)
 
+    project_folder = os.path.basename(session_dir)
+    project_png = plot_title(project_folder, session_dir, 'project.png')
+    
+    with open(f'{session_dir}/title.lst', 'w') as lst:
+        lst.write('file /home/phi/Sessions/title/geometor.png\n')
+        lst.write('duration 4.0\n')
+        lst.write(f'file {project_png}\n')
+        lst.write('duration 4.0\n')
+        lst.write('\n')
+
+    proc = ['ffmpeg']
+    proc.append('-y')
+    proc.append('-hide_banner')
+    proc.append('-f')
+    proc.append('concat')
+    proc.append('-safe')
+    proc.append('0')
+    proc.append('-i')
+    proc.append(f'{session_dir}/title.lst')
+    proc.append('-r')
+    proc.append('60')
+    proc.append(f'{session_dir}/title.mp4')
+    subprocess.run(proc)
+
     with open(f'{session_dir}/session.lst', 'w') as lst:
         lst.write('file /home/phi/Sessions/splash/session.mp4\n')
+        lst.write('file title.mp4\n')
         lst.write('file sequences/sequences.mp4\n')
         lst.write('file sections/sections.mp4\n')
         lst.write('file groups/groups.mp4\n')
