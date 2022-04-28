@@ -24,23 +24,30 @@ scale = pm.build_scale(
     octaves=octaves)
 
 
-def build_session(session_dir, scale, tempo, tick=True, music=True):
-    session_dir = os.path.abspath(session_dir)
-    console.rule(session_dir)
-    #  breakpoint()
-    build_sequence(session_dir, scale, tempo, tick=tick, music=music)
-    build_sections(session_dir, scale, tempo, tick=tick, music=music)
-    build_groups(session_dir, scale, tempo, tick=tick, music=music)
+def build_titles(session_dir):
+    """TODO: Docstring for build_title.
+
+    :session_dir: TODO
+    :returns: TODO
+
+    """
+    #  session_dir = os.path.abspath(session_dir)
+    titles_dir = os.path.join(session_dir, 'titles')
+    os.makedirs(titles_dir, exist_ok=True)
+    
+    geometor_png = plot_title('G E O M E T O R', titles_dir, 'geometor.png')
 
     project_folder = os.path.basename(session_dir)
-    project_png = plot_title(project_folder, session_dir, 'project.png')
+    project_png = plot_title(project_folder, titles_dir, 'project.png')
     
-    with open(f'{session_dir}/title.lst', 'w') as lst:
-        lst.write('file /home/phi/Sessions/title/geometor.png\n')
-        lst.write('duration 4.0\n')
+    with open(f'{titles_dir}/titles.lst', 'w') as lst:
+        lst.write(f'file {geometor_png}\n')
+        lst.write(f'duration 4.0\n')
         lst.write(f'file {project_png}\n')
-        lst.write('duration 4.0\n')
+        lst.write(f'duration 4.0\n')
         lst.write('\n')
+    
+    mp4_file = f'{titles_dir}/titles.mp4'
 
     proc = ['ffmpeg']
     proc.append('-y')
@@ -50,18 +57,30 @@ def build_session(session_dir, scale, tempo, tick=True, music=True):
     proc.append('-safe')
     proc.append('0')
     proc.append('-i')
-    proc.append(f'{session_dir}/title.lst')
+    proc.append(f'{titles_dir}/titles.lst')
     proc.append('-r')
     proc.append('60')
-    proc.append(f'{session_dir}/title.mp4')
+    proc.append(mp4_file)
     subprocess.run(proc)
 
+    return mp4_file
+
+def build_session(session_dir, scale, tempo, tick=True, music=True):
+    #  session_dir = os.path.abspath(session_dir)
+    console.rule(session_dir)
+    #  breakpoint()
+    build_sequence(session_dir, scale, tempo, tick=tick, music=music)
+    build_sections(session_dir, scale, tempo, tick=tick, music=music)
+    build_groups(session_dir, scale, tempo, tick=tick, music=music)
+
+    titles_mp4 = build_titles(session_dir)
+
     with open(f'{session_dir}/session.lst', 'w') as lst:
-        lst.write('file /home/phi/Sessions/splash/session.mp4\n')
-        lst.write('file title.mp4\n')
-        lst.write('file sequences/sequences.mp4\n')
-        lst.write('file sections/sections.mp4\n')
-        lst.write('file groups/groups.mp4\n')
+        lst.write(f'file /home/phi/Sessions/splash/session.mp4\n')
+        lst.write(f'file {titles_mp4}\n')
+        lst.write(f'file sequences/sequences.mp4\n')
+        lst.write(f'file sections/sections.mp4\n')
+        lst.write(f'file groups/groups.mp4\n')
 
     proc = ['ffmpeg']
     proc.append('-y')
