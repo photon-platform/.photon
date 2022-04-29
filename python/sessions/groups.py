@@ -9,7 +9,7 @@ from sessions.music import *
 
 def build_groups(d, scale, tempo, tick=True, music=True):
     '''will expect correct folders and files'''
-    
+
     folder = 'groups'
     d = os.path.abspath(d)
     folder = os.path.join(d, folder)
@@ -45,7 +45,10 @@ def build_groups(d, scale, tempo, tick=True, music=True):
                 pm.add_arp_up(vibes, vibe_notes, beat)
                 strings.set_notes(notes, beat, velocity=40)
 
+                vibes.set_volume(steps[f_id], 0)
                 vibes.set_volume(steps[f_id], beat)
+
+                strings.set_volume(steps[f_id], 0)
                 strings.set_volume(steps[f_id], beat)
 
             lst.write(f'file {png}\n')
@@ -54,13 +57,16 @@ def build_groups(d, scale, tempo, tick=True, music=True):
 
             print(f' • {f}')
 
-            f = os.path.splitext(f)[0] 
+            f = os.path.splitext(f)[0]
+
+        # reset volume
+        strings.set_volume(steps[0], 0)
 
         # add summary
         lst.write(f'file {d}/sections/summary.png\n')
         dur = pm.tick2second(beat, beat, tempo)
         lst.write(f'duration { float(dur) }\n')
-        num_beats = 32
+        num_beats = 16
         if tick:
             ride.set_hits(num_beats * beat, num_beats)
         if music:
@@ -71,15 +77,17 @@ def build_groups(d, scale, tempo, tick=True, music=True):
             set_volume_envelope(strings, num_beats * beat)
 
             choir.set_rest(len(files) * beat)
+            choir.set_volume(0, len(files) * beat)
             choir.set_notes(notes, num_beats * beat)
-            set_volume_envelope_reverse(strings, num_beats * beat)
+            set_volume_envelope_reverse(choir, num_beats * beat)
 
             #  num_beats = int(num_beats / 2)
             #  vibes.set_rest(num_beats * beat)
             #  pm.add_arp_up(vibes, notes, num_beats * beat)
             #  vibes.set_notes(notes[4:7], 2 * beat)
-        ride.set_hits(num_beats * beat, num_beats)
-        
+
+        ride.set_hits(4 * beat, 4)
+
     midi_path = f'{folder}/build/build.mid'
     mf.save(midi_path)
 

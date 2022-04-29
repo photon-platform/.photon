@@ -33,9 +33,11 @@ def set_volume_envelope(inst, dur):
     #  for val in steps:
     val = 32
     for _ in range(8):
+        inst.set_volume(val, 0)
         inst.set_volume(val, b)
         val += 6
     for _ in range(24):
+        inst.set_volume(val, 0)
         inst.set_volume(val, b)
         val -= 2
 

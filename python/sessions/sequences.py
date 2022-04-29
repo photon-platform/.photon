@@ -9,7 +9,7 @@ from sessions.music import *
 
 def build_sequence(d, scale, tempo, tick=True, music=True):
     '''will expect correct folders and files'''
-    
+
     folder = 'sequences'
     d = os.path.abspath(d)
     folder = os.path.join(d, folder)
@@ -26,7 +26,7 @@ def build_sequence(d, scale, tempo, tick=True, music=True):
 
 def build_sequence_elements(d, scale, tempo, tick=True, music=True):
     '''will expect correct folders and files'''
-    
+
     folder = 'sequences'
     d = os.path.abspath(d)
     folder = os.path.join(d, folder)
@@ -61,19 +61,19 @@ def build_sequence_list(folder, files, scale, tempo, tick=True, music=True):
         #  breakpoint()
 
         # start with summary image
-        lst.write(f'file ../summary.png\n')
-        img_beats = 4
+        #  lst.write(f'file ../summary.png\n')
+        #  img_beats = 4
+        #  dur = img_beats * beat
 
-        dur = pm.tick2second(img_beats * beat, beat, tempo)
-        lst.write(f'duration { float(dur) }\n')
+        #  secs = pm.tick2second(dur, beat, tempo)
+        #  lst.write(f'duration { float(secs) }\n')
 
-        dur = img_beats * beat
-        tick.set_hits(img_beats * beat, img_beats)
-        vibes.set_rest(dur)
-        horns.set_rest(dur)
-        strings.set_rest(dur)
-        strings.set_volume(0, dur)
-        horns.set_volume(0, dur)
+        #  tick.set_hits(dur, img_beats)
+        #  vibes.set_rest(dur)
+        #  horns.set_rest(dur)
+        #  strings.set_rest(dur)
+        #  strings.set_volume(0, dur)
+        #  horns.set_volume(0, dur)
 
         # rest horns and strings until first note
         dur = 2 * beat
@@ -105,7 +105,7 @@ def build_sequence_list(folder, files, scale, tempo, tick=True, music=True):
 
                     strings.set_note(note, dur)
                     set_volume_envelope(strings, dur)
-                    
+
                     horns.set_rest(dur)
                     horns.set_volume(0, dur)
             elif 'circle' in f:
@@ -138,7 +138,7 @@ def build_sequence_list(folder, files, scale, tempo, tick=True, music=True):
 
                     strings.set_note(note, dur)
                     set_volume_envelope(strings, dur)
-                
+
                     horns.set_note(note - 12 , dur)
                     set_volume_envelope(horns, dur)
             else:
@@ -175,18 +175,18 @@ def build_sequence_list(folder, files, scale, tempo, tick=True, music=True):
                 notes.append(scale[i])
             horns.set_notes(notes[0:3], 8 * beat)
             set_volume_envelope(horns, 8 * beat)
-            
+
             strings.set_rest(4 * beat)
             set_volume_envelope(strings, 4 * beat)
             strings.set_notes(notes[3:6], 4 * beat)
             set_volume_envelope(strings, 4 * beat)
-            
+
             #  arp_notes = [n + 12 for n in notes]
             #  vibes.set_rest(4 * beat)
             #  pm.add_arp_up(vibes, scale, 4 * beat)
 
         tick.set_hits(4 * beat, 4)
-        
+
     midi_path = f'{folder}/build/build.mid'
     mf.save(midi_path)
 
