@@ -48,7 +48,7 @@ def get_summary_golden(folder):
 
     summary = {}
     summary['sections'] = len(files)
-    
+
     # grousp
     d = folder + '/groups'
     pngs = [f.path for f in os.scandir(d) if 'png' in f.path]
@@ -61,7 +61,7 @@ def get_summary_golden(folder):
 
 
 
-def build_titles_music(num_images, folder):
+def build_titles_music(num_images, folder, set='titles'):
     """TODO: Docstring for build_titles_music.
 
     :arg1: TODO
@@ -71,7 +71,7 @@ def build_titles_music(num_images, folder):
     bpm = 120
     tempo = int(pm.bpm2tempo(bpm))
 
-    mf = pm.new_midi(title='title', tempo=tempo)
+    mf = pm.new_midi(title=set, tempo=tempo)
     M = 4 * mf.ticks_per_beat
     beat = mf.ticks_per_beat
 
@@ -87,7 +87,7 @@ def build_titles_music(num_images, folder):
         kick.set_hit(dur, velocity=100)
         tick.set_hits(dur, 4)
 
-    midi_path = f'{folder}/titles.mid'
+    midi_path = f'{folder}/{set}.mid'
     mf.save(midi_path)
 
     proc = ['timidity', '-c', '~/.photon/timidity.cfg', ]
@@ -95,7 +95,8 @@ def build_titles_music(num_images, folder):
     proc.append(midi_path)
     subprocess.run(proc)
 
-    return f'{folder}/titles.ogg'
+    return f'{folder}/{set}.ogg'
+
 
 def build_titles(session_dir):
     """TODO: Docstring for build_title.
@@ -108,25 +109,25 @@ def build_titles(session_dir):
     titles_dir = os.path.join(session_dir, 'titles')
     os.makedirs(titles_dir, exist_ok=True)
 
-    geometor_png = plot_title('G E O M E T O R', titles_dir, 'geometor.png')
+    geometor_png = plot_title('G E O M E T O R', titles_dir, 'geometor.png', size=55)
 
     project_folder = os.path.basename(session_dir)
     project_png = plot_title(project_folder, titles_dir, 'project.png')
 
     summary = get_summary(session_dir)
-    seq_summary = ''
+    seq_summary = 'ELEMENTS\n•\n'
     for key, val in summary.items():
-        seq_summary += f'{key} • {val}\n'
+        seq_summary += f'{key} • {val}\n\n'
 
-    summary_png  = plot_title(seq_summary, titles_dir, 'seq_summary.png')
-    
+    summary_png  = plot_title(seq_summary, titles_dir, 'seq_summary.png', size=33)
+
     summary = get_summary_golden(session_dir)
-    golden_summary = ''
+    golden_summary = 'GOLDEN\n•\n'
     for key, val in summary.items():
-        golden_summary += f'{key} • {val}\n'
+        golden_summary += f'{key} • {val}\n\n'
 
-    golden_summary_png  = plot_title(golden_summary, titles_dir, 'golden_summary.png')
-    
+    golden_summary_png  = plot_title(golden_summary, titles_dir, 'golden_summary.png', size=33)
+
     num_images = 6
     titles_ogg = build_titles_music(num_images, titles_dir)
 
@@ -171,6 +172,107 @@ def build_titles(session_dir):
     proc.append(f'{titles_dir}/titles.ogg')
     proc.append('-t')
     proc.append(f'{num_images * secs}')
+    proc.append('-preset')
+    proc.append('slow')
+    proc.append('-crf')
+    proc.append('18')
+    proc.append('-r')
+    proc.append('60')
+    proc.append(mp4_file)
+    subprocess.run(proc)
+
+    return mp4_file
+
+
+def build_outro(session_dir):
+    """TODO: Docstring for build_outro.
+
+    :session_dir: TODO
+    :returns: TODO
+
+    """
+    session_dir = os.path.abspath(session_dir)
+    outro_dir = os.path.join(session_dir, 'outro')
+    os.makedirs(outro_dir, exist_ok=True)
+
+    titles = []
+
+    name='blank'
+    text=''
+    titles.append( plot_title(text, outro_dir, f'{name}.png'))
+
+    name='geometor'
+    text='''G E O M E T O R'''
+    titles.append( plot_title(text, outro_dir, f'{name}.png'))
+
+    name='created-by'
+    text='''created by
+
+phi
+ARCHITECT
+φ'''
+    titles.append( plot_title(text, outro_dir, f'{name}.png'))
+
+    name='built-with'
+    text='''all images and music
+were generated and
+sequenced in Python
+using
+
+geometor-explorer
+phimidi'''
+    titles.append( plot_title(text, outro_dir, f'{name}.png'))
+
+    name='thanks'
+    text='''thanks to the
+power of
+
+sympy
+matplotlib
+mido
+ffmpeg
+timidity++'''
+    titles.append( plot_title(text, outro_dir, f'{name}.png'))
+
+    name='visit'
+    text='''visit
+
+geometor.com
+github.com/geometor'''
+    titles.append( plot_title(text, outro_dir, f'{name}.png'))
+    titles.append(titles[0])
+
+    titles_ogg = build_titles_music(len(titles), outro_dir)
+
+    secs = 2
+
+    with open(f'{outro_dir}/outro.lst', 'w') as lst:
+        for png in titles:
+            lst.write(f'file {png}\n')
+            lst.write(f'duration { float(secs) }\n')
+
+        lst.write('\n')
+
+    mp4_file = f'{outro_dir}/outro.mp4'
+
+
+    proc = ['ffmpeg']
+    proc.append('-y')
+    proc.append('-hide_banner')
+    proc.append('-f')
+    proc.append('concat')
+    proc.append('-safe')
+    proc.append('0')
+    proc.append('-i')
+    proc.append(f'{outro_dir}/outro.lst')
+    proc.append('-i')
+    proc.append(f'{outro_dir}/titles.ogg')
+    proc.append('-t')
+    proc.append(f'{len(titles) * secs}')
+    proc.append('-preset')
+    proc.append('slow')
+    proc.append('-crf')
+    proc.append('18')
     proc.append('-r')
     proc.append('60')
     proc.append(mp4_file)
@@ -187,6 +289,7 @@ def build_session(session_dir, scale, tempo, tick=True, music=True):
     build_groups(session_dir, scale, tempo, tick=tick, music=music)
 
     titles_mp4 = build_titles(session_dir)
+    outro_mp4 = build_outro(session_dir)
 
     with open(f'{session_dir}/session.lst', 'w') as lst:
         lst.write(f'file /home/phi/Sessions/splash/session.mp4\n')
@@ -194,6 +297,7 @@ def build_session(session_dir, scale, tempo, tick=True, music=True):
         lst.write(f'file sequences/sequences.mp4\n')
         lst.write(f'file sections/sections.mp4\n')
         lst.write(f'file groups/groups.mp4\n')
+        lst.write(f'file {outro_mp4}\n')
 
     proc = ['ffmpeg']
     proc.append('-y')

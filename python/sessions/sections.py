@@ -17,6 +17,8 @@ def build_sections(d, scale, tempo, tick=True, music=True):
     console.rule(folder)
 
     pngs = [f.path for f in os.scandir(folder) if 'png' in f.path]
+    pngs = [f for f in pngs if 'summary' not in f]
+    files = [f for f in pngs if 'zoom' not in f]
 
     title = folder
     mf = pm.new_midi(title=title, tempo=tempo)
@@ -28,7 +30,6 @@ def build_sections(d, scale, tempo, tick=True, music=True):
 
     os.makedirs(f'{folder}/build', exist_ok=True)
     with open(f'{folder}/build/build.lst', 'w') as lst:
-        files = [f for f in pngs if 'zoom' not in f]
         for f_id, f in enumerate(sorted(files)):
             png = os.path.join(folder, f)
             mp4 = f'{folder}/build/{f}.mp4'
@@ -58,24 +59,25 @@ def build_sections(d, scale, tempo, tick=True, music=True):
             #  print(int(num), *type)
 
         # add summary
-        lst.write(f'file {folder}/summary.png\n')
-        dur = pm.tick2second(beat, beat, tempo)
-        lst.write(f'duration { float(dur) }\n')
-        if tick:
-            ride.set_hits(8 * beat, 8)
-        if music:
-            notes = []
-            for i in [0, 2, 4, 6, 8, 10, 12]:
-                notes.append(scale[i])
-            strings.set_notes(notes[2:4], 8 * beat)
-            vibes.set_rest(4 * beat)
-            pm.add_arp_up(vibes, notes, 4 * beat)
-            #  vibes.set_notes(notes[4:7], 2 * beat)
-        ride.set_hits(4 * beat, 4)
+        #  lst.write(f'file {folder}/summary.png\n')
+        #  dur = pm.tick2second(beat, beat, tempo)
+        #  lst.write(f'duration { float(dur) }\n')
+        #  if tick:
+            #  ride.set_hits(8 * beat, 8)
+        #  if music:
+            #  notes = []
+            #  for i in [0, 2, 4, 6, 8, 10, 12]:
+                #  notes.append(scale[i])
+            #  strings.set_notes(notes[2:4], 8 * beat)
+            #  vibes.set_rest(4 * beat)
+            #  pm.add_arp_up(vibes, notes, 4 * beat)
+            #  #  vibes.set_notes(notes[4:7], 2 * beat)
+        #  ride.set_hits(4 * beat, 4)
         
     #  midi_path = pm.save_midi(mf, f'{folder}/build', 'build.mid')
     midi_path = f'{folder}/build/build.mid'
     mf.save(midi_path)
+    #  f = os.path.splitext(f)[0] 
 
     proc = ['timidity', '-c', '~/.photon/timidity.cfg', ]
     proc.append('-Ov')
@@ -93,6 +95,10 @@ def build_sections(d, scale, tempo, tick=True, music=True):
     proc.append(f'{folder}/build/build.lst')
     proc.append('-i')
     proc.append(f'{folder}/build/build.ogg')
+    proc.append('-preset')
+    proc.append('slow')
+    proc.append('-crf')
+    proc.append('18')
     proc.append('-r')
     proc.append('60')
     proc.append(f'{folder}/sections.mp4')
