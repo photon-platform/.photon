@@ -23,10 +23,13 @@ alias gm="cd /mnt/md0"
 
 alias gD="cd ~/Downloads; "
 alias gM="cd ~/Media"
-alias gP="cd ~/Projects"
-alias gPg="cd ~/Projects/GEOMETOR/explorer-notebooks; rd "
-alias gS="cd ~/Sessions"
-alias gN="cd ~/Notebooks"
+alias gP="cd ~/Projects; F"
+alias gPG="cd ~/Projects/GEOMETOR; F "
+alias gPp="cd ~/Projects/PHIARCHITECT; F "
+alias gPP="cd ~/Projects/PHOTON; F "
+alias gPH="cd ~/Projects/HARMONIC; F "
+alias gPg="cd ~/Projects/GEOMETOR/geometor-explorer; F "
+alias gS="cd ~/Sessions; F"
 
 alias open=xdg-open
 
