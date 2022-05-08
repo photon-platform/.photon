@@ -36,16 +36,16 @@ function folder_summarize() {
    
   # list_working_files | xargs -I {} basename "{}" |  sed 's/.*\.\(.*\)$/\1/' | sort | uniq -c | sort -nr | head -n20
 
-  declare -A ext_summary
-  extensions=$( list_working_files | xargs -I {} basename "{}" |  sed 's/.*\.\(.*\)$/\1/' )
-  for ext in ${extensions[@]}; do
-    (( ext_summary[$ext]++ ))
-  done
+  # declare -A ext_summary
+  # extensions=$( list_working_files | xargs -I {} basename "{}" |  sed 's/.*\.\(.*\)$/\1/' )
+  # for ext in ${extensions[@]}; do
+    # (( ext_summary[$ext]++ ))
+  # done
 
-  for key in ${!ext_summary[@]}
-  do
-    printf " %6d $SEP %s\n" "${ext_summary[$key]}" $key
-  done | sort -rn | head -n20
+  # for key in ${!ext_summary[@]}
+  # do
+    # printf " %6d $SEP %s\n" "${ext_summary[$key]}" $key
+  # done | sort -rn | head -n20
 
   echo
   
