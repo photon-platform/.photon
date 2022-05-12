@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
 
+function ablog_build() {
+  @
+  tools_git
+  ablog clean
+  ablog build
+  cp CNAME docs/CNAME
+  ablog serve
+}
+alias abb=ablog_build
+
+
 function bk() {
   gnome-terminal --working-directory=$PWD -- bash -c "source ~/.bashrc; backup; exec bash"
   
