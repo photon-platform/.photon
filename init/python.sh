@@ -45,6 +45,8 @@ pip install -U py_midicsv
 # pip install -U python-rtmidi
 pip install -U mido
 
+pip install -U pyjson5
+
 # pip install -U pygame
 
 pip install -U build
