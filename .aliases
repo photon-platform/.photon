@@ -9,6 +9,7 @@ alias -- -="cd -"
 alias src="source ~/.bashrc"
 alias C="src; clear -x"
 
+alias losslesscut=~/AppImages/LosslessCut-linux-x86_64.AppImage
 alias timidity="timidity -c ~/.photon/timidity.cfg"
 
 alias inmotion="ssh illumiphi.com"
