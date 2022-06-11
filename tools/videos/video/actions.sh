@@ -116,19 +116,9 @@ function video_migrate() {
 
 function video_edl() {
   file=$1
-  edl_file="${file%.*}-llc-edl.csv"
+  edl_file="${file%.*}-proj.llc"
   if [[ -f "$edl_file" ]]; then
-    awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file"
-    # mapfile  segments \
-      # < <( awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
-    # segments_count=${#segments[@]}
-    # for segment in "${segments[@]}"; do
-      # echo $segment
-    # done
-    echo
-    if [[ "$( ask_truefalse "edit?" )" == "true" ]]; then
       vim "$edl_file"
-    fi
   fi
 }
 
