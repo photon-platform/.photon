@@ -38,11 +38,11 @@ function images_actions() {
     k) folder_sibling_get $((siblings_index - 1)) ; images;;
     a) 
       #view all
-      mapfile -t selected_images < <( images_list_get  | sxiv -fba -o - )
+      mapfile -t selected_images < <( images_list_get  | sxiv -ba -o - )
       images_selected_actions
       images; ;;
     v)  
-      mapfile -t selected_images < <( images_list_get | fzf | sxiv -fba -o - )
+      mapfile -t selected_images < <( images_list_get | fzf | sxiv -ba -o - )
       images_selected_actions
       images; ;;
     F) folder; ;;
