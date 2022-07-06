@@ -46,8 +46,7 @@ pip install -U py_midicsv
 pip install -U mido
 
 pip install -U pyjson5
-
-# pip install -U pygame
+pip install -U python-slugify
 
 pip install -U build
 pip install -U twine
