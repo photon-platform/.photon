@@ -38,7 +38,7 @@ function video_actions() {
     n) image_rename "$file"; videos; ;;
     r) video_process "$file"; ;;
     e) video_edl "$file"; video "$file" $video_index; ;;
-    m) video_melt "$file"; video "$file" $video_index; ;;
+    m) video_melt_py "$file"; video "$file" $video_index; ;;
     b) video_build "$file"; ;;
     w) video_wrap "$file"; ;;
     i) video_migrate "$file"; videos; ;;
@@ -182,6 +182,10 @@ function video_process() {
   fi
 }
 
+function video_melt_py() {
+  python3 ~/.photon/tools/videos/video/llc.py "$1"
+  
+}
 function video_melt() {
   tr=12
   
