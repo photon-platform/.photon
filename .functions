@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
 
+function docs_build() {
+  @
+  cd docsrc
+  sphinx-apidoc -o source ../geometor -f 
+  make github
+  open ../docs/index.html
+}
+alias db=docs_build
+
+
 function ablog_build() {
   @
   tools_git

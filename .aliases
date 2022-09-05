@@ -145,3 +145,5 @@ alias ipython='ipython3'
 alias ipy='ipython3'
 
 alias mpv='mpv -fs -keep-open=yes'
+
+
