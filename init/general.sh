@@ -1,37 +1,31 @@
 #!/usr/bin/env bash
 
-source ~/.photon/ui/_main.sh
+# source ~/.photon/init/_utils.sh
 
-clear -x
-ui_banner "general utilities"
+title "general utilities"
 
 #TODO: ranger - set config files
-echo
 h1 "ranger"
-echo
 sudo apt install -y ranger
+ranger --version | tee -a $LOG
 
-echo
 h1 "tree"
-echo
 sudo apt install -y tree
+tree --version | tee -a $LOG
 
-echo
 h1 "highlight"
-echo
 sudo apt install -y highlight
+highlight --version | tee -a $LOG
 
-echo
 h1 "bat"
-echo
 sudo apt install -y bat
 mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
+bat --version | tee -a $LOG
 
-echo
 h1 "screenkey"
-echo
 sudo apt install -y screenkey
+screenkey --version | tee -a $LOG
 
 # echo
 # h1 "xmlstarlet"
@@ -43,20 +37,14 @@ sudo apt install -y screenkey
 # echo
 # sudo apt install -y tidy
 
-# echo
-# h1 "ncal"
-# echo
-# sudo apt install -y ncal
+h1 "ncal"
+sudo apt install -y ncal
+ncal --version | tee -a $LOG
 
 # echo
 # h1 "newsboat"
 # echo
 # sudo apt install -y newsboat
-
-echo
-h1 "youtube-dl"
-echo
-sudo pip install --upgrade youtube-dl
 
 # echo
 # h1 "wmctrl"

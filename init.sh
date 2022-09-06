@@ -1,25 +1,18 @@
 #!/usr/bin/env bash
 
-source ~/.photon/ui/_main.sh
+source ~/.photon/init/_utils.sh
 source ~/.photon/.functions
-LOGMD=~/init.log.md
 
-title() {
-  clear -x
-  ui_banner "$1"
-
-  echo 
-}
-subtitle() {
-  echo
-  h1 "$1"
-  echo
-}
+LOG=~/init.$(timestamp).log
+START_TIME="$(date -u +%s)"
 
 cd ~/.photon
 
 title "photon PLATFORM initialization"
+
 sudo pwd
+
+df . >> $LOG
 
 ./home.sh
 source ~/.bashrc
@@ -37,6 +30,7 @@ echo
 h1 "apt upgradeable"
 echo
 sudo apt list --upgradeable
+sudo apt list --upgradeable >> $LOG
 
 # echo
 # read -n1 -p "run upgrade?" run_upgrade
@@ -45,66 +39,37 @@ sudo apt list --upgradeable
   h1 "apt upgrade"
   echo
   sudo apt upgrade -y
+
   echo
   h1 "apt autoremove"
   echo
   sudo apt autoremove -y
 # fi
 
-init/gsettings.sh
+source init/gsettings.sh
 
-init/git.sh
+source init/git.sh
 
-init/general.sh
+source init/general.sh
 
-init/python.sh
+source init/python.sh
 
-init/vim.sh
+source init/vim.sh
 
-title "chrome"
-init/chrome.sh
+# title "chrome"
+# init/chrome.sh
 
 # init/node.sh
 
-init/graphics.sh
+# init/graphics.sh
 
-init/media.sh
+# init/media.sh
 
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
 
 
-# subtitle "apache2"
-# apache2 -v
-
-# subtitle "php"
-# php -v
-
-# subtitle "composer"
-# composer -V
-
-subtitle "git"
-git --version
-# git config --list
-
-subtitle "vim"
-vim --version
-
-subtitle "inkscape"
-inkscape -V
-
-subtitle "gimp"
-gimp -v
-
-subtitle "darktable"
-darktable --version
-
-subtitle "google-chrome"
-google-chrome --version
-
-subtitle "firefox"
-firefox --version
 
 
 #####################################
@@ -114,6 +79,13 @@ mv_bak ~/.profile
 
 title "change hostname"
 sudo hostnamectl set-hostname 'photon'
+
+END_TIME="$(date -u +%s)"
+ELAPSED="$(($END_TIME-$START_TIME))"
+TIME=$(convertsecstomin $ELAPSED)
+
+echo
+h2 "elapsed: ${txBold}$TIME${txReset} m:s"
 
 echo install manually:
 echo - pandoc.sh 

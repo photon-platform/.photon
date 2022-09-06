@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-source ~/.photon/ui/_main.sh
+source ~/.photon/init/_utils.sh
 
 clear -x
-ui_banner "gnome settings"
+title "gnome settings"
 
 
 bg="file:///home/${USERNAME}/.photon/graphics/photon-wallpaper.png"
