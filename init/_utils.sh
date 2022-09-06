@@ -11,7 +11,8 @@ title() {
   echo >> $LOG
   echo >> $LOG
   echo $1 >> $LOG
-  echo "=========/n" >> $LOG
+  echo "=========" >> $LOG
+  echo >> $LOG
 }
 
 function h1() {
