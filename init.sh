@@ -19,7 +19,7 @@ df . >> $LOG
 ./home.sh
 source ~/.bashrc
 
-source ~/,photon/init/remove-default-apps.sh
+source ~/.photon/init/remove-default-apps.sh
 
 
 title "update system packages"
