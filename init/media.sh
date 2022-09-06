@@ -48,11 +48,6 @@ h1 "melt"
 sudo apt install -y melt
 melt --version | tee -a $LOG
 
-# echo
-# h1 "lmms"
-# echo
-# sudo apt install -y lmms
-
 h1 "midicsv"
 sudo apt install -y midicsv
 midicsv --version | tee -a $LOG
@@ -65,9 +60,10 @@ h1 "losslesscut"
 sudo snap install losslesscut
 losslesscut --version | tee -a $LOG
 
-# echo
+# h1 "lmms"
+# sudo apt install -y lmms
+
 # h1 "editly"
-# echo
 # sudo apt install -y \
   # build-essential \
   # libcairo2-dev \
@@ -89,4 +85,5 @@ echo
 
 h1 "youtube-dl"
 sudo pip install --upgrade youtube-dl
+youtube-dl --version | tee -a $LOG
 

@@ -5,6 +5,7 @@ source ~/.photon/.functions
 
 LOG=~/init.$(timestamp).log
 START_TIME="$(date -u +%s)"
+PAUSE=true
 
 cd ~/.photon
 
@@ -18,6 +19,8 @@ df . >> $LOG
 source ~/.bashrc
 
 init/remove-default-apps.sh
+
+if PAUSE; then pause_enter; fi
 
 title "update system packages"
 
@@ -46,15 +49,22 @@ sudo apt list --upgradeable >> $LOG
   sudo apt autoremove -y
 # fi
 
+if PAUSE; then pause_enter; fi
+
 source init/gsettings.sh
+if PAUSE; then pause_enter; fi
 
 source init/git.sh
+if PAUSE; then pause_enter; fi
 
 source init/general.sh
+if PAUSE; then pause_enter; fi
 
 source init/python.sh
+if PAUSE; then pause_enter; fi
 
 source init/vim.sh
+if PAUSE; then pause_enter; fi
 
 # title "chrome"
 # init/chrome.sh
@@ -68,6 +78,7 @@ source init/vim.sh
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
+if PAUSE; then pause_enter; fi
 
 
 
