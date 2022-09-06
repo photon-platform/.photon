@@ -25,28 +25,21 @@ if $PAUSE; then pause_enter; fi
 
 title "update system packages"
 
-echo
 h1 "apt update"
-echo
 sudo apt update -y
 
-echo
 h1 "apt upgradeable"
-echo
-sudo apt list --upgradeable
-sudo apt list --upgradeable >> $LOG
+apt list --upgradeable | tee -a >> $LOG
+
+if $PAUSE; then pause_enter; fi
 
 # echo
 # read -n1 -p "run upgrade?" run_upgrade
 # if [[ $run_upgrade == "y" ]]; then
-  echo
   h1 "apt upgrade"
-  echo
   sudo apt upgrade -y
 
-  echo
   h1 "apt autoremove"
-  echo
   sudo apt autoremove -y
 # fi
 
@@ -79,8 +72,8 @@ if $PAUSE; then pause_enter; fi
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
-if $PAUSE; then pause_enter; fi
 
+if $PAUSE; then pause_enter; fi
 
 
 
@@ -97,7 +90,10 @@ ELAPSED="$(($END_TIME-$START_TIME))"
 TIME=$(convertsecstomin $ELAPSED)
 
 echo
-h2 "elapsed: ${txBold}$TIME${txReset} m:s"
+h1 "elapsed: ${txBold}$TIME${txReset} m:s"
+
+df . >> $LOG
+
 
 echo install manually:
 echo - pandoc.sh 
