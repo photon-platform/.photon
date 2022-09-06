@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+source ~/.photon/ui/_main.sh
 source ~/.photon/init/_utils.sh
 source ~/.photon/.functions
 
@@ -20,7 +21,7 @@ source ~/.bashrc
 
 init/remove-default-apps.sh
 
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 title "update system packages"
 
@@ -49,22 +50,22 @@ sudo apt list --upgradeable >> $LOG
   sudo apt autoremove -y
 # fi
 
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 source init/gsettings.sh
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 source init/git.sh
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 source init/general.sh
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 source init/python.sh
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 source init/vim.sh
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 # title "chrome"
 # init/chrome.sh
@@ -78,7 +79,7 @@ if PAUSE; then pause_enter; fi
 
 title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
-if PAUSE; then pause_enter; fi
+if $PAUSE; then pause_enter; fi
 
 
 
