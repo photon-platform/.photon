@@ -2,8 +2,9 @@
 
 source ~/.photon/init/_utils.sh
 
-title "git"
+title "configure git"
 git --version | tee -a  $LOG
+if $PAUSE; then pause_enter; fi
 
 h1 "set account"
 read -p "git user name: " username
@@ -47,6 +48,8 @@ pause_enter
 
 h1 "test connection"
 ssh -T git@github.com
+
+h1 "git settings complete"
 pause_enter
 
 

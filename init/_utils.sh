@@ -3,12 +3,15 @@
 source ~/.photon/ui/_main.sh
 
 title() {
-  clear -x
+  # clear -x
+  echo
   ui_banner "$1"
   echo 
 
-  echo $1 >> LOG
-  echo "=========/n" >> LOG
+  echo >> $LOG
+  echo >> $LOG
+  echo $1 >> $LOG
+  echo "=========/n" >> $LOG
 }
 
 function h1() {
@@ -17,7 +20,8 @@ function h1() {
   printf "$fmt" "$1"
   echo
 
-  echo $1 >> LOG
-  echo >> LOG
+  echo >> $LOG
+  echo $1 >> $LOG
+  echo >> $LOG
 }
 

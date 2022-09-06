@@ -2,10 +2,11 @@
 # source ~/.photon/init/_utils.sh
 
 title "Python"
+if $PAUSE; then pause_enter; fi
 
 h1 python3
 sudo apt install -y python3
-python3 --version | tee -a $JLOG
+python3 --version | tee -a $LOG
 
 h1 python3-dev
 sudo apt install -y python3-dev
@@ -21,7 +22,7 @@ h1 pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 # sudo apt install -y python3-pip
-pip --version | tee -a $JLOG
+pip --version | tee -a $LOG
 
 # h1 "Qt5"
 # echo
@@ -67,3 +68,5 @@ pip install -U pydot
 # pip install -U lbt-ladybug
 
 pip install -U google-api-python-client
+
+h1 "python settings complete"

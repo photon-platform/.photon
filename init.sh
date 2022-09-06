@@ -19,45 +19,42 @@ df . >> $LOG
 ./home.sh
 source ~/.bashrc
 
-init/remove-default-apps.sh
+source ~/,photon/init/remove-default-apps.sh
 
-if $PAUSE; then pause_enter; fi
 
 title "update system packages"
+if $PAUSE; then pause_enter; fi
 
 h1 "apt update"
 sudo apt update -y
 
 h1 "apt upgradeable"
-apt list --upgradeable | tee -a >> $LOG
+apt list --upgradeable | tee -a $LOG
+
+
+h1 "apt upgrade"
+if $PAUSE; then pause_enter; fi
+sudo apt upgrade -y
+
+h1 "apt autoremove"
+if $PAUSE; then pause_enter; fi
+sudo apt autoremove -y
 
 if $PAUSE; then pause_enter; fi
 
-# echo
-# read -n1 -p "run upgrade?" run_upgrade
-# if [[ $run_upgrade == "y" ]]; then
-  h1 "apt upgrade"
-  sudo apt upgrade -y
-
-  h1 "apt autoremove"
-  sudo apt autoremove -y
-# fi
-
+source ~/.photon/init/gsettings.sh
 if $PAUSE; then pause_enter; fi
 
-source init/gsettings.sh
+source ~/.photon/init/git.sh
 if $PAUSE; then pause_enter; fi
 
-source init/git.sh
+source ~/.photon/init/general.sh
 if $PAUSE; then pause_enter; fi
 
-source init/general.sh
+source ~/.photon/init/python.sh
 if $PAUSE; then pause_enter; fi
 
-source init/python.sh
-if $PAUSE; then pause_enter; fi
-
-source init/vim.sh
+source ~/.photon/init/vim.sh
 if $PAUSE; then pause_enter; fi
 
 # title "chrome"

@@ -2,8 +2,9 @@
 
 source ~/.photon/init/_utils.sh
 
-clear -x
+# clear -x
 title "gnome settings"
+if $PAUSE; then pause_enter; fi
 
 
 bg="file:///home/${USERNAME}/.photon/graphics/photon-wallpaper.png"
@@ -30,4 +31,4 @@ gsettings set org.gnome.desktop.interface overlay-scrolling false
 
 # h1 gnome-tweak-tool
 # sudo apt install -y gnome-tweak-tool
-
+h1 "gnome settings complete"
