@@ -58,10 +58,10 @@ h1 "melt"
 echo
 sudo apt install -y melt
 
-echo
-h1 "lmms"
-echo
-sudo apt install -y lmms
+# echo
+# h1 "lmms"
+# echo
+# sudo apt install -y lmms
 
 echo
 h1 "midicsv"
