@@ -1,19 +1,28 @@
 #!/usr/bin/env bash
-source ~/.photon/ui/_main.sh
+# source ~/.photon/init/_utils.sh
 
-clear -x
-ui_banner "Python"
-echo
+title "Python"
 
+h1 python3
 sudo apt install -y python3
+python3 --version | tee -a $JLOG
+
+h1 python3-dev
 sudo apt install -y python3-dev
 
+h1 python3-venv
+sudo apt install -y python3-venv
+virtualenv --version | tee -a $LOG
 
+h1 python3-gi-cairo
+sudo apt install -y python3-gi-cairo
+
+h1 pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 # sudo apt install -y python3-pip
-sudo apt install -y python3-venv
-sudo apt install -y python3-gi-cairo
+pip --version | tee -a $JLOG
+
 # h1 "Qt5"
 # echo
 # sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
