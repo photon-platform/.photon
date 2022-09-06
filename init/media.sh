@@ -16,10 +16,10 @@ h1 "pavucontrol"
 echo
 sudo apt install -y pavucontrol
 
-echo
-h1 "jack"
-echo
-sudo apt install -y jack
+# echo
+# h1 "jack"
+# echo
+# sudo apt install -y jack
 
 echo
 h1 "ffmpeg"
@@ -78,23 +78,23 @@ h1 "losslesscut"
 echo
 sudo snap install losslesscut
 
-echo
-h1 "editly"
-echo
-sudo apt install -y \
-  build-essential \
-  libcairo2-dev \
-  libpango1.0-dev \
-  libjpeg-dev \
-  libgif-dev \
-  librsvg2-dev
-npm i -g canvas
-npm i -g editly
+# echo
+# h1 "editly"
+# echo
+# sudo apt install -y \
+  # build-essential \
+  # libcairo2-dev \
+  # libpango1.0-dev \
+  # libjpeg-dev \
+  # libgif-dev \
+  # librsvg2-dev
+# npm i -g canvas
+# npm i -g editly
 
-echo
-h1 "timecut & timesnap"
-echo
-npm i -g timespan timecut
+# echo
+# h1 "timecut & timesnap"
+# echo
+# npm i -g timespan timecut
 
 
 echo

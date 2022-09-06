@@ -26,20 +26,20 @@ sudo apt install -y python3-gi-cairo
 
 # pip install -U pip
 
-pip install -U jupyterlab
 pip install -U sympy
 pip install -U numpy
 pip install -U matplotlib
-pip install -U scipy
+# pip install -U scipy
 
 pip install -U mplcursors
 pip install -U mpl_interactions
-pip install -U mpl_interactions[jupyter]
 
+pip install -U jupyterlab
+pip install -U mpl_interactions[jupyter]
 pip install -U ipywidgets
 pip install -U ipympl
 
-# pip install -U ffmpeg-python
+pip install -U ffmpeg-python
 
 pip install -U py_midicsv
 # pip install -U python-rtmidi

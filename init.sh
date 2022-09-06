@@ -57,22 +57,14 @@ init/git.sh
 
 init/general.sh
 
+init/python.sh
+
 init/vim.sh
-
-init/apache.sh
-
-init/php.sh
-
-init/composer.sh
-
-init/grav.sh
-
-init/starter.sh
 
 title "chrome"
 init/chrome.sh
 
-init/node.sh
+# init/node.sh
 
 init/graphics.sh
 
@@ -83,14 +75,14 @@ title "update & upgrade"
 sudo apt update -y && sudo apt upgrade -y
 
 
-subtitle "apache2"
-apache2 -v
+# subtitle "apache2"
+# apache2 -v
 
-subtitle "php"
-php -v
+# subtitle "php"
+# php -v
 
-subtitle "composer"
-composer -V
+# subtitle "composer"
+# composer -V
 
 subtitle "git"
 git --version
