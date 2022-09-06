@@ -31,31 +31,23 @@ sudo apt update -y
 h1 "apt upgradeable"
 apt list --upgradeable | tee -a $LOG
 
-
 h1 "apt upgrade"
-if $PAUSE; then pause_enter; fi
 sudo apt upgrade -y
 
 h1 "apt autoremove"
-if $PAUSE; then pause_enter; fi
 sudo apt autoremove -y
 
-if $PAUSE; then pause_enter; fi
+h1 "system update complete"
 
 source ~/.photon/init/gsettings.sh
-if $PAUSE; then pause_enter; fi
 
 source ~/.photon/init/git.sh
-if $PAUSE; then pause_enter; fi
 
 source ~/.photon/init/general.sh
-if $PAUSE; then pause_enter; fi
 
 source ~/.photon/init/python.sh
-if $PAUSE; then pause_enter; fi
 
 source ~/.photon/init/vim.sh
-if $PAUSE; then pause_enter; fi
 
 # title "chrome"
 # init/chrome.sh
