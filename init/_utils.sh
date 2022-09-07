@@ -17,6 +17,7 @@ title() {
 
 function h1() {
   echo
+  echo
   fmt="${txBold} %s${txReset}\n"
   printf "$fmt" "$1"
   echo
