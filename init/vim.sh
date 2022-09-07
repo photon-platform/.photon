@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ~/.photon/ui/_main.sh
+# source ~/.photon/ui/_main.sh
 
 title "vim"
 if $PAUSE; then pause_enter; fi
@@ -16,10 +16,10 @@ ctags --version | tee -a $LOG
 h1 "python3-dev"
 sudo apt install -y python3-dev
 
-h1 "vim-gtk"
+h1 "vim-gtk3"
 # enables + register for system clipboard
 # and support for python
-sudo apt install -y vim-gtk
+sudo apt install -y vim-gtk3
 vim --version | tee -a $LOG
 
 h1 "clone .vim"

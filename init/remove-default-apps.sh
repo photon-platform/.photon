@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-source ~/.photon/init/_utils.sh
+# source ~/.photon/init/_utils.sh
 
 title "remove default apps"
+if $PAUSE; then pause_enter; fi
 
 h1 gnome-contacts 
 sudo apt -y remove gnome-contacts

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ~/.photon/init/_utils.sh
+# source ~/.photon/init/_utils.sh
 
 title "configure git"
 git --version | tee -a  $LOG

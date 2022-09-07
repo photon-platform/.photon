@@ -23,6 +23,6 @@ function h1() {
 
   echo >> $LOG
   echo $1 >> $LOG
-  echo >> $LOG
+  echo "---------" >> $LOG
 }
 

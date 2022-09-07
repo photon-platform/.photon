@@ -3,6 +3,7 @@
 # source ~/.photon/ui/_main.sh
 
 title "media"
+if $PAUSE; then pause_enter; fi
 
 h1 "v4l2loopback"
 sudo apt install -y v4l2loopback-dkms

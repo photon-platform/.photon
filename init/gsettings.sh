@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ~/.photon/init/_utils.sh
+# source ~/.photon/init/_utils.sh
 
 # clear -x
 title "gnome settings"
