@@ -2,7 +2,7 @@
 
 source ~/.photon/ui/_main.sh
 
-title() {
+function title() {
   # clear -x
   echo
   ui_banner "$1"
@@ -15,7 +15,7 @@ title() {
   echo >> $LOG
 }
 
-function h1() {
+function sub() {
   echo
   echo
   fmt="${txBold} %s${txReset}\n"

@@ -5,16 +5,16 @@
 title "remove default apps"
 if $PAUSE; then pause_enter; fi
 
-h1 gnome-contacts 
+sub gnome-contacts 
 sudo apt -y remove gnome-contacts
 
-h1 geary
+sub geary
 sudo apt -y remove geary
 
-h1 gnome-calendar 
+sub gnome-calendar 
 sudo apt -y remove gnome-calendar
 
-h1 cleanup
+sub cleanup
 sudo apt -y autoremove
 
 

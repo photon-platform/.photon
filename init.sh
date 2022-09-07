@@ -14,7 +14,7 @@ title "photon PLATFORM initialization"
 
 sudo pwd
 
-df . >> $LOG
+df . | tee -a $LOG
 
 ./home.sh
 source ~/.bashrc
@@ -25,19 +25,19 @@ source ~/.photon/init/remove-default-apps.sh
 title "update system packages"
 if $PAUSE; then pause_enter; fi
 
-h1 "apt update"
+sub "apt update"
 sudo apt update -y
 
-h1 "apt upgradeable"
+sub "apt upgradeable"
 apt list --upgradeable | tee -a $LOG
 
-h1 "apt upgrade"
+sub "apt upgrade"
 sudo apt upgrade -y
 
-h1 "apt autoremove"
+sub "apt autoremove"
 sudo apt autoremove -y
 
-h1 "system update complete"
+sub "system update complete"
 
 source ~/.photon/init/gsettings.sh
 
@@ -79,9 +79,9 @@ ELAPSED="$(($END_TIME-$START_TIME))"
 TIME=$(convertsecstomin $ELAPSED)
 
 echo
-h1 "elapsed: ${txBold}$TIME${txReset} m:s"
+sub "elapsed: ${txBold}$TIME${txReset} m:s"
 
-df . >> $LOG
+df . | tee -a  $LOG
 
 
 echo install manually:

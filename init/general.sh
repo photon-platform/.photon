@@ -5,63 +5,63 @@
 title "general utilities"
 if $PAUSE; then pause_enter; fi
 
-h1 "ranger"
+sub "ranger"
 sudo apt install -y ranger
 ranger --version | tee -a $LOG
 
-h1 "tree"
+sub "tree"
 sudo apt install -y tree
 tree --version | tee -a $LOG
 
-h1 "highlight"
+sub "highlight"
 sudo apt install -y highlight
 highlight --version | tee -a $LOG
 
-h1 "bat"
+sub "bat"
 sudo apt install -y bat
 mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
 bat --version | tee -a $LOG
 
-h1 "screenkey"
+sub "screenkey"
 sudo apt install -y screenkey
 screenkey --version | tee -a $LOG
 
-# h1 "xmlstarlet"
+# sub "xmlstarlet"
 # sudo apt install -y xmlstarlet
 
-# h1 "tidy"
+# sub "tidy"
 # sudo apt install -y tidy
 
-h1 "ncal"
+sub "ncal"
 sudo apt install -y ncal
 ncal --version | tee -a $LOG
 
-# h1 "newsboat"
+# sub "newsboat"
 # sudo apt install -y newsboat
 
-# h1 "wmctrl"
+# sub "wmctrl"
 # sudo apt install -y wmctrl
 
-h1 "neofetch"
+sub "neofetch"
 sudo apt install -y neofetch
 neofetch --version | tee -a $LOG
 
-h1 "trash-cli"
+sub "trash-cli"
 sudo apt install -y trash-cli
 trash --version | tee -a $LOG
 
-# h1 "tesseract-ocr"
+# sub "tesseract-ocr"
 # sudo apt install -y tesseract-ocr
     
-# h1 "indicator-multiload"
+# sub "indicator-multiload"
 # sudo apt install -y indicator-multiload
 
-# h1 "fdupes"
+# sub "fdupes"
 # sudo apt install -y fdupes
 # sudo apt install -y silversearcher-ag
 # sudo apt install -y fd-find
 # sudo snap install  jq
 # sudo snap install  yq
 
-h1 "general utilities complete"
+sub "general utilities complete"

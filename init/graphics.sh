@@ -6,31 +6,31 @@
 title "graphics"
 if $PAUSE; then pause_enter; fi
 
-h1 "imagemagick"
+sub "imagemagick"
 sudo apt install -y imagemagick 
 
-h1 "exif"
+sub "exif"
 sudo apt install -y exif exiftool
 
-h1 "sxiv"
+sub "sxiv"
 sudo apt install -y sxiv
 
-h1 "chafa"
+sub "chafa"
 sudo apt install -y chafa
 
-# h1 "jpegtran"
+# sub "jpegtran"
 # sudo apt install libjpeg-turbo-progs
 
-# h1 "caca"
+# sub "caca"
 # sudo apt install -y caca-utils
 
 
-h1 "inkscape"
+sub "inkscape"
 sudo apt install -y inkscape
 
-h1 "darktable"
+sub "darktable"
 sudo apt install -y darktable
 
-h1 "gimp"
+sub "gimp"
 sudo apt install -y gimp
 

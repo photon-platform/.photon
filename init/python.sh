@@ -4,32 +4,32 @@
 title "Python"
 if $PAUSE; then pause_enter; fi
 
-h1 python3
+sub python3
 sudo apt install -y python3
 python3 --version | tee -a $LOG
 
-h1 python3-dev
+sub python3-dev
 sudo apt install -y python3-dev
 
-h1 python3-venv
+sub python3-venv
 sudo apt install -y python3-venv
 virtualenv --version | tee -a $LOG
 
-h1 python3-gi-cairo
+sub python3-gi-cairo
 sudo apt install -y python3-gi-cairo
 
-h1 pip
+sub pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 # sudo apt install -y python3-pip
 pip --version | tee -a $LOG
 
-# h1 "Qt5"
+# sub "Qt5"
 # echo
 # sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
 
 # echo
-# h1 "python accessories"
+# sub "python accessories"
 # echo
 # sudo apt install -y python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich
 # sudo apt install -y python3-tk python3-pyqt5 python3-pyqtwebengine python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
@@ -69,4 +69,4 @@ pip install -U pydot
 
 pip install -U google-api-python-client
 
-h1 "python settings complete"
+sub "python settings complete"

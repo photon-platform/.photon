@@ -29,6 +29,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
 
 gsettings set org.gnome.desktop.interface overlay-scrolling false
 
-# h1 gnome-tweak-tool
+# sub gnome-tweak-tool
 # sudo apt install -y gnome-tweak-tool
-h1 "gnome settings complete"
+sub "gnome settings complete"
