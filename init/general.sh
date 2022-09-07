@@ -45,9 +45,11 @@ ncal --version | tee -a $LOG
 
 h1 "neofetch"
 sudo apt install -y neofetch
+neofetch --version | tee -a $LOG
 
 h1 "trash-cli"
 sudo apt install -y trash-cli
+trash --version | tee -a $LOG
 
 # h1 "tesseract-ocr"
 # sudo apt install -y tesseract-ocr

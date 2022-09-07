@@ -54,9 +54,9 @@ source ~/.photon/init/vim.sh
 
 # init/node.sh
 
-# init/graphics.sh
+source ~/.photon/init/graphics.sh
 
-# init/media.sh
+source ~/.photon/init/media.sh
 
 
 title "update & upgrade"
