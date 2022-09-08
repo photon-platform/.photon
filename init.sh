@@ -16,7 +16,9 @@ sudo pwd
 
 df . | tee -a $LOG
 
+# set up symlinks for config files
 source ~/.photon/home.sh
+
 source ~/.bashrc
 
 source ~/.photon/init/remove-default-apps.sh
