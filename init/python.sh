@@ -13,7 +13,7 @@ sudo apt install -y python3-dev
 
 sub python3-venv
 sudo apt install -y python3-venv
-virtualenv --version | tee -a $LOG
+python -m venv -h | tee -a $LOG
 
 sub python3-gi-cairo
 sudo apt install -y python3-gi-cairo
