@@ -8,9 +8,7 @@ D=$(date +"%Y%m%d-%T")
 title "link config files in home directory"
 
 function set_rc() {
-  echo
   sub "$1"
-  echo
   if [[ -e $HOME/$1 ]]; then
     echo mv ~/$1 ~/$1.$D.bak
     mv $HOME/$1 $HOME/$1.$D.bak
