@@ -49,10 +49,9 @@ source ~/.photon/init/python.sh
 
 source ~/.photon/init/vim.sh
 
-# title "chrome"
-# init/chrome.sh
+source ~/.photon/init/chrome.sh
 
-# init/node.sh
+source ~/.photon/init/node.sh
 
 source ~/.photon/init/graphics.sh
 

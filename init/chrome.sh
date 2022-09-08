@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-source ~/.photon/ui/_main.sh
+# source ~/.photon/ui/_main.sh
 
-clear -x
-ui_banner "google chrome"
+title "google chrome"
+if $PAUSE; then pause_enter; fi
 
 CHROME=google-chrome-stable_current_amd64.deb
 

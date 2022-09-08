@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-source ~/.photon/init/_utils.sh
+# source ~/.photon/init/_utils.sh
 
 # clear -x
 title "node"
+if $PAUSE; then pause_enter; fi
 
 # echo
 # h1 "node"
