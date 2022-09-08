@@ -16,7 +16,7 @@ sudo pwd
 
 df . | tee -a $LOG
 
-./home.sh
+source ~/.photon/home.sh
 source ~/.bashrc
 
 source ~/.photon/init/remove-default-apps.sh
