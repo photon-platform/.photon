@@ -30,6 +30,11 @@ sub "audacity"
 sudo apt install -y audacity
 audacity --version | tee -a $LOG
 
+sub "flac"
+sudo apt install -y flac
+flac --version | tee -a $LOG
+
+
 # echo
 # sub "jack"
 # echo
