@@ -8,6 +8,13 @@ LOG=~/init.$(timestamp).log
 START_TIME="$(date -u +%s)"
 PAUSE=true
 
+if $(ask_truefalse "Pause at each step? [y|n]: ")
+then
+  PAUSE=true
+else
+  PAUSE=false
+fi
+
 cd ~/.photon
 
 title "photon PLATFORM initialization"
