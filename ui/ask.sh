@@ -19,7 +19,7 @@ function ask_date() {
 }
 
 function ask_truefalse() {
-  label=$(get_label "$1 [y/n]")
+  label=$(get_label "$1 [y|n]")
   read -n1 -p "${label}"
   case $REPLY in
     y)

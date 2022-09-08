@@ -8,28 +8,28 @@ LOG=~/init.$(timestamp).log
 START_TIME="$(date -u +%s)"
 PAUSE=true
 
-if $(ask_truefalse "Pause at each step? [y|n]: ")
+cd ~/.photon
+
+clear -x
+title "photon PLATFORM initialization"
+
+sudo pwd
+
+if $(ask_truefalse "Pause at each step?")
 then
   PAUSE=true
 else
   PAUSE=false
 fi
 
-cd ~/.photon
-
-title "photon PLATFORM initialization"
-
-sudo pwd
-
 df . | tee -a $LOG
 
 # set up symlinks for config files
 source ~/.photon/home.sh
-
+#set environment
 source ~/.bashrc
 
 source ~/.photon/init/remove-default-apps.sh
-
 
 title "update system packages"
 if $PAUSE; then pause_enter; fi
