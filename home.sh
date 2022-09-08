@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-source $HOME/.photon/ui/_main.sh
+source $HOME/.photon/init/_utils.sh
 
 D=$(date +"%Y%m%d-%T")
 
-clear -x
-ui_banner "link config files in home directory"
+# clear -x
+title "link config files in home directory"
 
 function set_rc() {
   echo
-  h1 $1
+  sub "$1"
   echo
   if [[ -e $HOME/$1 ]]; then
     echo mv ~/$1 ~/$1.$D.bak
