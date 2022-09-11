@@ -36,6 +36,7 @@ git clone git@github.com:photon-platform/.vim --recurse-submodules
 sub "install fzf"
 cd ~/.vim/photon/fzf-util
 ./install --all
+source ~/.bashrc
 fzf --version | tee -a $LOG
 
 sub "build photon-vim-completion"

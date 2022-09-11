@@ -18,8 +18,9 @@ function title() {
 function sub() {
   echo
   echo
-  fmt="${txBold} %s${txReset}\n"
-  printf "$fmt" "$1"
+  # fmt="${txBold} %s${txReset}\n"
+  # printf "$fmt" "$1"
+  h1 "$1"
   echo
 
   echo >> $LOG

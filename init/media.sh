@@ -69,26 +69,6 @@ losslesscut --version | tee -a $LOG
 # sub "lmms"
 # sudo apt install -y lmms
 
-# sub "editly"
-# sudo apt install -y \
-  # build-essential \
-  # libcairo2-dev \
-  # libpango1.0-dev \
-  # libjpeg-dev \
-  # libgif-dev \
-  # librsvg2-dev
-# npm i -g canvas
-# npm i -g editly
-
-# echo
-# sub "timecut & timesnap"
-# echo
-# npm i -g timespan timecut
-
-
-echo
-
-
 sub "youtube-dl"
 sudo pip install --upgrade youtube-dl
 youtube-dl --version | tee -a $LOG
