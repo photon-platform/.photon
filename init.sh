@@ -29,58 +29,40 @@ source ~/.photon/home.sh
 #set environment
 source ~/.bashrc
 
-source ~/.photon/init/remove-default-apps.sh
+title "disable .profile"
+mv_bak ~/.profile
 
-title "update system packages"
-if $PAUSE; then pause_enter; fi
 
-sub "apt update"
-sudo apt update -y
-
-sub "apt upgradeable"
-apt list --upgradeable | tee -a $LOG
-
-sub "apt upgrade"
-sudo apt upgrade -y
-
-sub "apt autoremove"
-sudo apt autoremove -y
-
-sub "system update complete"
+title "change hostname"
+host_name=$(ask_value 'set system name' 'photon')
+sudo hostnamectl set-hostname $host_name
 
 source ~/.photon/init/gsettings.sh
+source ~/.photon/init/remove-default-apps.sh
+source ~/.photon/init/update-system.sh
 
 source ~/.photon/init/git.sh
-
 source ~/.photon/init/general.sh
-
 source ~/.photon/init/python.sh
-
 source ~/.photon/init/vim.sh
-
 source ~/.photon/init/chrome.sh
-
 source ~/.photon/init/node.sh
-
 source ~/.photon/init/graphics.sh
-
 source ~/.photon/init/media.sh
 
+title "final update & upgrade"
+if $PAUSE; then pause_enter; fi
 
-title "update & upgrade"
+SECTION_TIME="$(date -u +%s)"
 sudo apt update -y && sudo apt upgrade -y
 
+sub "final upgrade complete"
+elapsed_time $SECTION_TIME
 if $PAUSE; then pause_enter; fi
 
 
 
 #####################################
-
-title "disable .profile"
-mv_bak ~/.profile
-
-title "change hostname"
-sudo hostnamectl set-hostname 'photon'
 
 # END_TIME="$(date -u +%s)"
 # ELAPSED="$(($END_TIME-$START_TIME))"
