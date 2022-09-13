@@ -5,6 +5,8 @@
 title "vim"
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 sub "build-essential cmake for YouCompleteMe"
 sudo apt install -y build-essential cmake 
 cmake --version | tee -a $LOG
@@ -45,3 +47,4 @@ git submodule update --init --recursive
 python3 install.py
 
 sub "vim complete"
+elapsed_time $SECTION_TIME

@@ -6,6 +6,8 @@
 title "graphics"
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 sub "imagemagick"
 sudo apt install -y imagemagick 
 
@@ -34,3 +36,5 @@ sudo apt install -y darktable
 sub "gimp"
 sudo apt install -y gimp
 
+sub "graphics complete"
+elapsed_time $SECTION_TIME

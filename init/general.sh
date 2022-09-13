@@ -5,6 +5,8 @@
 title "general utilities"
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 sub "ranger"
 sudo apt install -y ranger
 ranger --version | tee -a $LOG
@@ -65,3 +67,4 @@ trash --version | tee -a $LOG
 # sudo snap install  yq
 
 sub "general utilities complete"
+elapsed_time $SECTION_TIME

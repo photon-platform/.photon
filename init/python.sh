@@ -4,6 +4,8 @@
 title "Python"
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 sub python3
 sudo apt install -y python3
 python3 --version | tee -a $LOG
@@ -70,3 +72,4 @@ pip install -U pydot
 pip install -U google-api-python-client
 
 sub "python settings complete"
+elapsed_time $SECTION_TIME
