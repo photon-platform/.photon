@@ -82,12 +82,13 @@ mv_bak ~/.profile
 title "change hostname"
 sudo hostnamectl set-hostname 'photon'
 
-END_TIME="$(date -u +%s)"
-ELAPSED="$(($END_TIME-$START_TIME))"
-TIME=$(convertsecstomin $ELAPSED)
+# END_TIME="$(date -u +%s)"
+# ELAPSED="$(($END_TIME-$START_TIME))"
+# TIME=$(convertsecstomin $ELAPSED)
 
 echo
-sub "elapsed: ${txBold}$TIME${txReset} m:s"
+# sub "elapsed: ${txBold}$TIME${txReset} m:s"
+elapsed_time $START_TIME
 
 df . | tee -a  $LOG
 

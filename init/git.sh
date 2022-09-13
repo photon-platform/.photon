@@ -6,6 +6,8 @@ title "configure git"
 git --version | tee -a  $LOG
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 sub "set account"
 read -p "git user name: " username
 read -p "git user email: " useremail
@@ -50,6 +52,7 @@ sub "test connection"
 ssh -T git@github.com
 
 sub "git settings complete"
+elapsed_time $SECTION_TIME
 pause_enter
 
 

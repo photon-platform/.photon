@@ -6,6 +6,8 @@
 title "node"
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 # echo
 # h1 "node"
 # echo
@@ -34,3 +36,5 @@ npm i -g canvas
 npm i -g editly
 
 
+sub "node complete
+elapsed_time $SECTION_TIME

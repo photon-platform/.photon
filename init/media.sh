@@ -5,6 +5,8 @@
 title "media"
 if $PAUSE; then pause_enter; fi
 
+SECTION_TIME="$(date -u +%s)"
+
 sub "v4l2loopback"
 sudo apt install -y v4l2loopback-dkms
 sudo modprobe v4l2loopback video_nr=6 card_label=photon
@@ -74,3 +76,4 @@ sudo pip install --upgrade youtube-dl
 youtube-dl --version | tee -a $LOG
 
 sub "media complete
+elapsed_time $SECTION_TIME

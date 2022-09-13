@@ -57,6 +57,14 @@ convertsecstomin() {
   printf "%02d:%02d\n" $m $s
 }
 
+function elapsed_time() {
+  END_TIME="$(date -u +%s)"
+  ELAPSED="$(($END_TIME-$1))"
+  TIME=$(convertsecstomin $ELAPSED)
+
+  echo "elapsed: ${txBold}$TIME${txReset} m:s"
+}
+
 # Create a new directory and enter it
 function mkd() {
   mkdir -p "$@" && cd "$_"
