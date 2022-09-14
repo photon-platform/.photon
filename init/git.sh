@@ -48,7 +48,7 @@ echo
 echo "$key_file.pub"
 cat "$key_file.pub"
 xclip -i "$key_file.pub" -selection clipboard
-firefox "https://github.com/settings/keys"
+open "https://github.com/settings/keys" > /dev/null 2> /dev/null &
 
 echo
 pause_enter
