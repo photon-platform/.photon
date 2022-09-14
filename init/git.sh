@@ -39,12 +39,15 @@ eval "$(ssh-agent -s)"
 ssh-add $key_file
 
 sub "Copy Public Key to GitHub"
-echo "$key_file.pub"
 echo
 echo paste contents into GitHub SSH public key form
 echo https://github.com/settings/keys
 echo
+echo "$key_file.pub"
 cat "$key_file.pub"
+xclip -i "$key_file.pub" -selection -clipboard
+open "https://github.com/settings/keys"
+
 echo
 pause_enter
 
