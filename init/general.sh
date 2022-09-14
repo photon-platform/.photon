@@ -19,6 +19,10 @@ sub "highlight"
 sudo apt install -y highlight
 highlight --version | tee -a $LOG
 
+sub "xclip"
+sudo apt install -y xclip
+xclip -version | tee -a $LOG
+
 sub "bat"
 sudo apt install -y bat
 mkdir -p ~/.local/bin
@@ -67,4 +71,4 @@ trash --version | tee -a $LOG
 # sudo snap install  yq
 
 sub "general utilities complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG

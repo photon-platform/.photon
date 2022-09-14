@@ -36,5 +36,5 @@ npm i -g canvas
 npm i -g editly
 
 
-sub "node complete
-elapsed_time $SECTION_TIME
+sub "node complete"
+elapsed_time $SECTION_TIME | tee -a $LOG

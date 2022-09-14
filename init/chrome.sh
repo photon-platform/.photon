@@ -18,5 +18,5 @@ sudo dpkg -i $CHROME
 rm $CHROME
 
 sub "chrome complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG
 

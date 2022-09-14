@@ -37,4 +37,4 @@ sub "gimp"
 sudo apt install -y gimp
 
 sub "graphics complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG

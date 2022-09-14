@@ -36,4 +36,4 @@ gsettings set org.gnome.desktop.interface overlay-scrolling false
 # sub gnome-tweak-tool
 # sudo apt install -y gnome-tweak-tool
 sub "gnome settings complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG

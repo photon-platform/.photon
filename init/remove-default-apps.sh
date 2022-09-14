@@ -20,5 +20,5 @@ sub cleanup
 sudo apt -y autoremove
 
 sub "remove default apps complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG
 

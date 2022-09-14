@@ -41,8 +41,9 @@ source ~/.photon/init/gsettings.sh
 source ~/.photon/init/remove-default-apps.sh
 source ~/.photon/init/update-system.sh
 
-source ~/.photon/init/git.sh
 source ~/.photon/init/general.sh
+source ~/.photon/init/git.sh
+
 source ~/.photon/init/python.sh
 source ~/.photon/init/vim.sh
 source ~/.photon/init/chrome.sh
@@ -57,23 +58,18 @@ SECTION_TIME="$(date -u +%s)"
 sudo apt update -y && sudo apt upgrade -y
 
 sub "final upgrade complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG
 if $PAUSE; then pause_enter; fi
 
 
 
 #####################################
 
-# END_TIME="$(date -u +%s)"
-# ELAPSED="$(($END_TIME-$START_TIME))"
-# TIME=$(convertsecstomin $ELAPSED)
-
 echo
-# sub "elapsed: ${txBold}$TIME${txReset} m:s"
-elapsed_time $START_TIME
+sub "INIT complete"
+elapsed_time $START_TIME | tee -a $LOG
 
 df . | tee -a  $LOG
-
 
 echo install manually:
 echo - pandoc.sh 

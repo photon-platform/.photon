@@ -72,4 +72,4 @@ pip install -U pydot
 pip install -U google-api-python-client
 
 sub "python settings complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG

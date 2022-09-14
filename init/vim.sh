@@ -47,4 +47,4 @@ git submodule update --init --recursive
 python3 install.py
 
 sub "vim complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG

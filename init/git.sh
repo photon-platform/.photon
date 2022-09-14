@@ -52,7 +52,7 @@ sub "test connection"
 ssh -T git@github.com
 
 sub "git settings complete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG
 pause_enter
 
 

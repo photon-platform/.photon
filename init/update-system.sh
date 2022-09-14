@@ -20,5 +20,5 @@ sub "apt autoremove"
 sudo apt autoremove -y
 
 sub "update system comlete"
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG
 

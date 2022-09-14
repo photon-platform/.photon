@@ -76,4 +76,4 @@ sudo pip install --upgrade youtube-dl
 youtube-dl --version | tee -a $LOG
 
 sub "media complete
-elapsed_time $SECTION_TIME
+elapsed_time $SECTION_TIME | tee -a $LOG
