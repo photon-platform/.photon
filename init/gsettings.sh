@@ -2,7 +2,6 @@
 
 # source ~/.photon/init/_utils.sh
 
-# clear -x
 title "gnome settings"
 if $PAUSE; then pause_enter; fi
 
@@ -11,7 +10,7 @@ SECTION_TIME="$(date -u +%s)"
 
 bg="file:///home/${USERNAME}/.photon/graphics/photon-wallpaper.png"
 
-gsettings set org.gnome.desktop.session idle-delay 0
+# gsettings set org.gnome.desktop.session idle-delay 0
 
 gsettings set org.gnome.desktop.background primary-color '#222222'
 gsettings set org.gnome.desktop.background secondary-color '#222222'
@@ -21,7 +20,7 @@ gsettings set org.gnome.desktop.background picture-uri-dark $bg
 gsettings set org.gnome.desktop.screensaver picture-uri $bg
 gsettings set org.gnome.desktop.screensaver picture-uri-dark $bg
 
-gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
+# gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 
 gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt']"
 

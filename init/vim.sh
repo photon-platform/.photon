@@ -22,7 +22,7 @@
 
 TITLE="VIM install and configuration"
 
-title $TITLE
+title "$TITLE"
 if $PAUSE; then pause_enter; fi
 
 SECTION_TIME="$(date -u +%s)"

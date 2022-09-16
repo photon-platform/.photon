@@ -2,17 +2,10 @@
 
 # source ~/.photon/init/_utils.sh
 
-# clear -x
 title "node"
 if $PAUSE; then pause_enter; fi
 
 SECTION_TIME="$(date -u +%s)"
-
-# echo
-# h1 "node"
-# echo
-# curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-# sudo apt-get install -y nodejs
 
 sub "nvm"
 echo
