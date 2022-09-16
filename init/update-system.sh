@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# PHOTON init - update-system
+# subscript for apt update, upgrade, autoremove
+#
+
 # source ~/.photon/init/_utils.sh
 
 title "update system"
