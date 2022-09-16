@@ -13,7 +13,7 @@ username=$(ask_value 'git user name' 'phiarchitect')
 useremail=$(ask_value 'git user email' 'phi@phiarchitect.com')
 # read -p "git user name: " username
 # read -p "git user email: " useremail
-echo 
+echo
 
 git config --global user.name $username
 git config --global user.email $useremail
@@ -50,7 +50,7 @@ cat "$key_file.pub"
 xclip -i "$key_file.pub" -selection clipboard
 open "https://github.com/settings/keys" > /dev/null 2> /dev/null &
 
-echo
+echo "press ENTER when done"
 pause_enter
 
 sub "test connection"

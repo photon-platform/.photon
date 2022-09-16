@@ -72,7 +72,7 @@ losslesscut --version | tee -a $LOG
 # sudo apt install -y lmms
 
 sub "youtube-dl"
-sudo pip install --upgrade youtube-dl
+pip install --upgrade youtube-dl
 youtube-dl --version | tee -a $LOG
 
 sub "media complete
