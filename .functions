@@ -70,6 +70,10 @@ function mkd() {
   mkdir -p "$@" && cd "$_"
 }
 
+function logstamp() {
+  date +"%y.%j-%H%M%S"
+}
+
 function timestamp() {
   date +"%Y%m%d-%H%M%S"
 }

@@ -88,6 +88,10 @@ function images_selected_actions() {
       x) images_selected_trash; ;;
       m) images_selected_migrate; ;;
       E) images_selected_exif; images_selected_actions; ;;
+      l)  
+        printf "%s\n" "${selected_images[@]}" | fzf > selected.lst
+        images_selected_actions
+        ;;
       v)  
         mapfile -t selected_images < <( printf "%s\n" "${selected_images[@]}" | fzf | sxiv -fba -o - )
         images_selected_actions

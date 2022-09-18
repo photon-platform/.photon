@@ -27,6 +27,7 @@ do
     "C-x")      xclip -in -filter | tr '\n' ' ' | xclip -in -selection clipboard ;;
     "C-c")      while read file; do xclip -selection clipboard -target image/png "$file"; done ;;
     "e") gnome-terminal -- bash -c "exiftool '$file' | less" & ;;
+    "s") convert "$file" -gravity Center -resize 1921  "$file.small.jpg" ;;
     "g") setsid -f gimp "$file" & ;;
     "d") setsid -f darktable "$file" & ;;
     "R") rotate 270 ;;

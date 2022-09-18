@@ -8,7 +8,8 @@ function tools_capture() {
   clear -x
   ui_header "CAPTURE $SEP $PWD"
 
-  gphoto2 --auto-detect
+  gio mount -s gphoto2
+  gphoto2 --summary
 
   tools_capture_actions
 

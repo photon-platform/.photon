@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-capture_project=$USER
+# capture_project=$USER
 
 function tools_capture_actions() {
   echo
