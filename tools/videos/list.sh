@@ -6,6 +6,7 @@ function videos_list_get() {
     -iname "*.mkv" -o \
     -iname "*.mp4" -o \
     -iname "*.mov" -o \
+    -iname "*.webm" -o \
     -iname "*.avi"  \
      | sort | sed 's|\./||'
 }
