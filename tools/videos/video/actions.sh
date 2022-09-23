@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+source ~/.photon/tools/videos/video/video_process.sh
+source ~/.photon/tools/videos/video/video_migrate.sh
+
 function video_actions() {
   declare -A actions
   actions['?']="help"
@@ -14,6 +17,7 @@ function video_actions() {
   actions[b]="video_build"
   actions[i]="video_migrate"
   actions[x]="video_trash"
+  actions[X]="video_extract_video"
 
   actions[h]="back to videos"
   actions[j]="move to next sibling video"
@@ -40,6 +44,7 @@ function video_actions() {
     e) video_edl "$file"; video "$file" $video_index; ;;
     m) video_melt_py "$file"; video "$file" $video_index; ;;
     b) video_build "$file"; ;;
+    X) video_extract_video "$file"; ;;
     w) video_wrap "$file"; ;;
     i) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
@@ -73,46 +78,6 @@ function video_actions() {
   esac
 }
 
-function video_migrate() {
-  img=$1
-
-  hr
-  ui_banner "MIGRATE $SEP $img"
-  echo
-
-  ext=${img##*.}
-  ext=$( slugify "$ext" )
-
-  project=$( ask_value "project" "$project" )
-  project=$( slugify "$project" )
-
-  activity=$( ask_value "activity" "$activity" )
-  activity=$( slugify "$activity" )
-
-  img_dt=$( exiftool -DateTimeOriginal "$img" -S | \
-    sed -n 's/^DateTimeOriginal\: \(.*\)/\1/p' | \
-    tr ":" " "  \
-    )
-  img_folder="$HOME/Media/$project/"
-  img_folder+=$( echo $img_dt | awk '{printf "%s/%s/%s/", $1, $2, $3}' )
-
-  img_file=$( echo $img_dt | awk '{printf "%s%s%s", $4, $5, $6}' )
-  img_file+="-$activity"
-
-  img_path="$img_folder$img_file"
-
-  c=1
-  while [[ -f "$img_path.$ext" ]]; do
-    img_path="$img_folder$img_file.$c"
-    (( c++ ))
-  done
-  img_path+=".$ext"
-
-  echo
-  img_path=$( ask_value "migrate to" "$img_path" ) 
-  mkdir -p "$img_folder"
-  mv "$img" "$img_path"
-}
 
 function video_edl() {
   file=$1
@@ -122,70 +87,12 @@ function video_edl() {
   fi
 }
 
-# vf="hue=s=0, eq=contrast=2:brightness=-.5" 
-VIDEO_FILTERS=()
-# VIDEO_FILTERS+=("hue=s=0")
-VIDEO_FILTERS+=("eq=contrast=2:brightness=-.5")
-VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
-VF="${VF%,}"
-
-function video_process() {
-  input=$1
-  if [[ "$input" == *.raw.mp4 ]]; then
-    output="${input%.raw.mp4}.mp4"
-
-    if [[ $output ]]; then
-      mv $output $output.bak
-    fi
-
-    # dur=$(ffprobe -hide_banner -i "$input"  -show_entries format=duration -v quiet -of csv="p=0")
-
-    echo
-    ui_banner "process video: "
-    h1 "vf=$VF"
-    h1 "af=$AF"
-    ffmpeg -y  -hide_banner \
-      -i "$input" \
-      -map_metadata 0 \
-      -vf "$VF" \
-      -af "$AF" \
-      "$output" 
-
-    echo
-
-    getExif "$input"
-    notes="$(getExifValue "Notes")"
-    processed="processed $( date +"%g.%j.%H%M%S" ) : vf='$VF' : af='$AF' "
-    if [[ $notes == "" ]]; then
-      notes="$processed"
-    else
-      notes+=" | $processed"
-    fi
-
-    exiftool -ec \
-      -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
-      -Title="$(getExifValue "Title")" \
-      -Description="$(getExifValue "Description")" \
-      -Notes="$notes" \
-      -Subject="$(getExifValue "Subject")" \
-      -Rating="$(getExifValue "Rating")" \
-      -Colorlabels="$(getExifValue "Colorlabels")" \
-      -Creator=$(getExifValue "Creator") \
-      -Publisher="$(getExifValue "Publisher")" \
-      -Copyright="$(getExifValue "Copyright")" \
-      -overwrite_original \
-      "$output"
-
-    video "$output"
-  else
-    echo "$input is not a raw file"
-  fi
-}
 
 function video_melt_py() {
   python3 ~/.photon/tools/videos/video/llc.py "$1"
-  
 }
+
+
 function video_melt() {
   tr=12
   
@@ -321,9 +228,23 @@ function video_melt() {
 }
 
 function video_build() {
-  video_file=$1
-  melt "$video_file.mlt"  -consumer avformat:"$video_file.mlt.mp4" 
-  video "$video_file.mlt.mp4"
+  # remove extension
+  video_file=${1%.*}
+  out_file="$video_file.mlt.${1##*.}"
+  melt "$video_file.mlt" -consumer avformat:"$out_file" 
+  video "$out_file"
+}
+
+function video_extract_video() {
+  # remove extension
+  video_stem=${1%.*}
+  out_file="$video_stem.video.${1##*.}"
+  echo extract $1 
+  echo to $out_file
+  pause_any
+
+  ffmpeg -i "$1" -c copy -an "$out_file" 
+  video "$out_file"
 }
 
 function video_wrap() {
