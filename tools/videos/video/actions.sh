@@ -80,7 +80,6 @@ function video_actions() {
       exiftool -Rating=$action "$file" -overwrite_original
       video "$file" $video_index
       ;;
-
     *)
       video "$file" $video_index;
       ;;
