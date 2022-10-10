@@ -72,6 +72,15 @@ function video_actions() {
     E) tools_exif_actions;
       video "$file" $video_index
       ;;
+    0)
+      exiftool -Rating= "$file" -overwrite_original
+      video "$file" $video_index
+      ;;
+    [1-9])
+      exiftool -Rating=$action "$file" -overwrite_original
+      video "$file" $video_index
+      ;;
+
     *)
       video "$file" $video_index;
       ;;

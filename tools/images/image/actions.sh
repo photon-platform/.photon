@@ -61,6 +61,14 @@ function image_actions() {
     E) tools_exif_actions;
       image "$file" $image_index
       ;;
+    0)
+      exiftool -Rating= "$file" -overwrite_original
+      image "$file" $image_index
+      ;;
+    [1-9])
+      exiftool -Rating=$action "$file" -overwrite_original
+      image "$file" $image_index
+      ;;
     *)
       image "$file" $image_index;
       ;;

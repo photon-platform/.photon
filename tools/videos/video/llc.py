@@ -2,7 +2,7 @@
 translate edl from losslesscut json5 file
 to a melt file to render video
 """
-import json5 
+import json5
 import sys, os
 from pathlib import Path
 import subprocess
@@ -27,14 +27,14 @@ def read_videoframerate(video_path) -> float:
             print(response)
             return 0
 
-        response = response.decode("utf-8") 
+        response = response.decode("utf-8")
         vfr = str(response).split(': ')[1]
         vfr = float(vfr)
         return vfr
     else:
         print(video_path, "is not a file.")
         return 0
-                
+
 
 def read_llc_segments(video_path) -> list:
     """open the corresponding llc file for the ``video_path``
@@ -110,13 +110,13 @@ def llc_to_mlt(video_path):
         action, data = label.split(': ')
         data = data.strip()
         print( start, end, action, data )
-        
+
         if action == 'clip':
             clip_track = track_ctr
             track_ctr += 1
 
             # add previous clip length to offest
-            clip_offset += clip_length 
+            clip_offset += clip_length
             steps = ['-track']
             if clip_offset:
                 steps.extend(['-blank', str(clip_offset)])
@@ -127,13 +127,13 @@ def llc_to_mlt(video_path):
             clip_in = start
             clip_out = end
             clip_length = end - start
-        
+
         elif action == 'img':
             start = start - clip_in
             end = end - clip_in
             steps = [
-                    '-attach', f'watermark:{data}', f'in={start}', f'out={end}', 
-                    '-transition', 'luma', 'a_track=0', 'b_track=1', 
+                    '-attach', f'watermark:{data}', f'in={start}', f'out={end}',
+                    '-transition', 'luma', 'a_track=0', 'b_track=1',
             ]
             cmd.extend(steps)
 
@@ -145,22 +145,22 @@ def llc_to_mlt(video_path):
             end = end - clip_in
             tr = 12
             steps = [
-                    '-track', 
-                    '-blank', str(clip_offset + start), 
+                    '-track',
+                    '-blank', str(clip_offset + start),
                     img_filename, f'out={end - start}',
-                    '-transition', 'luma', 
+                    '-transition', 'luma',
                         f'in={clip_offset + start}', f'out={clip_offset + start + tr}',
                         f'a_track={clip_track}', f'b_track={track_ctr}',
-                    '-transition', 'luma', 
+                    '-transition', 'luma',
                         f'in={clip_offset + end - tr}', f'out={clip_offset + end + 1}',
                         'reverse=1',
                         f'a_track={clip_track}', f'b_track={track_ctr}',
-                    '-transition', 'composite', 
+                    '-transition', 'composite',
                         f'a_track={clip_track}', f'b_track={track_ctr}',
             ]
             cmd.extend(steps)
             track_ctr += 1
-            
+
     #  suffix = video_path.suffix
     mlt_path = video_path.with_suffix('.mlt')
     mlt_file = str(mlt_path)
