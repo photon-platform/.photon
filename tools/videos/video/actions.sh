@@ -113,6 +113,7 @@ function video_build() {
   video_file=${1%.*}
   out_file="$video_file.mlt.${1##*.}"
   melt "$video_file.mlt" -consumer avformat:"$out_file" 
+  exiftool -tagsFromFile "$1" "$out_file" -overwrite_original
   video "$out_file"
 }
 
@@ -122,10 +123,14 @@ function video_extract_video() {
   out_file="$video_stem.video.${1##*.}"
   echo extract $1 
   echo to $out_file
-  pause_any
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    ffmpeg -i "$1" -c copy -an "$out_file" 
+    exiftool -tagsFromFile "$1" "$out_file" -overwrite_original
+    video "$out_file"
+  else
+    video "$1"
+  fi
 
-  ffmpeg -i "$1" -c copy -an "$out_file" 
-  video "$out_file"
 }
 
 function video_wrap() {
