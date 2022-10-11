@@ -10,7 +10,7 @@ function video_actions() {
 
   actions[l]="losslesscut"
   actions[s]="shotcut"
-  actions[p]="mpv"
+  actions[o]="mpv"
   actions[r]="video_process"
   actions[e]="video_edl"
   actions[m]="video_melt"
@@ -30,7 +30,12 @@ function video_actions() {
   hr
   P=" ${fgYellow}VIDEO${txReset}"
   read -n1 -p "$P > " action
-  printf " $SEP ${actions[$action]}\n\n"
+  if [[ $action ]]; then
+    action_desc=${actions[$action]}
+  else
+    action_desc=${actions[o]}
+  fi
+  printf " $SEP $action_desc\n\n"
   case $action in
     \?)
       for key in "${!actions[@]}"; do
@@ -39,8 +44,8 @@ function video_actions() {
       video_actions
       ;;
     q) videos; ;;
-    n) image_rename "$file"; videos; ;;
-    r) video_process "$file"; ;;
+    r) image_rename "$file"; videos; ;;
+    F) video_process "$file"; ;;
     e) video_edl "$file"; video "$file" $video_index; ;;
     m) video_melt_py "$file"; video "$file" $video_index; ;;
     b) video_build "$file"; ;;
@@ -49,7 +54,9 @@ function video_actions() {
     i) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
     l) losslesscut "$file"; video "$file" $video_index; ;;
-    p) mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
+    ""|o) 
+      #hit enter for open
+      mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
     s) shotcut "$file"; video "$file" $video_index; ;;
     h) videos ;;
     j)

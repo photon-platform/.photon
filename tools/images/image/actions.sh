@@ -6,7 +6,7 @@ function image_actions() {
   actions[q]="quit"
 
   actions[e]="gimp"
-  actions[v]="sxiv"
+  actions[o]="sxiv"
   actions[d]="darktable"
   actions[m]="image_migrate"
   actions[r]="image_rename"
@@ -23,7 +23,12 @@ function image_actions() {
   hr
   P=" ${fgYellow}IMAGE${txReset}"
   read -n1 -p "$P > " action
-  printf " $SEP ${actions[$action]}\n\n"
+  if [[ $action ]]; then
+    action_desc=${actions[$action]}
+  else
+    action_desc=${actions[o]}
+  fi
+  printf " $SEP $action_desc\n\n"
   case $action in
     \?)
       for key in "${!actions[@]}"; do
@@ -37,7 +42,9 @@ function image_actions() {
     r) image_rename "$file"; images; ;;
     x) image_trash "$file"; images; ;;
     e) gimp "$file"; image "$file" $image_index; ;;
-    v) sxiv -fba "$file"; image "$file" $image_index; ;;
+    ""|o) 
+      # hit enter to open
+      sxiv -fba "$file"; image "$file" $image_index; ;;
     d) darktable "$file"; image "$file" $image_index; ;;
     
     h) images ;;
@@ -124,7 +131,7 @@ function image_rename() {
   file=${file%.*}
   file=$( slugify "$file" )
   ext=${img##*.}
-  ext=$( slugify "$ext" )
+  # ext=$( slugify "$ext" )
   path=$(dirname "$img")
 
   hr
@@ -134,7 +141,7 @@ function image_rename() {
   echo
   path=$( ask_value "path:" "$path" ) 
   file=$( ask_value "file:" "$file" ) 
-  file=$( slugify $file )
+  file=$( slugify "$file" )
   new_file="$path/$file.$ext" 
   c=1
   while [[ -f "$new_file" ]]; do
@@ -142,8 +149,14 @@ function image_rename() {
     (( c++ ))
   done
   mkdir -p "$( dirname "$new_file" )"
-  mv "$img" "$new_file"
-  pause_any
+
+  echo Rename:
+  echo $img
+  echo $new_file
+  echo
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    mv "$img" "$new_file"
+  fi
 }
 
 
