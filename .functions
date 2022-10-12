@@ -163,10 +163,12 @@ function swp() {
 
 # https://gist.github.com/oneohthree/f528c7ae1e701ad990e6
 function slugify() {
+  # TODO: fix translation
+  # sed -E 's/[^a-zA-Z0-9]+/-/g' |\
   echo "$1" |\
     iconv -t ascii//TRANSLIT |\
     sed -E 's/[~\^]+//g' |\
-    sed -E 's/[^a-zA-Z0-9]+/-/g' |\
+    sed -E 's/[ ]+/-/g' |\
     sed -E 's/^-+\|-+$//g' |\
     sed -E 's/^-+//g' |\
     sed -E 's/-+$//g' |\
