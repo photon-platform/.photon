@@ -69,6 +69,11 @@ function video() {
     exif_keyvalue Publisher
     exif_keyvalue Copyright
 
+    echo
+    hr
+    video_stem=${1%.*}
+    ls $video_stem*
+
     video_actions
   else
     h1 "video not found"

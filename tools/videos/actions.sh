@@ -88,9 +88,17 @@ function videos_selected_actions() {
       q) clear -x; ;;
 
       x) videos_selected_trash; ;;
-      p) videos_selected_play; ;;
-      m) videos_selected_migrate; ;;
-      E) videos_selected_exif; videos_selected_actions; ;;
+      ""|o) videos_selected_play; ;;
+      # m) videos_selected_migrate; ;;
+      # E) videos_selected_exif; videos_selected_actions; ;;
+    0)
+      exiftool -Rating= "$file" -overwrite_original
+      video "$file" $video_index
+      ;;
+    [1-9])
+      exiftool -Rating=$action "$file" -overwrite_original
+      video "$file" $video_index
+      ;;
       *)
         videos_selected_actions
         ;;
