@@ -171,11 +171,12 @@ def llc_to_mlt(video_path):
 
     print()
     print(cmd)
-    sh_path = video_path.with_suffix('.mlt.sh')
-    #  with sh_path.open('w') as f:
-        #  f.write(' '.join(cmd))
-    sh_path.write_text(' '.join(cmd))
-    sh_path.chmod(0o777)
+    # write command to file
+    #  sh_path = video_path.with_suffix('.mlt.sh')
+    #  #  with sh_path.open('w') as f:
+        #  #  f.write(' '.join(cmd))
+    #  sh_path.write_text(' '.join(cmd))
+    #  sh_path.chmod(0o777)
 
     # generate mlt file
     subprocess.run(cmd)
