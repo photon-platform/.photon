@@ -37,6 +37,7 @@ function tools_record_actions() {
     y) sk; tools_record_actions ;;
     t) set_term; tools_record_actions ;;
     v) camera_full; tools_record_actions ;;
+    i) camera_show; tools_record_actions ;;
     G) tools_git; record; ;;
     F) folder; ;;
     A) audios; ;;
