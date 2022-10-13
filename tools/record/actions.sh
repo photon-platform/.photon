@@ -64,11 +64,13 @@ function record_screen() {
   echo
 
   AUDIO_OFFSET="0.33"
+  # AUDIO_OFFSET="0.153"
+  # AUDIO_OFFSET="0.0"
 
-  read -p " title: " title
   createdt=$( date )
   ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
 
+  read -p " title: " title
   slug=$( slugify "$title" )
   
   raw="$ts.$slug.raw.mp4"
@@ -77,11 +79,17 @@ function record_screen() {
 
   countdown
 
+  #use 
+  # pacmd list-sources | grep "name: <alsa"
+  SYS_AUDIO=alsa_output.pci-0000_0a_00.6.analog-stereo.monitor
+
   ffmpeg -y -hide_banner \
     -video_size 1920x1080 \
     -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
+    -f pulse -i $SYS_AUDIO \
+    -filter_complex "[1:a:0][2:a:0]amix=2[aout]" -map 0:V:0 -map "[aout]" \
     "$raw"
 
   ll $raw
