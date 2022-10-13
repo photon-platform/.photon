@@ -21,6 +21,8 @@ function video_process() {
 
     echo
     ui_banner "process video: "
+    VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
+    VF="${VF%,}"
     h1 "vf=$VF"
     h1 "af=$AF"
     ffmpeg -y  -hide_banner \
