@@ -88,9 +88,16 @@ function record_screen() {
     -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
-    -f pulse -i $SYS_AUDIO \
-    -filter_complex "[1:a:0][2:a:0]amix=2[aout]" -map 0:V:0 -map "[aout]" \
     "$raw"
+  
+  # ffmpeg -y -hide_banner \
+    # -video_size 1920x1080 \
+    # -framerate $FRAMERATE \
+    # -f x11grab -i :1+0,768 \
+    # -f pulse -i $BLUE \
+    # -f pulse -i $SYS_AUDIO \
+    # -filter_complex "[1:a:0][2:a:0]amix=2[aout]" -map 0:V:0 -map "[aout]" \
+    # "$raw"
 
   ll $raw
   echo
