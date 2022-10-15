@@ -81,9 +81,6 @@ def llc_to_mlt(video_path):
     :returns: TODO
 
     """
-
-    #  cwd = Path.cwd()
-
     video_path = Path(video_path)
 
     vfr = read_videoframerate(video_path)
