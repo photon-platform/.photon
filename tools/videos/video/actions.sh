@@ -53,7 +53,7 @@ function video_actions() {
     w) video_wrap "$file"; ;;
     i) video_migrate "$file"; videos; ;;
     x) video_trash "$file"; videos; ;;
-    l) losslesscut "$file"; video "$file" $video_index; ;;
+    l) losslesscut "$file" 2> /dev/null; video "$file" $video_index; ;;
     ""|o) 
       #hit enter for open
       mpv "$file" --keep-open=yes; video "$file" $video_index; ;;
