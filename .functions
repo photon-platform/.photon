@@ -11,6 +11,16 @@ function docs_build() {
 alias db=docs_build
 
 
+function trash() {
+  hr
+  ui_banner "TRASH $SEP $1"
+  echo
+
+  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    gio trash $img
+  fi
+}
+
 function ablog_build() {
   @
   tools_git

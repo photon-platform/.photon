@@ -160,7 +160,7 @@ function record_audio() {
 
   slug=$( slugify "$title" )
   
-  raw="$ts.$slug.raw.flac"
+  raw="$ts.$slug.raw.ogg"
 
   countdown
 
@@ -183,8 +183,6 @@ function record_audio() {
     -overwrite_original \
     "$raw"
 
-
-  echo file $raw >> .record
   audio "$raw"
 }
 

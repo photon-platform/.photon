@@ -71,8 +71,9 @@ function video() {
 
     echo
     hr
+    echo
     video_stem=${1%.*}
-    ls $video_stem*
+    ls -1 $video_stem*
 
     video_actions
   else

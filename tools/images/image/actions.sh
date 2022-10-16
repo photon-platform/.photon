@@ -40,7 +40,7 @@ function image_actions() {
 
     m) image_migrate "$file"; images; ;;
     r) image_rename "$file"; images; ;;
-    x) image_trash "$file"; images; ;;
+    x) trash "$file"; images; ;;
     e) gimp "$file"; image "$file" $image_index; ;;
     ""|o) 
       # hit enter to open
@@ -160,14 +160,3 @@ function image_rename() {
 }
 
 
-function image_trash() {
-  img=$1
-
-  hr
-  ui_banner "TRASH $SEP $img"
-  echo
-
-  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    gio trash "$img"
-  fi
-}

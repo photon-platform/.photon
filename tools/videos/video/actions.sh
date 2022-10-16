@@ -52,7 +52,7 @@ function video_actions() {
     X) video_extract_video "$file"; ;;
     w) video_wrap "$file"; ;;
     i) video_migrate "$file"; videos; ;;
-    x) video_trash "$file"; videos; ;;
+    x) trash "$file"; videos; ;;
     l) losslesscut "$file" 2> /dev/null; video "$file" $video_index; ;;
     ""|o) 
       #hit enter for open
@@ -144,15 +144,4 @@ function video_wrap() {
   -consumer avformat:build.mp4
   video build.mp4
 
-}
-function video_trash() {
-  img=$1
-
-  hr
-  ui_banner "TRASH $SEP $img"
-  echo
-
-  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    gio trash "$img"
-  fi
 }

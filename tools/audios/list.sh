@@ -4,6 +4,7 @@ function audios_list_get() {
   find . \
     -type f \
     -iname "*.flac" -o \
+    -iname "*.ogg" -o \
     -iname "*.mp3" -o \
     -iname "*.m4a" -o \
     -iname "*.opus" -o \

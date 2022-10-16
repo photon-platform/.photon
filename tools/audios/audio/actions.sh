@@ -7,7 +7,7 @@ function audio_actions() {
 
   actions[l]="losslesscut"
   actions[u]="audacity"
-  actions[p]="mpv"
+  actions[o]="mpv"
   actions[r]="audio_process"
   actions[e]="audio_edl"
   actions[m]="audio_migrate"
@@ -34,15 +34,16 @@ function audio_actions() {
       ;;
     q) audios; ;;
     n) image_rename "$file"; audios; ;;
-    m) audio_migrate "$file"; audios; ;;
+    # m) audio_migrate "$file"; audios; ;;
+    m) video_melt_py "$file"; audio "$file" $audio_index ;;
     r) audio_process "$file"; ;;
     e) audio_edl "$file"; audio "$file" $audio_index; ;;
     # m) audio_melt "$file"; audio "$file" $audio_index; ;;
     # b) audio_build "$file"; audio "$file" $audio_index; ;;
-    x) audio_trash "$file"; audios; ;;
-    l) losslesscut "$file"; audio "$file" $audio_index; ;;
-    u) audacity "$file"; audio "$file" $audio_index; ;;
-    p) mpv "$file" --keep-open=yes; audio "$file" $audio_index; ;;
+    x) trash "$file"; audios; ;;
+    l) losslesscut "$file" 2> /dev/null; audio "$file" $audio_index; ;;
+    u) audacity "$file" 2> /dev/null; audio "$file" $audio_index; ;;
+    ""|o) mpv "$file" --keep-open=yes; audio "$file" $audio_index; ;;
     h) audios ;;
     j)
       id=$((audio_index + 1))
@@ -277,14 +278,14 @@ function audio_melt() {
   melt "$file.mlt"
 }
 
-function audio_trash() {
-  img=$1
+# function audio_trash() {
+  # img=$1
 
-  hr
-  ui_banner "TRASH $SEP $img"
-  echo
+  # hr
+  # ui_banner "TRASH $SEP $img"
+  # echo
 
-  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    gio trash "$img"
-  fi
-}
+  # if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    # gio trash "$img"
+  # fi
+# }
