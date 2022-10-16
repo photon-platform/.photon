@@ -53,9 +53,10 @@ sub "neofetch"
 sudo apt install -y neofetch
 neofetch --version | tee -a $LOG
 
-sub "trash-cli"
-sudo apt install -y trash-cli
-trash --version | tee -a $LOG
+# use gio trash
+# sub "trash-cli"
+# sudo apt install -y trash-cli
+# trash --version | tee -a $LOG
 
 # sub "tesseract-ocr"
 # sudo apt install -y tesseract-ocr
