@@ -249,16 +249,20 @@ function record_camera() {
   ui_banner "offset: $AUDIO_OFFSET"
   AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
   AF="${AF%,}"
+  VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
+  VF="${VF%,}"
+  VF="hflip,$VF"
   ffmpeg -hide_banner \
     -i "$raw" -itsoffset $AUDIO_OFFSET \
     -i "$raw" \
     -map 0:v -map 1:a  \
     -af "$AF" \
+    -vf "$VF" \
     $output
 
   getExif "$raw"
   notes="$(getExifValue "Notes")"
-  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$af' "
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
   if [[ $notes == "" ]]; then
     notes="$processed"
   else
