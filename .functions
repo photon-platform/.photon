@@ -13,11 +13,11 @@ alias db=docs_build
 
 function trash() {
   hr
-  ui_banner "TRASH $SEP $1"
+  ui_banner "TRASH $SEP $@"
   echo
 
   if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    gio trash $img
+    gio trash $@
   fi
 }
 
