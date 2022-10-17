@@ -112,7 +112,7 @@ function video_build() {
   # remove extension
   video_file=${1%.*}
   out_file="$video_file.mlt.${1##*.}"
-  melt "$video_file.mlt" -consumer avformat:"$out_file" 
+  melt "$video_file.mlt" -consumer avformat:"$out_file" vcodec=libx264 vb=2M
   exiftool -tagsFromFile "$1" "$out_file" -overwrite_original
   video "$out_file"
 }
