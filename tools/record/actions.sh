@@ -75,7 +75,6 @@ function record_screen() {
   
   raw="$ts.$slug.raw.mp4"
   output="$ts.$slug.mp4"
-  af="highpass=f=100, volume=volume=5dB, afftdn" 
 
   countdown
 
@@ -114,59 +113,55 @@ function record_screen() {
     -overwrite_original \
     "$raw"
 
+  AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
+  AF="${AF%,}"
   ffmpeg -hide_banner \
     -i "$raw" -itsoffset $AUDIO_OFFSET \
     -i "$raw" \
     -map 0:v -map 1:a  \
-    -af "$af" \
-    $output
+    -af "$AF" \
+    "$output"
 
   getExif "$raw"
   notes="$(getExifValue "Notes")"
-  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$af' "
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
   if [[ $notes == "" ]]; then
     notes="$processed"
   else
     notes+=" | $processed"
   fi
 
+  exiftool -tagsFromFile "$raw" "$output" -overwrite_original
   exiftool -ec \
-    -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
-    -Title="$(getExifValue "Title")" \
-    -Description="$(getExifValue "Description")" \
     -Notes="$notes" \
-    -Subject="$(getExifValue "Subject")" \
-    -Rating="$(getExifValue "Rating")" \
-    -Colorlabels="$(getExifValue "Colorlabels")" \
-    -Creator=$(getExifValue "Creator") \
-    -Publisher="$(getExifValue "Publisher")" \
-    -Copyright="$(getExifValue "Copyright")" \
     -overwrite_original \
     "$output"
 
-  echo file $output >> .record
   video "$output"
 }
 
 alias Ra=record_audio
 function record_audio() {
+  EXT=m4a
+
   clear -x
   ui_banner "RECORD • audio"
   echo
 
-  read -p " title: " title
   createdt=$( date )
   ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
 
+  read -p " title: " title
   slug=$( slugify "$title" )
   
-  raw="$ts.$slug.raw.ogg"
+  raw="$ts.$slug.raw.$EXT"
+  output="$ts.$slug.$EXT"
 
   countdown
 
   ffmpeg -y -hide_banner \
     -f pulse -i $BLUE \
-    $raw
+    "$raw"
 
   ll $raw
   echo
@@ -183,7 +178,29 @@ function record_audio() {
     -overwrite_original \
     "$raw"
 
-  audio "$raw"
+  AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
+  AF="${AF%,}"
+  ffmpeg -hide_banner \
+    -i "$raw" \
+    -af "$AF" \
+    $output
+
+  getExif "$raw"
+  notes="$(getExifValue "Notes")"
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
+  if [[ $notes == "" ]]; then
+    notes="$processed"
+  else
+    notes+=" | $processed"
+  fi
+
+  exiftool -tagsFromFile "$raw" "$output" -overwrite_original
+  exiftool -ec \
+    -Notes="$notes" \
+    -overwrite_original \
+    "$output"
+
+  audio "$output"
 }
 
 alias Rc=record_camera
@@ -193,13 +210,14 @@ function record_camera() {
   TRIM_END=0
   SIZE="1920x1080"
 
-  read -p "title: " title
   createdt=$( date )
   ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
 
+  read -p " title: " title
   slug=$( slugify "$title" )
   
-  output="$ts.$slug.raw.mp4"
+  raw="$ts.$slug.raw.mp4"
+  output="$ts.$slug.mp4"
 
   echo
   ui_banner "recording: $output"
@@ -210,25 +228,13 @@ function record_camera() {
     -video_size $SIZE \
     -f v4l2 -input_format mjpeg -i $CAMERA \
     -f pulse  -ac 2  -i $MIC \
-    "$output" 
+    "$raw" 
 
-  ll $output
+  ll $raw
   echo
   h1 "Press ENTER to complete metadata"
   pause_enter
   echo
-
-  echo
-  ui_banner "offset: $AUDIO_OFFSET"
-  ffmpeg -y  -hide_banner \
-    -i "$output" -itsoffset $AUDIO_OFFSET \
-    -i "$output" \
-    -map_metadata 0 \
-    -map 0:v -map 1:a  \
-    -c copy \
-    "tmp.mp4" 
-
-  mv "tmp.mp4" "$output"
 
   exiftool \
     -Title="$title" \
@@ -237,20 +243,34 @@ function record_camera() {
     -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
     -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
     -overwrite_original \
+    "$raw"
+
+  echo
+  ui_banner "offset: $AUDIO_OFFSET"
+  AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
+  AF="${AF%,}"
+  ffmpeg -hide_banner \
+    -i "$raw" -itsoffset $AUDIO_OFFSET \
+    -i "$raw" \
+    -map 0:v -map 1:a  \
+    -af "$AF" \
+    $output
+
+  getExif "$raw"
+  notes="$(getExifValue "Notes")"
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$af' "
+  if [[ $notes == "" ]]; then
+    notes="$processed"
+  else
+    notes+=" | $processed"
+  fi
+
+  exiftool -tagsFromFile "$raw" "$output" -overwrite_original
+  exiftool -ec \
+    -Notes="$notes" \
+    -overwrite_original \
     "$output"
 
-  echo file $output >> .record
   video "$output"
 }
-
-# function screen_full() {
-  # output="$( make_filename ).mp4"
-  # ffmpeg -hide_banner \
-    # -video_size 1920x1848 \
-    # -framerate $FRAMERATE \
-    # -f x11grab -i :1+0,0 \
-    # -f pulse -i $BLUE \
-    # "$output"
-  # mpv "$output"
-# }
 

@@ -45,7 +45,7 @@ function video_actions() {
       ;;
     q) videos; ;;
     r) image_rename "$file"; videos; ;;
-    F) video_process "$file"; ;;
+    f) video_filter "$file"; ;;
     e) video_edl "$file"; video "$file" $video_index; ;;
     m) video_melt_py "$file"; video "$file" $video_index; ;;
     b) video_build "$file"; ;;
