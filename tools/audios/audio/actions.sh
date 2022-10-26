@@ -7,7 +7,7 @@ function audio_actions() {
 
   actions[l]="losslesscut"
   actions[u]="audacity"
-  actions[p]="mpv"
+  actions[o]="mpv"
   actions[r]="audio_process"
   actions[e]="audio_edl"
   actions[m]="audio_migrate"
@@ -34,15 +34,16 @@ function audio_actions() {
       ;;
     q) audios; ;;
     n) image_rename "$file"; audios; ;;
-    m) audio_migrate "$file"; audios; ;;
-    r) audio_process "$file"; ;;
+    # m) audio_migrate "$file"; audios; ;;
+    f) audio_filter "$file"; ;;
     e) audio_edl "$file"; audio "$file" $audio_index; ;;
-    # m) audio_melt "$file"; audio "$file" $audio_index; ;;
+    w) audio_waveform "$file"; audio "$file" $audio_index; ;;
+    m) audio_melt "$file"; audio "$file" $audio_index ;;
     # b) audio_build "$file"; audio "$file" $audio_index; ;;
-    x) audio_trash "$file"; audios; ;;
-    l) losslesscut "$file"; audio "$file" $audio_index; ;;
-    u) audacity "$file"; audio "$file" $audio_index; ;;
-    p) mpv "$file" --keep-open=yes; audio "$file" $audio_index; ;;
+    x) trash "$file"; audios; ;;
+    l) losslesscut "$file" 2> /dev/null; audio "$file" $audio_index; ;;
+    u) audacity "$file" 2> /dev/null; audio "$file" $audio_index; ;;
+    ""|o) mpv "$file" --keep-open=yes; audio "$file" $audio_index; ;;
     h) audios ;;
     j)
       id=$((audio_index + 1))
@@ -68,6 +69,12 @@ function audio_actions() {
       audio "$file" $audio_index;
       ;;
   esac
+}
+
+function audio_waveform() {
+    ffmpeg -i "$1" -filter_complex "showwavespic=s=1920x1080" -frames:v 1 "$1.png"
+    sxiv "$1.png"
+    rm "$1.png"
 }
 
 function audio_migrate() {
@@ -116,83 +123,59 @@ function audio_migrate() {
 # af="adeclick,deesser=i=1,afftdn=nr=80:nf=-20:nt=w:om=o,highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=14" 
 
 AUDIO_FILTERS=()
-# AUDIO_FILTERS+=("deesser=i=1")
-AUDIO_FILTERS+=("highpass=f=70")
-AUDIO_FILTERS+=("lowpass=f=3000")
 AUDIO_FILTERS+=("afftdn")
-AUDIO_FILTERS+=("volume=volume=7dB")
+AUDIO_FILTERS+=("deesser=i=0.5")
+AUDIO_FILTERS+=("highpass=f=70")
+# AUDIO_FILTERS+=("lowpass=f=3000")
+AUDIO_FILTERS+=("volume=volume=5dB")
 AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
 AF="${AF%,}"
 
-function audio_process() {
+
+function audio_filter() {
   input=$1
-  if [[ "$input" == *.raw.flac ]]; then
-    output="${input%.raw.flac}.m4a"
+  input_stem=${input%.*}
+  output="$input_stem.af.${input##*.}"
 
-    if [[ $output ]]; then
-      mv $output $output.bak
-    fi
-
-    # af="highpass=f=100, volume=volume=5dB, afftdn" 
-    # af="$AF" 
-    # dur=$(ffprobe -hide_banner -i "$input"  -show_entries format=duration -v quiet -of csv="p=0")
-
-    echo
-    ui_banner "process audio: "
-    h1 "$AF"
-
-    ffmpeg -y  -hide_banner \
-      -i "$input" \
-      -map_metadata 0 \
-      -af "$AF" \
-      "$output" 
-
-    echo
-
-    getExif "$input"
-    notes="$(getExifValue "Notes")"
-    processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
-    if [[ $notes == "" ]]; then
-      notes="$processed"
-    else
-      notes+=" | $processed"
-    fi
-
-    exiftool -ec \
-      -DateTimeOriginal="$(getExifValue "DateTimeOriginal")" \
-      -Title="$(getExifValue "Title")" \
-      -Description="$(getExifValue "Description")" \
-      -Notes="$notes" \
-      -Subject="$(getExifValue "Subject")" \
-      -Rating="$(getExifValue "Rating")" \
-      -Colorlabels="$(getExifValue "Colorlabels")" \
-      -Creator=$(getExifValue "Creator") \
-      -Publisher="$(getExifValue "Publisher")" \
-      -Copyright="$(getExifValue "Copyright")" \
-      -overwrite_original \
-      "$output"
-
-    audio "$output"
-  else
-    echo "$input is not a raw file"
+  if [[ $output ]]; then
+    mv $output $output.bak
   fi
+
+  echo
+  ui_banner "filter audio: "
+  h1 "$AF"
+
+  ffmpeg -y  -hide_banner \
+    -i "$input" \
+    -map_metadata 0 \
+    -af "$AF" \
+    "$output" 
+
+  echo
+
+  getExif "$input"
+  notes="$(getExifValue "Notes")"
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
+  if [[ $notes == "" ]]; then
+    notes="$processed"
+  else
+    notes+=" | $processed"
+  fi
+
+  exiftool -tagsFromFile "$input" "$output" -overwrite_original
+  exiftool -ec \
+    -Notes="$notes" \
+    -overwrite_original \
+    "$output"
+
+  audio "$output"
 }
 
 function audio_edl() {
   file=$1
-  edl_file="${file%.*}-llc-edl.csv"
+  edl_file="${file%.*}-proj.llc"
   if [[ -f "$edl_file" ]]; then
-    awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file"
-    # mapfile  segments \
-      # < <( awk -F, '{printf "%8s %8s %s\n", int(24*$1), int(24*$2), $3}' "$edl_file" )
-    # segments_count=${#segments[@]}
-    # for segment in "${segments[@]}"; do
-      # echo $segment
-    # done
-    echo
-    if [[ "$( ask_truefalse "edit?" )" == "true" ]]; then
       vim "$edl_file"
-    fi
   fi
 }
 
@@ -277,14 +260,14 @@ function audio_melt() {
   melt "$file.mlt"
 }
 
-function audio_trash() {
-  img=$1
+# function audio_trash() {
+  # img=$1
 
-  hr
-  ui_banner "TRASH $SEP $img"
-  echo
+  # hr
+  # ui_banner "TRASH $SEP $img"
+  # echo
 
-  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    gio trash "$img"
-  fi
-}
+  # if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
+    # gio trash "$img"
+  # fi
+# }

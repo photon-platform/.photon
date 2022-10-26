@@ -9,7 +9,9 @@ function camera_show() {
   camera_off "$CAMERA"
   SIZE=1024x768
   # VF="hflip, crop=940:500, hue=s=0, eq=contrast=2:brightness=-.5" 
-  VF="hflip, crop=940:500, eq=contrast=2:brightness=-.5" 
+  VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
+  VF="${VF%,}"
+  VF="hflip, crop=940:500, $VF"
   ffplay -noborder -hide_banner -loglevel quiet \
     -video_size $SIZE \
     -framerate $FRAMERATE \
@@ -23,6 +25,9 @@ function camera_full() {
   CAMERA=${1:-$MAIN}
   camera_off "$CAMERA"
   SIZE=1920x1080
+  VF=$(printf '%s,' "${VIDEO_FILTERS[@]}")
+  VF="${VF%,}"
+  VF="hflip, $VF"
   ffplay -fs -noborder -hide_banner -loglevel quiet \
     -video_size $SIZE \
     -framerate $FRAMERATE \

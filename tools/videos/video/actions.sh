@@ -45,14 +45,14 @@ function video_actions() {
       ;;
     q) videos; ;;
     r) image_rename "$file"; videos; ;;
-    F) video_process "$file"; ;;
+    f) video_filter "$file"; ;;
     e) video_edl "$file"; video "$file" $video_index; ;;
     m) video_melt_py "$file"; video "$file" $video_index; ;;
     b) video_build "$file"; ;;
     X) video_extract_video "$file"; ;;
     w) video_wrap "$file"; ;;
     i) video_migrate "$file"; videos; ;;
-    x) video_trash "$file"; videos; ;;
+    x) trash "$file"; videos; ;;
     l) losslesscut "$file" 2> /dev/null; video "$file" $video_index; ;;
     ""|o) 
       #hit enter for open
@@ -112,7 +112,7 @@ function video_build() {
   # remove extension
   video_file=${1%.*}
   out_file="$video_file.mlt.${1##*.}"
-  melt "$video_file.mlt" -consumer avformat:"$out_file" 
+  melt "$video_file.mlt" -consumer avformat:"$out_file" vcodec=libx264 vb=2M
   exiftool -tagsFromFile "$1" "$out_file" -overwrite_original
   video "$out_file"
 }
@@ -144,15 +144,4 @@ function video_wrap() {
   -consumer avformat:build.mp4
   video build.mp4
 
-}
-function video_trash() {
-  img=$1
-
-  hr
-  ui_banner "TRASH $SEP $img"
-  echo
-
-  if [[ "$( ask_truefalse "continue" )" == "true" ]]; then
-    gio trash "$img"
-  fi
 }

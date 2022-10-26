@@ -32,6 +32,9 @@ function audio() {
 
     hr
     echo " $( getExifValue "Duration" ) ${fgg08}[${txReset} $( getExifValue "FileSize" ) ${fgg08}]${txReset}"
+    echo " channels:"    $( getExifValue "AudioChannels" )
+    echo " sample rate": $( getExifValue "SampleRate" )
+    echo " bitrate:"     $( getExifValue "NominalBitrate" )
     hr
 
     echo

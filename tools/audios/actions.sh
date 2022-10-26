@@ -88,7 +88,7 @@ function audios_selected_actions() {
       q) clear -x; ;;
 
       x) audios_selected_trash; ;;
-      p) audios_selected_play; ;;
+      ""|o) audios_selected_play; ;;
       m) audios_selected_migrate; ;;
       E) audios_selected_exif; audios_selected_actions; ;;
       *)
