@@ -6,8 +6,12 @@ if $PAUSE; then pause_enter; fi
 
 SECTION_TIME="$(date -u +%s)"
 
-sub python3
-sudo apt install -y python3
+# set up for getting latest version
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:deadsnakes/ppa
+
+sub python3.10
+sudo apt install -y python3.10
 python3 --version | tee -a $LOG
 
 sub python3-dev
