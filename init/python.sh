@@ -65,6 +65,7 @@ pip install -U twine
 pip install -U Sphinx
 pip install -U graphviz
 pip install -U pydot
+pip install -U m2r
 
 # pip install -U ladybug-core
 # pip install -U lbt-ladybug
