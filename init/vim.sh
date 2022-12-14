@@ -53,7 +53,7 @@ if [[ -e $HOME/.vim ]]; then
     echo mv ~/.vim ~/.vim.$D.bak
     mv $HOME/.vim $HOME/.vim.$D.bak
 fi
-git clone git@github.com:photon-platform/.vim --recurse-submodules
+git clone git@github.com:photon-platform/vim --recurse-submodules .vim
 
 sub "install fzf"
 cd ~/.vim/photon/fzf-util
