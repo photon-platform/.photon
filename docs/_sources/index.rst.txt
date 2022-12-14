@@ -1,8 +1,7 @@
+PHOTON platform • .photon
+=========================
 
-PHOTON platform • logger
-========================
 .. include:: README.rst
-
 
 recent logs:
 ------------
@@ -20,11 +19,10 @@ urgent todos:
    :excerpts:
 
 
-
 .. toctree::
+   :hideen"
    :maxdepth: 2
 
-   modules/photonplatform.logger.rst
 
 
 
