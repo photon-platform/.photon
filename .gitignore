@@ -1,5 +1,7 @@
-*.sw?
-.*.sw?
+__pycache__
+.doctrees
 tags
-**.pyc
-**/*.pyc
+*.swp
+*.egg-info/
+*.egg-info
+*.py[cod]
