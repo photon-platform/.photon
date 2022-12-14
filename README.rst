@@ -1,6 +1,3 @@
-.photon
-=======
-
 configurations for the PHOTON platform
 --------------------------------------
 
