@@ -20,7 +20,7 @@ urgent todos:
 
 
 .. toctree::
-   :hideen"
+   :hidden:
    :maxdepth: 2
 
 
