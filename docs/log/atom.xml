@@ -2,8 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://photon-platform.github.io/.photon</id>
   <title>PHOTON platform • .photon</title>
-  <updated>2022-12-14T18:37:46.518117+00:00</updated>
+  <updated>2022-12-16T18:10:49.057939+00:00</updated>
   <link href="https://photon-platform.github.io/.photon"/>
   <link href="https://photon-platform.github.io/.photon/log/atom.xml" rel="self"/>
   <generator uri="https://ablog.readthedocs.org/" version="0.10.26.dev4+g4d03eb4">ABlog</generator>
+  <entry>
+    <id>https://photon-platform.github.io/.photon/log/22.350-100911/</id>
+    <title>Welcome to .photon project</title>
+    <updated>2022-12-16T10:09:11-08:00</updated>
+    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
+&lt;p&gt;First entry for the log system&lt;/p&gt;
+&lt;/div&gt;
+</content>
+    <link href="https://photon-platform.github.io/.photon/log/22.350-100911/" rel="alternate"/>
+    <summary>First entry for the log system</summary>
+    <published>2022-12-16T10:09:11-08:00</published>
+  </entry>
 </feed>
