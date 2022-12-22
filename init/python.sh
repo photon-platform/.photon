@@ -7,12 +7,13 @@ if $PAUSE; then pause_enter; fi
 SECTION_TIME="$(date -u +%s)"
 
 # set up for getting latest version
-sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:deadsnakes/ppa
+# TODO: this does not work in chromebook
+# sudo apt install software-properties-common -y
+# sudo add-apt-repository ppa:deadsnakes/ppa -y
+# sudo apt-get update -y
 
-sub python3.10
-sudo apt install -y python3.10
-python3 --version | tee -a $LOG
+# sub python3.10
+# sudo apt install -y python3.10
 
 sub python3-dev
 sudo apt install -y python3-dev
