@@ -21,8 +21,9 @@ urgent todos:
 
 .. toctree::
    :hidden:
-   :maxdepth: 2
+   :maxdepth: 3
 
+   init/index.rst
    tools/index.rst
 
 
