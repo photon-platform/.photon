@@ -7,4 +7,4 @@ Bash scripts for general tasks
 
 .. toctree::
 
-   **/*.rst
+   record/index.rst

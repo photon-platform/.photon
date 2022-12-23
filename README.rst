@@ -1,8 +1,5 @@
-configurations for the PHOTON platform
---------------------------------------
+The **.photon**  project is the set of configurations and utilities for the PHOTON_ platform. 
 
-for more about the **PHOTON platform**, visit
-https://photon-platform.net
 
 clone this repository to the users home directory
 
@@ -37,3 +34,5 @@ all sites are created in ``~/SITES``
 
 the ``sites`` command alone will cd to the folder and list the current
 sites
+
+.. _PHOTON: https://photon-platform.github.io

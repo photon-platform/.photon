@@ -3,9 +3,7 @@ Tools
 
 
 Bash scripts for general tasks
-------------------------------
 
 .. toctree::
-   :glob:
 
-   **/*.rst
+   record/index.rst
