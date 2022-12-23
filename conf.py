@@ -1,7 +1,7 @@
 from ablog.conf import *
 
 org = 'photon-platform'
-org_name = 'PHOTON platform'
+org_name = 'PHOTON'
 
 repo = '.photon'
 repo_name = '.photon'
