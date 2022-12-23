@@ -1,5 +1,6 @@
 --exclude=.git
 --exclude=.config
+--exclude=docs
 --exclude=**/vendor
 --exclude=**/node_modules
 --exclude=**/packages

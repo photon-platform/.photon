@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://photon-platform.github.io/.photon</id>
-  <title>PHOTON platform • .photon</title>
-  <updated>2022-12-23T13:14:31.769355+00:00</updated>
+  <title>PHOTON • .photon</title>
+  <updated>2022-12-23T13:41:09.662996+00:00</updated>
   <link href="https://photon-platform.github.io/.photon"/>
   <link href="https://photon-platform.github.io/.photon/log/atom.xml" rel="self"/>
   <generator uri="https://ablog.readthedocs.org/" version="0.10.26.dev4+g4d03eb4">ABlog</generator>
