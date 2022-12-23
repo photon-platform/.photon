@@ -1,5 +1,5 @@
-PHOTON platform • .photon
-=========================
+PHOTON • .photon
+================
 
 .. include:: README.rst
 
@@ -23,6 +23,7 @@ urgent todos:
    :hidden:
    :maxdepth: 2
 
+   tools/index.rst
 
 
 

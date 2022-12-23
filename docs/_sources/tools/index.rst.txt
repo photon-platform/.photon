@@ -6,6 +6,5 @@ Bash scripts for general tasks
 ------------------------------
 
 .. toctree::
-   :glob:
 
    **/*.rst
