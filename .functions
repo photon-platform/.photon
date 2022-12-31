@@ -33,7 +33,7 @@ alias abb=ablog_build
 
 function log() {
   @
-  python -m photonplatform.logger
+  python -m photonplatform.logger.logger
   cd log
   tools_git
   cd -
