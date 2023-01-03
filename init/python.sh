@@ -72,6 +72,9 @@ pip install -U graphviz
 pip install -U pydot
 pip install -U m2r
 
+# https://github.com/Tinche/aiofiles
+pip install -U aiofiles
+
 # pip install -U ladybug-core
 # pip install -U lbt-ladybug
 
