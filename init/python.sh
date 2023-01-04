@@ -72,6 +72,10 @@ pip install -U graphviz
 pip install -U pydot
 pip install -U m2r
 
+pip install -U aiofiles
+
+pip isntall -U myst-parser
+
 # pip install -U ladybug-core
 # pip install -U lbt-ladybug
 
