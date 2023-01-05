@@ -26,6 +26,7 @@ function list_text_files() {
     -name ".git" -prune -o \
     -name "__pycache__" -prune -o \
     -name ".ipynb_checkpoints" -prune -o \
+    -name ".doctrees" -prune -o \
     -name "bundle" -prune -o \
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
@@ -55,6 +56,7 @@ function list_recent() {
     -name "node_modules" -prune -o \
     -name "__pycache__" -prune -o \
     -name ".ipynb_checkpoints" -prune -o \
+    -name ".doctrees" -prune -o \
     -name "cache" -prune -o \
     -name ".cache" -prune -o \
     -name ".mozilla" -prune -o \
@@ -66,6 +68,6 @@ function list_recent() {
     -type f -name "*.map" -prune -o \
     -type f -name "*.index" -prune -o \
     -type f -name "*" \
-    -printf "%A@ %p\n" | sort -nr | awk '{print $2}' | sed 's|\./||'
+    -printf "%A@ %p\n" | sort -nr | sed 's|^\w*\.\w*\s||' | sed 's|\./||' 
 }
 

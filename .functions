@@ -117,9 +117,23 @@ function vf() {
 }
 
 function vr() {
-  files=$( list_recent | fzf )
-  if [[ $files ]]; then
-    vim $files
+  # files=$( list_recent | fzf )
+  # mapfile -d \0 -t files < <( list_recent | fzf --print0 )
+  mapfile -t files < <( list_recent | fzf  )
+  files_list=""
+  for f in "${files[@]}"; do
+    echo $f
+    files_list+="\"${f}\" "
+    
+  done
+
+  echo "${files[@]}"
+  echo $files_list
+  pause_any
+  
+
+  if [[ $files_list ]]; then
+    eval vim $files_list
   fi
 }
 
