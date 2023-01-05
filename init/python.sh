@@ -75,6 +75,8 @@ pip install -U m2r
 # https://github.com/Tinche/aiofiles
 pip install -U aiofiles
 
+pip isntall -U myst-parser
+
 # pip install -U ladybug-core
 # pip install -U lbt-ladybug
 
