@@ -110,9 +110,15 @@ function mv_bak() {
 
 # Find and open in Vim
 function vf() {
-  files=$( list_text_files | sort | fzf )
-  if [[ $files ]]; then
-    vim $files
+  # files=$( list_text_files | sort | fzf )
+  mapfile -t files < <( list_text_files | sort | fzf )
+  files_list=""
+  for f in "${files[@]}"; do
+    files_list+="\"${f}\" "
+  done
+
+  if [[ $files_list ]]; then
+    eval vim $files_list
   fi
 }
 
@@ -122,15 +128,12 @@ function vr() {
   mapfile -t files < <( list_recent | fzf  )
   files_list=""
   for f in "${files[@]}"; do
-    echo $f
     files_list+="\"${f}\" "
-    
   done
 
-  echo "${files[@]}"
-  echo $files_list
-  pause_any
-  
+  # echo "${files[@]}"
+  # echo $files_list
+  # pause_any
 
   if [[ $files_list ]]; then
     eval vim $files_list
