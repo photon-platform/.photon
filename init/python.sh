@@ -67,10 +67,12 @@ pip install -U python-slugify
 
 pip install -U build
 pip install -U twine
+
 pip install -U Sphinx
 pip install -U graphviz
 pip install -U pydot
 pip install -U m2r
+pip install -U python-frontmatter
 
 # https://github.com/Tinche/aiofiles
 pip install -U aiofiles
