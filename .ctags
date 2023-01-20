@@ -1,4 +1,5 @@
 --exclude=.git
+--exclude=.archive
 --exclude=.config
 --exclude=docs
 --exclude=**/vendor
