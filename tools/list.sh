@@ -4,6 +4,10 @@ function list_working_files() {
   # find . \
   find "$PWD" \
     -name ".git" -prune -o \
+    -name "__pycache__" -prune -o \
+    -name ".ipynb_checkpoints" -prune -o \
+    -name ".doctrees" -prune -o \
+    -name "docs" -prune -o \
     -name "bundle" -prune -o \
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
@@ -27,6 +31,7 @@ function list_text_files() {
     -name "__pycache__" -prune -o \
     -name ".ipynb_checkpoints" -prune -o \
     -name ".doctrees" -prune -o \
+    -name "docs" -prune -o \
     -name "bundle" -prune -o \
     -name "vendor" -prune -o \
     -name "node_modules" -prune -o \
@@ -56,6 +61,7 @@ function list_recent() {
     -name "node_modules" -prune -o \
     -name "__pycache__" -prune -o \
     -name ".ipynb_checkpoints" -prune -o \
+    -name "docs" -prune -o \
     -name ".doctrees" -prune -o \
     -name "cache" -prune -o \
     -name ".cache" -prune -o \
