@@ -53,6 +53,10 @@ sub "neofetch"
 sudo apt install -y neofetch
 neofetch --version | tee -a $LOG
 
+sub "poppler-utils"
+sudo apt install -y poppler-utils
+pdftotext -v | tee -a $LOG
+
 # use gio trash
 # sub "trash-cli"
 # sudo apt install -y trash-cli
