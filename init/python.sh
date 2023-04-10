@@ -83,6 +83,10 @@ pip isntall -U myst-parser
 # pip install -U lbt-ladybug
 
 pip install -U google-api-python-client
+pip install -U google-auth-oauthlib
+
+pip install -U openai
+pip install -U langchain
 
 sub "python settings complete"
 elapsed_time $SECTION_TIME | tee -a $LOG
