@@ -9,12 +9,15 @@ SOURCES+=(tools/_main.sh)
 SOURCES+=(ui/_main.sh)
 SOURCES+=(sites/_main.sh)
 
+
 for file in  ${SOURCES[@]}
 do
   file="$HOME/.photon/$file"
   [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
+
+source $HOME/.private/google.env
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
