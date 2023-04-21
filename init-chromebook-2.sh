@@ -61,18 +61,18 @@ title "disable .profile"
 mv_bak ~/.profile
 
 
-title "change hostname"
-host_name=$(ask_value 'set system name' 'particle')
-sudo hostnamectl set-hostname $host_name
+# title "change hostname"
+# host_name=$(ask_value 'set system name' 'particle')
+# sudo hostnamectl set-hostname $host_name
 
-new_hostname=$(hostname)
-if [[ "$new_hostname" != "$host_name" ]]; then
-    echo "Error: Failed to set the hostname to $host_name"
-    pause_enter
-    # exit 1
-else
-    echo "Hostname successfully changed to $host_name"
-fi
+# new_hostname=$(hostname)
+# if [[ "$new_hostname" != "$host_name" ]]; then
+    # echo "Error: Failed to set the hostname to $host_name"
+    # pause_enter
+    # # exit 1
+# else
+    # echo "Hostname successfully changed to $host_name"
+# fi
 
 
 # source ~/.photon/init/gsettings.sh
