@@ -25,6 +25,15 @@ python -m venv -h | tee -a $LOG
 sub python3-gi-cairo
 sudo apt install -y python3-gi-cairo
 
+sub python3-tk
+sudo apt install -y python3-tk
+pip install -U tk
+
+# add latex for math
+sudo apt-get install texlive-base
+sudo apt-get install texlive-fonts-extra
+
+
 sub pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
