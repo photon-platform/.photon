@@ -25,13 +25,9 @@ python -m venv -h | tee -a $LOG
 sub python3-gi-cairo
 sudo apt install -y python3-gi-cairo
 
-sub python3-tk
-sudo apt install -y python3-tk
-pip install -U tk
-
 # add latex for math
-sudo apt-get install texlive-base
-sudo apt-get install texlive-fonts-extra
+sudo apt install -y texlive-base
+sudo apt install -y texlive-fonts-extra
 
 
 sub pip
@@ -40,9 +36,9 @@ python3 get-pip.py
 # sudo apt install -y python3-pip
 pip --version | tee -a $LOG
 
-# sub "Qt5"
-# echo
-# sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev
+sub python3-tk
+sudo apt install -y python3-tk
+pip install -U tk
 
 # echo
 # sub "python accessories"
