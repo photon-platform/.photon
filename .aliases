@@ -24,12 +24,12 @@ alias gm="cd /mnt/md0"
 
 alias gD="cd ~/Downloads; "
 alias gM="cd ~/Media"
-alias gP="cd ~/Projects; F"
-alias gPG="cd ~/Projects/GEOMETOR; F "
-alias gPp="cd ~/Projects/PHIARCHITECT; F "
-alias gPP="cd ~/Projects/PHOTON; F "
-alias gPH="cd ~/Projects/HARMONIC; F "
-alias gPg="cd ~/Projects/GEOMETOR/geometor-explorer; F "
+alias gP="cd ~/PROJECTS; F"
+alias gPG="cd ~/PROJECTS/geometor; F "
+alias gPp="cd ~/PROJECTS/phiarchitect; F "
+alias gPP="cd ~/PROJECTS/photon-platform; F "
+alias gPH="cd ~/PROJECTS/harmonic-resonance; F "
+alias gPi="cd ~/PROJECTS/illumiphi; F "
 alias gS="cd ~/Sessions; F"
 
 alias open=xdg-open

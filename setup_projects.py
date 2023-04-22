@@ -22,9 +22,9 @@ def setup_repos(account, repo_list):
         if not os.path.exists(repo_path):
             print(f"Cloning {repo_url}...")
             subprocess.run(["git", "clone", repo_url], cwd=account_dir, check=True)
-        if repo["installed"]:
-            print(f"Installing {repo_name}...")
-            subprocess.run(["pip", "install", "-e", "."], cwd=repo_path, check=True)
+            if repo["installed"]:
+                print(f"Installing {repo_name}...")
+                subprocess.run(["pip", "install", "-e", "."], cwd=repo_path, check=True)
 
 
 # Clone and install repositories for each account
