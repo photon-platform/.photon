@@ -1,49 +1,10 @@
 import os
 import subprocess
+import yaml
 
-# Your personal GitHub account and organizations
-accounts = [
-    "phiarchitect",
-    "geometor",
-    "photon-platform",
-    "harmonic-resonance",
-]
-
-# List of repositories you want to clone for each account
-# Replace 'repo_name' with the actual repository names
-repos = {
-    "phiarchitect": [
-        {"name": "phiarchitect", "installed": False},
-        {"name": "phiarchitect.com", "installed": False},
-        {"name": "ai", "installed": False},
-        {"name": "notes", "installed": False},
-    ],
-    "geometor": [
-        {"name": ".github", "installed": False},
-        {"name": "geometor.com", "installed": False},
-        {"name": "geometor-explorer", "installed": True},
-        {"name": "elements", "installed": False},
-        {"name": "divine", "installed": False},
-        {"name": "polynumbers", "installed": False},
-        {"name": "pappus", "installed": False},
-        {"name": "etc", "installed": False},
-        {"name": "phyllotaxis", "installed": False},
-        {"name": "relop", "installed": False},
-        {"name": "explorer-constructions", "installed": False},
-    ],
-    "photon-platform": [
-        {"name": ".github", "installed": False},
-        {"name": "photon-ablog", "installed": True},
-        {"name": "photon-platform.github.io", "installed": False},
-        {"name": "openai_chat_parser", "installed": True},
-        {"name": "action-deploy-sphinx-gh-pages", "installed": False},
-    ],
-    "harmonic-resonance": [
-        {"name": ".github", "installed": False},
-        {"name": "repo_name1", "installed": False},
-        {"name": "repo_name2", "installed": True},
-    ],
-}
+# Load project information from the YAML file
+with open("setup_projects.yaml", "r") as f:
+    repos = yaml.safe_load(f)
 
 # Base directory where repositories will be cloned
 base_dir = os.path.expanduser("~/PROJECTS")
@@ -56,7 +17,7 @@ def setup_repos(account, repo_list):
 
     for repo in repo_list:
         repo_name = repo["name"]
-        repo_url = f"https://github.com/{account}/{repo_name}.git"
+        repo_url = f"git@github.com:{account}/{repo_name}"
         repo_path = os.path.join(account_dir, repo_name)
         if not os.path.exists(repo_path):
             print(f"Cloning {repo_url}...")
@@ -67,7 +28,7 @@ def setup_repos(account, repo_list):
 
 
 # Clone and install repositories for each account
-for account in accounts:
-    setup_repos(account, repos[account])
+for account, repo_list in repos.items():
+    setup_repos(account, repo_list)
 
 print("Finished setting up repositories.")

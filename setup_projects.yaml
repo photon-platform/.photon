@@ -1,0 +1,70 @@
+phiarchitect:
+  - name: phiarchitect
+    installed: false
+  - name: phiarchitect.com
+    installed: false
+  - name: ai
+    installed: false
+  - name: notes
+    installed: false
+
+geometor:
+  - name: .github
+    installed: false
+  - name: geometor.com
+    installed: false
+  - name: geometor-explorer
+    installed: false
+  - name: elements
+    installed: false
+  - name: divine
+    installed: false
+  - name: polynumbers
+    installed: false
+  - name: pappus
+    installed: false
+  - name: etc
+    installed: false
+  - name: phyllotaxis
+    installed: false
+  - name: relop
+    installed: false
+  - name: explorer-constructions
+    installed: false
+
+photon-platform:
+  - name: .github
+    installed: false
+  - name: photon-ablog
+    installed: true
+  - name: photon-platform.github.io
+    installed: false
+  - name: openai_chat_parser
+    installed: true
+  - name: action-deploy-sphinx-gh-pages
+    installed: false
+  - name: logger
+    installed: true
+  - name: summarizer
+    installed: true
+  - name: clerk
+    installed: true
+  - name: photon-sphinx-theme
+    installed: true
+  - name: sphinx_rtd_theme
+    installed: true
+
+harmonic-resonance:
+  - name: .github
+    installed: false
+  - name: phi-midi
+    installed: false
+  - name: soundfonts
+    installed: false
+
+illumiphi:
+  - name: dots-and-prayers
+    installed: false
+  - name: smolen
+    installed: false
+

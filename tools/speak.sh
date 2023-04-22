@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 function speak() {
-  espeak -v mb-en1 -s 150  "$*" 
+  # espeak -v mb-en1 -s 150 -m "$*" 
+  espeak -s 150 -m "$*" 
 }
 
 function speak_wav() {
