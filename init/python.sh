@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # source ~/.photon/init/_utils.sh
+JUPITER=false
 
 title "Python"
 if $PAUSE; then pause_enter; fi
@@ -25,10 +26,6 @@ python -m venv -h | tee -a $LOG
 sub python3-gi-cairo
 sudo apt install -y python3-gi-cairo
 
-# add latex for math
-sudo apt install -y texlive-base
-sudo apt install -y texlive-fonts-extra
-
 
 sub pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -40,13 +37,12 @@ sub python3-tk
 sudo apt install -y python3-tk
 pip install -U tk
 
-# echo
-# sub "python accessories"
-# echo
-# sudo apt install -y python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich
-# sudo apt install -y python3-tk python3-pyqt5 python3-pyqtwebengine python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
-
-# pip install -U pip
+echo
+sub "python accessories"
+echo
+sudo apt install -y python3-lxml python3-six python3-css-parser python3-dulwich
+sudo apt install -y python3-tk \
+  python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
 
 pip install -U sympy
 pip install -U numpy
@@ -56,10 +52,12 @@ pip install -U matplotlib
 pip install -U mplcursors
 pip install -U mpl_interactions
 
-pip install -U jupyterlab
-pip install -U mpl_interactions[jupyter]
-pip install -U ipywidgets
-pip install -U ipympl
+if $JUPITER; then
+  pip install -U jupyterlab
+  pip install -U mpl_interactions[jupyter]
+  pip install -U ipywidgets
+  pip install -U ipympl
+fi
 
 pip install -U ffmpeg-python
 
@@ -96,5 +94,18 @@ pip install -U openai
 pip install -U langchain
 pip install -U wikipedia
 
+# add latex for math
+sudo apt install -y texlive-base
+# sudo apt install -y texlive-fonts-extra
+sudo apt install -y texlive-latex-recommended
+sudo apt install -y texlive-latex-extra
+sudo apt install -y texlive-fonts-recommended
+sudo apt install -y texlive-science
+sudo apt install -y texlive-xetex
+sudo apt install -y texlive-pictures
+sudo apt install -y texlive-pstricks
+
+
 sub "python settings complete"
 elapsed_time $SECTION_TIME | tee -a $LOG
+
