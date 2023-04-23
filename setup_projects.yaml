@@ -46,9 +46,9 @@ photon-platform:
   - name: logger
     installed: true
   - name: summarizer
-    installed: true
+    installed: false
   - name: clerk
-    installed: true
+    installed: false
   - name: photon-sphinx-theme
     installed: true
   - name: sphinx_rtd_theme
