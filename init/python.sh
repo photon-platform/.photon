@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # source ~/.photon/init/_utils.sh
 JUPITER=false
+SPHINX=true
 
 title "Python"
 if $PAUSE; then pause_enter; fi
@@ -73,16 +74,18 @@ pip install -U black
 pip install -U build
 pip install -U twine
 
-pip install -U Sphinx
-pip install -U graphviz
-pip install -U pydot
-pip install -U m2r
-pip install -U python-frontmatter
+if $SPHINX; then
+  pip install -U Sphinx
+  pip install -U graphviz
+  pip install -U pydot
+  pip install -U m2r
+  pip install -U python-frontmatter
+  pip install -U myst-parser
+fi
 
 # https://github.com/Tinche/aiofiles
 pip install -U aiofiles
 
-pip isntall -U myst-parser
 
 # pip install -U ladybug-core
 # pip install -U lbt-ladybug
