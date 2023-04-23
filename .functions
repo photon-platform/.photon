@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 function git_agent() {
-  if [ -z "$SSH_AUTH_SOCK" ]; then
+  # if [ -z "$SSH_AUTH_SOCK" ]; then
      # eval "$(ssh-agent -s)"
-     eval `ssh-agent`
+     eval `ssh-agent -s`
      ssh-add ~/.ssh/id_ed25519
-  fi
+  # fi
 }
+alias gag=git_agent
 
 function docs_build() {
   @
