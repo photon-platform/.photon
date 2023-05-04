@@ -42,8 +42,7 @@ echo
 sub "python accessories"
 echo
 sudo apt install -y python3-lxml python3-six python3-css-parser python3-dulwich
-sudo apt install -y python3-tk \
-  python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
+sudo apt install -y python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
 
 pip install -U sympy
 pip install -U numpy
