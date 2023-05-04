@@ -59,6 +59,7 @@ if $JUPITER; then
   pip install -U ipympl
 fi
 
+pip install -U textual rich rich-cli
 pip install -U ffmpeg-python
 
 pip install -U py_midicsv
