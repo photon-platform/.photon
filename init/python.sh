@@ -62,6 +62,8 @@ fi
 pip install -U textual rich rich-cli
 pip install -U ffmpeg-python
 
+pip install -U dotenv
+
 pip install -U py_midicsv
 # pip install -U python-rtmidi
 pip install -U mido
@@ -94,6 +96,7 @@ pip install -U google-api-python-client
 pip install -U google-auth-oauthlib
 
 pip install -U openai
+pip install -U tiktoken
 pip install -U langchain
 pip install -U wikipedia
 
