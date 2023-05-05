@@ -18,6 +18,7 @@ done
 unset file
 
 source $HOME/.private/google.env
+source $HOME/.private/openai.env
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
