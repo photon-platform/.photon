@@ -71,6 +71,7 @@ pip install -U mido
 pip install -U pyjson5
 pip install -U python-slugify
 
+pip install -U gitpython
 
 pip install -U black
 pip install -U build
