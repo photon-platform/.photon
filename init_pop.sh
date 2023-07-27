@@ -65,10 +65,10 @@ git clone git@github.com:phiarchitect/.private $HOME/.private
 
 source ~/.photon/init/python.sh
 source ~/.photon/init/vim.sh
-# source ~/.photon/init/chrome.sh
+source ~/.photon/init/chrome.sh
 # source ~/.photon/init/node.sh
-# source ~/.photon/init/graphics.sh
-# source ~/.photon/init/media.sh
+source ~/.photon/init/graphics.sh
+source ~/.photon/init/media.sh
 
 title "final update & upgrade"
 if $PAUSE; then pause_enter; fi
