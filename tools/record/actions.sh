@@ -203,6 +203,51 @@ function record_audio() {
   audio "$output"
 }
 
+alias Rd=record_dictation
+function record_dictation() {
+    EXT=m4a
+    FOLDER_PATH="./dictations"
+
+    clear -x
+    echo "RECORD DICTATION"
+    echo
+
+    createdt=$(date)
+    ts=$(date +"%g.%j.%H%M%S" --date="$createdt")
+
+    read -p "Title: " title
+    slug=$(slugify "$title")
+
+    # Creating a new folder for the dictation
+    NEW_FOLDER="$FOLDER_PATH/$ts.$slug"
+    mkdir -p "$NEW_FOLDER"
+
+    # Recording audio with ffmpeg
+    echo "Recording... Press 'q' to stop the recording."
+    echo
+    ffmpeg -y -hide_banner \
+        -f pulse -i default \
+        -ac 1 \
+        -ar 16000 \
+        -b:a 32k \
+        "$NEW_FOLDER/recording.$EXT"
+
+    # Transcribing audio with Whisper
+    echo Generating text
+    echo 
+    cd "$NEW_FOLDER" || exit
+    start_time=$(date +%s)  # Capturing start time
+    whisper --language English --fp16 False --model small "recording.$EXT"
+    end_time=$(date +%s)    # Capturing end time
+    cd - > /dev/null || exit
+
+    elapsed_time=$((end_time - start_time))
+    echo "Whisper transcription took $elapsed_time seconds."
+    
+    echo "Dictation recorded and transcribed in $NEW_FOLDER"
+}
+
+
 alias Rc=record_camera
 function record_camera() {
   CAMERA=${1:-$MAIN}
