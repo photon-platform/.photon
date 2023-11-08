@@ -37,43 +37,92 @@ function trash() {
   fi
 }
 
-# function ablog_build() {
-  # @
-  # cd docsrc
-  # # ablog clean
-  # ablog build
-  # cp CNAME docs/CNAME
-  # ablog serve
-  # rm -rf ../docs
-# }
 function ablog_build() {
   # Define cleanup function
   function cleanup() {
     echo "Cleaning up..."
-    rm -rf ../docs # Perform cleanup actions
-    trap - SIGINT   # Reset the SIGINT signal handling to default
-    echo "You can now close the server using Ctrl-C"
-    wait           # Optional: wait for ablog serve to be closed by user
-    # Do not exit here; let the trap end naturally
+    # Kill the 'ablog serve' background process
+    kill $ABLOG_PID 2> /dev/null
+
+    # Remove the 'docs' directory
+    rm -rf ../docs
+
+    # Reset SIGINT signal handling to default action
+    trap - SIGINT
+
+    # Optional: You may wait for 'ablog serve' to fully terminate before returning control
+    wait $ABLOG_PID 2> /dev/null
+
+    echo "Cleanup complete. You can now restart ablog using the function."
+    # No need to call 'exit' as it will terminate the terminal session if sourced.
   }
 
-  # Trap CTRL-C (SIGINT) and call cleanup function
+  @ 
+
+  # Change to the documentation source directory
+  cd docsrc || return
+
+  # Build the blog using 'ablog'
+  ablog build
+
+  # Check if CNAME exists and copy it to the 'docs' directory
+  if [[ -f CNAME ]]; then
+    cp CNAME docs/CNAME
+  else
+    echo "CNAME file does not exist, skipping copy."
+  fi
+
+  # Find the first free port starting at 8000
+  PORT=8000
+  while netstat -tuln | grep -q ":$PORT "; do
+    ((PORT++))
+  done
+  echo "Using port $PORT for 'ablog serve'."
+
+  # Start 'ablog serve' and store its process ID (PID)
+  ablog serve -p $PORT &
+  ABLOG_PID=$!
+
+  # Trap CTRL-C (SIGINT) and call the cleanup function upon signal reception
   trap cleanup SIGINT
 
-  @
-  cd docsrc
-  ablog build
-  cp CNAME docs/CNAME
+  # Wait for the 'ablog serve' process to finish
+  wait $ABLOG_PID
 
-  # Start ablog serve and wait for it to be killed
-  ablog serve &
-
-  # Keep the serve process in the foreground to be able to catch the CTRL-C
-  wait $!
-
-  # Call cleanup if ablog serve exits normally
+  # In case 'ablog serve' exited without interruption, call cleanup
   cleanup
 }
+
+
+
+# function ablog_build() {
+  # # Define cleanup function
+  # function cleanup() {
+    # echo "Cleaning up..."
+    # rm -rf ../docs # Perform cleanup actions
+    # trap - SIGINT   # Reset the SIGINT signal handling to default
+    # echo "You can now close the server using Ctrl-C"
+    # wait           # Optional: wait for ablog serve to be closed by user
+    # # Do not exit here; let the trap end naturally
+  # }
+
+  # # Trap CTRL-C (SIGINT) and call cleanup function
+  # trap cleanup SIGINT
+
+  # @
+  # cd docsrc
+  # ablog build
+  # cp CNAME docs/CNAME
+
+  # # Start ablog serve and wait for it to be killed
+  # ablog serve &
+
+  # # Keep the serve process in the foreground to be able to catch the CTRL-C
+  # wait $!
+
+  # # Call cleanup if ablog serve exits normally
+  # cleanup
+# }
 
 alias abb=ablog_build
 
