@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+source ~/.photon/tools/_main.sh
+
+function P() {
+  cd ~/PROJECTS
+  pyenv activate elements
+  F
+}
+
 function git_agent() {
   # if [ -z "$SSH_AUTH_SOCK" ]; then
      # eval "$(ssh-agent -s)"
@@ -29,14 +37,44 @@ function trash() {
   fi
 }
 
+# function ablog_build() {
+  # @
+  # cd docsrc
+  # # ablog clean
+  # ablog build
+  # cp CNAME docs/CNAME
+  # ablog serve
+  # rm -rf ../docs
+# }
 function ablog_build() {
+  # Define cleanup function
+  function cleanup() {
+    echo "Cleaning up..."
+    rm -rf ../docs # Perform cleanup actions
+    trap - SIGINT   # Reset the SIGINT signal handling to default
+    echo "You can now close the server using Ctrl-C"
+    wait           # Optional: wait for ablog serve to be closed by user
+    # Do not exit here; let the trap end naturally
+  }
+
+  # Trap CTRL-C (SIGINT) and call cleanup function
+  trap cleanup SIGINT
+
   @
-  tools_git
-  ablog clean
+  cd docsrc
   ablog build
   cp CNAME docs/CNAME
-  ablog serve
+
+  # Start ablog serve and wait for it to be killed
+  ablog serve &
+
+  # Keep the serve process in the foreground to be able to catch the CTRL-C
+  wait $!
+
+  # Call cleanup if ablog serve exits normally
+  cleanup
 }
+
 alias abb=ablog_build
 
 function plog() {
