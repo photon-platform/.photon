@@ -34,6 +34,7 @@ function tools_record_actions() {
     a) record_audio;  tools_record_actions; ;;
     c) record_camera;  tools_record_actions; ;;
     s) record_screen;  tools_record_actions; ;;
+    d) record_dictation;  tools_record_actions; ;;
     y) sk; tools_record_actions ;;
     t) set_term; tools_record_actions ;;
     v) camera_full; tools_record_actions ;;
