@@ -324,3 +324,166 @@ function record_camera() {
   video "$output"
 }
 
+
+
+alias Rp=record_pi
+function record_pi() {
+  # record screen
+  # transcribe
+  # 
+  clear -x
+  ui_banner "RECORD • pi"
+  echo
+
+  AUDIO_OFFSET="0.33"
+
+  createdt=$( date )
+  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+
+  read -p " title: " title
+  slug=$( slugify "$title" )
+  
+  raw="$ts.$slug.raw.mp4"
+  output="$ts.$slug.mp4"
+  txt_output="$ts.$slug.txt"
+
+  # countdown
+
+  #use 
+  # pacmd list-sources | grep "name: <alsa"
+  SYS_AUDIO=alsa_output.pci-0000_0a_00.6.analog-stereo.monitor
+
+  ffmpeg -y -hide_banner \
+    -video_size 1920x1080 \
+    -framerate $FRAMERATE \
+    -f x11grab -i :1+0,768 \
+    -f pulse -i $BLUE \
+    "$raw"
+  
+  # ffmpeg -y -hide_banner \
+    # -video_size 1920x1080 \
+    # -framerate $FRAMERATE \
+    # -f x11grab -i :1+0,768 \
+    # -f pulse -i $BLUE \
+    # -f pulse -i $SYS_AUDIO \
+    # -filter_complex "[1:a:0][2:a:0]amix=2[aout]" -map 0:V:0 -map "[aout]" \
+    # "$raw"
+
+  ll $raw
+  echo
+  h1 "Press ENTER to complete metadata"
+  pause_enter
+  echo
+
+  exiftool \
+    -Title="$title" \
+    -Description="$ts" \
+    -Creator="phi ARCHITECT" \
+    -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
+    -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
+    -overwrite_original \
+    "$raw"
+
+  AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
+  AF="${AF%,}"
+  ffmpeg -hide_banner \
+    -i "$raw" -itsoffset $AUDIO_OFFSET \
+    -i "$raw" \
+    -map 0:v -map 1:a  \
+    -af "$AF" \
+    "$output"
+
+  getExif "$raw"
+  notes="$(getExifValue "Notes")"
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
+  if [[ $notes == "" ]]; then
+    notes="$processed"
+  else
+    notes+=" | $processed"
+  fi
+
+  exiftool -tagsFromFile "$raw" "$output" -overwrite_original
+  exiftool -ec \
+    -Notes="$notes" \
+    -overwrite_original \
+    "$output"
+
+  # video "$output"
+
+  # Transcribing audio with Whisper
+  echo Generating text
+  echo 
+  # cd "$NEW_FOLDER" || exit
+  start_time=$(date +%s)  # Capturing start time
+  whisper --language English --fp16 False --model small -f txt "$output"
+  end_time=$(date +%s)    # Capturing end time
+  # cd - > /dev/null || exit
+
+  elapsed_time=$((end_time - start_time))
+  echo "Whisper transcription took $elapsed_time seconds."
+  
+  vim $txt_output
+}
+
+alias Ra=record_audio
+function record_audio() {
+  EXT=m4a
+
+  clear -x
+  ui_banner "RECORD • audio"
+  echo
+
+  createdt=$( date )
+  ts=$( date +"%g.%j.%H%M%S" --date="$createdt" )
+
+  read -p " title: " title
+  slug=$( slugify "$title" )
+  
+  raw="$ts.$slug.raw.$EXT"
+  output="$ts.$slug.$EXT"
+
+  countdown
+
+  ffmpeg -y -hide_banner \
+    -f pulse -i $BLUE \
+    "$raw"
+
+  ll $raw
+  echo
+  h1 "Press ENTER to complete metadata"
+  pause_enter
+  echo
+
+  exiftool \
+    -Title="$title" \
+    -Description="$ts" \
+    -Creator="phi ARCHITECT" \
+    -Copyright="$(date +%Y --date="$createdt") • phiarchitect.com" \
+    -DateTimeOriginal="$( date "+%Y:%m:%d %H:%M:%S" --date="$createdt")" \
+    -overwrite_original \
+    "$raw"
+
+  AF=$(printf '%s,' "${AUDIO_FILTERS[@]}")
+  AF="${AF%,}"
+  ffmpeg -hide_banner \
+    -i "$raw" \
+    -af "$AF" \
+    $output
+
+  getExif "$raw"
+  notes="$(getExifValue "Notes")"
+  processed="processed $( date +"%g.%j.%H%M%S" ) : af='$AF' "
+  if [[ $notes == "" ]]; then
+    notes="$processed"
+  else
+    notes+=" | $processed"
+  fi
+
+  exiftool -tagsFromFile "$raw" "$output" -overwrite_original
+  exiftool -ec \
+    -Notes="$notes" \
+    -overwrite_original \
+    "$output"
+
+  audio "$output"
+}
