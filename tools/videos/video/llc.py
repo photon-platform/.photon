@@ -6,7 +6,7 @@ import json5
 import sys, os
 from pathlib import Path
 import subprocess
-from geometor.title import *
+#  from geometor.title import *
 from slugify import slugify
 
 OVERLAY_SCRIPT = Path('~/.photon/tools/overlays/overlay_left.sh').expanduser()
