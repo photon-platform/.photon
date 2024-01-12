@@ -17,40 +17,34 @@ SECTION_TIME="$(date -u +%s)"
 # sub python3.10
 # sudo apt install -y python3.10
 
-sub python3-dev
-sudo apt install -y python3-dev
+# sub python3-dev
+# sudo apt install -y python3-dev
 
-sub python3-venv
-sudo apt install -y python3-venv
-python -m venv -h | tee -a $LOG
+# sub python3-venv
+# sudo apt install -y python3-venv
+# python -m venv -h | tee -a $LOG
 
-sub python3-gi-cairo
-sudo apt install -y python3-gi-cairo
+# sub python3-gi-cairo
+# sudo apt install -y python3-gi-cairo
 
 
-sub pip
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python3 get-pip.py
-# sudo apt install -y python3-pip
-pip --version | tee -a $LOG
+# sub pip
+# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# python3 get-pip.py
+# # sudo apt install -y python3-pip
+# pip --version | tee -a $LOG
 
-sub python3-tk
-sudo apt install -y python3-tk
-pip install -U tk
+# sub python3-tk
+# sudo apt install -y python3-tk
+# pip install -U tk
 
 echo
 sub "python accessories"
 echo
-sudo apt install -y python3-lxml python3-six python3-css-parser python3-dulwich
-sudo apt install -y python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
+# sudo apt install -y python3-lxml python3-six python3-css-parser python3-dulwich
+# sudo apt install -y python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
 
-echo
-sub "build requirements"
-echo
-# necessary for chromebook
-sudo apt install build-essential libssl-dev zlib1g-dev \
-  libbz2-dev libreadline-dev libsqlite3-dev curl \
-  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+pip install lxml six css-parser dulwich html5lib regex pillow cssselect chardet pycairo
 
 pip install -U sympy
 pip install -U numpy

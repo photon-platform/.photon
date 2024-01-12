@@ -29,7 +29,7 @@ git config --global init.defaultBranch main
 ## git new keygen (if ncessary)
 mkdir -p ~/.ssh
 cd ~/.ssh
-key_file="id_ed25519"
+key_file="id_github"
 
 sub "generate key files"
 ssh-keygen -t ed25519 -C "$useremail" -f "$key_file"
@@ -47,7 +47,7 @@ echo https://github.com/settings/keys
 echo
 echo "$key_file.pub"
 cat "$key_file.pub"
-xclip -i "$key_file.pub" -selection clipboard
+# xclip -i "$key_file.pub" -selection clipboard
 open "https://github.com/settings/keys" > /dev/null 2> /dev/null &
 
 echo "press ENTER when done"
