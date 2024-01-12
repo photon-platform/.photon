@@ -17,9 +17,7 @@ SECTION_TIME="$(date -u +%s)"
 echo
 sub "python accessories"
 echo
-# sudo apt install -y python3-lxml python3-six python3-css-parser python3-dulwich
-# sudo apt install -y python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet
-
+pip install -U pip
 pip install -U lxml six css-parser dulwich html5lib regex pillow cssselect chardet pycairo
 
 pip install -U sympy

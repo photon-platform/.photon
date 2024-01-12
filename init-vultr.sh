@@ -38,6 +38,7 @@ function set_rc() {
 }
 
 # set_rc .bashrc
+echo "source ~/.photon/.bashrc" >> ~/.bashrc
 
 set_rc .config/ranger 
 # set_rc .config/sxiv
