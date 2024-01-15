@@ -12,7 +12,7 @@ PAUSE=true
 cd ~/.photon
 
 clear -x
-title "photon PLATFORM initialization"
+title "VULTR init"
 
 sudo pwd
 
@@ -38,7 +38,7 @@ function set_rc() {
 }
 
 # set_rc .bashrc
-# set_rc .bash_profile
+echo "source ~/.photon/.bashrc" >> ~/.bashrc
 
 set_rc .config/ranger 
 # set_rc .config/sxiv
@@ -46,25 +46,22 @@ set_rc .config/ranger
 
 set_rc .XCompose
 set_rc .Xresources
-xrdb -load .Xresources
+# xrdb -load .Xresources
 
 #set environment
 # source ~/.bashrc
-
-# title "disable .profile"
-# mv_bak ~/.profile
 
 # source ~/.photon/init/remove-default-apps.sh
 
 collect_system_metrics
 write_installed_packages "update"
 
-# source ~/.photon/init/general.sh
-source ~/.photon/init/git.sh
-
 # git clone git@github.com:phiarchitect/.private $HOME/.private
 
+source ~/.photon/init/pyenv.sh
 source ~/.photon/init/python.sh
+
+source ~/.photon/init/git.sh
 source ~/.photon/init/vim.sh
 # source ~/.photon/init/chrome.sh
 # source ~/.photon/init/node.sh
