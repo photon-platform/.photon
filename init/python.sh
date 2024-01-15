@@ -2,23 +2,19 @@
 # source ~/.photon/init/_utils.sh
 JUPITER=false
 SPHINX=true
+LATEX=false
 
 title "Python"
 if $PAUSE; then pause_enter; fi
 
 SECTION_TIME="$(date -u +%s)"
 
-# sub pip
-# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-# python3 get-pip.py
-# # sudo apt install -y python3-pip
-# pip --version | tee -a $LOG
-
 echo
 sub "python accessories"
 echo
 pip install -U pip
-pip install -U lxml six css-parser dulwich html5lib regex pillow cssselect chardet pycairo
+pip install -U lxml six css-parser dulwich html5lib regex pillow cssselect chardet 
+# pycairo
 
 pip install -U sympy
 pip install -U numpy
@@ -38,7 +34,7 @@ fi
 pip install -U textual rich rich-cli
 pip install -U ffmpeg-python
 
-pip install -U dotenv
+pip install -U python-dotenv
 
 pip install -U py_midicsv
 # pip install -U python-rtmidi
@@ -77,16 +73,18 @@ pip install -U tiktoken
 pip install -U langchain
 pip install -U wikipedia
 
-# add latex for math
-sudo apt install -y texlive-base
-# sudo apt install -y texlive-fonts-extra
-sudo apt install -y texlive-latex-recommended
-sudo apt install -y texlive-latex-extra
-sudo apt install -y texlive-fonts-recommended
-sudo apt install -y texlive-science
-sudo apt install -y texlive-xetex
-sudo apt install -y texlive-pictures
-sudo apt install -y texlive-pstricks
+if $LATEX; then
+  # add latex for math
+  sudo apt install -y texlive-base
+  # sudo apt install -y texlive-fonts-extra
+  sudo apt install -y texlive-latex-recommended
+  sudo apt install -y texlive-latex-extra
+  sudo apt install -y texlive-fonts-recommended
+  sudo apt install -y texlive-science
+  sudo apt install -y texlive-xetex
+  sudo apt install -y texlive-pictures
+  sudo apt install -y texlive-pstricks
+fi
 
 
 sub "python settings complete"
