@@ -60,6 +60,7 @@ write_installed_packages "update"
 
 source ~/.photon/init/pyenv.sh
 source ~/.photon/init/python.sh
+source ~/.photon/init/python-huggingface.sh
 
 source ~/.photon/init/git.sh
 source ~/.photon/init/vim.sh
