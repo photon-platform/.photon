@@ -35,34 +35,18 @@ source ~/.bashrc
 title "disable .profile"
 mv_bak ~/.profile
 
-
-# title "change hostname"
-# host_name=$(ask_value 'set system name' 'particle')
-# sudo hostnamectl set-hostname $host_name
-
-# new_hostname=$(hostname)
-# if [[ "$new_hostname" != "$host_name" ]]; then
-    # echo "Error: Failed to set the hostname to $host_name"
-    # pause_enter
-    # # exit 1
-# else
-    # echo "Hostname successfully changed to $host_name"
-# fi
-
-
-# source ~/.photon/init/gsettings.sh
-# source ~/.photon/init/remove-default-apps.sh
 source ~/.photon/init/update-system.sh
 
 collect_system_metrics
 write_installed_packages "update"
 
 source ~/.photon/init/general.sh
-source ~/.photon/init/git.sh
+source ~/.photon/init/pyenv.sh
+source ~/.photon/init/python.sh
 
+source ~/.photon/init/git.sh
 git clone git@github.com:phiarchitect/.private $HOME/.private
 
-source ~/.photon/init/python.sh
 source ~/.photon/init/vim.sh
 # source ~/.photon/init/chrome.sh
 # source ~/.photon/init/node.sh
