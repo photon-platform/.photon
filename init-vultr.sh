@@ -29,12 +29,12 @@ write_installed_packages "start"
 # set up symlinks for config files
 function set_rc() {
   sub "$1"
-  if [[ -e $HOME/$1 ]]; then
+  if [[ -e ~/$1 ]]; then
     echo mv ~/$1 ~/$1.$D.bak
-    mv $HOME/$1 $HOME/$1.$D.bak
+    mv ~/$1 ~/$1.$D.bak
   fi
   echo ln -sf ~/.photon/$1 ~/$1
-  ln -sf $HOME/.photon/$1 $HOME/$1
+  ln -sf ~/.photon/$1 ~/$1
 }
 
 # set_rc .bashrc
