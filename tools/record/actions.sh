@@ -348,6 +348,14 @@ function record_pi() {
 
   # countdown
 
+
+  # ffmpeg -y -hide_banner \
+    # -video_size 1920x1080 \
+    # -framerate $FRAMERATE \
+    # -f x11grab -i :1+0,768 \
+    # -f pulse -i $BLUE \
+    # "$output"
+  
   #use 
   # pacmd list-sources | grep "name: <alsa"
   SYS_AUDIO=alsa_output.pci-0000_0a_00.6.analog-stereo.monitor
@@ -357,16 +365,9 @@ function record_pi() {
     -framerate $FRAMERATE \
     -f x11grab -i :1+0,768 \
     -f pulse -i $BLUE \
+    -f pulse -i $SYS_AUDIO \
+    -map 0:v -map 1:a -map 2:a \
     "$output"
-  
-  # ffmpeg -y -hide_banner \
-    # -video_size 1920x1080 \
-    # -framerate $FRAMERATE \
-    # -f x11grab -i :1+0,768 \
-    # -f pulse -i $BLUE \
-    # -f pulse -i $SYS_AUDIO \
-    # -filter_complex "[1:a:0][2:a:0]amix=2[aout]" -map 0:V:0 -map "[aout]" \
-    # "$raw"
 
   echo
   ll $output

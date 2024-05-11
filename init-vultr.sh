@@ -60,7 +60,7 @@ write_installed_packages "update"
 
 source ~/.photon/init/pyenv.sh
 source ~/.photon/init/python.sh
-source ~/.photon/init/python-huggingface.sh
+# source ~/.photon/init/python-huggingface.sh
 
 source ~/.photon/init/git.sh
 source ~/.photon/init/vim.sh
@@ -91,10 +91,5 @@ write_installed_packages "end"
 echo "Comparing installed package lists:"
 diff installed_packages_start.txt installed_packages_end.txt
 
-echo install manually:
-echo - pandoc.sh 
-echo - latex.sh
-echo - epub.sh
-echo
 echo $fgRed reboot system
 echo
