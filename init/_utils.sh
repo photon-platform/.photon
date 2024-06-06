@@ -49,7 +49,7 @@ collect_system_metrics() {
 
 write_installed_packages() {
     stage=$1
-    output_file="i~/installed_packages_$stage.txt"
+    output_file="~/installed_packages_$stage.txt"
     dpkg -l | tail -n +6 | awk '{print $2}' > $output_file
     echo "Installed packages list saved to $output_file"
 }
