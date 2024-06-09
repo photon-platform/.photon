@@ -20,6 +20,7 @@ unset file
 source $HOME/.private/google.env
 source $HOME/.private/openai.env
 source $HOME/.private/github.env
+source $HOME/.private/codestral.env
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -54,3 +55,13 @@ export NVM_DIR="$HOME/.nvm"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# Shell-GPT integration BASH v0.2
+_sgpt_bash() {
+if [[ -n "$READLINE_LINE" ]]; then
+    READLINE_LINE=$(sgpt --shell <<< "$READLINE_LINE" --no-interaction)
+    READLINE_POINT=${#READLINE_LINE}
+fi
+}
+bind -x '"\C-l": _sgpt_bash'
+# Shell-GPT integration BASH v0.2
