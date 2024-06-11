@@ -13,23 +13,13 @@ geometor:
     installed: false
   - name: geometor.com
     installed: false
-  - name: geometor-explorer
-    installed: false
-  - name: elements
-    installed: false
+  - name: model
+    installed: true
+  - name: render
+    installed: true
   - name: divine
-    installed: false
-  - name: polynumbers
-    installed: false
-  - name: pappus
-    installed: false
-  - name: etc
-    installed: false
+    installed: true
   - name: phyllotaxis
-    installed: false
-  - name: relop
-    installed: false
-  - name: explorer-constructions
     installed: false
 
 photon-platform:
@@ -43,6 +33,8 @@ photon-platform:
     installed: true
   - name: action-deploy-sphinx-gh-pages
     installed: false
+  - name: formulator
+    installed: true
   - name: logger
     installed: true
   - name: summarizer
@@ -50,15 +42,43 @@ photon-platform:
   - name: clerk
     installed: false
   - name: photon-sphinx-theme
-    installed: true
+    installed: false
   - name: sphinx_rtd_theme
+    installed: false
+  - name: sphinxilator
     installed: true
+  - name: modulator
+    installed: true
+  - name: progenitor
+    installed: true
+  - name: _aider
+    installed: false
+  - name: _fabric
+    installed: false
+  - name: _shell_gpt
+    installed: false
+  - name: _phidata
+    installed: false
+  - name: _groq-python
+    installed: false
+  - name: _groq-api-cookbook
+    installed: false
+  - name: _openai-cookbook
+    installed: false
+  - name: _elia
+    installed: false
+  - name: _kupo
+    installed: false
+  - name: _posting
+    installed: false
 
 harmonic-resonance:
   - name: .github
     installed: false
-  - name: phi-midi
-    installed: false
+  - name: midiator
+    installed: true
+  - name: chordulator
+    installed: true
   - name: soundfonts
     installed: false
 

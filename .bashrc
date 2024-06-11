@@ -64,3 +64,7 @@ if [[ -n "$READLINE_LINE" ]]; then
 fi
 }
 bind -x '"\C-l": _sgpt_bash'
+
+# reset ssh
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_github
