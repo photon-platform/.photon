@@ -16,23 +16,23 @@ alias timidity="timidity -c ~/.photon/timidity.cfg"
 
 alias inmotion="ssh illumiphi.com"
 
-alias dot="cd ~/.photon; folder;"
-alias dots="cd ~/.photon/sites; folder; "
-alias doti="cd ~/.photon/init; folder; "
-alias dott="cd ~/.photon/tools; folder; "
+alias dot="cd ~/.photon; "
+alias dots="cd ~/.photon/sites; "
+alias doti="cd ~/.photon/init; "
+alias dott="cd ~/.photon/tools; "
 
 alias gv="cd ~/.vim"
 alias gm="cd /mnt/md0"
 
 alias gD="cd ~/Downloads; "
 alias gM="cd ~/Media"
-alias gP="cd ~/PROJECTS; F"
-alias gPG="cd ~/PROJECTS/geometor; F "
-alias gPp="cd ~/PROJECTS/phiarchitect; F "
-alias gPP="cd ~/PROJECTS/photon-platform; F "
-alias gPH="cd ~/PROJECTS/harmonic-resonance; F "
-alias gPi="cd ~/PROJECTS/illumiphi; F "
-alias gS="cd ~/Sessions; F"
+alias gP="cd ~/PROJECTS; "
+alias gPG="cd ~/PROJECTS/geometor; "
+alias gPp="cd ~/PROJECTS/phiarchitect; "
+alias gPP="cd ~/PROJECTS/photon-platform; "
+alias gPH="cd ~/PROJECTS/harmonic-resonance; "
+alias gPi="cd ~/PROJECTS/illumiphi; "
+alias gS="cd ~/Sessions; "
 
 alias open=xdg-open
 

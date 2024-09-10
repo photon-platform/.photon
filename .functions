@@ -5,7 +5,6 @@ source ~/.photon/tools/_main.sh
 function P() {
   cd ~/PROJECTS
   pyenv activate elements
-  F
 }
 
 function git_agent() {
