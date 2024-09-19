@@ -1,7 +1,6 @@
 ## configurations for the PHOTON platform 
 
-.. note::
-   I make these scripts public as a reference. They may not work for you.  
+> I make these scripts public as a reference. They may not work for you.  
 
 
 ### start
@@ -19,6 +18,8 @@ these bash scripts will update, install and configure everything necessary for P
 
 ### home.sh
 
+*called by installs*
+
 symlinks config files to current user's home folder
 
 - .bashrc
@@ -31,11 +32,8 @@ custom prompt config
 shows user, machine, time, directory, and git branch & status (if available)
 
 
+### `legacy shell scripts`
 
+prior to committing myself to Python, I spent a ridiculous amount of time creating shell scripts for managing context from the prompt.
 
-### `sites`
-all sites are created in `~/SITES`
-
-the `sites` command alone will cd to the folder and list the current sites
-
-
+you can find them in the **tools** and **sites** folder
