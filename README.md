@@ -1,22 +1,26 @@
-<a href="https://photon-platform.net/">
-    <img src="https://photon-platform.net/images/photon-logo-bg.png" alt="photon" title="photon" align="right" height="120" />
-</a>
-
-# .photon
 ## configurations for the PHOTON platform 
 
-for more about the **PHOTON platform**, visit https://photon-platform.net
+> I make these scripts public as a reference. They may not work for you.  
 
-clone this repository to the users home directory
+
+### start
+
+clone this repository and submodules to the user's home directory
 
 ```bash
 cd ~
 git clone --recurse-submodules git@github.com:photon-platform/.photon.git
 ```
 
-### home script
+### install-*.sh
 
-symlink the following to current user's home folder
+these bash scripts will update, install and configure everything necessary for PHOTON on a new Pop!_OS (or Ubuntu) system.
+
+### home.sh
+
+*called by installs*
+
+symlinks config files to current user's home folder
 
 - .bashrc
 - .bash_profile
@@ -28,12 +32,8 @@ custom prompt config
 shows user, machine, time, directory, and git branch & status (if available)
 
 
-## site management scripts and functions
+### `legacy shell scripts`
 
+prior to committing myself to Python, I spent a ridiculous amount of time creating shell scripts for managing context from the prompt.
 
-### `sites`
-all sites are created in `~/SITES`
-
-the `sites` command alone will cd to the folder and list the current sites
-
-
+you can find them in the **tools** and **sites** folder
