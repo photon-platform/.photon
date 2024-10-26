@@ -23,6 +23,7 @@ source $HOME/.private/github.env
 source $HOME/.private/codestral.env
 source $HOME/.private/elevenlabs.env
 source $HOME/.private/x.env
+source $HOME/.private/anthropic.env
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
