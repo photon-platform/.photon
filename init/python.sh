@@ -59,7 +59,7 @@ if $SPHINX; then
 fi
 
 # https://github.com/Tinche/aiofiles
-pip install -U aiofiles
+# pip install -U aiofiles
 
 
 # pip install -U ladybug-core
@@ -70,8 +70,13 @@ pip install -U google-auth-oauthlib
 
 pip install -U openai
 pip install -U tiktoken
-pip install -U langchain
-pip install -U wikipedia
+# pip install -U langchain
+# pip install -U wikipedia
+
+python -m pip install aider-install
+aider-install
+
+pip install -q -U google-genai
 
 if $LATEX; then
   # add latex for math
