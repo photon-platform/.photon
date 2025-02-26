@@ -35,8 +35,8 @@ sub "exuberant-ctags"
 sudo apt install -y exuberant-ctags
 ctags --version | tee -a $LOG
 
-sub "python3-dev"
-sudo apt install -y python3-dev
+# sub "python3-dev"
+# sudo apt install -y python3-dev
 
 sub "vim-gtk3"
 # enables + register for system clipboard
