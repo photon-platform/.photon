@@ -91,6 +91,10 @@ if $LATEX; then
   sudo apt install -y texlive-pstricks
 fi
 
+#gi libraries
+sudo apt-get install libcairo2-dev libgirepository1.0-dev
+pip install PyGObject
+
 
 sub "python settings complete"
 elapsed_time $SECTION_TIME | tee -a $LOG
