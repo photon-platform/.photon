@@ -24,6 +24,7 @@ source $HOME/.private/codestral.env
 source $HOME/.private/elevenlabs.env
 source $HOME/.private/x.env
 source $HOME/.private/anthropic.env
+source $HOME/.private/google.env
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

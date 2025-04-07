@@ -29,8 +29,8 @@ photon-platform:
     installed: true
   - name: photon-platform.github.io
     installed: false
-  - name: openai_chat_parser
-    installed: true
+  # - name: openai_chat_parser
+    # installed: true
   - name: action-deploy-sphinx-gh-pages
     installed: false
   - name: formulator
@@ -51,26 +51,26 @@ photon-platform:
     installed: true
   - name: progenitor
     installed: true
-  - name: _aider
-    installed: false
-  - name: _fabric
-    installed: false
-  - name: _shell_gpt
-    installed: false
-  - name: _phidata
-    installed: false
-  - name: _groq-python
-    installed: false
-  - name: _groq-api-cookbook
-    installed: false
-  - name: _openai-cookbook
-    installed: false
-  - name: _elia
-    installed: false
-  - name: _kupo
-    installed: false
-  - name: _posting
-    installed: false
+  # - name: _aider
+    # installed: false
+  # - name: _fabric
+    # installed: false
+  # - name: _shell_gpt
+    # installed: false
+  # - name: _phidata
+    # installed: false
+  # - name: _groq-python
+    # installed: false
+  # - name: _groq-api-cookbook
+    # installed: false
+  # - name: _openai-cookbook
+    # installed: false
+  # - name: _elia
+    # installed: false
+  # - name: _kupo
+    # installed: false
+  # - name: _posting
+    # installed: false
 
 harmonic-resonance:
   - name: .github

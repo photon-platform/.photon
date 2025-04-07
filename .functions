@@ -4,7 +4,7 @@ source ~/.photon/tools/_main.sh
 
 function P() {
   cd ~/PROJECTS
-  pyenv activate elements
+  # pyenv activate elements
 }
 
 function git_agent() {
