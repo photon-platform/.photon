@@ -40,6 +40,12 @@ eval "$(ssh-agent -s)"
 # add key to agent for single signon
 ssh-add $key_file
 
+# add config entry
+echo "Host github.com" >> ~/.ssh/config
+echo "    AddKeysToAgent yes" >> ~/.ssh/config
+echo "    IdentityFile ~/.ssh/id_github" >> ~/.ssh/config
+
+
 sub "Copy Public Key to GitHub"
 echo
 echo paste contents into GitHub SSH public key form

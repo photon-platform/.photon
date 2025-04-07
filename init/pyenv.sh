@@ -23,9 +23,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-pyenv install 3.10
+pyenv install 3.13
 
-pyenv global 3.10
+pyenv global 3.13
 
 
 sub "pyenv settings complete"
