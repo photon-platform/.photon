@@ -8,6 +8,7 @@ SOURCES+=(.functions)
 SOURCES+=(tools/_main.sh)
 SOURCES+=(ui/_main.sh)
 SOURCES+=(sites/_main.sh)
+SOURCES+=(aider/aider.sh)
 
 
 for file in  ${SOURCES[@]}
