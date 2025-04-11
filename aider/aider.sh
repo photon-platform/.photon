@@ -2,9 +2,9 @@
 
 function aider_todos() {
   @
-  aider --read ~/.photon/aider/todos_agent.md todos/*
-
+  aider --user-input-color "#FF9900" --read ~/.photon/aider/todos_agent.md todos/*
 }
+alias AT=aider_todos
 
 function aider_readme() {
   @
