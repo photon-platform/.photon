@@ -8,7 +8,7 @@ alias AT=aider_todos
 
 function aider_readme() {
   @
-  aider --read ~/.photon/aider/readme_agent.md README.md
+  aider --read ~/.photon/aider/readme_agent.md README.md pyproject.toml
 }
 
 function aider_docstring() {
