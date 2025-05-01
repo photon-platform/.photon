@@ -213,7 +213,7 @@ function vf() {
   done
 
   if [[ $files_list ]]; then
-    eval vim $files_list
+    eval nvim $files_list
   fi
 }
 
@@ -231,7 +231,7 @@ function vr() {
   # pause_any
 
   if [[ $files_list ]]; then
-    eval vim $files_list
+    eval nvim $files_list
   fi
 }
 
@@ -313,7 +313,7 @@ function newsh() {
   fi
   echo '#!/usr/bin/env bash' > $scriptname.sh
   chmod +x $scriptname.sh
-  vim $scriptname.sh
+  nvim $scriptname.sh
 }
 
 function untar() {

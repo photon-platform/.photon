@@ -21,7 +21,7 @@ alias dots="cd ~/.photon/sites; "
 alias doti="cd ~/.photon/init; "
 alias dott="cd ~/.photon/tools; "
 
-alias gv="cd ~/.vim"
+alias gv="cd ~/.config/nvim"
 alias gm="cd /mnt/md0"
 
 alias gD="cd ~/Downloads; "
@@ -36,13 +36,12 @@ alias gS="cd ~/Sessions; "
 
 alias open=xdg-open
 
-alias v="vim"
-alias vrc="vim ~/.vim/vimrc"
-alias vbr="vim ~/.photon/.bashrc"
-alias vpr="vim ~/.photon/.prompt"
-alias val="vim ~/.photon/.aliases"
-alias vfc="vim ~/.photon/.functions"
-alias vrang="vim ~/.config/ranger/rc.conf"
+alias v="nvim"
+alias vbr="v ~/.photon/.bashrc"
+alias vpr="v ~/.photon/.prompt"
+alias val="v ~/.photon/.aliases"
+alias vfc="v ~/.photon/.functions"
+alias vrang="v ~/.config/ranger/rc.conf"
 
 alias r="ranger"
 
