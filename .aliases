@@ -149,4 +149,4 @@ alias ipy='ipython3'
 
 alias mpv='mpv -fs -keep-open=yes'
 
-
+alias freecad=$HOME/AppImages/FreeCAD_1.0.0-conda-Linux-x86_64-py311.AppImage
