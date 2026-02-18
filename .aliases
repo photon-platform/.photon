@@ -10,7 +10,7 @@ alias src="source ~/.bashrc"
 alias C="src; clear -x"
 
 alias audacity=~/AppImages/audacity-linux-3.4.2-x64.AppImage
-alias shotcut=~/AppImages/shotcut-linux-x86_64-250329.AppImage
+alias shotcut=~/AppImages/shotcut-linux-x86_64-25.11.2.AppImage
 alias losslesscut=~/AppImages/LosslessCut-linux-x86_64.AppImage
 alias timidity="timidity -c ~/.photon/timidity.cfg"
 

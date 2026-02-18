@@ -52,9 +52,9 @@ sub "shotcut"
 snap install shotcut --classic
 shotcut --version | tee -a $LOG
 
-sub "melt"
-sudo apt install -y melt
-melt --version | tee -a $LOG
+# sub "melt"
+# sudo apt install -y melt
+# melt --version | tee -a $LOG
 
 sub "midicsv"
 sudo apt install -y midicsv

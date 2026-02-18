@@ -21,11 +21,9 @@ unset file
 source $HOME/.private/google.env
 source $HOME/.private/openai.env
 source $HOME/.private/github.env
-source $HOME/.private/codestral.env
 source $HOME/.private/elevenlabs.env
-source $HOME/.private/x.env
 source $HOME/.private/anthropic.env
-source $HOME/.private/google.env
+source $HOME/.private/pypi.env
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

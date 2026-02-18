@@ -51,8 +51,8 @@ else
 fi
 
 
-source ~/.photon/init/gsettings.sh
-source ~/.photon/init/remove-default-apps.sh
+# source ~/.photon/init/gsettings.sh
+# source ~/.photon/init/remove-default-apps.sh
 source ~/.photon/init/update-system.sh
 
 collect_system_metrics
@@ -63,9 +63,13 @@ source ~/.photon/init/git.sh
 
 git clone git@github.com:phiarchitect/.private $HOME/.private
 
-source ~/.photon/init/pyenv.sh
+source ~/.photon/init/uv.sh
+# source ~/.photon/init/pyenv.sh
 source ~/.photon/init/python.sh
-source ~/.photon/init/vim.sh
+
+# VIM/NVIM
+# we are switching to nvim - separate install logic coming later
+# source ~/.photon/init/vim.sh
 source ~/.photon/init/chrome.sh
 # source ~/.photon/init/node.sh
 source ~/.photon/init/graphics.sh

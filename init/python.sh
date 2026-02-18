@@ -12,71 +12,91 @@ SECTION_TIME="$(date -u +%s)"
 echo
 sub "python accessories"
 echo
-pip install -U pip
-pip install -U lxml six css-parser dulwich html5lib regex pillow cssselect chardet 
+# Install Python 3.13 via uv
+uv python install 3.13
+
+# Create a default virtual environment for global-ish packages
+# This avoids messing with system python and avoids "externally managed environment" errors
+if [ ! -d "$HOME/.venv" ]; then
+    uv venv "$HOME/.venv" --python 3.13
+fi
+source "$HOME/.venv/bin/activate"
+
+# Add activation to bashrc if not present
+if ! grep -q "source \"\$HOME/.venv/bin/activate\"" "$HOME/.bashrc"; then
+    echo 'source "$HOME/.venv/bin/activate"' >> "$HOME/.bashrc"
+fi
+
+
+title "Python (via uv)"
+if $PAUSE; then pause_enter; fi
+
+SECTION_TIME="$(date -u +%s)"
+
+echo
+sub "python accessories"
+echo
+
+# Upgrade pip in the venv just in case, though uv manages it
+uv pip install --upgrade pip
+
+# Libraries
+uv pip install lxml six css-parser dulwich html5lib regex pillow cssselect chardet
 # pycairo
 
-pip install -U sympy
-pip install -U numpy
-pip install -U matplotlib
-# pip install -U scipy
+uv pip install sympy
+uv pip install numpy
+uv pip install matplotlib
+# uv pip install scipy
 
-pip install -U mplcursors
-pip install -U mpl_interactions
+uv pip install mplcursors
+uv pip install mpl_interactions
 
 if $JUPITER; then
-  pip install -U jupyterlab
-  pip install -U mpl_interactions[jupyter]
-  pip install -U ipywidgets
-  pip install -U ipympl
+  uv pip install jupyterlab
+  uv pip install mpl_interactions[jupyter]
+  uv pip install ipywidgets
+  uv pip install ipympl
 fi
 
-pip install -U textual rich rich-cli
-pip install -U ffmpeg-python
+# Tools (better installed via uv tool, but can be in venv too)
+# Using uv tool for CLI apps is cleaner
+uv tool install textual 
+uv tool install rich-cli
+# rich is a library too
+uv pip install rich
 
-pip install -U python-dotenv
+uv pip install ffmpeg-python
+uv pip install python-dotenv
+uv pip install py_midicsv
+uv pip install mido
+uv pip install pyjson5
+uv pip install python-slugify
+uv pip install gitpython
 
-pip install -U py_midicsv
-# pip install -U python-rtmidi
-pip install -U mido
-
-pip install -U pyjson5
-pip install -U python-slugify
-
-pip install -U gitpython
-
-pip install -U black
-pip install -U build
-pip install -U twine
+# Dev tools
+uv tool install black
+uv tool install build
+uv tool install twine
 
 if $SPHINX; then
-  pip install -U Sphinx
-  pip install -U graphviz
-  pip install -U pydot
-  pip install -U m2r
-  pip install -U python-frontmatter
-  pip install -U myst-parser
+  uv pip install Sphinx
+  uv pip install graphviz
+  uv pip install pydot
+  uv pip install m2r
+  uv pip install python-frontmatter
+  uv pip install myst-parser
 fi
 
-# https://github.com/Tinche/aiofiles
-# pip install -U aiofiles
+uv pip install google-api-python-client
+uv pip install google-auth-oauthlib
+uv pip install openai
+uv pip install tiktoken
 
+# aider
+uv tool install aider-chat
 
-# pip install -U ladybug-core
-# pip install -U lbt-ladybug
-
-pip install -U google-api-python-client
-pip install -U google-auth-oauthlib
-
-pip install -U openai
-pip install -U tiktoken
-# pip install -U langchain
-# pip install -U wikipedia
-
-python -m pip install aider-install
-aider-install
-
-pip install -q -U google-genai
+uv pip install google-genai
 
 if $LATEX; then
   # add latex for math
