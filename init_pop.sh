@@ -63,7 +63,7 @@ source ~/.photon/init/git.sh
 
 git clone git@github.com:phiarchitect/.private $HOME/.private
 
-source ~/.photon/init/uv.sh
+# source ~/.photon/init/uv.sh
 # source ~/.photon/init/pyenv.sh
 source ~/.photon/init/python.sh
 

@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 # source ~/.photon/init/_utils.sh
+
+title "uv (python manager)"
+if $PAUSE; then pause_enter; fi
+
+SECTION_TIME="$(date -u +%s)"
+
+sub "install uv"
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Ensure uv is in path for the current session if not already
+if ! command -v uv &> /dev/null; then
+    source $HOME/.cargo/env
+fi
+
+sub "uv settings complete"
+elapsed_time $SECTION_TIME | tee -a $LOG
+
 JUPITER=false
 SPHINX=true
 LATEX=false
@@ -10,69 +27,27 @@ if $PAUSE; then pause_enter; fi
 SECTION_TIME="$(date -u +%s)"
 
 echo
-sub "python accessories"
+sub "python 3.13"
 echo
 # Install Python 3.13 via uv
 uv python install 3.13
 
-# Create a default virtual environment for global-ish packages
-# This avoids messing with system python and avoids "externally managed environment" errors
-if [ ! -d "$HOME/.venv" ]; then
-    uv venv "$HOME/.venv" --python 3.13
-fi
-source "$HOME/.venv/bin/activate"
-
-# Add activation to bashrc if not present
-if ! grep -q "source \"\$HOME/.venv/bin/activate\"" "$HOME/.bashrc"; then
-    echo 'source "$HOME/.venv/bin/activate"' >> "$HOME/.bashrc"
-fi
-
-
-title "Python (via uv)"
+title "Python Tools (via uv)"
 if $PAUSE; then pause_enter; fi
 
 SECTION_TIME="$(date -u +%s)"
 
 echo
-sub "python accessories"
+sub "python tools"
 echo
 
-# Upgrade pip in the venv just in case, though uv manages it
-uv pip install --upgrade pip
-
-# Libraries
-uv pip install lxml six css-parser dulwich html5lib regex pillow cssselect chardet
-# pycairo
-
-uv pip install sympy
-uv pip install numpy
-uv pip install matplotlib
-# uv pip install scipy
-
-uv pip install mplcursors
-uv pip install mpl_interactions
-
 if $JUPITER; then
-  uv pip install jupyterlab
-  uv pip install mpl_interactions[jupyter]
-  uv pip install ipywidgets
-  uv pip install ipympl
+  uv tool install jupyterlab --with ipywidgets --with ipympl --with matplotlib
 fi
 
-# Tools (better installed via uv tool, but can be in venv too)
-# Using uv tool for CLI apps is cleaner
-uv tool install textual 
-uv tool install rich-cli
-# rich is a library too
-uv pip install rich
-
-uv pip install ffmpeg-python
-uv pip install python-dotenv
-uv pip install py_midicsv
-uv pip install mido
-uv pip install pyjson5
-uv pip install python-slugify
-uv pip install gitpython
+# Tools
+# uv tool install textual --with textual-dev
+# uv tool install rich-cli
 
 # Dev tools
 uv tool install black
@@ -80,23 +55,11 @@ uv tool install build
 uv tool install twine
 
 if $SPHINX; then
-  uv pip install Sphinx
-  uv pip install graphviz
-  uv pip install pydot
-  uv pip install m2r
-  uv pip install python-frontmatter
-  uv pip install myst-parser
+  uv tool install sphinx --with myst-parser --with sphinx-autobuild
 fi
-
-uv pip install google-api-python-client
-uv pip install google-auth-oauthlib
-uv pip install openai
-uv pip install tiktoken
 
 # aider
 uv tool install aider-chat
-
-uv pip install google-genai
 
 if $LATEX; then
   # add latex for math
@@ -111,11 +74,11 @@ if $LATEX; then
   sudo apt install -y texlive-pstricks
 fi
 
-#gi libraries
-sudo apt-get install libcairo2-dev libgirepository1.0-dev
-pip install PyGObject
+#gi libraries (system dev packages)
+sudo apt-get install -y libcairo2-dev libgirepository1.0-dev
+# PyGObject is a library, usually needed for building python apps that use GTK.
+# We skip installing the python binding globally.
 
-
-sub "python settings complete"
+sub "python tools complete"
 elapsed_time $SECTION_TIME | tee -a $LOG
 
