@@ -3,74 +3,52 @@ phiarchitect:
     installed: false
   - name: phiarchitect.com
     installed: false
-  - name: ai
-    installed: false
   - name: notes
     installed: false
 
 geometor:
+  - name: .config
+    installed: false
   - name: .github
     installed: false
   - name: geometor.com
     installed: false
   - name: model
     installed: true
-  - name: render
-    installed: true
   - name: divine
     installed: true
+  - name: explorer
+    installed: true
+  - name: euclid
+    installed: true
+  - name: elements
+    installed: true
+  - name: pacioli
+    installed: true
+  - name: etc
+    installed: true
+  - name: fundamentals
+    installed: true
   - name: phyllotaxis
-    installed: false
+    installed: true
+  - name: polynumbers
+    installed: true
+  - name: seer
+    installed: true
 
 photon-platform:
   - name: .github
     installed: false
-  - name: photon-ablog
-    installed: true
   - name: photon-platform.github.io
     installed: false
-  # - name: openai_chat_parser
-    # installed: true
+  - name: publish
+    installed: true
   - name: action-deploy-sphinx-gh-pages
     installed: false
+  - name: clerk
+    installed: true
   - name: formulator
     installed: true
-  - name: logger
-    installed: true
-  - name: summarizer
-    installed: false
-  - name: clerk
-    installed: false
-  - name: photon-sphinx-theme
-    installed: false
-  - name: sphinx_rtd_theme
-    installed: false
-  - name: sphinxilator
-    installed: true
-  - name: modulator
-    installed: true
-  - name: progenitor
-    installed: true
-  # - name: _aider
-    # installed: false
-  # - name: _fabric
-    # installed: false
-  # - name: _shell_gpt
-    # installed: false
-  # - name: _phidata
-    # installed: false
-  # - name: _groq-python
-    # installed: false
-  # - name: _groq-api-cookbook
-    # installed: false
-  # - name: _openai-cookbook
-    # installed: false
-  # - name: _elia
-    # installed: false
-  # - name: _kupo
-    # installed: false
-  # - name: _posting
-    # installed: false
 
 harmonic-resonance:
   - name: .github
@@ -85,6 +63,6 @@ harmonic-resonance:
 illumiphi:
   - name: dots-and-prayers
     installed: false
-  - name: smolen
-    installed: false
+  # - name: smolen
+  #   installed: false
 

@@ -55,9 +55,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 # Shell-GPT integration BASH v0.2
 _sgpt_bash() {
@@ -71,12 +68,6 @@ bind -x '"\C-l": _sgpt_bash'
 # reset ssh
 eval "$(ssh-agent -s)"
 # ssh-add ~/.ssh/id_github
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Python (uv) and Neovim PATH
+export PATH="$HOME/.local/bin:$PATH:/opt/nvim-linux-x86_64/bin"
 
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
